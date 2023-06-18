@@ -13,8 +13,8 @@ export const LogoutButton = () => {
     };
   
     return (
-      <div onClick={handleLogout}>
+      <span onClick={handleLogout}>
         Log Out
-      </div>
+      </span>
     );
   };
