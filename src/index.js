@@ -9,12 +9,12 @@ import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-<Auth0ProviderWithNavigate>
-      <DarkModeContextProvider>
-        <App />
-      </DarkModeContextProvider>
+      <Auth0ProviderWithNavigate>
+        <DarkModeContextProvider>
+          <App />
+        </DarkModeContextProvider>
       </Auth0ProviderWithNavigate>
-      </BrowserRouter>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

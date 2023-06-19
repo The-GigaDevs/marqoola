@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import CallbackPage from "./pages/callbackpage/callback-page";
 import { AuthenticationGuard } from "./components/authenticationguard/authentication-guard";
+import LandingPage from "./pages/landingpage/LandingPage";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -38,6 +39,7 @@ function App() {
               />
             </Route>
             <Route path="/callback" element={<CallbackPage />} />
+            <Route path="/landingpage" element={<LandingPage />} />
             
           </Route>
         </Routes>

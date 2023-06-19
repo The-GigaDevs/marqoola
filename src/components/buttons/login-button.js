@@ -7,7 +7,7 @@ import React from "react";
   const handleLogin = async () => {
     await loginWithRedirect({
       appState: {
-        returnTo: "/profile",
+        returnTo: "/landingpage",
       },
     });
   };

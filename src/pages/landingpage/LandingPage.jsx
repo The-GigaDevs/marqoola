@@ -3,9 +3,10 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
 import { useAuth0 } from "@auth0/auth0-react";
+import {Navigate} from 'react-router-dom';
 
 
- const CallbackPage = () => {
+ const LandingPage = () => {
 
   const { isAuthenticated } = useAuth0();
 
@@ -13,7 +14,7 @@ import { useAuth0 } from "@auth0/auth0-react";
     <div className="home">
       {!isAuthenticated && (
         <>
-          SHIT SUCKS
+          <Navigate to='/' />
         </>
       )}
       {isAuthenticated && (
@@ -35,4 +36,4 @@ import { useAuth0 } from "@auth0/auth0-react";
   );
 };
 
-export default CallbackPage;
+export default LandingPage;
