@@ -33,7 +33,7 @@ export default function Signinwithimage() {
   const handleSubmit =  async () => {
     await loginWithRedirect({
       appState: {
-        returnTo: "/landingpage",
+        returnTo: "/callback",
       },
     });
   };

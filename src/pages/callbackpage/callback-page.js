@@ -3,32 +3,31 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import Chart from "../../components/chart/Chart";
 import { useAuth0 } from "@auth0/auth0-react";
+import {Navigate} from 'react-router-dom';
 
 
  const CallbackPage = () => {
 
-  const { isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated, user } = useAuth0();
+
+  function persistUserSession() {
+    if (isAuthenticated) {
+
+    }
+  }
+
+  persistUserSession();
 
   return (
     <div className="home">
-      {!isAuthenticated && (
+      {!isLoading && !isAuthenticated && (
         <>
-          SHIT SUCKS
+           <Navigate to='/' />
         </>
       )}
       {isAuthenticated && (
         <>
-          <Sidebar />
-      <div className="homeContainer">
-        <Navbar />
-        
-
-        <div className="charts">
-          
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
-        </div>
-        
-      </div>
+          <Navigate to='/landingpage' />
         </>
       )}
     </div>

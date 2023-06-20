@@ -8,13 +8,13 @@ import {Navigate} from 'react-router-dom';
 
  const LandingPage = () => {
 
-  const { isAuthenticated } = useAuth0();
+  const { isLoading, isAuthenticated } = useAuth0();
 
   return (
     <div className="home">
-      {!isAuthenticated && (
+      {!isLoading &&!isAuthenticated && (
         <>
-          <Navigate to='/' />
+          Shit Sucks
         </>
       )}
       {isAuthenticated && (
