@@ -14,7 +14,7 @@ import {Navigate} from 'react-router-dom';
     <div className="home">
       {!isLoading &&!isAuthenticated && (
         <>
-          Shit Sucks
+          <Navigate to='/' />
         </>
       )}
       {isAuthenticated && (
