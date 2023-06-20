@@ -9,9 +9,11 @@ import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import Divisionselector from "../divisionselector/Divisionselector";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const { isLoading, isAuthenticated, user } = useAuth0();
 
   return (
     <div className="navbar">
@@ -49,8 +51,8 @@ const Navbar = () => {
           </div>
           <div className="item">
             <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
+              src={user.picture}
+              alt={user.email}
               className="avatar"
             />
           </div>
