@@ -10,14 +10,6 @@ import {Navigate} from 'react-router-dom';
 
   const { isLoading, isAuthenticated, user } = useAuth0();
 
-  function persistUserSession() {
-    if (isAuthenticated) {
-
-    }
-  }
-
-  persistUserSession();
-
   return (
     <div className="home">
       {!isLoading && !isAuthenticated && (

@@ -9,6 +9,7 @@ import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import CallbackPage from "./pages/callbackpage/callback-page";
+import TestPage from "./pages/testpage/testpage";
 import { AuthenticationGuard } from "./components/authenticationguard/authentication-guard";
 import LandingPage from "./pages/landingpage/LandingPage";
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
+            <Route path="/test" element={<AuthenticationGuard component={TestPage} />} />
             <Route path="users">
               <Route index element={<AuthenticationGuard component={List} />} />
               <Route path=":userId" element={<Single />} />
