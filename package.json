@@ -1,6 +1,6 @@
 {
-    "name": "berry-material-react",
-    "version": "3.5.0",
+    "name": "marqoola",
+    "version": "0.0.1",
     "private": true,
     "dependencies": {
         "@auth0/auth0-spa-js": "^2.0.2",
