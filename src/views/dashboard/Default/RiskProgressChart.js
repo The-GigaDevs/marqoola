@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -8,6 +8,8 @@ import ReactApexChart from 'react-apexcharts';
 
 // project import
 import useConfig from 'hooks/useConfig';
+
+
 
 // chart options
 const lineChartOptions = {
@@ -28,6 +30,7 @@ const lineChartOptions = {
 };
 
 // ==============================|| LINE CHART ||============================== //
+
 
 const RiskProgressChart = () => {
     const theme = useTheme();

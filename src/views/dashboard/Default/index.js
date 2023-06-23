@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 // material-ui
+import axios from 'utils/axios';
 import { Grid, Tab, Tabs, Box, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
@@ -74,17 +75,37 @@ const detailTabsOption = [
     }
 ];
 
-
+function UserList() {
+    
+    };
+    
+      
 
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
 const Dashboard = () => {
     const [isLoading, setLoading] = useState(true);
+
+    const [users, setUsers] = useState([]);
+    
+      const getUsers = useCallback(async () => {
+        try {
+          const response = await axios.get('/risks?limit=1');
+          console.log(response);
+        } catch (error) {
+          console.log(error);
+        }
+      }, []);
+
     useEffect(() => {
         setLoading(false);
     }, []);
 
+    useEffect(() => {
+        getUsers();
+      }, [getUsers]);
+    
     const theme = useTheme();
 
     const [value, setValue] = useState(0);
