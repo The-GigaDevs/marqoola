@@ -26,12 +26,12 @@ const CurrentRiskCard = ({ primary, secondary, amount, color, color2, icon }) =>
                 </Grid>
                 <Grid item xs={5} style={{ paddingTop: '100px'}}>
                     <Stack>
-                    <Typography variant="h3" style={{ color }}>
+                    <Typography variant="h4" style={{ color }}>
                         {amount}
                     </Typography>
                     </Stack>
                     <Grid container>
-                        <Grid item >
+                        <Grid item>
                             <Typography variant="h5" style={{ color }}>
                                {primaryIcon} {secondary} 
                             </Typography>

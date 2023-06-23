@@ -1,6 +1,6 @@
 import { useState } from 'react';
 // material-ui
-import { Grid, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Chip } from '@mui/material';
+import { Grid, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Chip, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -18,6 +18,11 @@ const rows = [
     createData('Policies for information security', '68%', 'A$ 50,798.26', 'A$ 34,542.81', 'A$ 20,000.00', 'A$ 34,542.81', 10, [{name:'ISO27001', color:'error.light'}]),
     createData('Information security roles and responsibilities', '18%', 'A$ 152,394.45', 'A$ 27,431.81', 'A$ 80,000.00', 'A$ 67,394.77', 26, [{name:'SOC 2 2027', color:'error.light'}]),
     createData('Segregation of duties', '19%', 'A$ 101,596.77', 'A$ 19,303.14', 'A$ 88,000.00', 'A$ 13,596.51', 30, [{name:'ISO27001', color:'error.light'}, {name:'SOC 2 2027', color:'primary.main'}, {name:'+2'}]),
+    createData('Management Responsibilities', '49%', 'A$ 253,991.28', 'A$ 124,455.73', 'A$ 30,000.00', 'A$ 223,991.28', 15, [{name:'ISO27001', color:'error.light'}, {name:'HIPAA', color:'orange.dark'}, {name:'+2'}]),
+    createData('Threat Intelligence', '10%', 'A$ 279,390.41', 'A$ 27,939.04', 'A$ 150,000.00', 'A$ 129,390.41', 4, [{name:'ISO27001', color:'error.light'}]),
+    createData('Compliance with policies, rules and standards for information security', '88%', 'A$ 29,569.13', 'A$ 29,569.13', 'A$ 2500.00', 'A$ 27,069.13', 2, [{name:'ISO27001', color:'error.light'}, {name:'SOC 2 2027', color:'primary.main'}]),
+    createData('Documented operating procedures', '20%', 'A$ 266,122.21', 'A$ 266,122.21', 'A$ 55,000.00', 'A$ 211,122.21', 20, [{name:'ISO27001', color:'error.light'}, {name:'SOC 2 2027', color:'primary.main'}, {name:'+1'}]),
+
 ];
 
 export const header = [
@@ -33,6 +38,7 @@ export const header = [
 export default function RiskDashboardControlTable() {
     const theme = useTheme();
     const red = theme.palette.error.main;
+    const offWhite = theme.palette.grey[500];
     const headers = [];
     columns.map((item) => headers.push({ label: item.headerName, key: item.field }));
 
@@ -76,13 +82,13 @@ export default function RiskDashboardControlTable() {
                                         <TableCell sx={{ pl: 3 }} component="th" scope="row">
                                             <Grid container direction='column'>
                                                 <Grid item>
-                                                    {row.name}
+                                                    <Typography variant="h6">{row.name}</Typography>
                                                 </Grid>
                                                 <Grid item>
                                                     <Grid container direction="row" spacing={1}>
                                                         {row.frameworks.map((framework) => (
                                                             <Grid item>
-                                                                <Chip label={framework.name} sx={{backgroundColor: framework.color}} />
+                                                                <Chip label={framework.name} sx={{backgroundColor: framework.color, fontWeight: 'bold', color:offWhite}} />
                                                             </Grid>
                                                         ))}
                                                     </Grid>
@@ -92,11 +98,11 @@ export default function RiskDashboardControlTable() {
                                             
                                             
                                         </TableCell>
-                                        <TableCell align="right">{row.score}</TableCell>
-                                        <TableCell align="right">{row.riskReductionCurrent}</TableCell>
-                                        <TableCell align="right">{row.riskReductionPotential}</TableCell>
-                                        <TableCell align="right">{row.implementantionCost}</TableCell>
-                                        <TableCell align="right">{row.roi}</TableCell>
+                                        <TableCell align="right"><Typography variant="subtitle3">{row.score}</Typography></TableCell>
+                                        <TableCell align="right"><Typography variant="subtitle3">{row.riskReductionCurrent}</Typography></TableCell>
+                                        <TableCell align="right"><Typography variant="subtitle3">{row.riskReductionPotential}</Typography></TableCell>
+                                        <TableCell align="right"><Typography variant="h6">{row.implementantionCost}</Typography></TableCell>
+                                        <TableCell align="right"><Typography variant="h6" noWrap>{row.roi}</Typography></TableCell>
                                         <TableCell align="right"><Button variant="outlined" sx={{
                                         borderColor: 'error.main',
                                         color: 'error.main'

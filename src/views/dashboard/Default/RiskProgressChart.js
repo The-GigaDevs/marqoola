@@ -58,7 +58,7 @@ const RiskProgressChart = () => {
     }, [navType, primary, darkLight, grey200, secondary]);
     return (
         <div id="chart">
-            <ReactApexChart options={options} series={series} type="area" height={550} />
+            <ReactApexChart options={options} series={series} type="area" height={350} />
         </div>
     );
 };
