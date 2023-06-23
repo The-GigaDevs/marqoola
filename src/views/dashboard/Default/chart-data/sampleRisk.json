@@ -1,0 +1,34 @@
+{
+    "id": "Risk-123",
+    "label": "Data Breach (Malicious External)",
+    "description": "Lorem ipsum",
+    "lastYear": "1981132",
+    "performance": "58.4%",
+    "percentaceOfTotalRisk": "12.38%",
+    "frequency": 1,
+    "probability": "5%",
+    "numControls": 15,
+    "numTests": 127,
+    "history": [
+        {
+            "date": "2023-01-01",
+            "value": "123456789"
+        },
+        {
+            "date": "2023-01-01",
+            "value": "123456789"
+        },
+        {
+            "date": "2023-01-01",
+            "value": "123456789"
+        },
+        {
+            "date": "2023-01-01",
+            "value": "123456789"
+        },
+        {
+            "date": "2023-01-01",
+            "value": "123456789"
+        }
+    ]
+}

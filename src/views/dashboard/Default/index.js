@@ -21,7 +21,7 @@ import LibraryBooksTwoToneIcon from '@mui/icons-material/LibraryBooksTwoTone';
 import LockTwoToneIcon from '@mui/icons-material/LockTwoTone';
 import MailTwoToneIcon from '@mui/icons-material/MailTwoTone';
 import MainCard from 'ui-component/cards/MainCard';
-import TableCollapsible from 'views/forms/tables/TableCollapsible';
+import RiskDashboardControlTable from 'views/forms/tables/RiskDashboardControlTable';
 import ReportCard from 'ui-component/cards/ReportCard';
 import CurrentRiskCard from 'ui-component/cards/CurrentRiskCard';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -76,10 +76,10 @@ const detailTabsOption = [
 ];
 
 function UserList() {
-    
-    };
-    
-      
+
+};
+
+
 
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
@@ -88,15 +88,15 @@ const Dashboard = () => {
     const [isLoading, setLoading] = useState(true);
 
     const [users, setUsers] = useState([]);
-    
-      const getUsers = useCallback(async () => {
+
+    const getUsers = useCallback(async () => {
         try {
-          const response = await axios.get('/risks?limit=1');
-          console.log(response);
+            const response = await axios.get('/risks?limit=1');
+            console.log(response);
         } catch (error) {
-          console.log(error);
+            console.log(error);
         }
-      }, []);
+    }, []);
 
     useEffect(() => {
         setLoading(false);
@@ -104,8 +104,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         getUsers();
-      }, [getUsers]);
-    
+    }, [getUsers]);
+
     const theme = useTheme();
 
     const [value, setValue] = useState(0);
@@ -121,204 +121,204 @@ const Dashboard = () => {
     };
 
     return (
-        
+
         <Grid title="Account" container spacing={gridSpacing}>
             <Grid item xs={12}>
-            <Tabs
-                        value={value}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        onChange={handleChange}
-                        aria-label="simple tabs example"
-                        variant="scrollable"
-                        sx={{
-                            mb: 3,
-                            '& a': {
-                                minHeight: 'auto',
-                                minWidth: 10,
-                                py: 1.5,
-                                px: 1,
-                                mr: 2.25,
-                                color: theme.palette.grey[600],
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            },
-                            '& a.Mui-selected': {
-                                color: theme.palette.primary.main
-                            },
-                            '& .MuiTabs-indicator': {
-                                bottom: 2
-                            },
-                            '& a > svg': {
-                                marginBottom: '0px !important',
-                                mr: 1.25
-                            }
-                        }}
-                    >
-                        {tabsOption.map((tab, index) => (
-                            <Tab key={index} component={Link} to="#" icon={tab.icon} label={tab.label} {...a11yProps(index)} />
-                        ))}
-                    </Tabs>
-                    <Typography variant="h2">Control Library</Typography>
-                    <Typography variant="h1">Data Breach (Malicious External)</Typography>
-                    <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
+                <Tabs
+                    value={value}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    onChange={handleChange}
+                    aria-label="simple tabs example"
+                    variant="scrollable"
+                    sx={{
+                        mb: 3,
+                        '& a': {
+                            minHeight: 'auto',
+                            minWidth: 10,
+                            py: 1.5,
+                            px: 1,
+                            mr: 2.25,
+                            color: theme.palette.grey[600],
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        },
+                        '& a.Mui-selected': {
+                            color: theme.palette.primary.main
+                        },
+                        '& .MuiTabs-indicator': {
+                            bottom: 2
+                        },
+                        '& a > svg': {
+                            marginBottom: '0px !important',
+                            mr: 1.25
+                        }
+                    }}
+                >
+                    {tabsOption.map((tab, index) => (
+                        <Tab key={index} component={Link} to="#" icon={tab.icon} label={tab.label} {...a11yProps(index)} />
+                    ))}
+                </Tabs>
+                <Typography variant="h2">Control Library</Typography>
+                <Typography variant="h1">Data Breach (Malicious External)</Typography>
+                <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={9} md={9} sm={9} xs={9}>
-                    <MainCard sx={{ '&>div': { p: 0, pb: '0px !important' } }}>
-            <Box
-                sx={{
-                    p: 3
-                }}
-            >
-                <Grid container direction="column" spacing={3}>
-                <Grid item>
-                            <Typography variant="h3">Performance</Typography>
-                        </Grid>
-                        <Grid item>
-                        <Grid container direction="row" spacing={1}>
-                            <Grid item>
-                                <ArrowUpwardIcon color='orange'/>
+                        <MainCard sx={{ '&>div': { p: 0, pb: '0px !important' } }}>
+                            <Box
+                                sx={{
+                                    p: 3
+                                }}
+                            >
+                                <Grid container direction="column" spacing={3}>
+                                    <Grid item>
+                                        <Typography variant="h3">Performance</Typography>
+                                    </Grid>
+                                    <Grid item>
+                                        <Grid container direction="row" spacing={1}>
+                                            <Grid item>
+                                                <ArrowUpwardIcon color='orange' />
+                                            </Grid>
+                                            <Grid item>
+                                                <Typography variant="h4" color={orange}>58,4%</Typography>
+                                            </Grid>
+                                            <Grid item>
+                                                <Typography variant="h4" color='grey'>Last year</Typography>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <RiskProgressChart isLoading={isLoading} /></Box>
+                            <Grid container direction="row" spacing={1} style={{ paddingLeft: '100px', paddingBottom: '20px' }}>
+                                <Grid item xs={2.4}>
+                                    <Grid container direction="column" spacing={1}>
+                                        <Grid item>
+                                            <Typography variant="h2" color="inherit">
+                                                12,38%
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant="h4" color="grey">
+                                                Of total risk
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={2.4}>
+                                    <Grid container direction="column" spacing={1}>
+                                        <Grid item>
+                                            <Typography variant="h2" color="inherit">
+                                                1
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant="h4" color="grey">
+                                                Frequency
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={2.4}>
+                                    <Grid container direction="column" spacing={1}>
+                                        <Grid item>
+                                            <Typography variant="h2" color="inherit">
+                                                5%
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant="h4" color="grey">
+                                                Probability
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={2.4}>
+                                    <Grid container direction="column" spacing={1}>
+                                        <Grid item>
+                                            <Typography variant="h2" color="inherit">
+                                                15
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant="h4" color="grey">
+                                                Controls
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={2.4}>
+                                    <Grid container direction="column" spacing={1}>
+                                        <Grid item>
+                                            <Typography variant="h2" color="inherit">
+                                                172
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Typography variant="h4" color="grey">
+                                                Tests
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                            <Grid item>
-                                <Typography variant="h4" color={orange}>58,4%</Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" color='grey'>Last year</Typography>
-                            </Grid>
-                        </Grid>
-                        </Grid>
-                </Grid>
-                <RiskProgressChart isLoading={isLoading} /></Box>
-                <Grid container direction="row" spacing={1} style={{paddingLeft: '100px', paddingBottom: '20px'}}>
-                    <Grid  item xs={2.4}>
-                        <Grid container direction="column" spacing={1}>
-                            <Grid item>
-                                <Typography variant="h2" color="inherit">
-                                    12,38%
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" color="grey">
-                                    Of total risk
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={2.4}>
-                    <Grid container direction="column" spacing={1}>
-                            <Grid item>
-                                <Typography variant="h2" color="inherit">
-                                    1
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" color="grey">
-                                    Frequency
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={2.4}>
-                    <Grid container direction="column" spacing={1}>
-                            <Grid item>
-                                <Typography variant="h2" color="inherit">
-                                    5%
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" color="grey">
-                                    Probability
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={2.4}>
-                    <Grid container direction="column" spacing={1}>
-                            <Grid item>
-                                <Typography variant="h2" color="inherit">
-                                    15
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" color="grey">
-                                   Controls
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={2.4}>
-                    <Grid container direction="column" spacing={1}>
-                            <Grid item>
-                                <Typography variant="h2" color="inherit">
-                                    172
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="h4" color="grey">
-                                    Tests
-                                </Typography>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                    </MainCard>
+                        </MainCard>
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xs={3}>
-                        <div style={{paddingBottom:'25px'}}><CurrentRiskCard secondary='58,3%' icon={ArrowUpwardIcon} primary='Data Breach (Malicious External)' color='orange' amount='A$ 1,981.132'></CurrentRiskCard></div>
+                        <div style={{ paddingBottom: '25px' }}><CurrentRiskCard secondary='58,3%' icon={ArrowUpwardIcon} primary='Data Breach (Malicious External)' color='orange' amount='A$ 1,981.132'></CurrentRiskCard></div>
                         <ReportCard primary='About Data Breach (Malicious External)' secondary='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet nulla sit amet est auctor ornare. Duis tellus lacus, consequat condimentum odio sit amet, finibus lacinia nisi. Aenean sit amet mollis enim. Nunc a dui purus. In a mauris fermentum, posuere ante sit amet, vulputate diam. Morbi cursus, mauris eget feugiat semper, ipsum enim mattis libero, feugiat gravida risus ante malesuada diam. Donec id metus interdum, volutpat ligula nec, fermentum augue. Pellentesque imperdiet consequat metus, in aliquet velit mattis et. Aliquam id purus at nibh aliquam lobortis vitae cursus augue. Suspendisse ac odio porta, imperdiet urna auctor, interdum tortor. In eget vestibulum sapien, nec elementum urna.' isLoading={isLoading} />
                     </Grid>
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-            <Tabs
-                        value={value1}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        onChange={handleDetailChange}
-                        aria-label="simple tabs example"
-                        variant="scrollable"
-                        sx={{
-                            mb: 3,
-                            '& a': {
-                                minHeight: 'auto',
-                                minWidth: 10,
-                                py: 1.5,
-                                px: 1,
-                                mr: 2.25,
-                                color: theme.palette.grey[600],
-                                display: 'flex',
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            },
-                            '& a.Mui-selected': {
-                                color: theme.palette.primary.main
-                            },
-                            '& .MuiTabs-indicator': {
-                                bottom: 2
-                            },
-                            '& a > svg': {
-                                marginBottom: '0px !important',
-                                mr: 1.25
-                            }
-                        }}
-                    >
-                        {detailTabsOption.map((tab, index) => (
-                            <Tab key={index} component={Link} to="#" icon={tab.icon} label={tab.label} {...a11yProps(index)} />
-                        ))}
-                    </Tabs>
+                <Tabs
+                    value={value1}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    onChange={handleDetailChange}
+                    aria-label="simple tabs example"
+                    variant="scrollable"
+                    sx={{
+                        mb: 3,
+                        '& a': {
+                            minHeight: 'auto',
+                            minWidth: 10,
+                            py: 1.5,
+                            px: 1,
+                            mr: 2.25,
+                            color: theme.palette.grey[600],
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        },
+                        '& a.Mui-selected': {
+                            color: theme.palette.primary.main
+                        },
+                        '& .MuiTabs-indicator': {
+                            bottom: 2
+                        },
+                        '& a > svg': {
+                            marginBottom: '0px !important',
+                            mr: 1.25
+                        }
+                    }}
+                >
+                    {detailTabsOption.map((tab, index) => (
+                        <Tab key={index} component={Link} to="#" icon={tab.icon} label={tab.label} {...a11yProps(index)} />
+                    ))}
+                </Tabs>
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={12}>
-                        <TableCollapsible />
+                        <RiskDashboardControlTable />
                     </Grid>
-                    
+
                 </Grid>
             </Grid>
-            
+
         </Grid>
-        
+
     );
 };
 
