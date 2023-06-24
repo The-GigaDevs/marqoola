@@ -27,6 +27,15 @@ const RiskProgressChart = ({chartData}) => {
     const grey200 = theme.palette.grey[200];
     const secondary = theme.palette.secondary.main;
 
+    let values = [];
+    let xaxis = [];
+    for(let i = 0; i < chartData.history.length; i++){
+        let obj = chartData.history[i];
+        values.push(obj.value)
+        xaxis.push(obj.date)
+
+    }
+
     const lineChartOptions = {
         chart: {
             zoom: {
@@ -40,13 +49,13 @@ const RiskProgressChart = ({chartData}) => {
             curve: 'smooth'
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+            categories: xaxis
         }
     };
     const [series] = useState([
         {
             name: 'aaaa',
-            data: [1323293, 1203403, 1450283, 1300283, 1402948, 1890230, 1784902, 2053584, 1981132]
+            data: values
         }
     ]);
 
@@ -60,7 +69,7 @@ const RiskProgressChart = ({chartData}) => {
     }, [navType, primary, darkLight, grey200, secondary]);
 
     React.useEffect(() => {
-        //console.log(chartData);
+        
     }, []);
     return (
         <div id="chart">
