@@ -9,6 +9,10 @@
 @import ' ~react-18-image-lightbox/style.css';
 @import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
+@font-face {
+    font-family: 'TomatoGrotesk';
+    src: url('../fonts/TomatoGrotesk-Regular.woff') format('woff');
+  }
 // ==============================|| LIGHT BOX ||============================== //
 .slick-arrow:before {
     color: $grey500;
