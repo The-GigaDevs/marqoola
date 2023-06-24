@@ -60,7 +60,7 @@ const RiskProgressChart = ({chartData}) => {
     }, [navType, primary, darkLight, grey200, secondary]);
 
     React.useEffect(() => {
-        console.log(chartData);
+        //console.log(chartData);
     }, []);
     return (
         <div id="chart">

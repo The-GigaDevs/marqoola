@@ -127,13 +127,12 @@ function UserList() {
 const Dashboard = () => {
     const [isLoading, setLoading] = useState(true);
 
-    const [users, setUsers] = useState([]);
+    const [risks, setRisks] = useState([]);
 
-    const getUsers = useCallback(async () => {
+    const getRisks = useCallback(async () => {
         try {
             const response = await axios.get('/risks?limit=3');
-            console.log(response.data)
-            setUsers(response.data[0].data);
+            setRisks(response.data[0].data);
         } catch (error) {
             console.log(error);
         }
@@ -144,8 +143,8 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        getUsers();
-    }, [getUsers]);
+        getRisks();
+    }, [getRisks]);
 
     const theme = useTheme();
 
@@ -203,7 +202,7 @@ const Dashboard = () => {
                     ))}
                 </Tabs>
                 <Typography variant="h2">Control Library</Typography>
-                <Typography variant="h1">{users.label}</Typography>
+                <Typography variant="h1">{risks.label}</Typography>
                 <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={9} md={9} sm={9} xs={9}>
@@ -223,7 +222,7 @@ const Dashboard = () => {
                                                 <ArrowUpwardIcon color='orange' />
                                             </Grid>
                                             <Grid item>
-                                                <Typography variant="h4" color={orange}>58,4%</Typography>
+                                                <Typography variant="h4" color={orange}>{risks.performance}</Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Typography variant="h4" color='grey'>Last year</Typography>
@@ -237,7 +236,7 @@ const Dashboard = () => {
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
                                             <Typography variant="h2" color="inherit">
-                                                12,38%
+                                                {risks.percentaceOfTotalRisk}
                                             </Typography>
                                         </Grid>
                                         <Grid item>
@@ -251,7 +250,7 @@ const Dashboard = () => {
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
                                             <Typography variant="h2" color="inherit">
-                                                1
+                                                {risks.frequency}
                                             </Typography>
                                         </Grid>
                                         <Grid item>
@@ -265,7 +264,7 @@ const Dashboard = () => {
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
                                             <Typography variant="h2" color="inherit">
-                                                5%
+                                                {risks.probability}
                                             </Typography>
                                         </Grid>
                                         <Grid item>
@@ -279,7 +278,7 @@ const Dashboard = () => {
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
                                             <Typography variant="h2" color="inherit">
-                                                15
+                                                {risks.numControls}
                                             </Typography>
                                         </Grid>
                                         <Grid item>
@@ -293,7 +292,7 @@ const Dashboard = () => {
                                     <Grid container direction="column" spacing={1}>
                                         <Grid item>
                                             <Typography variant="h2" color="inherit">
-                                                172
+                                                {risks.numTests}
                                             </Typography>
                                         </Grid>
                                         <Grid item>
@@ -307,8 +306,8 @@ const Dashboard = () => {
                         </MainCard>
                     </Grid>
                     <Grid item lg={3} md={3} sm={3} xs={3}>
-                        <div style={{ paddingBottom: '25px' }}><CurrentRiskCard secondary='58,3%' icon={ArrowUpwardIcon} primary='Data Breach (Malicious External)' color='orange' amount='A$ 1,981.132'></CurrentRiskCard></div>
-                        <ReportCard primary='About Data Breach (Malicious External)' secondary='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur laoreet nulla sit amet est auctor ornare. Duis tellus lacus, consequat condimentum odio sit amet, finibus lacinia nisi. Aenean sit amet mollis enim. Nunc a dui purus. In a mauris fermentum, posuere ante sit amet, vulputate diam. Morbi cursus, mauris eget feugiat semper, ipsum enim mattis libero, feugiat gravida risus ante malesuada diam. Donec id metus interdum, volutpat ligula nec, fermentum augue. Pellentesque imperdiet consequat metus, in aliquet velit mattis et.' isLoading={isLoading} />
+                        <div style={{ paddingBottom: '25px' }}><CurrentRiskCard secondary={risks.performance} icon={ArrowUpwardIcon} primary={risks.label} color='orange' amount= {'A$ ' + risks.lastYear}></CurrentRiskCard></div>
+                        <ReportCard primary={risks.label} secondary={risks.description} isLoading={isLoading} />
                     </Grid>
                 </Grid>
             </Grid>
