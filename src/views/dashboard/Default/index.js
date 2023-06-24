@@ -131,8 +131,8 @@ const Dashboard = () => {
 
     const getRisks = useCallback(async () => {
         try {
-            const response = await axios.get('/risks?limit=3');
-            setRisks(response.data[0].data);
+            const response = await axios.get('/risks/580749');
+            setRisks(response.data.data);
         } catch (error) {
             console.log(error);
         }
