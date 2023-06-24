@@ -170,7 +170,8 @@ const Dashboard = () => {
                     textColor="primary"
                     onChange={handleChange}
                     aria-label="simple tabs example"
-                    variant="scrollable"
+                    variant="centered"
+                    centered
                     sx={{
                         mb: 3,
                         '& a': {
@@ -318,7 +319,8 @@ const Dashboard = () => {
                     textColor="primary"
                     onChange={handleDetailChange}
                     aria-label="simple tabs example"
-                    variant="scrollable"
+                    variant="centered"
+                    centered
                     sx={{
                         mb: 3,
                         '& a': {
