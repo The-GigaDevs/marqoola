@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -12,27 +13,12 @@ import useConfig from 'hooks/useConfig';
 
 
 // chart options
-const lineChartOptions = {
-    chart: {
-        zoom: {
-            enabled: false
-        }
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'smooth'
-    },
-    xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
-    }
-};
+
 
 // ==============================|| LINE CHART ||============================== //
 
 
-const RiskProgressChart = () => {
+const RiskProgressChart = ({chartData}) => {
     const theme = useTheme();
     const { navType } = useConfig();
 
@@ -41,6 +27,22 @@ const RiskProgressChart = () => {
     const grey200 = theme.palette.grey[200];
     const secondary = theme.palette.secondary.main;
 
+    const lineChartOptions = {
+        chart: {
+            zoom: {
+                enabled: false
+            }
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            curve: 'smooth'
+        },
+        xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+        }
+    };
     const [series] = useState([
         {
             name: 'aaaa',
@@ -56,11 +58,19 @@ const RiskProgressChart = () => {
             
         }));
     }, [navType, primary, darkLight, grey200, secondary]);
+
+    React.useEffect(() => {
+        console.log(chartData);
+    }, []);
     return (
         <div id="chart">
             <ReactApexChart options={options} series={series} type="area" height={350} />
         </div>
     );
+};
+
+RiskProgressChart.propTypes = {
+    chartData: PropTypes.object
 };
 
 export default RiskProgressChart;

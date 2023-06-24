@@ -33,6 +33,46 @@ function a11yProps(index) {
     };
 }
 
+const testData = [
+    {
+       "id":580749,
+       "name":"risk-1",
+       "data":{
+          "description":"Lorem ipsum",
+          "frequency":1,
+          "history":[
+             {
+                "date":"2023-01-01",
+                "value":"123456789"
+             },
+             {
+                "date":"2023-01-02",
+                "value":"987654321"
+             },
+             {
+                "date":"2023-01-03",
+                "value":"456789123"
+             },
+             {
+                "date":"2023-01-04",
+                "value":"321654987"
+             },
+             {
+                "date":"2023-01-05",
+                "value":"789123456"
+             }
+          ],
+          "id":"Risk-123",
+          "label":"Data Breach (Malicious External)",
+          "lastYear":"1981132",
+          "numControls":15,
+          "numTests":127,
+          "percentaceOfTotalRisk":"12.38%",
+          "performance":"58.4%",
+          "probability":"5%"
+       }
+    }];
+
 const tabsOption = [
     {
         label: 'Dashboard',
@@ -91,8 +131,9 @@ const Dashboard = () => {
 
     const getUsers = useCallback(async () => {
         try {
-            const response = await axios.get('/risks?limit=1');
-            console.log(response);
+            const response = await axios.get('/risks?limit=3');
+            console.log(response.data)
+            setUsers(response.data[0].data);
         } catch (error) {
             console.log(error);
         }
@@ -162,7 +203,7 @@ const Dashboard = () => {
                     ))}
                 </Tabs>
                 <Typography variant="h2">Control Library</Typography>
-                <Typography variant="h1">Data Breach (Malicious External)</Typography>
+                <Typography variant="h1">{users.label}</Typography>
                 <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
                 <Grid container spacing={gridSpacing}>
                     <Grid item lg={9} md={9} sm={9} xs={9}>
@@ -190,7 +231,7 @@ const Dashboard = () => {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <RiskProgressChart isLoading={isLoading} /></Box>
+                                <RiskProgressChart isLoading={isLoading} chartData={testData}/></Box>
                             <Grid container direction="row" spacing={1} style={{ paddingLeft: '100px', paddingBottom: '20px' }}>
                                 <Grid item xs={2.4}>
                                     <Grid container direction="column" spacing={1}>
