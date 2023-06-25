@@ -2,11 +2,16 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconDashboard, IconDeviceAnalytics } from '@tabler/icons';
+import { IconDashboard, IconDeviceAnalytics, IconSettings, IconChartHistogram, IconRobot, IconMailbox, IconShoppingCart } from '@tabler/icons';
 
 const icons = {
     IconDashboard,
-    IconDeviceAnalytics
+    IconDeviceAnalytics,
+    IconSettings,
+    IconChartHistogram,
+    IconRobot,
+    IconMailbox,
+    IconShoppingCart
 };
 
 // ==============================|| MENU ITEMS - DASHBOARD ||============================== //
@@ -22,7 +27,7 @@ const marqoolamenu = {
             title: <FormattedMessage id="Tasks" />,
             type: 'collapse',
             
-            icon: icons.IconDashboard,
+            icon: icons.IconMailbox,
             breadcrumbs: false,
             children: [
                 {
@@ -148,7 +153,7 @@ const marqoolamenu = {
             title: <FormattedMessage id="Dashboards" />,
             type: 'collapse',
             
-            icon: icons.IconDashboard,
+            icon: icons.IconChartHistogram,
             breadcrumbs: false,
             children: [
                 {
@@ -174,7 +179,7 @@ const marqoolamenu = {
             title: <FormattedMessage id="Integrations" />,
             type: 'collapse',
             
-            icon: icons.IconDashboard,
+            icon: icons.IconRobot,
             breadcrumbs: false,
             children: [
                 {
@@ -207,7 +212,7 @@ const marqoolamenu = {
             title: <FormattedMessage id="Marketplace" />,
             type: 'item',
             url: '/',
-            icon: icons.IconDashboard,
+            icon: icons.IconShoppingCart,
             breadcrumbs: false
         },
         {
@@ -215,7 +220,7 @@ const marqoolamenu = {
             title: <FormattedMessage id="Settings" />,
             type: 'item',
             url: '/',
-            icon: icons.IconDashboard,
+            icon: icons.IconSettings,
             breadcrumbs: false
         }
     ]
