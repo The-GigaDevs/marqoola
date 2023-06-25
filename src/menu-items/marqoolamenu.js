@@ -35,7 +35,6 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Control Assessments" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
                     breadcrumbs: false,
                 },
                 {
@@ -43,14 +42,12 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Raise Incident" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Alerts" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
                     breadcrumbs: false,
                 }
             ]
@@ -67,7 +64,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Organizations" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },
                 {
@@ -75,7 +72,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Objectives" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },
                 {
@@ -83,7 +80,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Assets" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },
                 {
@@ -91,7 +88,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Vendors" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },
                 {
@@ -99,7 +96,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Processes" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },
                 {
@@ -107,7 +104,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Legal Entities" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },
                 {
@@ -115,35 +112,35 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Cyber Riks Portfolio" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Controls Portfolio" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Incidents" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Indicators" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Action Items" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 }
             ]
@@ -161,7 +158,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Current Risk" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },
                 {
@@ -169,7 +166,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="SOA" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 }
             ]
@@ -187,7 +184,7 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Repository" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },
                 {
@@ -195,14 +192,14 @@ const marqoolamenu = {
                     title: <FormattedMessage id="Logs" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Connectors" />,
                     type: 'item',
                     url: '/',
-                    icon: icons.IconDashboard,
+                    
                     breadcrumbs: false,
                 }
             ]
