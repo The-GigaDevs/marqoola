@@ -104,7 +104,7 @@ function getStyles(name, personName, theme) {
 
 // ==============================|| PRODUCT ADD DIALOG ||============================== //
 
-const OrganizationAdd = ({ open, handleCloseDialog }) => {
+const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
     const theme = useTheme();
     
 
@@ -113,7 +113,7 @@ const OrganizationAdd = ({ open, handleCloseDialog }) => {
             try {
                 
                 const response =  await axios.post('/objects/organisations', {name: name,
-                parentid: 1,
+                parentid: currency,
                 data: {
                     description: description,
                     title: name 
@@ -214,9 +214,9 @@ const OrganizationAdd = ({ open, handleCloseDialog }) => {
                                     onChange={handleSelectChange}
                                     helperText="Please select Parent"
                                 >
-                                    {categories.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
+                                    {parents.map((parent) => (
+                                        <MenuItem key={parent.id} value={parent.id}>
+                                            {parent.name}
                                         </MenuItem>
                                     ))}
                                 </TextField>
@@ -240,7 +240,8 @@ const OrganizationAdd = ({ open, handleCloseDialog }) => {
 
 OrganizationAdd.propTypes = {
     open: PropTypes.bool,
-    handleCloseDialog: PropTypes.func
+    handleCloseDialog: PropTypes.func,
+    parents: PropTypes.object
 };
 
 export default OrganizationAdd;

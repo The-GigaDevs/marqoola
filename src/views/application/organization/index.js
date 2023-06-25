@@ -40,6 +40,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopyTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
+import OrgChartPage from 'views/forms/chart/OrgChart';
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -366,7 +367,7 @@ const OrganizationList = () => {
                                 <AddIcon fontSize="small" />
                             </Fab>
                         </Tooltip>
-                        <OrganizationAdd open={open} handleCloseDialog={handleCloseDialog} />
+                        <OrganizationAdd open={open} handleCloseDialog={handleCloseDialog} parents={rows}/>
                     </Grid>
                 </Grid>
             </CardContent>
@@ -477,7 +478,9 @@ const OrganizationList = () => {
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
+            <OrgChartPage />
         </MainCard>
+        
     );
 };
 
