@@ -33,6 +33,7 @@ const AppCustomerOrderList = Loadable(lazy(() => import('views/application/custo
 const AppCustomerCreateInvoice = Loadable(lazy(() => import('views/application/customer/CreateInvoice')));
 const AppCustomerOrderDetails = Loadable(lazy(() => import('views/application/customer/OrderDetails')));
 const AppCustomerProduct = Loadable(lazy(() => import('views/application/customer/Product')));
+const OrganizationList = Loadable(lazy(() => import('views/application/organization')));
 const AppCustomerProductReview = Loadable(lazy(() => import('views/application/customer/ProductReview')));
 
 // application routing
@@ -50,6 +51,8 @@ const AppECommProducts = Loadable(lazy(() => import('views/application/e-commerc
 const AppECommProductDetails = Loadable(lazy(() => import('views/application/e-commerce/ProductDetails')));
 const AppECommProductList = Loadable(lazy(() => import('views/application/e-commerce/ProductList')));
 const AppECommCheckout = Loadable(lazy(() => import('views/application/e-commerce/Checkout')));
+
+
 
 // forms component routing
 const FrmComponentsTextfield = Loadable(lazy(() => import('views/forms/components/TextField')));
@@ -209,7 +212,7 @@ const MainRoutes = {
         },
         {
             path: '/customer/product',
-            element: <AppCustomerProduct />
+            element: <OrganizationList />
         },
         {
             path: '/customer/product-review',

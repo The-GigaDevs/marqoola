@@ -8,6 +8,7 @@ import snackbarReducer from './slices/snackbar';
 import customerReducer from './slices/customer';
 import contactReducer from './slices/contact';
 import productReducer from './slices/product';
+import organisationReducer from './slices/organisation'
 import chatReducer from './slices/chat';
 import calendarReducer from './slices/calendar';
 import mailReducer from './slices/mail';
@@ -32,6 +33,7 @@ const reducer = combineReducers({
     customer: customerReducer,
     contact: contactReducer,
     product: productReducer,
+    organisation: organisationReducer,
     chat: chatReducer,
     calendar: calendarReducer,
     mail: mailReducer,

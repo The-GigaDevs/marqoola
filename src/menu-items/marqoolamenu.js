@@ -63,7 +63,7 @@ const marqoolamenu = {
                     id: 'controlassessments',
                     title: <FormattedMessage id="Organizations" />,
                     type: 'item',
-                    url: '/',
+                    url: '/customer/product',
                     
                     breadcrumbs: false,
                 },

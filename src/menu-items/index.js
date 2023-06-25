@@ -11,7 +11,7 @@ import marqoolamenu from './marqoolamenu'
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    //items: [header,  dashboard,  application, forms, elements, pages, utilities, support, other]
+    //items: [ dashboard,  application, forms, elements, pages, utilities, support, other]
     items: [marqoolamenu]
 };
 
