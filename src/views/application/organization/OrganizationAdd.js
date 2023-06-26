@@ -113,6 +113,7 @@ const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
                 
                 const response =  await axios.post('/objects/organisations', {name: name,
                 parentid: currency,
+                costofbreach: parseInt(costOfBreach),
                 data: {
                     description: description,
                     title: name 
@@ -132,6 +133,7 @@ const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
     
     const [currency, setCurrency] = useState('3');
     const [name, setName] = useState('');
+    const [costOfBreach, setCostOfBreach] = useState('');
     const [description, setDescription] = useState('');
     const handleSelectChange = (event) => {
         setCurrency(event?.target.value);
@@ -222,7 +224,14 @@ const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
                                     ))}
                                 </TextField>
                             </Grid>
-                            
+                            <Grid item xs={12}>
+                                <TextField id="outlined-basic1" 
+                                        onChange={(event) => {setCostOfBreach(event.target.value)}} 
+                                        fullWidth label="Cost of Breach" 
+                                        helperText="The total cost of breach for this organisation"
+                                        InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+                                />
+                            </Grid>
                         </Grid>
                     </DialogContent>
                     <DialogActions>
