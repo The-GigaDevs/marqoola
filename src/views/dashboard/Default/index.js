@@ -25,6 +25,8 @@ import RiskDashboardControlTable from 'views/forms/tables/RiskDashboardControlTa
 import ReportCard from 'ui-component/cards/ReportCard';
 import CurrentRiskCard from 'ui-component/cards/CurrentRiskCard';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import RiskDashboardCurrentRiskChart from './RiskDashboardCurrentRiskChart';
+import RiskDashboard from './RiskDashboard';
 
 function TabPanel({ children, value, index, ...other }) {
     return (
@@ -141,23 +143,28 @@ const Dashboard = () => {
     const [isLoading, setLoading] = useState(true);
 
     const [risks, setRisks] = useState([]);
-
+    var aaa;
     const getRisks = useCallback(async () => {
         try {
-            const response = await axios.get('/risks/580749');
+            const response = await axios.get('/objects/risks/580749');
             setRisks(response.data.data);
+            aaa = response.data.data;
+            console.log(response)
         } catch (error) {
             console.log(error);
         }
     }, []);
 
     useEffect(() => {
+        getRisks();
+    }, [getRisks]);
+
+    useEffect(() => {
+        if(risks.length > 0)
         setLoading(false);
     }, []);
 
-    useEffect(() => {
-        getRisks();
-    }, [getRisks]);
+    
 
     const theme = useTheme();
 
@@ -218,7 +225,7 @@ const Dashboard = () => {
                 <Typography variant="h2">Control Library</Typography>
                 <Typography variant="h1">{risks.label}</Typography>
                 <TabPanel value={value} index={0}>
-                    Hello
+                            <RiskDashboard  isLoading={isLoading} />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Typography variant="title" color="inherit" noWrap>&nbsp;</Typography>
