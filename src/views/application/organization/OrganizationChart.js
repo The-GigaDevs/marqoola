@@ -96,27 +96,8 @@ const OrganizationChart = ({rows, open, handleCloseDialog}) => {
 
     return (
         <Grid container rowSpacing={2} justifyContent="center">
-            {/* 
-            <Grid item md={12} lg={12} xs={12}>
-                <CardMui>
-                    <CardHeader title="Organization Chart" />
-                </CardMui>
-            </Grid> */ }
             <Grid item md={12} lg={12} xs={12}>
                 <Grid container spacing={2}>
-                    {/* 
-                    <Grid item md={12} lg={12} xs={12}>
-                        <MainCard title="Simple Chart" sx={{ overflow: 'auto' }}>
-                            <Tree
-                                lineWidth="1px"
-                                lineColor={theme.palette.secondary.main}
-                                lineBorderRadius="10px"
-                                label={<SimpleTree name={data[0].name} />}
-                            >
-                                <TreeCard items={data[0].children} />
-                            </Tree>
-                        </MainCard>
-                    </Grid> */ }
                     <Grid item md={12} lg={12} xs={12}>
                     <MainCard  sx={{ overflow: 'auto' }}>
                             <Tree
@@ -128,9 +109,7 @@ const OrganizationChart = ({rows, open, handleCloseDialog}) => {
                                         name={orgTree.name}
                                         role={orgTree.role}
                                         id={orgTree.id}
-                                        
                                         root
-
                                     />
                                 }
                             > { orgTree.children && 
