@@ -104,8 +104,21 @@ function getStyles(name, personName, theme) {
 
 // ==============================|| PRODUCT ADD DIALOG ||============================== //
 
-const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
+const OrganizationAddWithParent = ({ open, parent, handleCloseDialog }) => {
+    
     const theme = useTheme();
+
+    const closeDialog = async () => {
+        
+        try {
+            
+            const response =  await axios.get('/objects/organisations?limit=1').then(handleCloseDialog);
+           
+        } catch (error) {
+            console.log('Could not save org:', error)
+        }
+    
+}
     
     const handleSaveOrganisation = async () => {
         
@@ -129,8 +142,8 @@ const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
         
     }
     // handle category change dropdown
-    
-    const [currency, setCurrency] = useState('3');
+    debugger;
+    const [currency, setCurrency] = useState(parent.id);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const handleSelectChange = (event) => {
@@ -172,7 +185,7 @@ const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
             open={open}
             TransitionComponent={Transition}
             keepMounted
-            onClose={handleCloseDialog}
+            onClose={closeDialog}
             sx={{
                 '&>div:nth-of-type(3)': {
                     justifyContent: 'flex-end',
@@ -212,14 +225,14 @@ const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
                                     value={currency}
                                     
                                     fullWidth
-                                    onChange={handleSelectChange}
+                                    onChange={(event) => {setCurrency(event.target.value)}}
                                     helperText="Please select Parent"
                                 >
-                                    {parents.map((parent) => (
+                                    
                                         <MenuItem key={parent.id} value={parent.id}>
                                             {parent.name}
                                         </MenuItem>
-                                    ))}
+                                    
                                 </TextField>
                             </Grid>
                             
@@ -229,7 +242,7 @@ const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
                         <AnimateButton>
                             <Button variant="contained" onClick={handleSaveOrganisation}>Create</Button>
                         </AnimateButton>
-                        <Button variant="text" color="error" onClick={handleCloseDialog}>
+                        <Button variant="text" color="error" onClick={closeDialog}>
                             Close
                         </Button>
                     </DialogActions>
@@ -239,10 +252,10 @@ const OrganizationAdd = ({ open, handleCloseDialog, parents }) => {
     );
 };
 
-OrganizationAdd.propTypes = {
+OrganizationAddWithParent.propTypes = {
     open: PropTypes.bool,
+    parent: PropTypes.object,
     handleCloseDialog: PropTypes.func,
-    parents: PropTypes.object
 };
 
-export default OrganizationAdd;
+export default OrganizationAddWithParent;
