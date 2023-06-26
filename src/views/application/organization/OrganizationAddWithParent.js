@@ -142,7 +142,6 @@ const OrganizationAddWithParent = ({ open, parent, handleCloseDialog }) => {
         
     }
     // handle category change dropdown
-    debugger;
     const [currency, setCurrency] = useState(parent.id);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
