@@ -211,7 +211,7 @@ const MainRoutes = {
             element: <AppCustomerOrderDetails />
         },
         {
-            path: '/customer/product',
+            path: '/organisations',
             element: <OrganizationList />
         },
         {
