@@ -22,14 +22,21 @@ import OrganizationModify from './OrganizationModify';
 function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
     
     const [open, setOpen] = React.useState(false);
+    const [openM, setOpenM] = React.useState(false);
     const handleClickOpenDialog = () => {
         setOpen(true);
     };
+    const handleClickOpenDialogM = () => {
+        setOpenM(true);
+    };
     const handleClickOpenEditDialog = () =>{
-        setOpen(true);
+        setOpenM(true);
     }
     const handleCloseDialog = () => {
         setOpen(false);
+    };
+    const handleCloseDialogM = () => {
+        setOpenM(false);
     };
     
     const linkHandler = (link) => {
@@ -114,8 +121,9 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
                             sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
                         >
                             <EditIcon fontSize='small'  />
-                            <OrganizationModify open={open} parents={rows} orgId={orgData} handleCloseDialog={handleCloseDialog} />
+                            <OrganizationModify open={openM} parents={rows} orgId={orgData} handleCloseDialog={handleCloseDialogM} />
                         </IconButton>
+
                         
                     </Stack>
                 </Stack>

@@ -159,6 +159,7 @@ const OrganizationModify = ({ open, parents, orgId, handleCloseDialog }) => {
 
     useEffect(() => {
         getOrgData();
+        setCurrency(orgId.parentid);
     }, [getOrgData]);
 
     // handle category change dropdown
@@ -265,7 +266,7 @@ const OrganizationModify = ({ open, parents, orgId, handleCloseDialog }) => {
                                         onChange={(event) => {setCostOfBreach(event.target.value)}} 
                                         fullWidth label="Cost of Breach" 
                                         helperText="The total cost of breach for this organisation"
-                                        defaultValue={orgId.costofbreach + 1}
+                                        defaultValue={orgId.costofbreach}
                                         InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
                                 />
                             </Grid>
