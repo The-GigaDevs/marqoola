@@ -1,10 +1,12 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'utils/axios'
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Box, Chip, IconButton, List, ListItem, ListItemText, ListItemAvatar, Stack, Typography, Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/AddTwoTone';
+import EditIcon from '@mui/icons-material/Edit';
 // third party icons
 
 import OrganizationIcon from './OrganizationIcon';
@@ -13,15 +15,19 @@ import OrganizationIcon from './OrganizationIcon';
 import Avatar from 'ui-component/extended/Avatar';
 import MainCard from 'ui-component/cards/MainCard';
 import OrganizationAddWithParent from './OrganizationAddWithParent';
+import OrganizationModify from './OrganizationModify';
 
 // ==============================|| DATACARD ORGANIZATION CHART ||============================== //
 
-function DataCard({ name, role, id, linkedin, meet, skype, root }) {
+function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
     
     const [open, setOpen] = React.useState(false);
     const handleClickOpenDialog = () => {
         setOpen(true);
     };
+    const handleClickOpenEditDialog = () =>{
+        setOpen(true);
+    }
     const handleCloseDialog = () => {
         setOpen(false);
     };
@@ -33,6 +39,23 @@ function DataCard({ name, role, id, linkedin, meet, skype, root }) {
 
     const subTree = theme.palette.mode === 'dark' ? `dark.800` : `grey.100`;
     const rootTree = theme.palette.mode === 'dark' ? `dark.900` : `secondary.light`;
+
+    const [orgData, setOrgData] = React.useState([]);
+    var aaa;
+
+    const getOrgData = React.useCallback(async () => {
+        try {
+            const response = await axios.get('/objects/organisations/'+ id);
+            setOrgData(response.data);
+            aaa = response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
+    React.useEffect(() => {
+        getOrgData();
+    }, [getOrgData]);
 
     return (
         <MainCard
@@ -79,26 +102,21 @@ function DataCard({ name, role, id, linkedin, meet, skype, root }) {
                         <IconButton
                             size="small"
                             onClick={handleClickOpenDialog}
-                            sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 1, p: 0.25 }}
+                            sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
                         >
                            <AddIcon fontSize="small" />
                            
                             <OrganizationAddWithParent open={open} parent={{id: id, name:name}} handleCloseDialog={handleCloseDialog} />
                         </IconButton>
                         <IconButton
-                            onClick={() => linkHandler(meet)}
+                            onClick={handleClickOpenEditDialog}
                             size="small"
-                            sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 1, p: 0.25 }}
+                            sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
                         >
-                            
+                            <EditIcon fontSize='small'  />
+                            <OrganizationModify open={open} parents={rows} orgId={orgData} handleCloseDialog={handleCloseDialog} />
                         </IconButton>
-                        <IconButton
-                            onClick={() => linkHandler(skype)}
-                            size="small"
-                            sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 1, p: 0.25 }}
-                        >
-                            
-                        </IconButton>
+                        
                     </Stack>
                 </Stack>
             </List>
@@ -115,7 +133,8 @@ DataCard.propTypes = {
     skype: PropTypes.string,
     root: PropTypes.bool,
     open: PropTypes.bool,
-    handleCloseDialog: PropTypes.func
+    handleCloseDialog: PropTypes.func,
+    rows: PropTypes.object
 };
 
 export default DataCard;

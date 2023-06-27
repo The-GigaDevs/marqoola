@@ -75,7 +75,6 @@ const OrganizationChart = ({rows, open, handleCloseDialog}) => {
             const response = await axios.get('/objects/organisations/treeview');
             setOrgTree(response.data[0]);
             aaa = response.data[0];
-            console.log(response)
         } catch (error) {
             console.log(error);
         }
@@ -85,6 +84,9 @@ const OrganizationChart = ({rows, open, handleCloseDialog}) => {
         getOrgTree();
     }, [getOrgTree]);
 
+    useEffect(() => {
+        getOrgTree();
+    }, [open]);
 
     useEffect(() => {
         dispatch(openDrawer(false));
@@ -110,6 +112,7 @@ const OrganizationChart = ({rows, open, handleCloseDialog}) => {
                                         role={orgTree.role}
                                         id={orgTree.id}
                                         root
+                                        rows={rows}
                                     />
                                 }
                             > { orgTree.children && 
