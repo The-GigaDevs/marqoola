@@ -142,6 +142,7 @@ const OrganizationAddWithParent = ({ open, parent, handleCloseDialog }) => {
         
     }
     // handle category change dropdown
+    const [costOfBreach, setCostOfBreach] = useState('');
     const [currency, setCurrency] = useState(parent.id);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -234,7 +235,14 @@ const OrganizationAddWithParent = ({ open, parent, handleCloseDialog }) => {
                                     
                                 </TextField>
                             </Grid>
-                            
+                            <Grid item xs={12}>
+                                <TextField id="outlined-basic1" 
+                                        onChange={(event) => {setCostOfBreach(event.target.value)}} 
+                                        fullWidth label="Cost of Breach" 
+                                        helperText="The total cost of breach for this organisation"
+                                        InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+                                />
+                            </Grid>
                         </Grid>
                     </DialogContent>
                     <DialogActions>
