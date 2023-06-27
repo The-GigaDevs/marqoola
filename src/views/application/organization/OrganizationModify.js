@@ -222,7 +222,7 @@ const OrganizationModify = ({ open, parents, orgId, handleCloseDialog }) => {
                 }
             }}
         >
-            {open && orgData &&(
+            {open && orgData && orgId &&(
                 <>
                     <DialogTitle>Update Organisation</DialogTitle>
                     <DialogContent>
@@ -252,6 +252,7 @@ const OrganizationModify = ({ open, parents, orgId, handleCloseDialog }) => {
                                     fullWidth
                                     onChange={(event) => {setCurrency(event.target.value)}}
                                     helperText="Please select Parent"
+                                    defaultValue={orgId.parentid}
                                 >
                                     {orgData.map((parent) => (
                                         <MenuItem key={parent.id} value={parent.id}>
