@@ -1,6 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Box, useMediaQuery } from '@mui/material';
+import { Avatar, Box, useMediaQuery, Button } from '@mui/material';
 
 // project imports
 import LAYOUT_CONST from 'constant';
@@ -76,7 +76,9 @@ const Header = () => {
 
             {/* mega-menu */}
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                <MegaMenuSection />
+                <Button color='primary' variant='contained'>
+                    Roadmap
+                </Button>
             </Box>
 
             {/* live customization & localization */}
