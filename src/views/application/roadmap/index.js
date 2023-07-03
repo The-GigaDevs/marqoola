@@ -26,22 +26,32 @@ import {
 } from '@mui/material';
 import RoadmapCard from 'ui-component/cards/RoadmapCard';
 import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone';
+import { Icon360 } from '@tabler/icons';
 
 
-const OrganizationList = () => {
+const Roadmap = () => {
     const theme = useTheme();
 
     return (
         <MainCard title="Roadmap" content={false}>
             <CardContent>
             <Grid container spacing={3}>
-            <Grid item xs={12} lg={4} md={12}>
+            <Grid item xs={5} >
                 <RoadmapCard
-                    primary="Revenue"
-                    secondary="$42,562"
-                    content="$50,032 Last Month"
+                    secondary="Create your own risk categories"
+                    content="Add/Modify/Delete"
                     iconPrimary={MonetizationOnTwoToneIcon}
                     color={theme.palette.secondary.main}
+                    title="Create Risk Categories"
+                />
+            </Grid>
+            <Grid item xs={5}>
+                <RoadmapCard
+                    secondary="Create your own risks"
+                    content="Add/Modify/Delete"
+                    iconPrimary={Icon360}
+                    color={theme.palette.primary.main}
+                    title="Create Risks"
                 />
             </Grid>
             </Grid>
@@ -55,4 +65,4 @@ const OrganizationList = () => {
     );
 };
 
-export default OrganizationList;
+export default Roadmap;
