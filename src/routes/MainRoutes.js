@@ -133,6 +133,8 @@ const UtilsGrid = Loadable(lazy(() => import('views/utilities/Grid')));
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
+const RoadMap = Loadable(lazy(() => import('views/application/roadmap')));
+
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -213,6 +215,10 @@ const MainRoutes = {
         {
             path: '/organisations',
             element: <OrganizationList />
+        },
+        {
+            path: '/roadmap',
+            element: <RoadMap />
         },
         {
             path: '/customer/product-review',
