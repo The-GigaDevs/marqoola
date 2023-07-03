@@ -1,4 +1,5 @@
 // material-ui
+import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, useMediaQuery, Button } from '@mui/material';
 
@@ -76,7 +77,7 @@ const Header = () => {
 
             {/* mega-menu */}
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                <Button color='primary' variant='contained'>
+                <Button color='primary' variant='contained' component={Link} to="/organisations">
                     Roadmap
                 </Button>
             </Box>
