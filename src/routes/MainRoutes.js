@@ -136,6 +136,7 @@ const UnderConstruction = Loadable(lazy(() => import('views/pages/maintenance/Un
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
 const RoadMap = Loadable(lazy(() => import('views/application/roadmap')));
+const SecurityConceptsMaster = Loadable(lazy(() => import('views/application/securityconcepts/MasterTable')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -526,7 +527,12 @@ const MainRoutes = {
         {
             path: '/underconstruction',
             element: <UnderConstruction />
+        },
+        {
+            path: '/securityconcepts/master',
+            element: <SecurityConceptsMaster />
         }
+
     ]
 };
 

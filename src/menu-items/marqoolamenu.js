@@ -230,7 +230,7 @@ const marqoolamenu = {
                             id: 'securityconcepts',
                             title: <FormattedMessage id="Security Concepts" />,
                             type: 'item',
-                            url: '/underconstruction',
+                            url: '/securityconcepts/master',
                             breadcrumbs: false,
                         }
                     ]
