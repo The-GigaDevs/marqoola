@@ -34,20 +34,20 @@ const marqoolamenu = {
                     id: 'controlassessments',
                     title: <FormattedMessage id="Control Assessments" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     breadcrumbs: false,
                 },
                 {
                     id: 'incident',
                     title: <FormattedMessage id="Raise Incident" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Alerts" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     breadcrumbs: false,
                 }
             ]
@@ -71,7 +71,7 @@ const marqoolamenu = {
                     id: 'incident',
                     title: <FormattedMessage id="Objectives" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },
@@ -79,7 +79,7 @@ const marqoolamenu = {
                     id: 'alerts',
                     title: <FormattedMessage id="Assets" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },
@@ -87,7 +87,7 @@ const marqoolamenu = {
                     id: 'vendors',
                     title: <FormattedMessage id="Vendors" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },
@@ -95,7 +95,7 @@ const marqoolamenu = {
                     id: 'alerts',
                     title: <FormattedMessage id="Processes" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },
@@ -103,7 +103,7 @@ const marqoolamenu = {
                     id: 'alerts',
                     title: <FormattedMessage id="Legal Entities" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },
@@ -111,35 +111,35 @@ const marqoolamenu = {
                     id: 'alerts',
                     title: <FormattedMessage id="Cyber Riks Portfolio" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Controls Portfolio" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Incidents" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Indicators" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Action Items" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 }
@@ -157,7 +157,7 @@ const marqoolamenu = {
                     id: 'controlassessments',
                     title: <FormattedMessage id="Current Risk" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },
@@ -165,7 +165,7 @@ const marqoolamenu = {
                     id: 'incident',
                     title: <FormattedMessage id="SOA" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 }
@@ -183,7 +183,7 @@ const marqoolamenu = {
                     id: 'controlassessments',
                     title: <FormattedMessage id="Repository" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },
@@ -191,14 +191,14 @@ const marqoolamenu = {
                     id: 'incident',
                     title: <FormattedMessage id="Logs" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
                     id: 'alerts',
                     title: <FormattedMessage id="Connectors" />,
                     type: 'item',
-                    url: '/',
+                    url: '/underconstruction',
                     
                     breadcrumbs: false,
                 }
@@ -208,7 +208,7 @@ const marqoolamenu = {
             id: 'marketplace',
             title: <FormattedMessage id="Marketplace" />,
             type: 'item',
-            url: '/',
+            url: '/underconstruction',
             icon: icons.IconShoppingCart,
             breadcrumbs: false
         },
@@ -216,7 +216,7 @@ const marqoolamenu = {
             id: 'settings',
             title: <FormattedMessage id="Settings" />,
             type: 'item',
-            url: '/',
+            url: '/underconstruction',
             icon: icons.IconSettings,
             breadcrumbs: false
         }
