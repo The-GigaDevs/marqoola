@@ -215,10 +215,27 @@ const marqoolamenu = {
         {
             id: 'settings',
             title: <FormattedMessage id="Settings" />,
-            type: 'item',
+            type: 'collapse',
             url: '/underconstruction',
             icon: icons.IconSettings,
-            breadcrumbs: false
+            breadcrumbs: false,
+            children: [
+                {
+                    id: 'mastertables',
+                    title: <FormattedMessage id="Master Tables" />,
+                    type: 'collapse',
+                    breadcrumbs: false,
+                    children :[ 
+                        {
+                            id: 'securityconcepts',
+                            title: <FormattedMessage id="Security Concepts" />,
+                            type: 'item',
+                            url: '/underconstruction',
+                            breadcrumbs: false,
+                        }
+                    ]
+                }
+            ]
         }
     ]
 };
