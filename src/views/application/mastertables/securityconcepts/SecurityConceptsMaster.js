@@ -28,6 +28,8 @@ import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import { CSVExport } from '../../../forms/tables/TableExports';
 import { header } from '../../../forms/tables/TableBasic';
 
+import NewSecurityConcept from './NewSecurityConcept';
+
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/AddTwoTone';
@@ -358,6 +360,8 @@ export default function EnhancedTable() {
                             )}
                         </TableBody>
                     </Table>
+
+                    <NewSecurityConcept open={open} handleCloseDialog={handleCloseDialog} />
                 </TableContainer>
 
                 {/* table data */}
