@@ -232,6 +232,13 @@ const marqoolamenu = {
                             type: 'item',
                             url: '/securityconcepts/master',
                             breadcrumbs: false,
+                        },
+                        {
+                            id: 'controlcategories',
+                            title: <FormattedMessage id="Control Categories" />,
+                            type: 'item',
+                            url: '/controlcategories/master',
+                            breadcrumbs: false,
                         }
                     ]
                 }

@@ -25,8 +25,8 @@ import { visuallyHidden } from '@mui/utils';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
-import { CSVExport } from '../../forms/tables/TableExports';
-import { header } from '../../forms/tables/TableBasic';
+import { CSVExport } from '../../../forms/tables/TableExports';
+import { header } from '../../../forms/tables/TableBasic';
 
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -43,11 +43,14 @@ function createData(name, calories, fat, carbs, protein) {
 }
 
 const rows = [
-    createData('Govern', 159, 6, 24),
-    createData('Identify', 237, 9, 37),
-    createData('Protect', 262, 16, 24),
-    createData('Detect', 305, 3.7, 67),
-    createData('Respond', 318, 0, 81),
+    createData('Execution', 1, 'Lorem ipsum lorem ipsum'),
+    createData('Cloud Administration Command', '1.1', 'Lorem ipsum lorem ipsum', 'Execution'),
+    createData('Deploy Container', '1.2', 'Lorem ipsum lorem ipsum', 'Execution'),
+    createData('Native API', '1.3', 'Lorem ipsum lorem ipsum', 'Execution'),
+    createData('Persistence', 2, 'Lorem ipsum lorem ipsum'),
+    createData('BITS Jobs', '2.1', 'Lorem ipsum lorem ipsum', 'Persistence'),
+    createData('Browser Extensions', '2.1', 'Lorem ipsum lorem ipsum', 'Persistence'),
+
    
 ];
 
@@ -77,35 +80,29 @@ function stableSort(array, comparator) {
 
 // table header
 const headCells = [
-    {
+    { 
         id: 'name',
         numeric: false,
         disablePadding: true,
-        label: 'CSF2.0 Function'
+        label: 'Control Category Name'
     },
     {
         id: 'calories',
         numeric: true,
         disablePadding: false,
-        label: 'CSF2.0 Category'
+        label: 'Code'
     },
     {
         id: 'fat',
         numeric: true,
         disablePadding: false,
-        label: 'Impact Ratio'
+        label: 'Description'
     },
     {
         id: 'carbs',
         numeric: true,
         disablePadding: false,
-        label: 'Abbreviation'
-    },
-    {
-        id: 'protein',
-        numeric: true,
-        disablePadding: false,
-        label: 'Description'
+        label: 'Parent Category'
     }
 ];
 
@@ -184,7 +181,7 @@ const EnhancedTableToolbar = ({ numSelected }) => (
             </Typography>
         ) : (
             <Typography variant="h6" id="tableTitle">
-                CSF Framework
+                Control Categories
             </Typography>
         )}
         <Box sx={{ flexGrow: 1 }} />
@@ -267,7 +264,7 @@ export default function EnhancedTable() {
     return (
         <MainCard
             content={false}
-            title="Security Concepts"
+            title="Control Categories"
             secondary={
                 <Stack direction="row" spacing={2} alignItems="center">
                     <CSVExport data={selectedValue.length > 0 ? selectedValue : rows} filename="data-tables.csv" header={header} />
