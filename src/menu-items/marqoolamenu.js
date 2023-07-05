@@ -215,16 +215,19 @@ const marqoolamenu = {
         {
             id: 'settings',
             title: <FormattedMessage id="Settings" />,
-<<<<<<< HEAD
-            type: 'item',
-            url: '/settings',
-=======
             type: 'collapse',
             url: '/underconstruction',
->>>>>>> bac6eb37fef87cf2d5a4b4ec49c58986d00f3320
             icon: icons.IconSettings,
             breadcrumbs: false,
             children: [
+                {
+                    id: 'Enumerations',
+                    title: <FormattedMessage id="Enumerations" />,
+                    type: 'item',
+                    url: '/settings',
+                    icon: icons.IconShoppingCart,
+                    breadcrumbs: false
+                },
                 {
                     id: 'mastertables',
                     title: <FormattedMessage id="Master Tables" />,
