@@ -12,8 +12,8 @@ import * as yup from 'yup';
 
 
 const validationSchema = yup.object({
-    numEmployees: yup.string().required('First Name is required'),
-    revenue: yup.string().required('Last Name is required')
+    industry: yup.string().required('First Name is required'),
+    subIndustry: yup.string().required('Last Name is required')
 });
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
@@ -23,14 +23,14 @@ export default function IndustryInformation({ paymentData, setPaymentData, handl
 
     const formik = useFormik({
         initialValues: {
-            numEmployees: paymentData.numEmployees,
-            revenue: paymentData.revenue
+            industry: paymentData.industry,
+            subIndustry: paymentData.subIndustry
         },
         validationSchema,
         onSubmit: (values) => {
             setPaymentData({
-                numEmployees: values.numEmployees,
-                revenue: values.revenue
+                industry: values.industry,
+                subIndustry: values.subIndustry
             });
             handleNext();
         }
@@ -40,39 +40,39 @@ export default function IndustryInformation({ paymentData, setPaymentData, handl
         <>
             <form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <TextField
+                            id="industry"
+                            name="industry"
+                            value={formik.values.industry}
+                            onChange={formik.handleChange}
+                            error={formik.touched.industry && Boolean(formik.errors.industry)}
+                            helperText={formik.touched.industry && formik.errors.industry}
+                            label="Industry"
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            id="subIndustry"
+                            name="subIndustry"
+                            label="Sub-Industry"
+                            value={formik.values.subIndustry}
+                            onChange={formik.handleChange}
+                            error={formik.touched.subIndustry && Boolean(formik.errors.subIndustry)}
+                            helperText={formik.touched.subIndustry && formik.errors.subIndustry}
+                            fullWidth
+                        />
+                    </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            id="numEmployees"
-                            name="numEmployees"
-                            value={formik.values.numEmployees}
+                            id="numCustomers"
+                            name="numCustomers"
+                            label="Number of Customers"
+                            value={formik.values.numCustomers}
                             onChange={formik.handleChange}
-                            error={formik.touched.numEmployees && Boolean(formik.errors.numEmployees)}
-                            helperText={formik.touched.numEmployees && formik.errors.numEmployees}
-                            label="Number of employees"
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={9}>
-                        <TextField
-                            id="revenue"
-                            name="revenue"
-                            label="Annual revenue"
-                            value={formik.values.revenue}
-                            onChange={formik.handleChange}
-                            error={formik.touched.revenue && Boolean(formik.errors.revenue)}
-                            helperText={formik.touched.revenue && formik.errors.revenue}
-                            fullWidth
-                        />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <TextField
-                            id="currency"
-                            name="currency"
-                            label="Currency"
-                            value={formik.values.currency}
-                            onChange={formik.handleChange}
-                            error={formik.touched.currency && Boolean(formik.errors.currency)}
-                            helperText={formik.touched.currency && formik.errors.currency}
+                            error={formik.touched.numCustomers && Boolean(formik.errors.numCustomers)}
+                            helperText={formik.touched.numCustomers && formik.errors.numCustomers}
                             fullWidth
                         >
                              {parentData && parentData.map((parent) => (

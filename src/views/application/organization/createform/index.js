@@ -64,6 +64,11 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, shippingDat
                     parentData={parentData}
                 />
             );
+            case 4:
+                return (
+                    <Review
+                    />
+                );
         default:
             throw new Error('Unknown step');
     }
@@ -123,29 +128,8 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData }) => {
             <>
                 {activeStep === steps.length ? (
                     <>
-                        <Typography variant="h5" gutterBottom>
-                            Thank you for your order.
-                        </Typography>
-                        <Typography variant="subtitle1">
-                            Your order number is #2001539. We have emailed your order confirmation, and will send you an update when your
-                            order has shipped.
-                        </Typography>
-                        <Stack direction="row" justifyContent="flex-end">
-                            <AnimateButton>
-                                <Button
-                                    variant="contained"
-                                    color="error"
-                                    onClick={() => {
-                                        setShippingData({});
-                                        setPaymentData({});
-                                        setActiveStep(0);
-                                    }}
-                                    sx={{ my: 3, ml: 1 }}
-                                >
-                                    Reset
-                                </Button>
-                            </AnimateButton>
-                        </Stack>
+                        <Review
+                        />
                     </>
                 ) : (
                     <>
@@ -160,7 +144,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData }) => {
                             setPaymentData,
                             parentData
                         )}
-                        {activeStep === steps.length - 1 && (
+                        {activeStep === steps.length -1 && (
                             <Stack direction="row" justifyContent={activeStep !== 0 ? 'space-between' : 'flex-end'}>
                                 {activeStep !== 0 && (
                                     <Button onClick={handleBack} sx={{ my: 3, ml: 1 }}>
@@ -169,7 +153,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData }) => {
                                 )}
                                 <AnimateButton>
                                     <Button variant="contained" onClick={handleNext} sx={{ my: 3, ml: 1 }}>
-                                        {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                                        {activeStep === steps.length -1 ? 'Place order' : 'Next'}
                                     </Button>
                                 </AnimateButton>
                             </Stack>
