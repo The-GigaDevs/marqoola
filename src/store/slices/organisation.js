@@ -10,13 +10,14 @@ import { dispatch } from '../index';
 const initialState = {
     error: null,
     organisations: [],
+    organisationtree: [],
     orders: [],
     products: [],
     productreviews: []
 };
 
 const slice = createSlice({
-    name: 'customer',
+    name: 'organisation',
     initialState,
     reducers: {
         // HAS ERROR
@@ -27,6 +28,11 @@ const slice = createSlice({
         // GET CUSTOMERS
         getOrganisationSuccess(state, action) {
             state.organisations = action.payload;
+        },
+
+        // GET CUSTOMERS
+        getOrganisationTreeSuccess(state, action) {
+            state.organisationtree = action.payload;
         },
 
         // GET ORDERS
@@ -61,6 +67,20 @@ export function getOrganisations() {
         }
     };
 }
+
+export function getOrganisationsTree() {
+    return async () => {
+        try {
+            const response = await axios.get('/objects/organisations/treeview');
+            dispatch(slice.actions.getOrganisationTreeSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
+
+
 
 export function getOrders() {
     return async () => {

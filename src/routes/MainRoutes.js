@@ -132,6 +132,8 @@ const UtilsGrid = Loadable(lazy(() => import('views/utilities/Grid')));
 
 const UnderConstruction = Loadable(lazy(() => import('views/pages/maintenance/UnderConstruction')));
 
+const Settings = Loadable(lazy(() => import('views/pages/settings/admin')));
+
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
@@ -526,6 +528,10 @@ const MainRoutes = {
         {
             path: '/underconstruction',
             element: <UnderConstruction />
+        },
+        {
+            path: '/settings',
+            element: <Settings />
         }
     ]
 };

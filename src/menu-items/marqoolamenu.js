@@ -216,7 +216,7 @@ const marqoolamenu = {
             id: 'settings',
             title: <FormattedMessage id="Settings" />,
             type: 'item',
-            url: '/underconstruction',
+            url: '/settings',
             icon: icons.IconSettings,
             breadcrumbs: false
         }

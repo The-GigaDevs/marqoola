@@ -9,6 +9,9 @@ import customerReducer from './slices/customer';
 import contactReducer from './slices/contact';
 import productReducer from './slices/product';
 import organisationReducer from './slices/organisation'
+import organisationtreeReducer from './slices/organisation'
+import enumReducer from './slices/enumerations'
+import enumDataReducer from './slices/enumerations'
 import chatReducer from './slices/chat';
 import calendarReducer from './slices/calendar';
 import mailReducer from './slices/mail';
@@ -34,6 +37,9 @@ const reducer = combineReducers({
     contact: contactReducer,
     product: productReducer,
     organisation: organisationReducer,
+    organisationtree: organisationReducer,
+    enumlist: enumReducer,
+    enumData: enumDataReducer,
     chat: chatReducer,
     calendar: calendarReducer,
     mail: mailReducer,
