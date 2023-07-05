@@ -215,10 +215,39 @@ const marqoolamenu = {
         {
             id: 'settings',
             title: <FormattedMessage id="Settings" />,
+<<<<<<< HEAD
             type: 'item',
             url: '/settings',
+=======
+            type: 'collapse',
+            url: '/underconstruction',
+>>>>>>> bac6eb37fef87cf2d5a4b4ec49c58986d00f3320
             icon: icons.IconSettings,
-            breadcrumbs: false
+            breadcrumbs: false,
+            children: [
+                {
+                    id: 'mastertables',
+                    title: <FormattedMessage id="Master Tables" />,
+                    type: 'collapse',
+                    breadcrumbs: false,
+                    children :[ 
+                        {
+                            id: 'securityconcepts',
+                            title: <FormattedMessage id="Security Concepts" />,
+                            type: 'item',
+                            url: '/securityconcepts/master',
+                            breadcrumbs: false,
+                        },
+                        {
+                            id: 'controlcategories',
+                            title: <FormattedMessage id="Control Categories" />,
+                            type: 'item',
+                            url: '/controlcategories/master',
+                            breadcrumbs: false,
+                        }
+                    ]
+                }
+            ]
         }
     ]
 };
