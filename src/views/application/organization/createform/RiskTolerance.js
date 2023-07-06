@@ -1,14 +1,18 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 // material-ui
-import { Button, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Slider, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography, Box } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
+import {ButtonGroup, ButtonGroupCustom} from 'ui-component/button-group'
 
 // third-party
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import ThresholdSlider from './ThresholdSlider';
+import SummaryCard from './SummaryCard';
 
 
 const validationSchema = yup.object({
@@ -19,7 +23,11 @@ const validationSchema = yup.object({
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
 export default function RiskTolerance({ paymentData, setPaymentData, handleNext, handleBack, setErrorIndex, parentData }) {
-    
+    const [value, setValue] = useState([20, 37]);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+      };
 
     const formik = useFormik({
         initialValues: {
@@ -41,48 +49,34 @@ export default function RiskTolerance({ paymentData, setPaymentData, handleNext,
             <form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
-                        <TextField
-                            id="numEmployees"
-                            name="numEmployees"
-                            value={formik.values.numEmployees}
-                            onChange={formik.handleChange}
-                            error={formik.touched.numEmployees && Boolean(formik.errors.numEmployees)}
-                            helperText={formik.touched.numEmployees && formik.errors.numEmployees}
-                            label="Number of employees"
-                            fullWidth
-                        />
+                        <Typography variant="h3">Select an entity risk classification</Typography>
                     </Grid>
-                    <Grid item xs={9}>
-                        <TextField
-                            id="revenue"
-                            name="revenue"
-                            label="Annual revenue"
-                            value={formik.values.revenue}
-                            onChange={formik.handleChange}
-                            error={formik.touched.revenue && Boolean(formik.errors.revenue)}
-                            helperText={formik.touched.revenue && formik.errors.revenue}
-                            fullWidth
-                        />
+                    <Grid item xs={12} >
+                        <Box display="flex" justifyContent="center" alignItems="center">
+                            <ButtonGroupCustom />
+                        </Box>
                     </Grid>
-                    <Grid item xs={3}>
-                        <TextField
-                            id="currency"
-                            name="currency"
-                            label="Currency"
-                            value={formik.values.currency}
-                            onChange={formik.handleChange}
-                            error={formik.touched.currency && Boolean(formik.errors.currency)}
-                            helperText={formik.touched.currency && formik.errors.currency}
-                            fullWidth
-                        >
-                             {parentData && parentData.map((parent) => (
-                                        <MenuItem key={parent.id} value={parent.id}>
-                                            {parent.name}
-                                        </MenuItem>
-                                    ))}
-                        </TextField>
+                    <Grid item xs={12}>
+                        <Typography variant="h6">We will consider all potentials options and prioritise the most likely ones to result in success while also providing an acceptable level of rewards.</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography variant="h3">What is your tolerable level for risk?</Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <ThresholdSlider />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <SummaryCard />
                     </Grid>
                     
+                    <Grid item xs={12} sx={{textAlign:'center'}}>
+                        <Typography variant="h5" color={'red'}>The tolerable amount exceeds the recommended limit for OPEN classification.</Typography>
+                    </Grid>
+                    
+                    <Grid item xs={12}>
+                    <Typography variant="h6" color={'#808080'} sx={{textAlign:'center'}}>Transfer to cyber insurance coming soon.</Typography>
+                    </Grid>
+                   { /*
                     <Grid item xs={12}>
                         <Stack direction="row" justifyContent="space-between">
                             <Button onClick={handleBack} sx={{ my: 3, ml: 1 }}>
@@ -94,7 +88,7 @@ export default function RiskTolerance({ paymentData, setPaymentData, handleNext,
                                 </Button>
                             </AnimateButton>
                         </Stack>
-                    </Grid>
+                             </Grid> */}
                 </Grid>
             </form>
         </>
