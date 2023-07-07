@@ -13,7 +13,7 @@ export default function Review({basicInformationData, divisionDetailsData, indus
     const { organisationdetails } = useSelector((state) => state.organisation);
     const [organisationDetailsData, setOrganisationDetailsData] = React.useState([]);
 
-
+    const [ filteredClassification, setFilteredClassification] = React.useState([]);
     const { risktolerances } = useSelector((state) => state.risktolerance);
     const [ riskToleranceDetailsData, setRiskToleranceData] = React.useState([]);
 
@@ -27,21 +27,20 @@ export default function Review({basicInformationData, divisionDetailsData, indus
     }, [organisationdetails]);
 
     React.useEffect(() => {
-        if (risktolerances.length > 0){
-            var filtered = risktolerances.filter(function (el) {
-                return el.value == riskToleranceData.riskClassification;
-              });
-              setRiskToleranceData(filtered);
-        }
-       
-        
+        setRiskToleranceData(risktolerances);
     }, [risktolerances]);
 
+    React.useEffect(()=> {
+        var filtered = riskToleranceDetailsData.filter(function (el) {
+            return el.value == riskToleranceData.riskClassification
+          });
+          setFilteredClassification(filtered);
+    }, [riskToleranceDetailsData])
     
     
 
     const test = basicInformationData.name;
-    //console.log(riskToleranceData)
+   // console.log(filteredClassification[0].label)
    
     return (
         <>
@@ -73,7 +72,8 @@ export default function Review({basicInformationData, divisionDetailsData, indus
             </Grid>
             <Grid container sx={{my: 20, mx: 10}}>
                 <Grid item xs={6}>
-                    Risk class is {riskToleranceDetailsData.label}
+                    { filteredClassification.length > 0 && (<>
+                    Risk class is {filteredClassification[0].label} </>)}
                 </Grid>
                 <Grid item xs={6}>
                    Tolerable range for risk is 
