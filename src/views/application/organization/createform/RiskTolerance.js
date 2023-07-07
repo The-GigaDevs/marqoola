@@ -19,20 +19,15 @@ import SummaryCard from './SummaryCard';
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
 export default function RiskTolerance({ riskToleranceData, setRiskToleranceData, handleNext, handleBack, setErrorIndex, parentData }) {
-    const [value, setValue] = useState([20, 37]);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-      };
-
+    const [sliderData, setSliderData] = useState({});
+    //console.log(sliderData);
     const formik = useFormik({
         initialValues: {
             
         },
         onSubmit: (values) => {
             setRiskToleranceData({
-                numEmployees: values.numEmployees,
-                revenue: values.revenue
+                sliderData: sliderData
             });
             handleNext();
         }
@@ -57,7 +52,7 @@ export default function RiskTolerance({ riskToleranceData, setRiskToleranceData,
                         <Typography variant="h3">What is your tolerable level for risk?</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <ThresholdSlider />
+                        <ThresholdSlider sliderData={sliderData} setSliderData={setSliderData}/>
                     </Grid>
                     <Grid item xs={12}>
                         <SummaryCard />

@@ -111,6 +111,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
                 industry: industryInformationData.industry,
                 subindustry: industryInformationData.subIndustry,
                 numcustomers: industryInformationData.numCustomers,
+                sliderdata: riskToleranceData.sliderData
             }},{
                 headers: {
                   // Overwrite Axios's automatically set Content-Type
