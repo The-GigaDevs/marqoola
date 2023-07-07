@@ -2,15 +2,16 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 // material-ui
-import { Button,Slider, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography, Box } from '@mui/material';
+import { Button, Grid, Stack, Typography, Box } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import {ButtonGroup, ButtonGroupCustom} from 'ui-component/button-group'
+import { ButtonGroupCustom } from 'ui-component/button-group'
 
 // third-party
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+
+//marqoola imports
 import ThresholdSlider from './ThresholdSlider';
 import SummaryCard from './SummaryCard';
 

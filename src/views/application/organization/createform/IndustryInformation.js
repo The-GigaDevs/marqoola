@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
-import { useRef } from 'react';
+
 // material-ui
-import { Button, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
 
 // third-party
 import { useFormik } from 'formik';
-import * as yup from 'yup';
-
 
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //

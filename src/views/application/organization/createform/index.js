@@ -10,9 +10,6 @@ import DivisionDetails from './DivisionDetails';
 import Review from './Review';
 import MainCard from 'ui-component/cards/MainCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import { getOrganisations } from 'store/slices/organisation';
-import { useDispatch, useSelector } from 'store';
-import { useEffect, useState } from 'react';
 import IndustryInformation from './IndustryInformation';
 import RiskTolerance from './RiskTolerance';
 

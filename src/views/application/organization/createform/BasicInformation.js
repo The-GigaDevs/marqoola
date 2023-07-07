@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Button, MenuItem, FormControlLabel, Grid, Stack, Typography, TextField } from '@mui/material';
+import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
