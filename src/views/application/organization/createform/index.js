@@ -29,6 +29,7 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
                     setErrorIndex={setErrorIndex}
                     basicInformationData={basicInformationData}
                     setBasicInformationData={setBasicInformationData}
+                    parentData={parentData}
                 />
             );
         case 1:
@@ -102,6 +103,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
             
             const response =  await axios.post('/objects/organisations', {name: basicInformationData.name,
             annualrevenue: {number:parseInt(divisionDetailsData.revenue),currency:divisionDetailsData.currency}, 
+            parentid: parseInt(basicInformationData.parent),
             data: {
                 description: basicInformationData.description,
                 title: basicInformationData.name,

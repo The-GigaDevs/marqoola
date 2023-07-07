@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Button, Checkbox, FormControlLabel, Grid, Stack, Typography, TextField } from '@mui/material';
+import { Button, MenuItem, FormControlLabel, Grid, Stack, Typography, TextField } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -17,7 +17,7 @@ const validationSchema = yup.object({
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-const BasicInformation = ({ basicInformationData, setBasicInformationData, handleNext, setErrorIndex }) => {
+const BasicInformation = ({ basicInformationData, setBasicInformationData, handleNext, setErrorIndex, parentData }) => {
     const formik = useFormik({
         initialValues: {
             name: basicInformationData.name,
@@ -37,7 +37,7 @@ const BasicInformation = ({ basicInformationData, setBasicInformationData, handl
         <>
             <form onSubmit={formik.handleSubmit} id="validation-forms">
                 <Grid container spacing={3}>
-                    <Grid item xs={12} >
+                    <Grid item xs={6} >
                         <TextField
                             id="name"
                             name="name"
@@ -49,6 +49,27 @@ const BasicInformation = ({ basicInformationData, setBasicInformationData, handl
                             fullWidth
                            
                         />
+                    </Grid>
+                    <Grid item xs={6}>
+                    <TextField
+                            id="parent"
+                            name="parent"
+                            label="Parent"
+                            value={formik.values.parent}
+                            onChange={formik.handleChange}
+                            error={formik.touched.parent && Boolean(formik.errors.parent)}
+                            helperText={formik.touched.parent && formik.errors.parent}
+                            fullWidth
+                            select
+                        >
+                             {
+                             
+                             parentData && parentData.map((parent) => (
+                                        <MenuItem key={parent.id} value={parent.id}>
+                                            {parent.name}
+                                        </MenuItem>
+                                    ))}
+                        </TextField>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
