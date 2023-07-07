@@ -17,15 +17,15 @@ const validationSchema = yup.object({
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-const BasicInformation = ({ shippingData, setShippingData, handleNext, setErrorIndex }) => {
+const BasicInformation = ({ basicInformationData, setBasicInformationData, handleNext, setErrorIndex }) => {
     const formik = useFormik({
         initialValues: {
-            name: shippingData.name,
-            description: shippingData.description
+            name: basicInformationData.name,
+            description: basicInformationData.description
         },
         validationSchema,
         onSubmit: (values) => {
-            setShippingData({
+            setBasicInformationData({
                 name: values.name,
                 description: values.description
             });
@@ -35,9 +35,6 @@ const BasicInformation = ({ shippingData, setShippingData, handleNext, setErrorI
 
     return (
         <>
-            <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-                Shipping address
-            </Typography>
             <form onSubmit={formik.handleSubmit} id="validation-forms">
                 <Grid container spacing={3}>
                     <Grid item xs={12} >
@@ -57,7 +54,7 @@ const BasicInformation = ({ shippingData, setShippingData, handleNext, setErrorI
                         <TextField
                             id="description"
                             name="description"
-                            label="Last Name *"
+                            label="Description *"
                             value={formik.values.description}
                             onChange={formik.handleChange}
                             error={formik.touched.description && Boolean(formik.errors.description)}
@@ -84,8 +81,8 @@ const BasicInformation = ({ shippingData, setShippingData, handleNext, setErrorI
 };
 
 BasicInformation.propTypes = {
-    shippingData: PropTypes.object,
-    setShippingData: PropTypes.func,
+    basicInformationData: PropTypes.object,
+    setBasicInformationData: PropTypes.func,
     handleNext: PropTypes.func,
     setErrorIndex: PropTypes.func
 };
