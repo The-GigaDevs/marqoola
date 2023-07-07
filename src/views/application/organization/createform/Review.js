@@ -37,12 +37,14 @@ const payments = [
     { name: 'Expiry date', detail: '04/2024' }
 ];
 
-export default function Review(name, divisionDetailsData, industryInformationData, riskToleranceData) {
-    const test = name.basicInformationData.name;
+export default function Review({basicInformationData, divisionDetailsData, industryInformationData, riskToleranceData}) {
+    const test = basicInformationData.name;
     console.log(test)
     return (
         <>
-        
+            <Typography variant="h3" gutterBottom sx={{ mb: 2 }}>
+               Parent: {test}
+            </Typography>
             <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
                {test}
             </Typography>
