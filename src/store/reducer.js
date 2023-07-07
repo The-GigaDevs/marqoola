@@ -24,6 +24,7 @@ import industryReducer from './slices/industry';
 import subIndustryReducer from './slices/industry'
 import organisationReducer from './slices/organisation'
 import organisationtreeReducer from './slices/organisation'
+import risktoleranceReducer from './slices/risktolerance';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -46,6 +47,7 @@ const reducer = combineReducers({
     currency: currencyReducer,
     industry: industryReducer,
     subindustry: subIndustryReducer,
+    risktolerance: risktoleranceReducer,
     enumlist: enumReducer,
     enumData: enumDataReducer,
     chat: chatReducer,
