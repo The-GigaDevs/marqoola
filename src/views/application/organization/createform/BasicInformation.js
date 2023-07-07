@@ -27,7 +27,8 @@ const BasicInformation = ({ basicInformationData, setBasicInformationData, handl
         onSubmit: (values) => {
             setBasicInformationData({
                 name: values.name,
-                description: values.description
+                description: values.description,
+                parent: values.parent
             });
             handleNext();
         }

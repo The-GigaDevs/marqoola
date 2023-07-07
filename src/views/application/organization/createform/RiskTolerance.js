@@ -20,6 +20,8 @@ import SummaryCard from './SummaryCard';
 
 export default function RiskTolerance({ riskToleranceData, setRiskToleranceData, handleNext, handleBack, setErrorIndex, parentData }) {
     const [sliderData, setSliderData] = useState({});
+    const [buttonGroupData, setButtonGroupData] = useState({});
+
     //console.log(sliderData);
     const formik = useFormik({
         initialValues: {
@@ -27,7 +29,8 @@ export default function RiskTolerance({ riskToleranceData, setRiskToleranceData,
         },
         onSubmit: (values) => {
             setRiskToleranceData({
-                sliderData: sliderData
+                sliderData: sliderData,
+                riskClassification: buttonGroupData
             });
             handleNext();
         }
@@ -42,7 +45,7 @@ export default function RiskTolerance({ riskToleranceData, setRiskToleranceData,
                     </Grid>
                     <Grid item xs={12} >
                         <Box display="flex" justifyContent="center" alignItems="center">
-                            <ButtonGroupCustom />
+                            <ButtonGroupCustom buttonGroupData={buttonGroupData} setButtonGroupData={setButtonGroupData}/>
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
