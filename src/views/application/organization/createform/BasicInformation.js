@@ -12,7 +12,6 @@ import * as yup from 'yup';
 
 const validationSchema = yup.object({
     name: yup.string().required('Organisation name is required'),
-    description: yup.string().required('Last Name is required')
 });
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //

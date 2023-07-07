@@ -12,8 +12,7 @@ import * as yup from 'yup';
 
 
 const validationSchema = yup.object({
-    numEmployees: yup.string().required('First Name is required'),
-    revenue: yup.string().required('Last Name is required')
+
 });
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
