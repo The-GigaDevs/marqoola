@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import axios from 'utils/axios';
 // material-ui
 import { Button, Step, Stepper, StepLabel, Stack, Typography , Dialog} from '@mui/material';
 
@@ -18,9 +18,9 @@ import RiskTolerance from './RiskTolerance';
 
 
 // step options
-const steps = ['Basic information', 'Division details', 'Industry information', 'Risk tolerance'];
+const steps = ['Basic information', 'Division details', 'Industry information', 'Risk tolerance', 'Review'];
 
-const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, parentData, currencies, industries, subindustries) => {
+const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, riskToleranceData, setRiskToleranceData, parentData, currencies, industries, subindustries) => {
     switch (step) {
         case 0:
             return (
@@ -62,8 +62,8 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
                     handleNext={handleNext}
                     handleBack={handleBack}
                     setErrorIndex={setErrorIndex}
-                    divisionDetailsData={divisionDetailsData}
-                    setDivisionDetailsData={setDivisionDetailsData}
+                    riskToleranceData={riskToleranceData}
+                    setRiskToleranceData={setRiskToleranceData}
                     parentData={parentData}
                 />
             );
@@ -84,6 +84,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
     const [basicInformationData, setBasicInformationData] = React.useState({});
     const [divisionDetailsData, setDivisionDetailsData] = React.useState({});
     const [industryInformationData, setIndustryInformationData] = React.useState({});
+    const [riskToleranceData, setRiskToleranceData] = React.useState({});
     const [errorIndex, setErrorIndex] = React.useState(null);
     
     const handleNext = () => {
@@ -94,6 +95,29 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
     const handleBack = () => {
         setActiveStep(activeStep - 1);
     };
+
+    const handleSaveOrganisation = async () => {
+        
+        try {
+            
+            const response =  await axios.post('/objects/organisations', {name: basicInformationData.name,
+            annualrevenue: {number:parseInt(divisionDetailsData.revenue),currency:divisionDetailsData.currency}, 
+            data: {
+                description: basicInformationData.description,
+                title: basicInformationData.name,
+                numemployees: basicInformationData.numEmployees
+            }},{
+                headers: {
+                  // Overwrite Axios's automatically set Content-Type
+                  'Content-Type': 'application/json'
+                }
+              }).then(handleCloseDialog);
+            console.log(response)
+        } catch (error) {
+            console.log('Could not save org:', error)
+        }
+    
+}
 
     return ( <Dialog
         open={open}
@@ -145,6 +169,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
                             basicInformationData, setBasicInformationData,
                             divisionDetailsData, setDivisionDetailsData,
                             industryInformationData, setIndustryInformationData,
+                            riskToleranceData, setRiskToleranceData,
                             parentData,
                             currencies,
                             industries,
@@ -158,7 +183,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
                                     </Button>
                                 )}
                                 <AnimateButton>
-                                    <Button variant="contained" onClick={handleNext} sx={{ my: 3, ml: 1 }}>
+                                    <Button variant="contained" onClick={activeStep === steps.length -1 ? handleSaveOrganisation : handleNext} sx={{ my: 3, ml: 1 }}>
                                         {activeStep === steps.length -1 ? 'Place order' : 'Next'}
                                     </Button>
                                 </AnimateButton>

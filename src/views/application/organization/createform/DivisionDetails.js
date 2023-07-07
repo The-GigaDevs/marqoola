@@ -29,7 +29,8 @@ export default function DivisionDetails({ divisionDetailsData, setDivisionDetail
         onSubmit: (values) => {
             setDivisionDetailsData({
                 numEmployees: values.numEmployees,
-                revenue: values.revenue
+                revenue: values.revenue,
+                currency: values.currency
             });
             handleNext();
         }

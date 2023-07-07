@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 // material-ui
-import { Slider, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography, Box } from '@mui/material';
+import { Button,Slider, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography, Box } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -18,7 +18,7 @@ import SummaryCard from './SummaryCard';
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-export default function RiskTolerance({ paymentData, setPaymentData, handleNext, handleBack, setErrorIndex, parentData }) {
+export default function RiskTolerance({ riskToleranceData, setRiskToleranceData, handleNext, handleBack, setErrorIndex, parentData }) {
     const [value, setValue] = useState([20, 37]);
 
     const handleChange = (event, newValue) => {
@@ -30,7 +30,7 @@ export default function RiskTolerance({ paymentData, setPaymentData, handleNext,
             
         },
         onSubmit: (values) => {
-            setPaymentData({
+            setRiskToleranceData({
                 numEmployees: values.numEmployees,
                 revenue: values.revenue
             });
@@ -70,19 +70,19 @@ export default function RiskTolerance({ paymentData, setPaymentData, handleNext,
                     <Grid item xs={12}>
                     <Typography variant="h6" color={'#808080'} sx={{textAlign:'center'}}>Transfer to cyber insurance coming soon.</Typography>
                     </Grid>
-                   { /*
+                 
                     <Grid item xs={12}>
                         <Stack direction="row" justifyContent="space-between">
                             <Button onClick={handleBack} sx={{ my: 3, ml: 1 }}>
                                 Back
                             </Button>
                             <AnimateButton>
-                                <Button variant="contained" type="submit" sx={{ my: 3, ml: 1 }} onClick={() => setErrorIndex(1)}>
+                                <Button variant="contained" type="submit" sx={{ my: 3, ml: 1 }} onClick={() => setErrorIndex(3)}>
                                     Next
                                 </Button>
                             </AnimateButton>
                         </Stack>
-                             </Grid> */}
+                             </Grid> 
                 </Grid>
             </form>
         </>
