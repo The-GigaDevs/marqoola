@@ -26,7 +26,8 @@ export default function IndustryInformation({ industryInformationData, setIndust
         onSubmit: (values) => {
             setIndustryInformationData({
                 industry: values.industry,
-                subIndustry: values.subIndustry
+                subIndustry: values.subIndustry,
+                numCustomers: values.numCustomers
             });
             handleNext();
         }

@@ -78,7 +78,7 @@ export default function DivisionDetails({ divisionDetailsData, setDivisionDetail
                             select
                         >
                              {currencies && currencies.map((parent) => (
-                                        <MenuItem key={parent.Code} value={parent.Code}>
+                                        <MenuItem key={parent.Code} value={parent.Alpha}>
                                             {parent.Alpha}
                                         </MenuItem>
                                     ))}
