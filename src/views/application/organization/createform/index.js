@@ -20,7 +20,7 @@ import RiskTolerance from './RiskTolerance';
 // step options
 const steps = ['Basic information', 'Division details', 'Industry information', 'Risk tolerance'];
 
-const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, parentData, currencies, industries) => {
+const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, parentData, currencies, industries, subindustries) => {
     switch (step) {
         case 0:
             return (
@@ -53,6 +53,7 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
                     setIndustryInformationData={setIndustryInformationData}
                     parentData={parentData}
                     industries={industries}
+                    subindustries={subindustries}
                 />
             );
         case 3:
@@ -78,7 +79,7 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
 
 // ==============================|| FORMS WIZARD - BASIC ||============================== //
 
-const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, industries }) => {
+const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, industries , subindustries}) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [basicInformationData, setBasicInformationData] = React.useState({});
     const [divisionDetailsData, setDivisionDetailsData] = React.useState({});
@@ -146,7 +147,8 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
                             industryInformationData, setIndustryInformationData,
                             parentData,
                             currencies,
-                            industries
+                            industries,
+                            subindustries
                         )}
                         {activeStep === steps.length -1 && (
                             <Stack direction="row" justifyContent={activeStep !== 0 ? 'space-between' : 'flex-end'}>

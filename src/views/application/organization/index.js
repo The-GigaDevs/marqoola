@@ -43,7 +43,7 @@ import AddIcon from '@mui/icons-material/AddTwoTone';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import OrganizationChart from './OrganizationChart';
 import CreateForm from './createform'
-import { getIndustries } from 'store/slices/industry';
+import { getIndustries, getSubIndustries } from 'store/slices/industry';
 
 const OrganizationList = () => {
     const theme = useTheme();
@@ -61,13 +61,16 @@ const OrganizationList = () => {
     const [rows, setRows] = React.useState([]);
     const [currencyData, setCurrencies] = React.useState([]);
     const [industryData, setIndustries] = React.useState([]);
+    const [subIndustryData, setSubIndustries] = React.useState([]);
     const { organisations } = useSelector((state) => state.organisation);
     const { currencies } = useSelector((state) => state.currency);
     const { industries } = useSelector((state) => state.industry);
+    const { subindustries } = useSelector((state) => state.subindustry);
     React.useEffect(() => {
         dispatch(getOrganisations());
         dispatch(getCurrencies());
         dispatch(getIndustries());
+        dispatch(getSubIndustries());
     }, [dispatch]);
     React.useEffect(() => {
         setRows(organisations);
@@ -80,6 +83,11 @@ const OrganizationList = () => {
     React.useEffect(() => {
         setIndustries(industries);
     }, [industries]);
+
+    React.useEffect(() => {
+        setSubIndustries(subindustries);
+    }, [subindustries]);
+
 
 
     return (
@@ -116,7 +124,7 @@ const OrganizationList = () => {
                                 <AddIcon fontSize="small" />
                             </Fab>
                         </Tooltip>
-                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} parentData={rows} currencies={currencyData} industries={industryData}/>
+                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} parentData={rows} currencies={currencyData} industries={industryData} subindustries={subIndustryData}/>
                     </Grid>
                 </Grid>
             </CardContent>

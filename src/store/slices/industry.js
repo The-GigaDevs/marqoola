@@ -24,6 +24,10 @@ const slice = createSlice({
 
         getIndustriesSuccess(state, action){
             state.industries = action.payload;
+        },
+
+        getSubIndustriesSuccess(state, action){
+            state.subindustries = action.payload;
         }
     }
 });
@@ -39,6 +43,17 @@ export function getIndustries() {
         try {
             const response = await axios.get('/objects/industry');
             dispatch(slice.actions.getIndustriesSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
+export function getSubIndustries() {
+    return async () => {
+        try {
+            const response = await axios.get('/objects/subIndustry');
+            dispatch(slice.actions.getSubIndustriesSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }

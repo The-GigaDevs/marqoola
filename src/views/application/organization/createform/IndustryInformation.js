@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+import { useRef } from 'react';
 // material-ui
 import { Button, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography } from '@mui/material';
 
@@ -14,15 +14,15 @@ import * as yup from 'yup';
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-export default function IndustryInformation({ industryInformationData, setIndustryInformationData, handleNext, handleBack, setErrorIndex, parentData, industries }) {
+export default function IndustryInformation({ industryInformationData, setIndustryInformationData, handleNext, handleBack, setErrorIndex, parentData, industries, subindustries }) {
     
+       
 
     const formik = useFormik({
         initialValues: {
             industry: industryInformationData.industry,
             subIndustry: industryInformationData.subIndustry
         },
-
         onSubmit: (values) => {
             setIndustryInformationData({
                 industry: values.industry,
@@ -31,6 +31,11 @@ export default function IndustryInformation({ industryInformationData, setIndust
             handleNext();
         }
     });
+
+    var subIndustriesFiltered = subindustries.filter(function (el) {
+        return el.industryid == formik.values.industry;
+      });
+
 
     return (
         <>
@@ -49,6 +54,7 @@ export default function IndustryInformation({ industryInformationData, setIndust
                             fullWidth
                             select
                         >
+                            
                             {industries && industries.map((parent) => (
                                         <MenuItem key={parent.id} value={parent.id}>
                                             {parent.name}
@@ -66,7 +72,16 @@ export default function IndustryInformation({ industryInformationData, setIndust
                             error={formik.touched.subIndustry && Boolean(formik.errors.subIndustry)}
                             helperText={formik.touched.subIndustry && formik.errors.subIndustry}
                             fullWidth
-                        />
+                            select
+                        >
+                             {
+                             
+                             subIndustriesFiltered && subIndustriesFiltered.map((parent) => (
+                                        <MenuItem key={parent.id} value={parent.id}>
+                                            {parent.name}
+                                        </MenuItem>
+                                    ))}
+                        </TextField>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField

@@ -23,6 +23,7 @@ import menuReducer from './slices/menu';
 //marqoola imports
 import currencyReducer from './slices/currency'
 import industryReducer from './slices/industry';
+import subIndustryReducer from './slices/industry'
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -44,6 +45,7 @@ const reducer = combineReducers({
     organisationtree: organisationtreeReducer,
     currency: currencyReducer,
     industry: industryReducer,
+    subindustry: subIndustryReducer,
     enumlist: enumReducer,
     enumData: enumDataReducer,
     chat: chatReducer,
