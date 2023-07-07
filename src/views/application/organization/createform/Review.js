@@ -37,11 +37,14 @@ const payments = [
     { name: 'Expiry date', detail: '04/2024' }
 ];
 
-export default function Review() {
+export default function Review(name, divisionDetailsData, industryInformationData, riskToleranceData) {
+    const test = name.basicInformationData.name;
+    console.log(test)
     return (
         <>
+        
             <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-                Order summary
+               {test}
             </Typography>
             <List disablePadding>
                 {products.map((product) => (
@@ -82,6 +85,6 @@ export default function Review() {
                     </Grid>
                 </Grid>
             </Grid>
-        </>
+         </>
     );
 }

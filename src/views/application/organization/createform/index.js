@@ -68,6 +68,10 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
             case 4:
                 return (
                     <Review
+                        basicInformationData={basicInformationData}
+                        divisionDetailsData={divisionDetailsData}
+                        industryInformationData={industryInformationData}
+                        riskToleranceData={riskToleranceData}
                     />
                 );
         default:
