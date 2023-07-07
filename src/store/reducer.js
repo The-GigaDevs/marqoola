@@ -8,8 +8,6 @@ import snackbarReducer from './slices/snackbar';
 import customerReducer from './slices/customer';
 import contactReducer from './slices/contact';
 import productReducer from './slices/product';
-import organisationReducer from './slices/organisation'
-import organisationtreeReducer from './slices/organisation'
 import enumReducer from './slices/enumerations'
 import enumDataReducer from './slices/enumerations'
 import chatReducer from './slices/chat';
@@ -24,6 +22,8 @@ import menuReducer from './slices/menu';
 import currencyReducer from './slices/currency'
 import industryReducer from './slices/industry';
 import subIndustryReducer from './slices/industry'
+import organisationReducer from './slices/organisation'
+import organisationtreeReducer from './slices/organisation'
 
 // ==============================|| COMBINE REDUCER ||============================== //
 

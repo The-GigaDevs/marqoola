@@ -11,6 +11,7 @@ const initialState = {
     error: null,
     organisations: [],
     organisationtree: [],
+    organisationdetails: [],
     orders: [],
     products: [],
     productreviews: [],
@@ -33,6 +34,10 @@ const slice = createSlice({
         // GET CUSTOMERS
         getOrganisationTreeSuccess(state, action) {
             state.organisationtree = action.payload;
+        },
+
+        getOrganisationDetailsSuccess(state, action) {
+            state.organisationdetails = action.payload;
         },
 
         // GET ORDERS
@@ -62,6 +67,17 @@ export function getOrganisations() {
         try {
             const response = await axios.get('/objects/organisations');
             dispatch(slice.actions.getOrganisationSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
+export function getOrganisationDetails(id) {
+    return async () => {
+        try {
+            const response = await axios.get('/objects/organisations/' + id);
+            dispatch(slice.actions.getOrganisationDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }

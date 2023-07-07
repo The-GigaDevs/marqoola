@@ -1,90 +1,53 @@
 import * as React from 'react';
 
 // material-ui
-import { Grid, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Grid, List, ListItem, ListItemText, Typography, Divider } from '@mui/material';
+import { useDispatch, useSelector } from 'store';
 
-// ==============================|| FORM WIZARD - VALIDATION  ||============================== //
-
-const products = [
-    {
-        name: 'Product 1',
-        desc: 'A nice thing',
-        price: '$9.99'
-    },
-    {
-        name: 'Product 2',
-        desc: 'Another thing',
-        price: '$3.45'
-    },
-    {
-        name: 'Product 3',
-        desc: 'Something else',
-        price: '$6.51'
-    },
-    {
-        name: 'Product 4',
-        desc: 'Best thing of all',
-        price: '$14.11'
-    },
-    { name: 'Shipping', desc: '', price: 'Free' }
-];
-
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-    { name: 'Card type', detail: 'Visa' },
-    { name: 'Card holder', detail: 'Mr John Smith' },
-    { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-    { name: 'Expiry date', detail: '04/2024' }
-];
+import { getOrganisationDetails } from 'store/slices/organisation';
 
 export default function Review({basicInformationData, divisionDetailsData, industryInformationData, riskToleranceData}) {
+    const dispatch = useDispatch();
+   
+    const { organisationdetails } = useSelector((state) => state.organisation);
+    const [organisationDetailsData, setOrganisationDetailsData] = React.useState([]);
+
+    React.useEffect(() => {
+        dispatch(getOrganisationDetails(basicInformationData.parent));
+        
+    }, [dispatch]);
+    React.useEffect(() => {
+        setOrganisationDetailsData(organisationdetails);
+    }, [organisationdetails]);
+
     const test = basicInformationData.name;
-    console.log(test)
+    console.log(organisationDetailsData)
     return (
         <>
             <Typography variant="h3" gutterBottom sx={{ mb: 2 }}>
-               Parent: {test}
+               Parent: {organisationDetailsData.name}
             </Typography>
-            <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-               {test}
+            <Typography variant="h5" gutterBottom sx={{ mb: 2 , mt: 15, ml: 10}}>
+               {basicInformationData.name}
             </Typography>
-            <List disablePadding>
-                {products.map((product) => (
-                    <ListItem sx={{ py: 1, px: 0 }} key={product.name}>
-                        <ListItemText primary={product.name} secondary={product.desc} />
-                        <Typography variant="body2">{product.price}</Typography>
-                    </ListItem>
-                ))}
-
-                <ListItem sx={{ py: 1, px: 0 }}>
-                    <ListItemText primary="Total" />
-                    <Typography variant="subtitle1">$34.06</Typography>
-                </ListItem>
-            </List>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                        Shipping
-                    </Typography>
-                    <Typography gutterBottom>John Smith</Typography>
-                    <Typography gutterBottom>{addresses.join(', ')}</Typography>
+            <Typography variant="h5" gutterBottom sx={{ mb: 2, mt: 2, ml: 10 }}>
+               {basicInformationData.description}
+            </Typography>
+            <Divider sx={{mt: 5, mb: 5}}/>
+            <Grid container sx={{mx: 10}}>
+                <Grid item xs={6}>
+                    {divisionDetailsData.numEmployees} Employees
                 </Grid>
-                <Grid item container direction="column" xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                        Payment details
-                    </Typography>
-                    <Grid container>
-                        {payments.map((payment) => (
-                            <React.Fragment key={payment.name}>
-                                <Grid item xs={6}>
-                                    <Typography gutterBottom>{payment.name}</Typography>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Typography gutterBottom>{payment.detail}</Typography>
-                                </Grid>
-                            </React.Fragment>
-                        ))}
-                    </Grid>
+                <Grid item xs={6}>
+                   {industryInformationData.industry} - {industryInformationData.subIndustry}
+                </Grid>
+            </Grid>
+            <Grid container sx={{mx: 10}}>
+                <Grid item xs={6}>
+                    {divisionDetailsData.revenue} Annual Income
+                </Grid>
+                <Grid item xs={6}>
+                   {industryInformationData.numCustomers} Customers
                 </Grid>
             </Grid>
          </>
