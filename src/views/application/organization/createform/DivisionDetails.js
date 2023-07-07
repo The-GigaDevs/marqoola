@@ -68,6 +68,7 @@ export default function DivisionDetails({ divisionDetailsData, setDivisionDetail
                             id="currency"
                             name="currency"
                             label="Currency"
+                            defaultValue='971'
                             value={formik.values.currency}
                             onChange={formik.handleChange}
                             error={formik.touched.currency && Boolean(formik.errors.currency)}

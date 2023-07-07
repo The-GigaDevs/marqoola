@@ -23,7 +23,7 @@ const slice = createSlice({
         },
 
         getIndustriesSuccess(state, action){
-            state.currencies = action.payload;
+            state.industries = action.payload;
         }
     }
 });

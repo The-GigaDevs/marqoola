@@ -40,6 +40,7 @@ export default function IndustryInformation({ industryInformationData, setIndust
                         <TextField
                             id="industry"
                             name="industry"
+                            defaultValue="1"
                             value={formik.values.industry}
                             onChange={formik.handleChange}
                             error={formik.touched.industry && Boolean(formik.errors.industry)}
@@ -105,6 +106,5 @@ IndustryInformation.propTypes = {
     setIndustryInformationData: PropTypes.func,
     handleNext: PropTypes.func,
     handleBack: PropTypes.func,
-    setErrorIndex: PropTypes.func,
-    industries: PropTypes.object
+    setErrorIndex: PropTypes.func
 };
