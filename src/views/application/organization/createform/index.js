@@ -192,7 +192,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
                                 )}
                                 <AnimateButton>
                                     <Button variant="contained" onClick={activeStep === steps.length -1 ? handleSaveOrganisation : handleNext} sx={{ my: 3, ml: 1 }}>
-                                        {activeStep === steps.length -1 ? 'Place order' : 'Next'}
+                                        {activeStep === steps.length -1 ? 'Create' : 'Next'}
                                     </Button>
                                 </AnimateButton>
                             </Stack>

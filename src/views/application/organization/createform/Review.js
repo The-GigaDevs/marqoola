@@ -5,6 +5,7 @@ import { Grid, List, ListItem, ListItemText, Typography, Divider } from '@mui/ma
 import { useDispatch, useSelector } from 'store';
 
 import { getOrganisationDetails } from 'store/slices/organisation';
+import { getRiskTolerances } from 'store/slices/risktolerance';
 
 export default function Review({basicInformationData, divisionDetailsData, industryInformationData, riskToleranceData}) {
     const dispatch = useDispatch();
@@ -12,16 +13,36 @@ export default function Review({basicInformationData, divisionDetailsData, indus
     const { organisationdetails } = useSelector((state) => state.organisation);
     const [organisationDetailsData, setOrganisationDetailsData] = React.useState([]);
 
+
+    const { risktolerances } = useSelector((state) => state.risktolerance);
+    const [ riskToleranceDetailsData, setRiskToleranceData] = React.useState([]);
+
     React.useEffect(() => {
         dispatch(getOrganisationDetails(basicInformationData.parent));
-        
+        dispatch(getRiskTolerances());
     }, [dispatch]);
+
     React.useEffect(() => {
         setOrganisationDetailsData(organisationdetails);
     }, [organisationdetails]);
 
+    React.useEffect(() => {
+        if (risktolerances.length > 0){
+            var filtered = risktolerances.filter(function (el) {
+                return el.value == riskToleranceData.riskClassification;
+              });
+              setRiskToleranceData(filtered);
+        }
+       
+        
+    }, [risktolerances]);
+
+    
+    
+
     const test = basicInformationData.name;
-    console.log(organisationDetailsData)
+    //console.log(riskToleranceData)
+   
     return (
         <>
             <Typography variant="h3" gutterBottom sx={{ mb: 2 }}>
@@ -48,6 +69,20 @@ export default function Review({basicInformationData, divisionDetailsData, indus
                 </Grid>
                 <Grid item xs={6}>
                    {industryInformationData.numCustomers} Customers
+                </Grid>
+            </Grid>
+            <Grid container sx={{my: 20, mx: 10}}>
+                <Grid item xs={6}>
+                    Risk class is {riskToleranceDetailsData.label}
+                </Grid>
+                <Grid item xs={6}>
+                   Tolerable range for risk is 
+                </Grid>
+                <Grid item xs={6}>
+                    
+                </Grid>
+                <Grid item xs={6}>
+                    {riskToleranceData.sliderData.value[0]} to {riskToleranceData.sliderData.value[1]}
                 </Grid>
             </Grid>
          </>
