@@ -15,10 +15,6 @@ import ThresholdSlider from './ThresholdSlider';
 import SummaryCard from './SummaryCard';
 
 
-const validationSchema = yup.object({
-    numEmployees: yup.string().required('First Name is required'),
-    revenue: yup.string().required('Last Name is required')
-});
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
@@ -31,10 +27,8 @@ export default function RiskTolerance({ paymentData, setPaymentData, handleNext,
 
     const formik = useFormik({
         initialValues: {
-            numEmployees: paymentData.numEmployees,
-            revenue: paymentData.revenue
+            
         },
-        validationSchema,
         onSubmit: (values) => {
             setPaymentData({
                 numEmployees: values.numEmployees,
