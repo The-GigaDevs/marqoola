@@ -20,15 +20,15 @@ import RiskTolerance from './RiskTolerance';
 // step options
 const steps = ['Basic information', 'Division details', 'Industry information', 'Risk tolerance'];
 
-const getStepContent = (step, handleNext, handleBack, setErrorIndex, shippingData, setShippingData, paymentData, setPaymentData,  parentData) => {
+const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, parentData, currencies, industries) => {
     switch (step) {
         case 0:
             return (
                 <BasicInformation
                     handleNext={handleNext}
                     setErrorIndex={setErrorIndex}
-                    shippingData={shippingData}
-                    setShippingData={setShippingData}
+                    basicInformationData={basicInformationData}
+                    setBasicInformationData={setBasicInformationData}
                 />
             );
         case 1:
@@ -37,9 +37,10 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, shippingDat
                     handleNext={handleNext}
                     handleBack={handleBack}
                     setErrorIndex={setErrorIndex}
-                    paymentData={paymentData}
-                    setPaymentData={setPaymentData}
+                    divisionDetailsData={divisionDetailsData}
+                    setDivisionDetailsData={setDivisionDetailsData}
                     parentData={parentData}
+                    currencies={currencies}
                 />
             );
         case 2:
@@ -48,9 +49,10 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, shippingDat
                     handleNext={handleNext}
                     handleBack={handleBack}
                     setErrorIndex={setErrorIndex}
-                    paymentData={paymentData}
-                    setPaymentData={setPaymentData}
+                    industryInformationData={industryInformationData}
+                    setIndustryInformationData={setIndustryInformationData}
                     parentData={parentData}
+                    industries={industries}
                 />
             );
         case 3:
@@ -59,8 +61,8 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, shippingDat
                     handleNext={handleNext}
                     handleBack={handleBack}
                     setErrorIndex={setErrorIndex}
-                    paymentData={paymentData}
-                    setPaymentData={setPaymentData}
+                    divisionDetailsData={divisionDetailsData}
+                    setDivisionDetailsData={setDivisionDetailsData}
                     parentData={parentData}
                 />
             );
@@ -76,10 +78,11 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, shippingDat
 
 // ==============================|| FORMS WIZARD - BASIC ||============================== //
 
-const ValidationWizard = ({ open, handleCloseDialog, parentData }) => {
+const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, industries }) => {
     const [activeStep, setActiveStep] = React.useState(0);
-    const [shippingData, setShippingData] = React.useState({});
-    const [paymentData, setPaymentData] = React.useState({});
+    const [basicInformationData, setBasicInformationData] = React.useState({});
+    const [divisionDetailsData, setDivisionDetailsData] = React.useState({});
+    const [industryInformationData, setIndustryInformationData] = React.useState({});
     const [errorIndex, setErrorIndex] = React.useState(null);
     
     const handleNext = () => {
@@ -102,7 +105,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData }) => {
             }
         }}
     > 
-    {open && (
+    {open && parentData.length > 0 && (
         <MainCard title="Create Organisational Entity">
             <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                 {steps.map((label, index) => {
@@ -138,11 +141,12 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData }) => {
                             handleNext,
                             handleBack,
                             setErrorIndex,
-                            shippingData,
-                            setShippingData,
-                            paymentData,
-                            setPaymentData,
-                            parentData
+                            basicInformationData, setBasicInformationData,
+                            divisionDetailsData, setDivisionDetailsData,
+                            industryInformationData, setIndustryInformationData,
+                            parentData,
+                            currencies,
+                            industries
                         )}
                         {activeStep === steps.length -1 && (
                             <Stack direction="row" justifyContent={activeStep !== 0 ? 'space-between' : 'flex-end'}>
@@ -169,6 +173,8 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData }) => {
 ValidationWizard.propTypes = {
     open: PropTypes.bool,
     handleCloseDialog: PropTypes.func,
-    parents: PropTypes.object
+    parentData: PropTypes.object,
+    currencies: PropTypes.object,
+    industries: PropTypes.object
 };
 export default ValidationWizard;

@@ -20,6 +20,10 @@ import cartReducer from './slices/cart';
 import kanbanReducer from './slices/kanban';
 import menuReducer from './slices/menu';
 
+//marqoola imports
+import currencyReducer from './slices/currency'
+import industryReducer from './slices/industry';
+
 // ==============================|| COMBINE REDUCER ||============================== //
 
 const reducer = combineReducers({
@@ -37,7 +41,9 @@ const reducer = combineReducers({
     contact: contactReducer,
     product: productReducer,
     organisation: organisationReducer,
-    organisationtree: organisationReducer,
+    organisationtree: organisationtreeReducer,
+    currency: currencyReducer,
+    industry: industryReducer,
     enumlist: enumReducer,
     enumData: enumDataReducer,
     chat: chatReducer,

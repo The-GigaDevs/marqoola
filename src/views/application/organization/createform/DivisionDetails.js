@@ -18,17 +18,16 @@ const validationSchema = yup.object({
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-export default function DivisionDetails({ paymentData, setPaymentData, handleNext, handleBack, setErrorIndex, parentData }) {
+export default function DivisionDetails({ divisionDetailsData, setDivisionDetailsData, handleNext, handleBack, setErrorIndex, parentData, currencies }) {
     
-
     const formik = useFormik({
         initialValues: {
-            numEmployees: paymentData.numEmployees,
-            revenue: paymentData.revenue
+            numEmployees: divisionDetailsData.numEmployees,
+            revenue: divisionDetailsData.revenue
         },
         validationSchema,
         onSubmit: (values) => {
-            setPaymentData({
+            setDivisionDetailsData({
                 numEmployees: values.numEmployees,
                 revenue: values.revenue
             });
@@ -74,10 +73,11 @@ export default function DivisionDetails({ paymentData, setPaymentData, handleNex
                             error={formik.touched.currency && Boolean(formik.errors.currency)}
                             helperText={formik.touched.currency && formik.errors.currency}
                             fullWidth
+                            select
                         >
-                             {parentData && parentData.map((parent) => (
-                                        <MenuItem key={parent.id} value={parent.id}>
-                                            {parent.name}
+                             {currencies && currencies.map((parent) => (
+                                        <MenuItem key={parent.Code} value={parent.Code}>
+                                            {parent.Alpha}
                                         </MenuItem>
                                     ))}
                         </TextField>
@@ -102,9 +102,10 @@ export default function DivisionDetails({ paymentData, setPaymentData, handleNex
 }
 
 DivisionDetails.propTypes = {
-    paymentData: PropTypes.object,
-    setPaymentData: PropTypes.func,
+    divisionDetailsData: PropTypes.object,
+    setDivisionDetailsData: PropTypes.func,
     handleNext: PropTypes.func,
     handleBack: PropTypes.func,
-    setErrorIndex: PropTypes.func
+    setErrorIndex: PropTypes.func,
+    currencies: PropTypes.object
 };

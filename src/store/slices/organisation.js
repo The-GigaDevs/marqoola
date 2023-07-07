@@ -13,7 +13,7 @@ const initialState = {
     organisationtree: [],
     orders: [],
     products: [],
-    productreviews: []
+    productreviews: [],
 };
 
 const slice = createSlice({

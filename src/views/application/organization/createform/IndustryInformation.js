@@ -11,24 +11,20 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 
-const validationSchema = yup.object({
-    industry: yup.string().required('First Name is required'),
-    subIndustry: yup.string().required('Last Name is required')
-});
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-export default function IndustryInformation({ paymentData, setPaymentData, handleNext, handleBack, setErrorIndex, parentData }) {
+export default function IndustryInformation({ industryInformationData, setIndustryInformationData, handleNext, handleBack, setErrorIndex, parentData, industries }) {
     
 
     const formik = useFormik({
         initialValues: {
-            industry: paymentData.industry,
-            subIndustry: paymentData.subIndustry
+            industry: industryInformationData.industry,
+            subIndustry: industryInformationData.subIndustry
         },
-        validationSchema,
+
         onSubmit: (values) => {
-            setPaymentData({
+            setIndustryInformationData({
                 industry: values.industry,
                 subIndustry: values.subIndustry
             });
@@ -50,7 +46,14 @@ export default function IndustryInformation({ paymentData, setPaymentData, handl
                             helperText={formik.touched.industry && formik.errors.industry}
                             label="Industry"
                             fullWidth
-                        />
+                            select
+                        >
+                            {industries && industries.map((parent) => (
+                                        <MenuItem key={parent.id} value={parent.id}>
+                                            {parent.name}
+                                        </MenuItem>
+                                    ))}
+                        </TextField>
                     </Grid>
                     <Grid item xs={6}>
                         <TextField
@@ -75,11 +78,7 @@ export default function IndustryInformation({ paymentData, setPaymentData, handl
                             helperText={formik.touched.numCustomers && formik.errors.numCustomers}
                             fullWidth
                         >
-                             {parentData && parentData.map((parent) => (
-                                        <MenuItem key={parent.id} value={parent.id}>
-                                            {parent.name}
-                                        </MenuItem>
-                                    ))}
+                             
                         </TextField>
                     </Grid>
                     
@@ -89,7 +88,7 @@ export default function IndustryInformation({ paymentData, setPaymentData, handl
                                 Back
                             </Button>
                             <AnimateButton>
-                                <Button variant="contained" type="submit" sx={{ my: 3, ml: 1 }} onClick={() => setErrorIndex(1)}>
+                                <Button variant="contained" type="submit" sx={{ my: 3, ml: 1 }} onClick={() => setErrorIndex(2)}>
                                     Next
                                 </Button>
                             </AnimateButton>
@@ -102,9 +101,10 @@ export default function IndustryInformation({ paymentData, setPaymentData, handl
 }
 
 IndustryInformation.propTypes = {
-    paymentData: PropTypes.object,
-    setPaymentData: PropTypes.func,
+    industryInformationData: PropTypes.object,
+    setIndustryInformationData: PropTypes.func,
     handleNext: PropTypes.func,
     handleBack: PropTypes.func,
-    setErrorIndex: PropTypes.func
+    setErrorIndex: PropTypes.func,
+    industries: PropTypes.object
 };
