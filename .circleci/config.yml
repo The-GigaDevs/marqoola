@@ -9,13 +9,22 @@ orbs:
 workflows:
     buildDockerImageandPush:
       jobs:
+        
         - aws-ecr/build-and-push-image:
+            filters:
+              branches:
+                only:
+                  - main
             context: AWS
             region: eu-central-1
             repo: marqoola-ui
             tag: latest
             push-image: true
         - aws-ecs/deploy-service-update:
+            filters:
+              branches:
+                only:
+                  - main
             cluster: mqCluster
             context: AWS
             container-image-name-updates: container=marqoola-ui,tag=latest
