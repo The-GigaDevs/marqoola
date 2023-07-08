@@ -8,8 +8,6 @@ import snackbarReducer from './slices/snackbar';
 import customerReducer from './slices/customer';
 import contactReducer from './slices/contact';
 import productReducer from './slices/product';
-import organisationReducer from './slices/organisation'
-import organisationtreeReducer from './slices/organisation'
 import enumReducer from './slices/enumerations'
 import enumDataReducer from './slices/enumerations'
 import chatReducer from './slices/chat';
@@ -19,6 +17,14 @@ import userReducer from './slices/user';
 import cartReducer from './slices/cart';
 import kanbanReducer from './slices/kanban';
 import menuReducer from './slices/menu';
+
+//marqoola imports
+import currencyReducer from './slices/currency'
+import industryReducer from './slices/industry';
+import subIndustryReducer from './slices/industry'
+import organisationReducer from './slices/organisation'
+import organisationtreeReducer from './slices/organisation'
+import risktoleranceReducer from './slices/risktolerance';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -37,7 +43,11 @@ const reducer = combineReducers({
     contact: contactReducer,
     product: productReducer,
     organisation: organisationReducer,
-    organisationtree: organisationReducer,
+    organisationtree: organisationtreeReducer,
+    currency: currencyReducer,
+    industry: industryReducer,
+    subindustry: subIndustryReducer,
+    risktolerance: risktoleranceReducer,
     enumlist: enumReducer,
     enumData: enumDataReducer,
     chat: chatReducer,

@@ -1,87 +1,90 @@
 import * as React from 'react';
 
 // material-ui
-import { Grid, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Grid, List, ListItem, ListItemText, Typography, Divider } from '@mui/material';
+import { useDispatch, useSelector } from 'store';
 
-// ==============================|| FORM WIZARD - VALIDATION  ||============================== //
+import { getOrganisationDetails } from 'store/slices/organisation';
+import { getRiskTolerances } from 'store/slices/risktolerance';
 
-const products = [
-    {
-        name: 'Product 1',
-        desc: 'A nice thing',
-        price: '$9.99'
-    },
-    {
-        name: 'Product 2',
-        desc: 'Another thing',
-        price: '$3.45'
-    },
-    {
-        name: 'Product 3',
-        desc: 'Something else',
-        price: '$6.51'
-    },
-    {
-        name: 'Product 4',
-        desc: 'Best thing of all',
-        price: '$14.11'
-    },
-    { name: 'Shipping', desc: '', price: 'Free' }
-];
+export default function Review({basicInformationData, divisionDetailsData, industryInformationData, riskToleranceData}) {
+    const dispatch = useDispatch();
+   
+    const { organisationdetails } = useSelector((state) => state.organisation);
+    const [organisationDetailsData, setOrganisationDetailsData] = React.useState([]);
 
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-    { name: 'Card type', detail: 'Visa' },
-    { name: 'Card holder', detail: 'Mr John Smith' },
-    { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-    { name: 'Expiry date', detail: '04/2024' }
-];
+    const [ filteredClassification, setFilteredClassification] = React.useState([]);
+    const { risktolerances } = useSelector((state) => state.risktolerance);
+    const [ riskToleranceDetailsData, setRiskToleranceData] = React.useState([]);
 
-export default function Review() {
+    React.useEffect(() => {
+        dispatch(getOrganisationDetails(basicInformationData.parent));
+        dispatch(getRiskTolerances());
+    }, [dispatch]);
+
+    React.useEffect(() => {
+        setOrganisationDetailsData(organisationdetails);
+    }, [organisationdetails]);
+
+    React.useEffect(() => {
+        setRiskToleranceData(risktolerances);
+    }, [risktolerances]);
+
+    React.useEffect(()=> {
+        var filtered = riskToleranceDetailsData.filter(function (el) {
+            return el.value == riskToleranceData.riskClassification
+          });
+          setFilteredClassification(filtered);
+    }, [riskToleranceDetailsData])
+    
+    
+
+    const test = basicInformationData.name;
+   // console.log(filteredClassification[0].label)
+   
     return (
         <>
-            <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-                Order summary
+            <Typography variant="h3" gutterBottom sx={{ mb: 2 }}>
+               Parent: {organisationDetailsData.name}
             </Typography>
-            <List disablePadding>
-                {products.map((product) => (
-                    <ListItem sx={{ py: 1, px: 0 }} key={product.name}>
-                        <ListItemText primary={product.name} secondary={product.desc} />
-                        <Typography variant="body2">{product.price}</Typography>
-                    </ListItem>
-                ))}
-
-                <ListItem sx={{ py: 1, px: 0 }}>
-                    <ListItemText primary="Total" />
-                    <Typography variant="subtitle1">$34.06</Typography>
-                </ListItem>
-            </List>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                        Shipping
-                    </Typography>
-                    <Typography gutterBottom>John Smith</Typography>
-                    <Typography gutterBottom>{addresses.join(', ')}</Typography>
+            <Typography variant="h5" gutterBottom sx={{ mb: 2 , mt: 15, ml: 10}}>
+               {basicInformationData.name}
+            </Typography>
+            <Typography variant="h5" gutterBottom sx={{ mb: 2, mt: 2, ml: 10 }}>
+               {basicInformationData.description}
+            </Typography>
+            <Divider sx={{mt: 5, mb: 5}}/>
+            <Grid container sx={{mx: 10}}>
+                <Grid item xs={6}>
+                    {divisionDetailsData.numEmployees} Employees
                 </Grid>
-                <Grid item container direction="column" xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-                        Payment details
-                    </Typography>
-                    <Grid container>
-                        {payments.map((payment) => (
-                            <React.Fragment key={payment.name}>
-                                <Grid item xs={6}>
-                                    <Typography gutterBottom>{payment.name}</Typography>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Typography gutterBottom>{payment.detail}</Typography>
-                                </Grid>
-                            </React.Fragment>
-                        ))}
-                    </Grid>
+                <Grid item xs={6}>
+                   {industryInformationData.industry} - {industryInformationData.subIndustry}
                 </Grid>
             </Grid>
-        </>
+            <Grid container sx={{mx: 10}}>
+                <Grid item xs={6}>
+                    {divisionDetailsData.revenue} Annual Income
+                </Grid>
+                <Grid item xs={6}>
+                   {industryInformationData.numCustomers} Customers
+                </Grid>
+            </Grid>
+            <Grid container sx={{my: 20, mx: 10}}>
+                <Grid item xs={6}>
+                    { filteredClassification.length > 0 && (<>
+                    Risk class is {filteredClassification[0].label} </>)}
+                </Grid>
+                <Grid item xs={6}>
+                   Tolerable range for risk is 
+                </Grid>
+                <Grid item xs={6}>
+                    
+                </Grid>
+                <Grid item xs={6}>
+                    {riskToleranceData.sliderData.value[0]} to {riskToleranceData.sliderData.value[1]}
+                </Grid>
+            </Grid>
+         </>
     );
 }

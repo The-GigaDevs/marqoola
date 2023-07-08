@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Button, Checkbox, FormControlLabel, Grid, Stack, Typography, TextField } from '@mui/material';
+import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -12,22 +12,22 @@ import * as yup from 'yup';
 
 const validationSchema = yup.object({
     name: yup.string().required('Organisation name is required'),
-    description: yup.string().required('Last Name is required')
 });
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-const BasicInformation = ({ shippingData, setShippingData, handleNext, setErrorIndex }) => {
+const BasicInformation = ({ basicInformationData, setBasicInformationData, handleNext, setErrorIndex, parentData }) => {
     const formik = useFormik({
         initialValues: {
-            name: shippingData.name,
-            description: shippingData.description
+            name: basicInformationData.name,
+            description: basicInformationData.description
         },
         validationSchema,
         onSubmit: (values) => {
-            setShippingData({
+            setBasicInformationData({
                 name: values.name,
-                description: values.description
+                description: values.description,
+                parent: values.parent
             });
             handleNext();
         }
@@ -35,12 +35,9 @@ const BasicInformation = ({ shippingData, setShippingData, handleNext, setErrorI
 
     return (
         <>
-            <Typography variant="h5" gutterBottom sx={{ mb: 2 }}>
-                Shipping address
-            </Typography>
             <form onSubmit={formik.handleSubmit} id="validation-forms">
                 <Grid container spacing={3}>
-                    <Grid item xs={12} >
+                    <Grid item xs={6} >
                         <TextField
                             id="name"
                             name="name"
@@ -53,11 +50,32 @@ const BasicInformation = ({ shippingData, setShippingData, handleNext, setErrorI
                            
                         />
                     </Grid>
+                    <Grid item xs={6}>
+                    <TextField
+                            id="parent"
+                            name="parent"
+                            label="Parent"
+                            value={formik.values.parent}
+                            onChange={formik.handleChange}
+                            error={formik.touched.parent && Boolean(formik.errors.parent)}
+                            helperText={formik.touched.parent && formik.errors.parent}
+                            fullWidth
+                            select
+                        >
+                             {
+                             
+                             parentData && parentData.map((parent) => (
+                                        <MenuItem key={parent.id} value={parent.id}>
+                                            {parent.name}
+                                        </MenuItem>
+                                    ))}
+                        </TextField>
+                    </Grid>
                     <Grid item xs={12}>
                         <TextField
                             id="description"
                             name="description"
-                            label="Last Name *"
+                            label="Description *"
                             value={formik.values.description}
                             onChange={formik.handleChange}
                             error={formik.touched.description && Boolean(formik.errors.description)}
@@ -84,8 +102,8 @@ const BasicInformation = ({ shippingData, setShippingData, handleNext, setErrorI
 };
 
 BasicInformation.propTypes = {
-    shippingData: PropTypes.object,
-    setShippingData: PropTypes.func,
+    basicInformationData: PropTypes.object,
+    setBasicInformationData: PropTypes.func,
     handleNext: PropTypes.func,
     setErrorIndex: PropTypes.func
 };

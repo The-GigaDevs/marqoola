@@ -1,19 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, ButtonGroup } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { purple, grey } from '@mui/material/colors'
 
-export const ButtonGroupCustom = () => {
+export const ButtonGroupCustom = ({buttonGroupData, setButtonGroupData}) => {
     const redTheme = createTheme({ palette: { primary: grey, secondary: purple } })
     
-    
-    const [value, setValue] = useState("a");
-  
-    const handleChange = (_event, newAlignment) => {
-      setValue(newAlignment);
-    };
-
     const [selectedBtn, setSelectedBtn] = useState(-1);
+  
+    useEffect(() => {
+      setButtonGroupData(selectedBtn);
+  }, [selectedBtn]);
 
     return (
       <div>

@@ -2,43 +2,36 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 // material-ui
-import { Slider, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography, Box } from '@mui/material';
+import { Button, Grid, Stack, Typography, Box } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
-import {ButtonGroup, ButtonGroupCustom} from 'ui-component/button-group'
+import { ButtonGroupCustom } from 'ui-component/button-group'
 
 // third-party
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+
+//marqoola imports
 import ThresholdSlider from './ThresholdSlider';
 import SummaryCard from './SummaryCard';
 
 
-const validationSchema = yup.object({
-    numEmployees: yup.string().required('First Name is required'),
-    revenue: yup.string().required('Last Name is required')
-});
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-export default function RiskTolerance({ paymentData, setPaymentData, handleNext, handleBack, setErrorIndex, parentData }) {
-    const [value, setValue] = useState([20, 37]);
+export default function RiskTolerance({ riskToleranceData, setRiskToleranceData, handleNext, handleBack, setErrorIndex, parentData }) {
+    const [sliderData, setSliderData] = useState({});
+    const [buttonGroupData, setButtonGroupData] = useState({});
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-      };
-
+    //console.log(sliderData);
     const formik = useFormik({
         initialValues: {
-            numEmployees: paymentData.numEmployees,
-            revenue: paymentData.revenue
+            
         },
-        validationSchema,
         onSubmit: (values) => {
-            setPaymentData({
-                numEmployees: values.numEmployees,
-                revenue: values.revenue
+            setRiskToleranceData({
+                sliderData: sliderData,
+                riskClassification: buttonGroupData
             });
             handleNext();
         }
@@ -53,7 +46,7 @@ export default function RiskTolerance({ paymentData, setPaymentData, handleNext,
                     </Grid>
                     <Grid item xs={12} >
                         <Box display="flex" justifyContent="center" alignItems="center">
-                            <ButtonGroupCustom />
+                            <ButtonGroupCustom buttonGroupData={buttonGroupData} setButtonGroupData={setButtonGroupData}/>
                         </Box>
                     </Grid>
                     <Grid item xs={12}>
@@ -63,7 +56,7 @@ export default function RiskTolerance({ paymentData, setPaymentData, handleNext,
                         <Typography variant="h3">What is your tolerable level for risk?</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <ThresholdSlider />
+                        <ThresholdSlider sliderData={sliderData} setSliderData={setSliderData}/>
                     </Grid>
                     <Grid item xs={12}>
                         <SummaryCard />
@@ -76,19 +69,19 @@ export default function RiskTolerance({ paymentData, setPaymentData, handleNext,
                     <Grid item xs={12}>
                     <Typography variant="h6" color={'#808080'} sx={{textAlign:'center'}}>Transfer to cyber insurance coming soon.</Typography>
                     </Grid>
-                   { /*
+                 
                     <Grid item xs={12}>
                         <Stack direction="row" justifyContent="space-between">
                             <Button onClick={handleBack} sx={{ my: 3, ml: 1 }}>
                                 Back
                             </Button>
                             <AnimateButton>
-                                <Button variant="contained" type="submit" sx={{ my: 3, ml: 1 }} onClick={() => setErrorIndex(1)}>
+                                <Button variant="contained" type="submit" sx={{ my: 3, ml: 1 }} onClick={() => setErrorIndex(3)}>
                                     Next
                                 </Button>
                             </AnimateButton>
                         </Stack>
-                             </Grid> */}
+                             </Grid> 
                 </Grid>
             </form>
         </>

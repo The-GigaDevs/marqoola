@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 // material-ui
-import { Button, MenuItem, FormControlLabel, Grid, Stack, TextField, Typography } from '@mui/material';
+import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
 
 // project imports
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -12,25 +12,24 @@ import * as yup from 'yup';
 
 
 const validationSchema = yup.object({
-    numEmployees: yup.string().required('First Name is required'),
-    revenue: yup.string().required('Last Name is required')
+
 });
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-export default function DivisionDetails({ paymentData, setPaymentData, handleNext, handleBack, setErrorIndex, parentData }) {
+export default function DivisionDetails({ divisionDetailsData, setDivisionDetailsData, handleNext, handleBack, setErrorIndex, parentData, currencies }) {
     
-
     const formik = useFormik({
         initialValues: {
-            numEmployees: paymentData.numEmployees,
-            revenue: paymentData.revenue
+            numEmployees: divisionDetailsData.numEmployees,
+            revenue: divisionDetailsData.revenue
         },
         validationSchema,
         onSubmit: (values) => {
-            setPaymentData({
+            setDivisionDetailsData({
                 numEmployees: values.numEmployees,
-                revenue: values.revenue
+                revenue: values.revenue,
+                currency: values.currency
             });
             handleNext();
         }
@@ -69,15 +68,17 @@ export default function DivisionDetails({ paymentData, setPaymentData, handleNex
                             id="currency"
                             name="currency"
                             label="Currency"
+                            defaultValue='971'
                             value={formik.values.currency}
                             onChange={formik.handleChange}
                             error={formik.touched.currency && Boolean(formik.errors.currency)}
                             helperText={formik.touched.currency && formik.errors.currency}
                             fullWidth
+                            select
                         >
-                             {parentData && parentData.map((parent) => (
-                                        <MenuItem key={parent.id} value={parent.id}>
-                                            {parent.name}
+                             {currencies && currencies.map((parent) => (
+                                        <MenuItem key={parent.Code} value={parent.Alpha}>
+                                            {parent.Alpha}
                                         </MenuItem>
                                     ))}
                         </TextField>
@@ -102,9 +103,10 @@ export default function DivisionDetails({ paymentData, setPaymentData, handleNex
 }
 
 DivisionDetails.propTypes = {
-    paymentData: PropTypes.object,
-    setPaymentData: PropTypes.func,
+    divisionDetailsData: PropTypes.object,
+    setDivisionDetailsData: PropTypes.func,
     handleNext: PropTypes.func,
     handleBack: PropTypes.func,
-    setErrorIndex: PropTypes.func
+    setErrorIndex: PropTypes.func,
+    currencies: PropTypes.object
 };
