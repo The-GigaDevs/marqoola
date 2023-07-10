@@ -19,6 +19,7 @@ import { openDrawer } from 'store/slices/menu';
 
 // assets
 import { IconMenu2 } from '@tabler/icons';
+import DivisionSelector from 'views/application/division-selector';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -76,6 +77,7 @@ const Header = () => {
             <Box sx={{ flexGrow: 1 }} />
 
             {/* mega-menu */}
+            <DivisionSelector />
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                 <Button color='primary' variant='contained' component={Link} to="/roadmap">
                     Roadmap
