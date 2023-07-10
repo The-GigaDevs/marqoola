@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 
 // material-ui
 import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
@@ -16,22 +17,44 @@ const validationSchema = yup.object({
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-const BasicInformation = ({ basicInformationData, setBasicInformationData, handleNext, setErrorIndex, parentData }) => {
+const BasicInformation = ({ basicInformationData, setBasicInformationData, handleNext, setErrorIndex, resetFormData, handleResetData, parentData }) => {
+    const [resetData, setResetData] = useState(false)
+
     const formik = useFormik({
         initialValues: {
-            name: basicInformationData.name,
-            description: basicInformationData.description
+            
         },
         validationSchema,
-        onSubmit: (values) => {
+        onSubmit: (values, helpers) => {
             setBasicInformationData({
                 name: values.name,
                 description: values.description,
                 parent: values.parent
             });
             handleNext();
+            helpers.resetForm()
         }
     });
+    
+    useEffect(() => {
+        if (resetFormData == true){
+            /*formik.setFieldValue('name', null, false);
+            formik.setFieldValue('description', null, false);
+            formik.setFieldValue('parent', null, false); */
+        }
+        else
+        {
+            console.log('Dont refresh the data');
+        }
+    }, [resetFormData]);
+
+    
+    const handleReset = () => {
+        handleResetData();
+    }
+
+    
+
 
     return (
         <>

@@ -12,6 +12,8 @@ export default function Review({basicInformationData, divisionDetailsData, indus
    
     const { organisationdetails } = useSelector((state) => state.organisation);
     const [organisationDetailsData, setOrganisationDetailsData] = React.useState([]);
+    const [industryDetailsData, setIndustryDetailsData] = React.useState([]);
+    const [subIndustryDetailsData, setSubIndustryDetailsData] = React.useState([]);
 
     const [ filteredClassification, setFilteredClassification] = React.useState([]);
     const { risktolerances } = useSelector((state) => state.risktolerance);
@@ -82,7 +84,7 @@ export default function Review({basicInformationData, divisionDetailsData, indus
                     
                 </Grid>
                 <Grid item xs={6}>
-                    {riskToleranceData.sliderData.value[0]} to {riskToleranceData.sliderData.value[1]}
+                    {riskToleranceData && riskToleranceData.sliderData && (<>{riskToleranceData.sliderData.value[0]} to {riskToleranceData.sliderData.value[1]}</>)}
                 </Grid>
             </Grid>
          </>

@@ -37,12 +37,19 @@ const OrganizationList = () => {
 
     // show a right sidebar when clicked on new product
     const [open, setOpen] = React.useState(false);
+    const [resetForm, setResetForm] = React.useState(false);
+
     const handleClickOpenDialog = () => {
         setOpen(true);
+        setResetForm(false);
     };
     const handleCloseDialog = () => {
         setOpen(false);
+        setResetForm(true);
     };
+
+    
+
 
     const [rows, setRows] = React.useState([]);
     const [currencyData, setCurrencies] = React.useState([]);
@@ -52,6 +59,7 @@ const OrganizationList = () => {
     const { currencies } = useSelector((state) => state.currency);
     const { industries } = useSelector((state) => state.industry);
     const { subindustries } = useSelector((state) => state.subindustry);
+    
     React.useEffect(() => {
         dispatch(getOrganisations());
         dispatch(getCurrencies());
@@ -73,6 +81,10 @@ const OrganizationList = () => {
     React.useEffect(() => {
         setSubIndustries(subindustries);
     }, [subindustries]);
+
+    React.useEffect(() => {
+        dispatch(getOrganisations());
+    }, [open]);
 
 
 
@@ -110,7 +122,7 @@ const OrganizationList = () => {
                                 <AddIcon fontSize="small" />
                             </Fab>
                         </Tooltip>
-                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} parentData={rows} currencies={currencyData} industries={industryData} subindustries={subIndustryData}/>
+                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} parentData={rows} currencies={currencyData} industries={industryData} subindustries={subIndustryData}/>
                     </Grid>
                 </Grid>
             </CardContent>

@@ -18,8 +18,7 @@ export default function IndustryInformation({ industryInformationData, setIndust
 
     const formik = useFormik({
         initialValues: {
-            industry: industryInformationData.industry,
-            subIndustry: industryInformationData.subIndustry
+           
         },
         onSubmit: (values) => {
             setIndustryInformationData({

@@ -17,13 +17,15 @@ import RiskTolerance from './RiskTolerance';
 // step options
 const steps = ['Basic information', 'Division details', 'Industry information', 'Risk tolerance', 'Review'];
 
-const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, riskToleranceData, setRiskToleranceData, parentData, currencies, industries, subindustries) => {
+const getStepContent = (step, handleNext, handleBack, setErrorIndex, resetFormData, handleResetData, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, riskToleranceData, setRiskToleranceData, parentData, currencies, industries, subindustries) => {
     switch (step) {
         case 0:
             return (
                 <BasicInformation
                     handleNext={handleNext}
                     setErrorIndex={setErrorIndex}
+                    resetFormData={resetFormData}
+                    handleResetData={handleResetData}
                     basicInformationData={basicInformationData}
                     setBasicInformationData={setBasicInformationData}
                     parentData={parentData}
@@ -81,7 +83,7 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
 
 // ==============================|| FORMS WIZARD - BASIC ||============================== //
 
-const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, industries , subindustries}) => {
+const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, parentData, currencies, industries , subindustries}) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [basicInformationData, setBasicInformationData] = React.useState({});
     const [divisionDetailsData, setDivisionDetailsData] = React.useState({});
@@ -89,6 +91,14 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
     const [riskToleranceData, setRiskToleranceData] = React.useState({});
     const [errorIndex, setErrorIndex] = React.useState(null);
     
+    const [resetFormData, setResetFormData] = React.useState(false);
+
+    const handleResetData = () => {
+        setResetFormData(resetForm)
+        setActiveStep(0);
+    }
+    
+
     const handleNext = () => {
         setActiveStep(activeStep + 1);
         setErrorIndex(null);
@@ -98,13 +108,25 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
         setActiveStep(activeStep - 1);
     };
 
+    React.useEffect(() => {
+        if (open == false)
+        {
+            setActiveStep(0);
+            setBasicInformationData({});
+            setDivisionDetailsData({});
+            setIndustryInformationData({});
+            setRiskToleranceData({});
+        }
+    }, [open]);
+    
+    
     const handleSaveOrganisation = async () => {
         
         try {
             
             const response =  await axios.post('/objects/organisations', {name: basicInformationData.name,
             annualrevenue: {number:parseInt(divisionDetailsData.revenue),currency:divisionDetailsData.currency}, 
-            parentid: parseInt(basicInformationData.parent),
+            parentid: basicInformationData.parent,
             data: {
                 description: basicInformationData.description,
                 title: basicInformationData.name,
@@ -123,6 +145,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
             console.log(response)
         } catch (error) {
             console.log('Could not save org:', error)
+            handleCloseDialog();
         }
     
 }
@@ -174,6 +197,7 @@ const ValidationWizard = ({ open, handleCloseDialog, parentData, currencies, ind
                             handleNext,
                             handleBack,
                             setErrorIndex,
+                            resetFormData, handleResetData,
                             basicInformationData, setBasicInformationData,
                             divisionDetailsData, setDivisionDetailsData,
                             industryInformationData, setIndustryInformationData,
