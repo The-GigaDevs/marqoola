@@ -13,8 +13,6 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import IndustryInformation from './IndustryInformation';
 import RiskTolerance from './RiskTolerance';
 
-import { useState } from 'state-pool';
-
 
 // step options
 const steps = ['Basic information', 'Division details', 'Industry information', 'Risk tolerance', 'Review'];
@@ -95,7 +93,7 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
     
     const [resetFormData, setResetFormData] = React.useState(false);
 
-    const [divisionSelectorState, setdivisionSelectorState, updatedivisionSelectorState] = useState("divisionSelectorState");
+    
 
     const handleResetData = () => {
         setResetFormData(resetForm)
@@ -113,7 +111,6 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
     };
 
     React.useEffect(() => {
-        console.log(divisionSelectorState)
         if (open == false)
         {
             setActiveStep(0);
