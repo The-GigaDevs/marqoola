@@ -55,10 +55,15 @@ const OrganizationList = () => {
     const [currencyData, setCurrencies] = React.useState([]);
     const [industryData, setIndustries] = React.useState([]);
     const [subIndustryData, setSubIndustries] = React.useState([]);
+    const [divisionSelector, setDivisionSelector] = React.useState('');
+
+
     const { organisations } = useSelector((state) => state.organisation);
     const { currencies } = useSelector((state) => state.currency);
     const { industries } = useSelector((state) => state.industry);
     const { subindustries } = useSelector((state) => state.subindustry);
+
+    const { selectedDivision } = useSelector((state) => state.divisionselector);
     
     React.useEffect(() => {
         dispatch(getOrganisations());
@@ -86,7 +91,9 @@ const OrganizationList = () => {
         dispatch(getOrganisations());
     }, [open]);
 
-
+    React.useEffect(() => {
+        setDivisionSelector(selectedDivision);
+    }, [selectedDivision]);
 
     return (
         <MainCard title="Organizations" content={false}>

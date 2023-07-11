@@ -93,6 +93,8 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
     
     const [resetFormData, setResetFormData] = React.useState(false);
 
+    
+
     const handleResetData = () => {
         setResetFormData(resetForm)
         setActiveStep(0);
