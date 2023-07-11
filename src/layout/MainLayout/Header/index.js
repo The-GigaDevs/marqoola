@@ -78,7 +78,7 @@ const Header = () => {
 
             {/* mega-menu */}
             <DivisionSelector />
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+            <Box sx={{ display: { xs: 'none', sm: 'block' }, mx:2 }}>
                 <Button color='primary' variant='contained' component={Link} to="/roadmap">
                     Roadmap
                 </Button>
