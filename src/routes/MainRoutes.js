@@ -140,6 +140,7 @@ const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 const RoadMap = Loadable(lazy(() => import('views/application/roadmap')));
 const SecurityConceptsMaster = Loadable(lazy(() => import('views/application/mastertables/securityconcepts/SecurityConceptsMaster')));
 const ControlCategoriesMaster = Loadable(lazy(() => import('views/application/mastertables/controlcategories/ControlCategoriesMaster')));
+const Assets = Loadable(lazy(() => import('views/application/assets/')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -537,6 +538,10 @@ const MainRoutes = {
         {
             path: '/controlcategories/master',
             element: <ControlCategoriesMaster />
+        },
+        {
+            path: '/assets',
+            element: <Assets />
         },
         {
             path: '/settings',
