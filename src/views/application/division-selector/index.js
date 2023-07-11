@@ -1,23 +1,15 @@
 import { TextField, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from 'store';
-import { getOrganisations } from 'store/slices/organisation';
+import { setDivisionSelector } from 'store/slices/division-selector';
 import { useEffect, useState } from "react";
 
-import { createState } from 'state-pool';
-
-const divisionSelectorState = createState('');
 
 export default function DivisionSelector(){
     const dispatch = useDispatch();
 
-    const [divisiolSelector, setDivisionSelector] = divisionSelectorState.useState();
-
     const { organisations } = useSelector((state) => state.organisation);
     const [rows, setRows] = useState([]);
 
-    useEffect(() => {
-        dispatch(getOrganisations());
-    }, [dispatch]);
 
     useEffect(() => {
         setRows(organisations);
@@ -30,7 +22,7 @@ export default function DivisionSelector(){
             <TextField
                 id="divisionselector"
                 select
-                onChange={(e) => {setDivisionSelector(e.target.value)}}
+                onChange={(e) => {dispatch(setDivisionSelector(e.target.value))}}
                 
                 fullWidth
                 
