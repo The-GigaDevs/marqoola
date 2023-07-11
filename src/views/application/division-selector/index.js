@@ -2,6 +2,7 @@ import { TextField, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from 'store';
 import { setDivisionSelector } from 'store/slices/division-selector';
 import { useEffect, useState } from "react";
+import { getOrganisations } from "store/slices/organisation";
 
 
 export default function DivisionSelector(){
@@ -10,6 +11,10 @@ export default function DivisionSelector(){
     const { organisations } = useSelector((state) => state.organisation);
     const [rows, setRows] = useState([]);
 
+
+    useEffect(() => {
+        dispatch(getOrganisations());
+      }, []);
 
     useEffect(() => {
         setRows(organisations);
