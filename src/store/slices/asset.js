@@ -10,6 +10,7 @@ import { dispatch } from '../index';
 const initialState = {
     error: null,
     assets: [],
+    assetsbyorg: []
     
 };
 
@@ -24,6 +25,10 @@ const slice = createSlice({
 
         getAssetsSuccess(state, action){
             state.assets = action.payload;
+        },
+
+        getAssetsByOrganisationSuccess(state, action){
+            state.assetsbyorg = action.payload;
         }
     }
 });
@@ -45,4 +50,14 @@ export function getAssets() {
     };
 }
 
+export function getAssetsByOrganisation(orgId) {
+    return async () => {
+        try {
+            const response = await axios.get('/objects/assets?orga=' + orgId);
+            dispatch(slice.actions.getAssetsByOrganisationSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
 

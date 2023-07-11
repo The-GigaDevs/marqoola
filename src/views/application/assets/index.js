@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 import { useDispatch, useSelector } from 'store';
 
@@ -13,24 +13,38 @@ import { header } from '../../forms/tables/TableBasic';
 
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+    { id: 'parentname', label: 'Parent Name', minWidth: 100 },
     {
-        id: 'population',
-        label: 'Population',
+        id: 'organisation',
+        label: 'Organisation',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'size',
-        label: 'Size\u00a0(km\u00b2)',
+        id: 'intrinsicassetvalue',
+        label: 'Intrinsic Value',
         minWidth: 170,
         align: 'right',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'density',
-        label: 'Density',
+        id: 'indirectassetvalue',
+        label: 'Indirect Value',
+        minWidth: 170,
+        align: 'right',
+        format: (value) => typeof value === 'number' && value.toFixed(2)
+    },
+    {
+        id: 'directassetvalue',
+        label: 'Direct Value',
+        minWidth: 170,
+        align: 'right',
+        format: (value) => typeof value === 'number' && value.toFixed(2)
+    },
+    {
+        id: 'totalassetvalue',
+        label: 'Total Value',
         minWidth: 170,
         align: 'right',
         format: (value) => typeof value === 'number' && value.toFixed(2)
@@ -77,6 +91,10 @@ export default function AssetTable() {
         setRowsPerPage(+event?.target?.value);
         setPage(0);
     };
+
+    useEffect(() => {
+        setDivisionSelector(selectedDivision);
+    }, [selectedDivision]);
 
     return (
         <MainCard
