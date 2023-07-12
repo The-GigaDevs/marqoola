@@ -14,6 +14,9 @@ import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
 import { CSVExport } from '../../forms/tables/TableExports';
 import { header } from '../../forms/tables/TableBasic';
 
+import AssetCreateForm from './createform'
+
+
 const columns = [
     { id: 'name', label: 'Name', minWidth: 170 },
     { id: 'parentname', label: 'Parent Name', minWidth: 100 },
@@ -112,6 +115,7 @@ export default function AssetTable() {
                         </Tooltip>
                     <CSVExport data={assetTableData} filename="sticky-header-table.csv" header={header} />
                     <SecondaryAction link="https://next.material-ui.com/components/tables/" />
+                    <AssetCreateForm open={open}/>
                 </Stack>
             }
         >
