@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react';
 
 import { useDispatch, useSelector } from 'store';
 
+import { getAssets } from 'store/slices/asset';
+
 // material-ui
 import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
 
@@ -25,22 +27,19 @@ const columns = [
         id: 'intrinsicassetvalue',
         label: 'Intrinsic Value',
         minWidth: 170,
-        align: 'right',
-        format: (value) => value.toLocaleString('en-US')
+        
     },
     {
         id: 'indirectassetvalue',
         label: 'Indirect Value',
         minWidth: 170,
-        align: 'right',
-        format: (value) => typeof value === 'number' && value.toFixed(2)
+        
     },
     {
         id: 'directassetvalue',
         label: 'Direct Value',
         minWidth: 170,
-        align: 'right',
-        format: (value) => typeof value === 'number' && value.toFixed(2)
+        
     },
     {
         id: 'totalassetvalue',
@@ -78,10 +77,15 @@ const rows = [
 // ==============================|| TABLE - STICKY HEADER ||============================== //
 
 export default function AssetTable() {
+    const dispatch = useDispatch();
+
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [divisionSelector, setDivisionSelector] = useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
+
+    const [assetTableData, setAssetTableData] = useState([]);
+    const { assets } = useSelector((state) => state.asset);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -91,6 +95,14 @@ export default function AssetTable() {
         setRowsPerPage(+event?.target?.value);
         setPage(0);
     };
+
+    useEffect(() => {
+        dispatch(getAssets());
+    }, [dispatch]);
+
+    useEffect(() => {
+        setAssetTableData(assets);
+    }, [assets]);
 
     useEffect(() => {
         setDivisionSelector(selectedDivision);
@@ -120,15 +132,25 @@ export default function AssetTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
+                        {assetTableData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => (
                             <TableRow sx={{ py: 3 }} hover role="checkbox" tabIndex={-1} key={row.code}>
                                 {columns.map((column) => {
                                     const value = row[column.id];
-                                    return (
-                                        <TableCell key={column.id} align={column.align}>
-                                            {column.format && typeof value === 'number' ? column.format(value) : value}
-                                        </TableCell>
-                                    );
+                                    if (typeof value === 'object'){
+                                        return (
+                                            <TableCell key={column.id} align={column.align}>
+                                                {value && value.number}
+                                            </TableCell>
+                                        );
+                                    }
+                                    else{
+                                        return (
+                                            <TableCell key={column.id} align={column.align}>
+                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                            </TableCell>
+                                        );
+                                    }
+                                    
                                 })}
                             </TableRow>
                         ))}
