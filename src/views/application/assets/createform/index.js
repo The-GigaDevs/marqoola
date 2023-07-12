@@ -13,7 +13,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 
 
 // step options
-const steps = ['Basic information', 'Asset details'];
+const steps = ['Basic information', 'Asset details', 'Review'];
 
 const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInformationData, setBasicInformationData, assetDetailsData, setAssetDetailsData, parentData, currencies) => {
     switch (step) {
@@ -87,12 +87,14 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
         try {
             
             const response =  await axios.post('/objects/assets', {name: basicInformationData.name,
-            annualrevenue: {number:parseInt(assetDetailsData.revenue),currency:assetDetailsData.currency}, 
+                intrinsicassetvalue: {number:parseInt(assetDetailsData.intrinsicassetvalue.number),currency:assetDetailsData.intrinsicassetvalue.currency}, 
+                indirectassetvalue: {number:parseInt(assetDetailsData.indirectassetvalue.number),currency:assetDetailsData.indirectassetvalue.currency}, 
+                directassetvalue: {number:parseInt(assetDetailsData.directassetvalue.number),currency:assetDetailsData.directassetvalue.currency}, 
             parentid: basicInformationData.parent,
+            orgaid: basicInformationData.organisation,
             data: {
                 description: basicInformationData.description,
                 title: basicInformationData.name,
-                numemployees: parseInt(assetDetailsData.numEmployees),
                 
             }},{
                 headers: {
