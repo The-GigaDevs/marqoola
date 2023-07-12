@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'store';
-import { getOrganisations } from 'store/slices/organisation';
+import { getCurrencies } from 'store/slices/currency';
 
 // material-ui
 import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
@@ -21,16 +21,16 @@ const validationSchema = yup.object({
 
 const AssetDetails = ({ assetDetailsData, setAssetDetailsData, handleNext, setErrorIndex, parentData }) => {
     const dispatch = useDispatch();
-    const [organisationData, setOrganisationData] = useState([]);
-    const { organisations } = useSelector((state) => state.organisation);
+    const [currencyData, setCurrencyData] = useState([]);
+    const { currencies } = useSelector((state) => state.currency);
 
     useEffect(() => {
-        dispatch(getOrganisations());
+        dispatch(getCurrencies());
     }, []);
 
     useEffect(() => {
-        setOrganisationData(organisations);
-    }, [organisations]);
+        setCurrencyData(currencies);
+    }, [currencies]);
 
     const formik = useFormik({
         initialValues: {
@@ -80,49 +80,14 @@ const AssetDetails = ({ assetDetailsData, setAssetDetailsData, handleNext, setEr
                         >
                              {
                              
-                             parentData && parentData.map((parent) => (
-                                        <MenuItem key={parent.id} value={parent.id}>
-                                            {parent.name}
+                             currencyData && currencyData.map((parent) => (
+                                        <MenuItem key={parent.Alpha} value={parent.Alpha}>
+                                            {parent.Alpha}
                                         </MenuItem>
                                     ))}
                         </TextField>
                     </Grid>
-                    <Grid item xs={6}>
-                    <TextField
-                            id="organisation"
-                            name="organisation"
-                            label="Organisation"
-                            value={formik.values.organisation}
-                            onChange={formik.handleChange}
-                            error={formik.touched.organisation && Boolean(formik.errors.organisation)}
-                            helperText={formik.touched.organisation && formik.errors.organisation}
-                            fullWidth
-                            select
-                        >
-                             {
-                             
-                             organisationData && organisationData.map((parent) => (
-                                        <MenuItem key={parent.id} value={parent.id}>
-                                            {parent.name}
-                                        </MenuItem>
-                                    ))}
-                        </TextField>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            id="description"
-                            name="description"
-                            label="Description *"
-                            value={formik.values.description}
-                            onChange={formik.handleChange}
-                            error={formik.touched.description && Boolean(formik.errors.description)}
-                            helperText={formik.touched.description && formik.errors.description}
-                            fullWidth
-                            multiline
-                            rows={3}
-                            autoComplete="family-name"
-                        />
-                    </Grid>
+                    
                     <Grid item xs={12}>
                         <Stack direction="row" justifyContent="flex-end">
                             <AnimateButton>
