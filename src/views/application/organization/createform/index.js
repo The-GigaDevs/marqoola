@@ -144,7 +144,6 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
                   'Content-Type': 'application/json'
                 }
               }).then(handleCloseDialog);
-            console.log(response)
         } catch (error) {
             console.log('Could not save org:', error)
             handleCloseDialog();

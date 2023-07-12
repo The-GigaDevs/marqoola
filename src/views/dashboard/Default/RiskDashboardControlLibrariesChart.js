@@ -35,7 +35,7 @@ const RiskDashboardControlLibrariesChart = ({ chartData }) => {
     
 
     useEffect(() => {
-        axios.get('/risks/580750').then((response) => {
+        axios.get('/risks/616f8176-6aa8-4288-8802-655f287e9a69').then((response) => {
             for (let i = 0; i < response.data.data.history.length; i++) {
                 let obj = response.data.data.history[i];
                 values.push(obj.value)

@@ -38,7 +38,7 @@ const RiskDashboard = ({ chartData }) => {
 
     const getBBB = useCallback(async () => {
         try {
-            const response = await axios.get('/objects/risks/580749');
+            const response = await axios.get('/objects/risks/616f8176-6aa8-4288-8802-655f287e9a69');
             setBbb(response);
             for (let i = 0; i < response.data.data.history.length; i++) {
                 let obj = response.data.data.history[i];
