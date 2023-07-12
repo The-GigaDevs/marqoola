@@ -74,6 +74,7 @@ export default function AssetTable() {
     };
     const handleCloseDialog = () => {
         setOpen(false);
+        dispatch(getAssets());
     };
 
     const handleChangePage = (event, newPage) => {
@@ -95,6 +96,7 @@ export default function AssetTable() {
 
     useEffect(() => {
         setDivisionSelector(selectedDivision);
+        dispatch(getAssets(divisionSelector));
     }, [selectedDivision]);
 
     return (

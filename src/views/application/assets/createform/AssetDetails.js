@@ -39,7 +39,9 @@ const AssetDetails = ({ assetDetailsData, setAssetDetailsData, handleNext, setEr
         validationSchema,
         onSubmit: (values, helpers) => {
             setAssetDetailsData({
-                intrinsicassetvalue: values.intrinsicassetvaluenumber,
+                intrinsicassetvalue: {number: values.intrinsicassetvaluenumber, currency: values.intrinsicassetvaluecurrency},
+                indirectassetvalue: {number: values.indirectassetvaluenumber, currency: values.indirectassetvaluecurrency},
+                directassetvalue: {number: values.directassetvaluenumber, currency: values.directassetvaluecurrency},
             });
             handleNext();
             helpers.resetForm()

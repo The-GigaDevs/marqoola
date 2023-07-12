@@ -42,7 +42,7 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
             );
         case 2:
             return (
-                <Review />
+                <Review basicInformationData={basicInformationData} assetDetailsData={assetDetailsData}/>
             );
         default:
             throw new Error('Unknown step');
@@ -152,7 +152,8 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
                 {activeStep === steps.length ? (
                     <>
                         
-                        
+                        <Review
+                        />
                     </>
                 ) : (
                     <>
@@ -174,7 +175,7 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
                                 )}
                                 <AnimateButton>
                                     <Button variant="contained" onClick={activeStep === steps.length -1 ? handleSaveAsset : handleNext} sx={{ my: 3, ml: 1 }}>
-                                        {activeStep === steps.length -1 ? 'Create' : 'Next'}
+                                        {activeStep === 2? 'Create' : 'Next'}
                                     </Button>
                                 </AnimateButton>
                             </Stack>

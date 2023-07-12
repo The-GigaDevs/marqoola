@@ -10,8 +10,9 @@ import { dispatch } from '../index';
 const initialState = {
     error: null,
     assets: [],
+    assetdetails: {},
     assetsbyorg: []
-    
+
 };
 
 const slice = createSlice({
@@ -23,11 +24,15 @@ const slice = createSlice({
             state.error = action.payload;
         },
 
-        getAssetsSuccess(state, action){
+        getAssetsSuccess(state, action) {
             state.assets = action.payload;
         },
 
-        getAssetsByOrganisationSuccess(state, action){
+        getAssetDetailsSuccess(state, action) {
+            state.assetdetails = action.payload;
+        },
+
+        getAssetsByOrganisationSuccess(state, action) {
             state.assetsbyorg = action.payload;
         }
     }
@@ -39,11 +44,31 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getAssets() {
+export function getAssets(orgId) {
     return async () => {
         try {
-            const response = await axios.get('/objects/assets');
-            dispatch(slice.actions.getAssetsSuccess(response.data));
+            if (orgId === undefined){
+                const response = await axios.get('/objects/assets');
+                dispatch(slice.actions.getAssetsSuccess(response.data));    
+            }
+            else {
+                const response = await axios.get('/objects/assets?orga=' + orgId);
+                dispatch(slice.actions.getAssetsSuccess(response.data));   
+            }
+            
+
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+            dispatch(slice.actions.getAssetsSuccess([]));   
+        }
+    };
+}
+
+export function getAssetDetails(id) {
+    return async () => {
+        try {
+            const response = await axios.get('/objects/assets/' + id);
+            dispatch(slice.actions.getAssetDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }
