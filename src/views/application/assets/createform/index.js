@@ -15,7 +15,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 // step options
 const steps = ['Basic information', 'Asset details'];
 
-const getStepContent = (step, handleNext, handleBack, setErrorIndex, resetFormData, handleResetData, basicInformationData, setBasicInformationData, assetDetailsData, setAssetDetailsData, industryInformationData, setIndustryInformationData, riskToleranceData, setRiskToleranceData, parentData, currencies, industries, subindustries) => {
+const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInformationData, setBasicInformationData, assetDetailsData, setAssetDetailsData, parentData, currencies) => {
     switch (step) {
         case 0:
             return (
@@ -155,13 +155,9 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
                             handleNext,
                             handleBack,
                             setErrorIndex,
-                            resetFormData, handleResetData,
                             basicInformationData, setBasicInformationData,
                             assetDetailsData, setAssetDetailsData,
-                            parentData,
-                            currencies,
-                            industries,
-                            subindustries
+                            parentData
                         )}
                         {activeStep === steps.length -1 && (
                             <Stack direction="row" justifyContent={activeStep !== 0 ? 'space-between' : 'flex-end'}>
