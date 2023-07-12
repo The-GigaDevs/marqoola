@@ -149,7 +149,6 @@ const Dashboard = () => {
             const response = await axios.get('/objects/risks/580749');
             setRisks(response.data.data);
             aaa = response.data.data;
-            console.log(response)
         } catch (error) {
             console.log(error);
         }

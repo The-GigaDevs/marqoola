@@ -91,7 +91,6 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
         try {
             
             const response =  await axios.post('/objects/assets', {name: basicInformationData.name,
-                intrinsicassetvalue: {number:parseInt(assetDetailsData.intrinsicassetvalue.number),currency:assetDetailsData.intrinsicassetvalue.currency}, 
                 indirectassetvalue: {number:parseInt(assetDetailsData.indirectassetvalue.number),currency:assetDetailsData.indirectassetvalue.currency}, 
                 directassetvalue: {number:parseInt(assetDetailsData.directassetvalue.number),currency:assetDetailsData.directassetvalue.currency}, 
             parentid: basicInformationData.parent,
@@ -106,9 +105,8 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
                   'Content-Type': 'application/json'
                 }
               }).then(handleCloseDialog);
-            console.log(response)
         } catch (error) {
-            console.log('Could not save org:', error)
+            console.log('Could not save asset:', error)
             handleCloseDialog();
         }
     

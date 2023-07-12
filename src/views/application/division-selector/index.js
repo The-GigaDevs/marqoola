@@ -28,10 +28,13 @@ export default function DivisionSelector(){
                 id="divisionselector"
                 select
                 onChange={(e) => {dispatch(setDivisionSelector(e.target.value))}}
-                
                 fullWidth
+               defaultValue={'0'}
                 
             >
+                <MenuItem key={'0'} value={'0'}>
+                        All Divisions
+                    </MenuItem>
                 {rows.map((parent) => (
                     <MenuItem key={parent.id} value={parent.id}>
                         {parent.name}

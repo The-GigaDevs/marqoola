@@ -47,7 +47,7 @@ export default slice.reducer;
 export function getAssets(orgId) {
     return async () => {
         try {
-            if (orgId === undefined){
+            if (orgId ==='' || orgId === '0' || orgId === undefined){
                 const response = await axios.get('/objects/assets');
                 dispatch(slice.actions.getAssetsSuccess(response.data));    
             }

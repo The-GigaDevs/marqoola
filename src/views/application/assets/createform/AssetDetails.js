@@ -39,7 +39,6 @@ const AssetDetails = ({ assetDetailsData, setAssetDetailsData, handleNext, setEr
         validationSchema,
         onSubmit: (values, helpers) => {
             setAssetDetailsData({
-                intrinsicassetvalue: {number: values.intrinsicassetvaluenumber, currency: values.intrinsicassetvaluecurrency},
                 indirectassetvalue: {number: values.indirectassetvaluenumber, currency: values.indirectassetvaluecurrency},
                 directassetvalue: {number: values.directassetvaluenumber, currency: values.directassetvaluecurrency},
             });
@@ -52,40 +51,6 @@ const AssetDetails = ({ assetDetailsData, setAssetDetailsData, handleNext, setEr
         <>
             <form onSubmit={formik.handleSubmit} id="validation-forms">
                 <Grid container spacing={3}>
-                    <Grid item xs={9} >
-                        <TextField
-                            id="intrinsicassetvaluenumber"
-                            name="intrinsicassetvaluenumber"
-                            label="Intrinsic Asset Value"
-                            value={formik.values.intrinsicassetvaluenumber}
-                            onChange={formik.handleChange}
-                            error={formik.touched.intrinsicassetvaluenumber && Boolean(formik.errors.intrinsicassetvaluenumber)}
-                            helperText={formik.touched.intrinsicassetvaluenumber && formik.errors.intrinsicassetvaluenumber}
-                            fullWidth
-                           
-                        />
-                    </Grid>
-                    <Grid item xs={3}>
-                    <TextField
-                            id="intrinsicassetvaluecurrency"
-                            name="intrinsicassetvaluecurrency"
-                            label="Currency"
-                            value={formik.values.intrinsicassetvaluecurrency}
-                            onChange={formik.handleChange}
-                            error={formik.touched.intrinsicassetvaluecurrency && Boolean(formik.errors.intrinsicassetvaluecurrency)}
-                            helperText={formik.touched.intrinsicassetvaluecurrency && formik.errors.intrinsicassetvaluecurrency}
-                            fullWidth
-                            select
-                        >
-                             {
-                             
-                             currencyData && currencyData.map((parent) => (
-                                        <MenuItem key={parent.Alpha} value={parent.Alpha}>
-                                            {parent.Alpha}
-                                        </MenuItem>
-                                    ))}
-                        </TextField>
-                    </Grid>
                     <Grid item xs={9} >
                         <TextField
                             id="indirectassetvaluenumber"

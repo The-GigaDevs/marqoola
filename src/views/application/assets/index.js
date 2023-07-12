@@ -87,7 +87,7 @@ export default function AssetTable() {
     };
 
     useEffect(() => {
-        dispatch(getAssets());
+        dispatch(getAssets(divisionSelector));
     }, [dispatch]);
 
     useEffect(() => {
@@ -96,8 +96,12 @@ export default function AssetTable() {
 
     useEffect(() => {
         setDivisionSelector(selectedDivision);
-        dispatch(getAssets(divisionSelector));
+        
     }, [selectedDivision]);
+
+    useEffect(() => {
+        dispatch(getAssets(divisionSelector));
+    }, [divisionSelector]);
 
     return (
         <MainCard

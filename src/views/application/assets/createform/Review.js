@@ -43,16 +43,22 @@ export default function Review({basicInformationData, assetDetailsData}) {
             <Typography variant="h4" gutterBottom sx={{ mb: 2 }}>
                Organisation: {organisationDetailsData.name}
             </Typography>
+            <Typography variant="h4" gutterBottom sx={{ mb: 2 }}>
+               Total Asset Value: {assetDetailsData.indirectassetvalue.number + assetDetailsData.directassetvalue.number} &nbsp; {assetDetailsData.directassetvalue.currency}  
+            </Typography>
             <Typography variant="h5" gutterBottom sx={{ mb: 2 , mt: 15, ml: 10}}>
-               {basicInformationData.name}
+               Asset Name: {basicInformationData.name}
             </Typography>
             <Typography variant="h5" gutterBottom sx={{ mb: 2, mt: 2, ml: 10 }}>
-               {basicInformationData.description}
+               Description: {basicInformationData.description}
             </Typography>
             <Divider sx={{mt: 5, mb: 5}}/>
             <Grid container sx={{mx: 10}}>
                 <Grid item xs={12}>
-                    Instrinsic Asset Value: {assetDetailsData.intrinsicassetvalue.number} &nbsp; {assetDetailsData.intrinsicassetvalue.currency}
+                    Indirect Asset Value: {assetDetailsData.indirectassetvalue.number} &nbsp; {assetDetailsData.indirectassetvalue.currency}
+                </Grid>
+                <Grid item xs={12}>
+                    Direct Asset Value: {assetDetailsData.directassetvalue.number} &nbsp; {assetDetailsData.directassetvalue.currency}
                 </Grid>
                 
             </Grid>
