@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'store';
 import { getAssets } from 'store/slices/asset';
 
 // material-ui
-import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow } from '@mui/material';
+import { Stack, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip, Fab } from '@mui/material';
+import AddIcon from '@mui/icons-material/AddTwoTone';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -50,29 +51,6 @@ const columns = [
     }
 ];
 
-// table data
-function createData(name, code, population, size) {
-    const density = population / size;
-    return { name, code, population, size, density };
-}
-
-const rows = [
-    createData('India', 'IN', 1324171354, 3287263),
-    createData('China', 'CN', 1403500365, 9596961),
-    createData('Italy', 'IT', 60483973, 301340),
-    createData('United States', 'US', 327167434, 9833520),
-    createData('Canada', 'CA', 37602103, 9984670),
-    createData('Australia', 'AU', 25475400, 7692024),
-    createData('Germany', 'DE', 83019200, 357578),
-    createData('Ireland', 'IE', 4857000, 70273),
-    createData('Mexico', 'MX', 126577691, 1972550),
-    createData('Japan', 'JP', 126317000, 377973),
-    createData('France', 'FR', 67022000, 640679),
-    createData('United Kingdom', 'GB', 67545757, 242495),
-    createData('Russia', 'RU', 146793744, 17098246),
-    createData('Nigeria', 'NG', 200962417, 923768),
-    createData('Brazil', 'BR', 210147125, 8515767)
-];
 
 // ==============================|| TABLE - STICKY HEADER ||============================== //
 
@@ -86,6 +64,14 @@ export default function AssetTable() {
 
     const [assetTableData, setAssetTableData] = useState([]);
     const { assets } = useSelector((state) => state.asset);
+
+    const [open, setOpen] = useState(false);
+    const handleClickOpenDialog = () => {
+        setOpen(true);
+    };
+    const handleCloseDialog = () => {
+        setOpen(false);
+    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -114,7 +100,17 @@ export default function AssetTable() {
             title="Assets"
             secondary={
                 <Stack direction="row" spacing={2} alignItems="center">
-                    <CSVExport data={rows} filename="sticky-header-table.csv" header={header} />
+                    <Tooltip title="Create Asset">
+                            <Fab
+                                color="primary"
+                                size="small"
+                                onClick={handleClickOpenDialog}
+                                sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}
+                            >
+                                <AddIcon fontSize="small" />
+                            </Fab>
+                        </Tooltip>
+                    <CSVExport data={assetTableData} filename="sticky-header-table.csv" header={header} />
                     <SecondaryAction link="https://next.material-ui.com/components/tables/" />
                 </Stack>
             }
@@ -162,7 +158,7 @@ export default function AssetTable() {
             <TablePagination
                 rowsPerPageOptions={[10, 25, 100]}
                 component="div"
-                count={rows.length}
+                count={assetTableData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
