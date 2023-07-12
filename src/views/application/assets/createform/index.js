@@ -7,6 +7,7 @@ import { Button, Step, Stepper, StepLabel, Stack, Typography , Dialog} from '@mu
 // project imports
 import BasicInformation from './BasicInformation';
 import AssetDetails from './AssetDetails';
+import Review from './Review'
 import MainCard from 'ui-component/cards/MainCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 
@@ -39,7 +40,10 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
                     currencies={currencies}
                 />
             );
-        
+        case 2:
+            return (
+                <Review />
+            );
         default:
             throw new Error('Unknown step');
     }
