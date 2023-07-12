@@ -60,7 +60,7 @@ const marqoolamenu = {
             breadcrumbs: false,
             children: [
                 {
-                    id: 'controlassessments',
+                    id: 'organisations',
                     title: <FormattedMessage id="Organizations" />,
                     type: 'item',
                     url: '/organisations',
@@ -76,10 +76,10 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
-                    id: 'alerts',
+                    id: 'assets',
                     title: <FormattedMessage id="Assets" />,
                     type: 'item',
-                    url: '/underconstruction',
+                    url: '/assets',
                     
                     breadcrumbs: false,
                 },

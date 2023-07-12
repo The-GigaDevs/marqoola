@@ -26,6 +26,8 @@ import organisationReducer from './slices/organisation'
 import organisationtreeReducer from './slices/organisation'
 import risktoleranceReducer from './slices/risktolerance';
 
+import assetReducer from './slices/asset'
+
 import divisionSelectorReducer from './slices/division-selector';
 
 // ==============================|| COMBINE REDUCER ||============================== //
@@ -50,6 +52,7 @@ const reducer = combineReducers({
     industry: industryReducer,
     subindustry: subIndustryReducer,
     risktolerance: risktoleranceReducer,
+    asset: assetReducer,
     divisionselector: divisionSelectorReducer,
     enumlist: enumReducer,
     enumData: enumDataReducer,
