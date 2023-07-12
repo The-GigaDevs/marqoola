@@ -115,7 +115,7 @@ export default function AssetTable() {
                         </Tooltip>
                     <CSVExport data={assetTableData} filename="sticky-header-table.csv" header={header} />
                     <SecondaryAction link="https://next.material-ui.com/components/tables/" />
-                    <AssetCreateForm open={open} handleCloseDialog={handleCloseDialog}/>
+                    <AssetCreateForm open={open} parentData={assetTableData} handleCloseDialog={handleCloseDialog}/>
                 </Stack>
             }
         >
