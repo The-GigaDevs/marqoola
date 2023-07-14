@@ -73,7 +73,7 @@ export function addEnum(enumlist) {
 export function getEnumData(enumName) {
     return async () => {
         try {
-            const response = await axios.get('/manager/enums/' + enumName);
+            const response = await axios.get('/enums/' + enumName);
             dispatch(slice.actions.getEnumDataSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
