@@ -15,7 +15,8 @@ const initialState = {
     },
     transition: 'Fade',
     close: true,
-    actionButton: false
+    actionButton: false,
+    autoHideDuration: 1500
 };
 
 // ==============================|| SLICE - SNACKBAR ||============================== //
@@ -25,7 +26,7 @@ const snackbar = createSlice({
     initialState,
     reducers: {
         openSnackbar(state, action) {
-            const { open, message, anchorOrigin, variant, alert, transition, close, actionButton } = action.payload;
+            const { open, message, anchorOrigin, variant, alert, transition, close, actionButton, autoHideDuration } = action.payload;
 
             state.action = !state.action;
             state.open = open || initialState.open;
@@ -39,6 +40,7 @@ const snackbar = createSlice({
             state.transition = transition || initialState.transition;
             state.close = close === false ? close : initialState.close;
             state.actionButton = actionButton || initialState.actionButton;
+            state.autoHideDuration = autoHideDuration || initialState.autoHideDuration;
         },
 
         closeSnackbar(state) {
