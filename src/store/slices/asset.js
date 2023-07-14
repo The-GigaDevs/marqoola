@@ -34,6 +34,10 @@ const slice = createSlice({
 
         getAssetsByOrganisationSuccess(state, action) {
             state.assetsbyorg = action.payload;
+        },
+
+        deleteAssetSuccess(state, action) {
+            getAssets();
         }
     }
 });
@@ -58,8 +62,7 @@ export function getAssets(orgId) {
             
 
         } catch (error) {
-            dispatch(slice.actions.hasError(error));
-            dispatch(slice.actions.getAssetsSuccess([]));   
+            dispatch(slice.actions.hasError(error));  
         }
     };
 }
@@ -80,6 +83,17 @@ export function getAssetsByOrganisation(orgId) {
         try {
             const response = await axios.get('/objects/assets?orga=' + orgId);
             dispatch(slice.actions.getAssetsByOrganisationSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
+export function deleteAsset(id) {
+    return async () => {
+        try {
+            const response = await axios.delete('/objects/assets/' + id);
+            dispatch(slice.actions.deleteAssetSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }
