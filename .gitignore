@@ -78,7 +78,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-
+.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -134,7 +134,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+.env
 # dependencies
 /node_modules
 /.pnp
@@ -159,5 +160,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /.idea/
-
+.env
 
