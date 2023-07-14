@@ -1,7 +1,7 @@
 // material-ui
 import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { Avatar, Box, useMediaQuery, Button } from '@mui/material';
+import { Avatar, Box, useMediaQuery, Tooltip } from '@mui/material';
 
 // project imports
 import LAYOUT_CONST from 'constant';
@@ -20,6 +20,8 @@ import { openDrawer } from 'store/slices/menu';
 // assets
 import { IconMenu2 } from '@tabler/icons';
 import DivisionSelector from 'views/application/division-selector';
+
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -79,18 +81,34 @@ const Header = () => {
             {/* mega-menu */}
             <DivisionSelector />
             <Box sx={{ display: { xs: 'none', sm: 'block' }, mx:2 }}>
-                <Button color='primary' variant='contained' component={Link} to="/roadmap">
-                    Roadmap
-                </Button>
+            <Tooltip title="Roadmap">
+  
+
+            <Avatar
+                    variant="rounded"
+                    sx={{
+                        ...theme.typography.commonAvatar,
+                        ...theme.typography.mediumAvatar,
+                        border: '1px solid',
+                        borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.primary.light,
+                        background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.primary.light,
+                        color: theme.palette.primary.dark,
+                        transition: 'all .2s ease-in-out',
+                        '&[aria-controls="menu-list-grow"],&:hover': {
+                            borderColor: theme.palette.primary.main,
+                            background: theme.palette.primary.main,
+                            color: theme.palette.primary.light
+                        }
+                    }}
+                    alt='Roadmap'
+                    color="inherit"
+                    component={Link} to="/roadmap"
+                >
+                    { <LocationOnIcon sx={{ fontSize: '1.3rem' }} />}
+                </Avatar>
+                </Tooltip>
             </Box>
 
-            {/* live customization & localization */}
-            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                <LocalizationSection />
-            </Box>
-
-            {/* notification & profile */}
-            <NotificationSection />
             <ProfileSection />
 
             {/* mobile header */}
