@@ -1,2 +1,2 @@
 
-env | sort >> .env
+env | sort >> /usr/share/nginx/html/.env
