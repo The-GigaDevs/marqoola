@@ -53,6 +53,10 @@ const slice = createSlice({
         // GET PRODUCT REVIEWS
         getProductReviewsSuccess(state, action) {
             state.productreviews = action.payload;
+        },
+
+        deleteOrganisationSuccess(state, action) {
+            getOrganisations();
         }
     }
 });
@@ -96,7 +100,16 @@ export function getOrganisationsTree() {
 }
 
 
-
+export function deleteOrganisation(id) {
+    return async () => {
+        try {
+            const response = await axios.delete('/objects/organisations/' + id);
+            dispatch(slice.actions.deleteOrganisationSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
 
 export function getOrders() {
     return async () => {

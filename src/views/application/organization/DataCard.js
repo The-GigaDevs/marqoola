@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { Box, Chip, IconButton, List, ListItem, ListItemText, ListItemAvatar, Stack, Typography, Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 import EditIcon from '@mui/icons-material/Edit';
+import { Delete } from '@mui/icons-material';
 // third party icons
 
 import OrganizationIcon from './OrganizationIcon';
@@ -17,10 +18,16 @@ import MainCard from 'ui-component/cards/MainCard';
 import OrganizationAddWithParent from './OrganizationAddWithParent';
 import OrganizationModify from './OrganizationModify';
 
+import { useDispatch, useSelector } from 'store';
+
+import { deleteOrganisation } from 'store/slices/organisation';
+
 // ==============================|| DATACARD ORGANIZATION CHART ||============================== //
 
 function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
-    
+    const dispatch = useDispatch();
+    const { organisations } = useSelector((state) => state.organisation);
+
     const [open, setOpen] = React.useState(false);
     const [openM, setOpenM] = React.useState(false);
     const handleClickOpenDialog = () => {
@@ -38,6 +45,10 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
     const handleCloseDialogM = () => {
         setOpenM(false);
     };
+
+    const handleDelete = () => {
+        dispatch(deleteOrganisation(id));
+    };
     
     const linkHandler = (link) => {
         window.open(link);
@@ -49,6 +60,7 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
 
     const [orgData, setOrgData] = React.useState([]);
     var aaa;
+
 
     const getOrgData = React.useCallback(async () => {
         try {
@@ -122,6 +134,11 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
                         >
                             <EditIcon fontSize='small'  />
                             <OrganizationModify open={openM} parents={rows} orgId={orgData} handleCloseDialog={handleCloseDialogM} />
+                            
+                        </IconButton>
+                        <IconButton size='small' sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
+                        >
+                            <Delete fontSize='small'  onClick={handleDelete} />
                         </IconButton>
 
                         
