@@ -35,7 +35,7 @@ function Row({ row }) {
     //const dispatch = useDispatch();
    // const {enumData}= useSelector((state) => state.enumData);
 
-    axios.get('/enums/'+row.name)
+    axios.get('/manager/enums/'+row.name)
     .then(resp => {
 
         row.history = resp.data;
@@ -111,7 +111,7 @@ axios.delete('/manager/enums/'+row.name+"/delete")
                                                 <TableRow>
                                                     <TableCell>Label</TableCell>
                                                     <TableCell>Value</TableCell>
-                                                    <TableCell>Color</TableCell>
+                           
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -122,7 +122,7 @@ axios.delete('/manager/enums/'+row.name+"/delete")
                                                         </TableCell>
                                                         <TableCell>{historyRow.value}</TableCell>
                   
-                                                        <TableCell>{historyRow.color}</TableCell>
+
 
                                                     </TableRow>
                                                     
