@@ -23,7 +23,7 @@ const marqoolamenu = {
     type: 'group',
     children: [
         {
-            id: 'default',
+            id: 'tasks',
             title: <FormattedMessage id="Tasks" />,
             type: 'collapse',
             
@@ -52,7 +52,7 @@ const marqoolamenu = {
                 }
             ]
         },{
-            id: 'default',
+            id: 'riskuniverse',
             title: <FormattedMessage id="Risk Universe" />,
             type: 'collapse',
             
@@ -68,7 +68,7 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
-                    id: 'incident',
+                    id: 'objectives',
                     title: <FormattedMessage id="Objectives" />,
                     type: 'item',
                     url: '/underconstruction',
@@ -92,7 +92,7 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
-                    id: 'alerts',
+                    id: 'processes',
                     title: <FormattedMessage id="Processes" />,
                     type: 'item',
                     url: '/underconstruction',
@@ -100,7 +100,7 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
-                    id: 'alerts',
+                    id: 'legalentities',
                     title: <FormattedMessage id="Legal Entities" />,
                     type: 'item',
                     url: '/underconstruction',
@@ -108,35 +108,35 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
-                    id: 'alerts',
+                    id: 'cyberriskportfolio',
                     title: <FormattedMessage id="Cyber Riks Portfolio" />,
                     type: 'item',
                     url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
-                    id: 'alerts',
+                    id: 'controlsportfolio',
                     title: <FormattedMessage id="Controls Portfolio" />,
                     type: 'item',
                     url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
-                    id: 'alerts',
+                    id: 'incidents',
                     title: <FormattedMessage id="Incidents" />,
                     type: 'item',
                     url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
-                    id: 'alerts',
+                    id: 'indicators',
                     title: <FormattedMessage id="Indicators" />,
                     type: 'item',
                     url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
-                    id: 'alerts',
+                    id: 'actionitems',
                     title: <FormattedMessage id="Action Items" />,
                     type: 'item',
                     url: '/underconstruction',
@@ -146,7 +146,7 @@ const marqoolamenu = {
             ]
         },
         {
-            id: 'default',
+            id: 'dashboards',
             title: <FormattedMessage id="Dashboards" />,
             type: 'collapse',
             
@@ -154,7 +154,7 @@ const marqoolamenu = {
             breadcrumbs: false,
             children: [
                 {
-                    id: 'controlassessments',
+                    id: 'currentrisk',
                     title: <FormattedMessage id="Current Risk" />,
                     type: 'item',
                     url: '/underconstruction',
@@ -162,7 +162,7 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
-                    id: 'incident',
+                    id: 'soa',
                     title: <FormattedMessage id="SOA" />,
                     type: 'item',
                     url: '/underconstruction',
@@ -172,7 +172,7 @@ const marqoolamenu = {
             ]
         },
         {
-            id: 'default',
+            id: 'integrations',
             title: <FormattedMessage id="Integrations" />,
             type: 'collapse',
             
@@ -180,7 +180,7 @@ const marqoolamenu = {
             breadcrumbs: false,
             children: [
                 {
-                    id: 'controlassessments',
+                    id: 'repository',
                     title: <FormattedMessage id="Repository" />,
                     type: 'item',
                     url: '/underconstruction',
@@ -188,14 +188,14 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
-                    id: 'incident',
+                    id: 'logs',
                     title: <FormattedMessage id="Logs" />,
                     type: 'item',
                     url: '/underconstruction',
                     
                     breadcrumbs: false,
                 },{
-                    id: 'alerts',
+                    id: 'connectors',
                     title: <FormattedMessage id="Connectors" />,
                     type: 'item',
                     url: '/underconstruction',
