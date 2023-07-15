@@ -51,7 +51,7 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, basicInform
 
 // ==============================|| FORMS WIZARD - BASIC ||============================== //
 
-const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, parentData, currencies, industries , subindustries}) => {
+const AssetEditForm = ({ open, handleCloseDialog, resetForm, setResetForm, parentData, currencies, industries , subindustries, assetid}) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [basicInformationData, setBasicInformationData] = React.useState({});
     const [assetDetailsData, setAssetDetailsData] = React.useState({});
@@ -83,6 +83,18 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
             setBasicInformationData({});
             setAssetDetailsData({});
         }
+        if (open == true && assetid && assetid.length > 1){
+            axios.get('/objects/assets/'+assetid).then(response => {
+                var basicinformation = {name: response.data.name, parent: response.data.parentid, organisation: response.data.orgaid, description: response.data.data.description};
+                var assetdetails = {directassetvalue: {number:response.data.directassetvalue.number, currency:response.data.directassetvalue.currency}, indirectassetvalue: {number:response.data.indirectassetvalue.number, currency:response.data.indirectassetvalue.currency}};
+                setBasicInformationData(basicinformation);
+                setAssetDetailsData(assetdetails);
+                
+            }).catch(error => {
+                console.log('Could not load asset:', error)
+            });
+        
+        }
     }, [open]);
     
     
@@ -90,7 +102,7 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
         
         try {
             
-            const response =  await axios.post('/objects/assets', {name: basicInformationData.name,
+            const response =  await axios.post('/objects/assets/' + assetid, {name: basicInformationData.name,
                 indirectassetvalue: {number:parseInt(assetDetailsData.indirectassetvalue.number),currency:assetDetailsData.indirectassetvalue.currency}, 
                 directassetvalue: {number:parseInt(assetDetailsData.directassetvalue.number),currency:assetDetailsData.directassetvalue.currency}, 
             parentid: basicInformationData.parent,
@@ -124,7 +136,7 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
         }}
     > 
     {open && (
-        <MainCard title="Create Asset">
+        <MainCard title="View/Modify Asset">
             <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                 {steps.map((label, index) => {
                     const labelProps = {};
@@ -173,7 +185,7 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
                                 )}
                                 <AnimateButton>
                                     <Button variant="contained" onClick={activeStep === steps.length -1 ? handleSaveAsset : handleNext} sx={{ my: 3, ml: 1 }}>
-                                        {activeStep === 2? 'Create' : 'Next'}
+                                        {activeStep === 2? 'Update' : 'Next'}
                                     </Button>
                                 </AnimateButton>
                             </Stack>
@@ -186,11 +198,12 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
     );
 };
 
-AssetCreateForm.propTypes = {
+AssetEditForm.propTypes = {
     open: PropTypes.bool,
     handleCloseDialog: PropTypes.func,
     parentData: PropTypes.object,
     currencies: PropTypes.object,
-    industries: PropTypes.object
+    industries: PropTypes.object,
+    assetid: PropTypes.string,
 };
-export default AssetCreateForm;
+export default AssetEditForm;

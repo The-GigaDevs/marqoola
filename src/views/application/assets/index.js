@@ -40,6 +40,7 @@ import FileCopyIcon from '@mui/icons-material/FileCopyTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 import AssetCreateForm from './createform'
+import AssetEditForm from './editform'
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -220,6 +221,7 @@ const AssetTable = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [search, setSearch] = React.useState('');
+    const [currentAsset, setCurrentAsset] = React.useState('');
     const [rows, setRows] = React.useState([]);
     const { customers } = useSelector((state) => state.customer);
     const [divisionSelector, setDivisionSelector] = React.useState('');
@@ -229,6 +231,8 @@ const AssetTable = () => {
     const { assets } = useSelector((state) => state.asset);
 
     const [open, setOpen] = React.useState(false);
+    const [openEdit, setOpenEdit] = React.useState(false);
+
     const handleClickOpenDialog = () => {
         setOpen(true);
     };
@@ -319,6 +323,17 @@ const AssetTable = () => {
             return;
         }
         setSelected([]);
+    };
+
+    const handleOpenEditDialog = (event, id) => {
+        const selectedIndex = selected.indexOf(id);
+        setCurrentAsset(id)
+        setOpenEdit(true);
+    }
+
+    const handleCloseEditDialog = () => {
+        setOpenEdit(false);
+        dispatch(getAssets());
     };
 
     const handleClick = (event, name) => {
@@ -431,12 +446,12 @@ const AssetTable = () => {
                                             component="th"
                                             id={labelId}
                                             scope="row"
-                                            onClick={(event) => handleClick(event, row.name)}
+                                            onClick={(event) => {if(selected.length === 0)handleOpenEditDialog(event, row.id)}}
                                             sx={{ cursor: 'pointer' }}
                                         >
                                             <Typography
                                                 variant="subtitle1"
-                                                sx={{ color: theme.palette.mode === 'dark' ? 'grey.600' : 'grey.900' }}
+                                                sx={{ color: '#db72ff'}}
                                             >
                                                 {' '}
                                                 {row.name}{' '}
@@ -467,6 +482,7 @@ const AssetTable = () => {
                         )}
                     </TableBody>
                 </Table>
+                <AssetEditForm open={openEdit} parentData={assetTableData} handleCloseDialog={handleCloseEditDialog} assetid={currentAsset}/>
             </TableContainer>
 
             {/* table pagination */}
