@@ -458,7 +458,7 @@ const AssetTable = () => {
                                             </Typography>
                                             <Typography variant="caption"> Parent: {row.parentname} </Typography>
                                         </TableCell>
-                                        <TableCell>{row.organisation}</TableCell>
+                                        <TableCell>{row.organame}</TableCell>
                                         <TableCell align="center">{row.intrinsicassetvalue? row.intrinsicassetvalue.number : '0'}&nbsp; {row.intrinsicassetvalue? row.intrinsicassetvalue.currency : ''}</TableCell>
                                         <TableCell align="center">{row.indirectassetvalue? row.indirectassetvalue.number : '0'}&nbsp; {row.indirectassetvalue? row.indirectassetvalue.currency : ''}</TableCell>
                                         <TableCell align="center">
