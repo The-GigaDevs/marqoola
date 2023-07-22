@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
-
+import useAuth from 'hooks/useAuth';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -226,7 +226,7 @@ const AssetTable = () => {
     const { customers } = useSelector((state) => state.customer);
     const [divisionSelector, setDivisionSelector] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
-
+    const { user } = useAuth();
     const [assetTableData, setAssetTableData] = React.useState([]);
     const { assets } = useSelector((state) => state.asset);
 
@@ -238,10 +238,14 @@ const AssetTable = () => {
     };
     const handleCloseDialog = () => {
         setOpen(false);
-        dispatch(getAssets());
+        dispatch(getAssets("", user.accessToken));
     };
+
+    // Getting the token
+ 
     React.useEffect(() => {
-        dispatch(getAssets(divisionSelector));
+
+        dispatch(getAssets(divisionSelector, user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
@@ -254,7 +258,7 @@ const AssetTable = () => {
     }, [selectedDivision]);
 
     React.useEffect(() => {
-        dispatch(getAssets(divisionSelector));
+        dispatch(getAssets(divisionSelector, user.accessToken));
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
@@ -274,7 +278,7 @@ const AssetTable = () => {
                     
                 })
             )
-        dispatch(getAssets(divisionSelector));
+        dispatch(getAssets(divisionSelector, user.accessToken));
         setSelected([])
     };
 
@@ -333,7 +337,7 @@ const AssetTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getAssets());
+        dispatch(getAssets("", user.accessToken));
     };
 
     const handleClick = (event, name) => {

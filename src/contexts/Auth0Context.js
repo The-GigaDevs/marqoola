@@ -23,6 +23,7 @@ const initialState = {
 
 const Auth0Context = createContext(null);
 
+
 export const Auth0Provider = ({ children }) => {
     const [state, dispatch] = useReducer(accountReducer, initialState);
 
@@ -33,7 +34,8 @@ export const Auth0Provider = ({ children }) => {
                     clientId: process.env.REACT_APP_AUTH0_CLIENT_ID,
                     domain: process.env.REACT_APP_AUTH0_DOMAIN,
                     authorizationParams: {
-                        redirect_uri: window.location.origin
+                        redirect_uri: window.location.origin,
+                        audience : process.env.REACT_APP_AUTH0_AUDIENCE
                     }
                 });
 
@@ -42,14 +44,15 @@ export const Auth0Provider = ({ children }) => {
 
                 if (isLoggedIn) {
                     const user = await auth0Client.getUser();
-
+                    const accessToken = await auth0Client.getTokenSilently();
                     dispatch({
                         type: LOGIN,
                         payload: {
                             isLoggedIn: true,
                             user: {
                                 id: user?.sub,
-                                email: user?.email
+                                email: user?.email,
+                                accessToken :accessToken
                             }
                         }
                     });
@@ -74,6 +77,7 @@ export const Auth0Provider = ({ children }) => {
 
         if (isLoggedIn) {
             const user = await auth0Client.getUser();
+            const accessToken = await auth0Client.getTokenSilently();
             dispatch({
                 type: LOGIN,
                 payload: {
@@ -83,6 +87,7 @@ export const Auth0Provider = ({ children }) => {
                         avatar: user?.picture,
                         email: user?.email,
                         name: user?.name,
+                        accessToken :accessToken,
                         tier: 'Premium'
                     }
                 }

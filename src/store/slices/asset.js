@@ -1,10 +1,8 @@
 // third-party
 import { createSlice } from '@reduxjs/toolkit';
-
 // project imports
 import axios from 'utils/axios';
 import { dispatch } from '../index';
-
 // ----------------------------------------------------------------------
 
 const initialState = {
@@ -48,15 +46,18 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getAssets(orgId) {
+export function getAssets(orgId, token) {
     return async () => {
         try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
             if (orgId ==='' || orgId === '0' || orgId === undefined){
-                const response = await axios.get('/objects/assets');
+                const response = await axios.get('/objects/assets', { headers });
                 dispatch(slice.actions.getAssetsSuccess(response.data));    
             }
             else {
-                const response = await axios.get('/objects/assets?orga=' + orgId);
+                const response = await axios.get('/objects/assets?orga=' + orgId, { headers });
                 dispatch(slice.actions.getAssetsSuccess(response.data));   
             }
             
