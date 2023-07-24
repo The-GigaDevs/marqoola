@@ -86,7 +86,7 @@ const AssetEditForm = ({ open, handleCloseDialog, resetForm, setResetForm, paren
         if (open == true && assetid && assetid.length > 1){
             axios.get('/objects/assets/'+assetid).then(response => {
                 var basicinformation = {name: response.data.name, parent: response.data.parentid, organisation: response.data.orgaid, description: response.data.data.description};
-                var assetdetails = {directassetvalue: {number:response.data.directassetvalue.number, currency:response.data.directassetvalue.currency}, indirectassetvalue: {number:response.data.indirectassetvalue.number, currency:response.data.indirectassetvalue.currency}};
+                var assetdetails = {directassetvalue: {number:response.data.directassetvalue? response.data.directassetvalue.number : 0, currency:response.data.directassetvalue? response.data.directassetvalue.currency : ''}, indirectassetvalue: {number:response.data.indirectassetvalue ? response.data.indirectassetvalue.number:0, currency:response.data.indirectassetvalue? response.data.indirectassetvalue.currency : ''}};
                 setBasicInformationData(basicinformation);
                 setAssetDetailsData(assetdetails);
                 

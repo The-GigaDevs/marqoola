@@ -22,13 +22,14 @@ import {
     Toolbar,
     Tooltip,
     Typography,
-    Fab
+    Fab, Collapse
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { openSnackbar } from 'store/slices/snackbar';
 // project imports
 import Chip from 'ui-component/extended/Chip';
 import MainCard from 'ui-component/cards/MainCard';
+import SubCard from 'ui-component/cards/SubCard';
 import { useDispatch, useSelector } from 'store';
 import { getAssets, deleteAsset } from 'store/slices/asset';
 
@@ -428,7 +429,7 @@ const AssetTable = () => {
                                 const isItemSelected = isSelected(row.id);
                                 const labelId = `enhanced-table-checkbox-${index}`;
 
-                                return (
+                                return (<>
                                     <TableRow
                                         hover
                                         role="checkbox"
@@ -473,6 +474,49 @@ const AssetTable = () => {
                                         </TableCell>
                                         
                                     </TableRow>
+                                    <TableRow>
+                                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                                        <Collapse in={open} timeout="auto" unmountOnExit>
+                                            {open && (
+                                                <Box sx={{ margin: 1 }}>
+                                                    <TableContainer>
+                                                        <SubCard
+                                                            sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.800' : 'grey.50', mb: 2 }}
+                                                            title="History"
+                                                            content={false}
+                                                            
+                                                        >
+                                                            <Table size="small" aria-label="purchases">
+                                                                <TableHead>
+                                                                    <TableRow>
+                                                                        <TableCell>ID</TableCell>
+                                                                        <TableCell>Control</TableCell>
+                                                                        <TableCell align="right">Tests</TableCell>
+                                                                    </TableRow>
+                                                                </TableHead>
+                                                                <TableBody>
+                                                                    {row.history?.map((historyRow) => (
+                                                                        <TableRow hover key={historyRow.controlId}>
+                                                                            <TableCell component="th" scope="row">
+                                                                                {historyRow.controlId}
+                                                                            </TableCell>
+                                                                            <TableCell>{historyRow.label}</TableCell>
+                                                                            <TableCell align="right" style={{padding: 5 + 'px', borderRadius: 5 +'px', backgroundColor: 'rgba(0, 128, 0, 0.05)', color:`${historyRow.color}` }}>
+                                                                                {historyRow.successfulltests} / {historyRow.totaltests}
+                                                                            </TableCell>
+                                                                        </TableRow>
+                                                                        
+                                                                    ))}
+                                                                </TableBody>
+                                                            </Table>
+                                                        </SubCard>
+                                                    </TableContainer>
+                                                </Box>
+                                            )}
+                                        </Collapse>
+                                    </TableCell>
+                                </TableRow>
+                                </>
                                 );
                             })}
                         {emptyRows > 0 && (
