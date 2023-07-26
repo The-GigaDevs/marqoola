@@ -84,6 +84,14 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
+                    id: 'controls',
+                    title: <FormattedMessage id="Controls" />,
+                    type: 'item',
+                    url: '/controls',
+                    
+                    breadcrumbs: false,
+                },
+                {
                     id: 'vendors',
                     title: <FormattedMessage id="Vendors" />,
                     type: 'item',
