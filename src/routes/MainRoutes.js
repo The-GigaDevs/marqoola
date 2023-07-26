@@ -142,6 +142,7 @@ const SecurityConceptsMaster = Loadable(lazy(() => import('views/application/mas
 const ControlCategoriesMaster = Loadable(lazy(() => import('views/application/mastertables/controlcategories/ControlCategoriesMaster')));
 const Assets = Loadable(lazy(() => import('views/application/assets')));
 const Controls = Loadable(lazy(() => import('views/application/controls')));
+const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -547,6 +548,10 @@ const MainRoutes = {
         {
             path: '/controls',
             element: <Controls />
+        },
+        {
+            path: '/control',
+            element: <ControlDetails />
         },
         {
             path: '/settings',

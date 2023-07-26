@@ -7,7 +7,8 @@ import { dispatch } from '../index';
 
 const initialState = {
     error: null,
-    controls: []
+    controls: [],
+    selectedControl: {}
 
 };
 
@@ -22,6 +23,9 @@ const slice = createSlice({
 
         getControlsSuccess(state, action) {
             state.controls = action.payload;
+        },
+        getControlByIdSuccess(state, action){
+            state.selectedControl=action.payload;
         },
 
         deleteControlSuccess(state, action) {
@@ -51,6 +55,25 @@ export function getControls(orgId, token) {
                 const response = await axios.get('/objects/controls?orga=' + orgId, { headers });
                 dispatch(slice.actions.getControlsSuccess(response.data));   
             }
+            
+
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));  
+        }
+    };
+}
+
+
+export function getControlById(controlid, token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            
+                const response = await axios.get('/objects/controls/' + controlid, { headers });
+                dispatch(slice.actions.getControlByIdSuccess(response.data));   
+            
             
 
         } catch (error) {

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import useAuth from 'hooks/useAuth';
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -231,6 +232,7 @@ EnhancedTableToolbar.propTypes = {
 const ControlTable = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
       );
@@ -349,9 +351,7 @@ const ControlTable = () => {
     };
 
     const handleOpenEditDialog = (event, id) => {
-        const selectedIndex = selected.indexOf(id);
-        setCurrentAsset(id)
-        setOpenEdit(true);
+        navigate('/control', { state: { id: id } });
     }
 
     const handleCloseEditDialog = () => {
