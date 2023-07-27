@@ -24,6 +24,7 @@ const slice = createSlice({
         getControlsSuccess(state, action) {
             state.controls = action.payload;
         },
+
         getControlByIdSuccess(state, action){
             state.selectedControl=action.payload;
         },
@@ -64,6 +65,7 @@ export function getControls(orgId, token) {
 }
 
 
+
 export function getControlById(controlid, token) {
     return async () => {
         try {
@@ -93,6 +95,7 @@ export function getControlsForAsset(assetid) {
     };
 }
 
+
 export function deleteControl(id) {
     return async () => {
         try {
@@ -103,4 +106,5 @@ export function deleteControl(id) {
         }
     };
 }
+
 
