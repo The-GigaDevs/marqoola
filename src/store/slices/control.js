@@ -7,7 +7,8 @@ import { dispatch } from '../index';
 
 const initialState = {
     error: null,
-    controls: []
+    controls: [],
+    selectedControl: {}
 
 };
 
@@ -23,6 +24,14 @@ const slice = createSlice({
         getControlsSuccess(state, action) {
             state.controls = action.payload;
         },
+
+        getControlByIdSuccess(state, action){
+            state.selectedControl=action.payload;
+        },
+
+        deleteControlSuccess(state, action) {
+            getControls();
+        }
 
     }
 });
@@ -55,6 +64,26 @@ export function getControls(orgId, token) {
     };
 }
 
+
+
+export function getControlById(controlid, token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            
+                const response = await axios.get('/objects/controls/' + controlid, { headers });
+                dispatch(slice.actions.getControlByIdSuccess(response.data));   
+            
+            
+
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));  
+        }
+    };
+}
+
 export function getControlsForAsset(assetid) {
     return async () => {
         try {
@@ -65,4 +94,17 @@ export function getControlsForAsset(assetid) {
         }
     };
 }
+
+
+export function deleteControl(id) {
+    return async () => {
+        try {
+            const response = await axios.delete('/objects/controls/' + id);
+            dispatch(slice.actions.deleteControlSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
 
