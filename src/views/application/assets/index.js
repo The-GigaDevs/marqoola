@@ -543,13 +543,13 @@ const AssetTable = () => {
                                             <Typography variant="caption"> Parent: {row.parentname} </Typography>
                                         </TableCell>
                                         <TableCell>{row.organame}</TableCell>
-                                        <TableCell align="center">{row.intrinsicassetvalue ? row.intrinsicassetvalue.number : '0'}&nbsp; {row.intrinsicassetvalue ? row.intrinsicassetvalue.currency : ''}</TableCell>
-                                        <TableCell align="center">{row.indirectassetvalue ? row.indirectassetvalue.number : '0'}&nbsp; {row.indirectassetvalue ? row.indirectassetvalue.currency : ''}</TableCell>
+                                        <TableCell align="center">{row.intrinsicassetvalue ? row.intrinsicassetvalueformated : '0'}</TableCell>
+                                        <TableCell align="center">{row.indirectassetvalue ? row.indirectassetvalueformated : '0'}</TableCell>
                                         <TableCell align="center">
-                                            {row.directassetvalue ? row.directassetvalue.number : '0'}&nbsp; {row.directassetvalue ? row.directassetvalue.currency : ''}
+                                            {row.directassetvalue ? row.directassetvalueformated : '0'}
                                         </TableCell>
                                         <TableCell align="center">
-                                            {row.totalassetvalue ? row.totalassetvalue.number : '0'} &nbsp; {row.totalassetvalue ? row.totalassetvalue.currency : ''}
+                                            {row.totalassetvalue ? row.totalassetvalueformated : '0'}
                                         </TableCell>
 
                                     </TableRow>

@@ -486,10 +486,10 @@ const ControlTable = () => {
                                         <TableCell align="center">{row.assetname}</TableCell>
                                         <TableCell align="center">{row.riskname}</TableCell>
                                         <TableCell align="center">
-                                            {row.implementationcost? row.implementationcost.number : '0'}&nbsp; {row.implementationcost? row.implementationcost.currency : ''}
+                                            {row.implementationcost? row.implementationcostformated : '0'}
                                         </TableCell>
                                         <TableCell align="center">
-                                            {row.controlvalue? row.controlvalue.number : '0'} &nbsp; {row.controlvalue? row.controlvalue.currency : ''}
+                                            {row.controlvalue? row.controlvalueformated : '0'}
                                         </TableCell>
                                         
                                     </TableRow>
