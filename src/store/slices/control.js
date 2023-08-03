@@ -95,6 +95,16 @@ export function getControlsForAsset(assetid) {
     };
 }
 
+export function getControlsForTemplate(templateid) {
+    return async () => {
+        try {
+            const response = await axios.get('/objects/controls?filter[templateid]=' + templateid );
+            dispatch(slice.actions.getControlsSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
 
 export function deleteControl(id, token) {
     return async () => {

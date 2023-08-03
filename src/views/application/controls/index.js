@@ -23,15 +23,17 @@ import {
     Toolbar,
     Tooltip,
     Typography,
-    Fab
+    Fab, Collapse, Tab, Button
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { openSnackbar } from 'store/slices/snackbar';
 // project imports
 import Chip from 'ui-component/extended/Chip';
 import MainCard from 'ui-component/cards/MainCard';
+import SubCard from 'ui-component/cards/SubCard';
 import { useDispatch, useSelector } from 'store';
-import { getControls, deleteControl } from 'store/slices/control';
+import { getControls, getControlsForTemplate, deleteControl } from 'store/slices/control';
+import { getControlTemplates, deleteControlTemplate } from 'store/slices/controltemplate';
 
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -40,6 +42,8 @@ import PrintIcon from '@mui/icons-material/PrintTwoTone';
 import FileCopyIcon from '@mui/icons-material/FileCopyTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -85,38 +89,52 @@ function stableSort(array, comparator) {
 */
 // table header options
 const headCells = [
-    { id: 'name', label: 'Name', minWidth: 170 },
+    { id: 'name', label: 'Template Name', minWidth: 170 },
     {
-        id: 'organisation',
-        label: 'Organisation',
+        id: 'totalrisk',
+        label: 'Total % of Risk',
         numeric: false,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'assetname',
-        label: 'Asset',
+        id: 'currentriskreduction',
+        label: 'Current Risk Reduction',
         numeric: false,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'riskname',
-        label: 'Risk',
+        id: 'potentialriskreduction',
+        label: 'Potential Risk Reduction',
         align: 'center',
         numeric: false,
         
     },
     {
         id: 'implementationcost',
-        label: 'Implementation Cost',
+        label: 'Current Implementation Cost',
         align: 'center',
         numeric: true,
         
     },
     {
-        id: 'controlvalue',
-        label: 'Control Value',
+        id: 'potentialcost',
+        label: 'Potential Implementation Cost',
+        numeric: true,
+        align: 'center',
+        format: (value) => typeof value === 'number' && value.toFixed(2)
+    },
+    {
+        id: 'currentroi',
+        label: 'Current ROI',
+        numeric: true,
+        align: 'center',
+        format: (value) => typeof value === 'number' && value.toFixed(2)
+    },
+    {
+        id: 'potentialcost',
+        label: 'Potential ROI',
         numeric: true,
         align: 'center',
         format: (value) => typeof value === 'number' && value.toFixed(2)
@@ -231,6 +249,7 @@ EnhancedTableToolbar.propTypes = {
 const ControlTable = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
@@ -247,7 +266,7 @@ const ControlTable = () => {
     const { selectedDivision } = useSelector((state) => state.divisionselector);
     const { user } = useAuth();
     const [assetTableData, setAssetTableData] = React.useState([]);
-    const { controls } = useSelector((state) => state.control);
+    const { controltemplates } = useSelector((state) => state.controltemplate);
 
     const [open, setOpen] = React.useState(false);
     const [openEdit, setOpenEdit] = React.useState(false);
@@ -266,12 +285,12 @@ const ControlTable = () => {
 
     React.useEffect(() => {
 
-        dispatch(getControls(divisionSelector, user.accessToken));
+        dispatch(getControlTemplates(divisionSelector, user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
-        setAssetTableData(controls);
-    }, [controls]);
+        setAssetTableData(controltemplates);
+    }, [controltemplates]);
 
     React.useEffect(() => {
         setDivisionSelector(selectedDivision);
@@ -284,7 +303,7 @@ const ControlTable = () => {
 
     const handleDelete = async (selected) => {
         for (var selectedid of selected) {
-            dispatch(deleteAsset(selectedid));
+            dispatch(deleteControl(selectedid));
         }
         await delay(500);
         dispatch(
@@ -356,7 +375,7 @@ const ControlTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getAssets("", user.accessToken));
+        dispatch(getControls("", user.accessToken));
     };
 
     const handleClick = (event, name) => {
@@ -395,12 +414,12 @@ const ControlTable = () => {
 
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - assetTableData.length) : 0;
 
-    function ExpandedRow({ assetid }) {
+    function ExpandedRow({ templateid }) {
         const [controlTableData, setControlTableData] = React.useState([]);
         const { controls } = useSelector((state) => state.control);
         React.useEffect(() => {
 
-            dispatch(getControlsForAsset(assetid, user.accessToken));
+            dispatch(getControlsForTemplate(templateid, user.accessToken));
         }, [dispatch]);
         
         React.useEffect(() => {
@@ -422,26 +441,54 @@ const ControlTable = () => {
                                         <Table size="small" aria-label="dgfgd">
                                             <TableHead>
                                                 <TableRow>
-                                                    <TableCell>Vulnerability</TableCell>
-                                                    <TableCell>Control Test</TableCell>
-                                                    <TableCell>CIS</TableCell>
-                                                    <TableCell>Function</TableCell>
-                                                    <TableCell>Resource Type</TableCell>
+                                                    <TableCell>Control</TableCell>
+                                                    <TableCell>Control Category</TableCell>
+                                                    <TableCell>Organisation</TableCell>
+                                                    <TableCell>Risk</TableCell>
+                                                    <TableCell>Concept</TableCell>
                                                     <TableCell>Implementation</TableCell>
                                                     <TableCell>Control Value</TableCell>
-                                                    <TableCell>Potential Risk Reduction</TableCell>
+                                                    <TableCell>Vulnerability</TableCell>
                                                     <TableCell>Last Tested</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                            {controls.map((controlRow) => (
+                                            {controls.map((controlRow) => (<>
                                                     <TableRow hover key={controlRow.id}>
                                                         <TableCell component="th" scope="row">
                                                             {controlRow.name}
+                                                            <Typography variant="caption"> Asset: {controlRow.assetname} </Typography>
                                                         </TableCell>
-                                                        
+                                                        <TableCell>
+                                                            {controlRow.controlcategoryname}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {controlRow.organame}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {controlRow.riskname}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {controlRow.securityconceptname}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {controlRow.implementationcostformated}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {controlRow.controlvalueformated}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {controlRow.vulnerability}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            {controlRow.lasttested? controlRow.lasttested: "Never"}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <Button variant='contained' color="secondary">Run Test</Button>
+                                                        </TableCell>
                                                     </TableRow>
                                                     
+                                                    </>
                                                 ))}
                                             </TableBody>
                                         </Table>
@@ -484,8 +531,9 @@ const ControlTable = () => {
                             >
                                 <AddIcon fontSize="small" />
                             </Fab>
-                        </Tooltip>
-                        <AssetCreateForm open={open} parentData={assetTableData} handleCloseDialog={handleCloseDialog} />
+                        </Tooltip>{
+                       // <AssetCreateForm open={open} parentData={assetTableData} handleCloseDialog={handleCloseDialog} />
+                     }
                     </Grid>
                 </Grid>
             </CardContent>
@@ -549,23 +597,29 @@ const ControlTable = () => {
                                                 sx={{ color: '#db72ff' }}
                                             >
                                                 {' '}
-                                                {row.name}{' '}
+                                                {row.name} - {row.title}
                                             </Typography>
-                                            <Typography variant="caption"> Parent: {row.parentname} </Typography>
+                                            
                                         </TableCell>
-                                        <TableCell>{row.organame}</TableCell>
-                                        <TableCell align="center">{row.intrinsicassetvalue ? row.intrinsicassetvalue.number : '0'}&nbsp; {row.intrinsicassetvalue ? row.intrinsicassetvalue.currency : ''}</TableCell>
-                                        <TableCell align="center">{row.indirectassetvalue ? row.indirectassetvalue.number : '0'}&nbsp; {row.indirectassetvalue ? row.indirectassetvalue.currency : ''}</TableCell>
+                                        <TableCell>{row.totalriskpercentage ? row.totalriskpercentage : 0}%</TableCell>
+                                        <TableCell align="center">{row.currentriskreduction ? row.currentriskreductionformatted : '0'}</TableCell>
+                                        <TableCell align="center">{row.potentialriskreduction ? row.potentialriskreductionformatted : '0'}</TableCell> 
                                         <TableCell align="center">
                                             {row.implementationcost? row.implementationcostformated : '0'}
                                         </TableCell>
                                         <TableCell align="center">
-                                            {row.controlvalue? row.controlvalueformated : '0'}
+                                            {row.potentialimplementationcost? row.potentialimplementationcostformated : '0'}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            {row.currentroi? row.currentroiformatted  : '0'}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            {row.potentialroi? row.potentialroiformatted  : '0'}
                                         </TableCell>
 
                                     </TableRow>
                                     {isRowExpanded && (
-                                        <ExpandedRow assetid={row.id}  />
+                                        <ExpandedRow templateid={row.id}  />
                                     )}
                                 </>
                                 );
