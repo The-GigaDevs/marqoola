@@ -23,15 +23,15 @@ import { Auth0Provider as AuthProvider } from 'contexts/Auth0Context';
 // ==============================|| APP ||============================== //
 
 const App = () => {
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        dispatch(getMenu()).then(() => {
-            setLoading(true);
-        });
-    }, []);
+    // useEffect(() => {
+    //     dispatch(getMenu()).then(() => {
+    //         setLoading(true);
+    //     });
+    // }, []);
 
-    if (!loading) return <Loader />;
+    // if (!loading) return <Loader />;
 
     return (
         <ThemeCustomization>
