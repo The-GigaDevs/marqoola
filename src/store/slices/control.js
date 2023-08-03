@@ -96,10 +96,13 @@ export function getControlsForAsset(assetid) {
 }
 
 
-export function deleteControl(id) {
+export function deleteControl(id, token) {
     return async () => {
         try {
-            const response = await axios.delete('/objects/controls/' + id);
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.delete('/objects/controls/' + id, {headers});
             dispatch(slice.actions.deleteControlSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
