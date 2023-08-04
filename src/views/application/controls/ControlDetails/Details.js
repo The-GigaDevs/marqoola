@@ -1,5 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 import {
     Divider,
     Grid,
@@ -11,21 +12,36 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Typography
+    Typography,
+    TextField,
+    Button, MenuItem
 } from '@mui/material';
 
 // project imports
+
+import AnimateButton from 'ui-component/extended/AnimateButton';
 import SubCard from 'ui-component/cards/SubCard';
 import Chip from 'ui-component/extended/Chip';
 import { gridSpacing } from 'store/constant';
 
 import { useDispatch, useSelector } from 'store';
 
+import { getOrganisations } from 'store/slices/organisation';
+import { getAssets } from 'store/slices/asset';
+import { getCurrencies } from 'store/slices/currency';
+
 // assets
 import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
 import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EmailTwoToneIcon from '@mui/icons-material/EmailTwoTone';
 import PhoneAndroidTwoToneIcon from '@mui/icons-material/PhoneAndroidTwoTone';
+
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+
+const validationSchema = yup.object({
+    name: yup.string().required('Control name is required'),
+});
 
 const sxDivider = {
     borderColor: 'primary.light'
@@ -50,297 +66,338 @@ const rows = [
     createData('Admin Template', 'lorem ipsum dolor sit amat, connecter adieu siccing eliot', '5', '$150.00', '$750.00')
 ];
 
+
+
 const Details = (controlData) => {
     const theme = useTheme();
-    
+    const dispatch = useDispatch();
     const { selectedControl } = useSelector((state) => state.control);
-    
-    return selectedControl && (
-        <Grid container spacing={gridSpacing}>
-            <Grid item xs={12}>
-                <SubCard title={selectedControl.name} secondary={<Typography variant="subtitle1">Placed on 12.07.2018 10:00</Typography>}>
-                    <Grid container spacing={gridSpacing}>
-                        <Grid item xs={12}>
-                            <Grid container spacing={3}>
-                                <Grid item>
-                                    <Typography variant="body2">
-                                        <CalendarTodayTwoToneIcon sx={detailsIconSX} /> Sophia Hale
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    <Typography variant="body2">
-                                        <PhoneAndroidTwoToneIcon sx={detailsIconSX} /> 070 123 4567
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    <Typography variant="body2">
-                                        <EmailTwoToneIcon sx={detailsIconSX} /> {controlData.name}
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Divider sx={sxDivider} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Grid container spacing={gridSpacing}>
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Stack spacing={2}>
-                                        <Typography variant="h4">Payment method</Typography>
-                                        <Stack spacing={0}>
-                                            <Typography variant="h6" sx={{ mb: 1 }}>
-                                                Credit Card
-                                            </Typography>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Transaction ID :</Typography>
-                                                <Typography variant="body2">000001-TXT</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Amount :</Typography>
-                                                <Typography variant="body2">$2500</Typography>
-                                            </Stack>
-                                        </Stack>
-                                    </Stack>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Stack spacing={2}>
-                                        <Typography variant="h4">Shipping method</Typography>
-                                        <Stack spacing={0}>
-                                            <Typography variant="h6" sx={{ mb: 1 }}>
-                                                Carrier
-                                            </Typography>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Tracking Code :</Typography>
-                                                <Typography variant="body2">FX-012345-6</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Date :</Typography>
-                                                <Typography variant="body2">12.15.2018</Typography>
-                                            </Stack>
-                                        </Stack>
-                                    </Stack>
-                                </Grid>
-                                <Grid item xs={12} sm={6} md={4}>
-                                    <Stack spacing={0} sx={{ mt: { xs: 0, md: 3 } }}>
-                                        <Stack direction="row" spacing={1}>
-                                            <Typography variant="subtitle1">Fulfillment status :</Typography>
-                                            <Typography variant="body2">Delivered</Typography>
-                                        </Stack>
-                                        <Stack direction="row" spacing={1}>
-                                            <Typography variant="subtitle1">Payment status :</Typography>
-                                            <Chip label="Paid" variant="outlined" size="small" chipcolor="success" />
-                                        </Stack>
-                                    </Stack>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Divider sx={sxDivider} />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Grid container spacing={gridSpacing}>
-                                <Grid item sm={6} md={4}>
-                                    <Stack spacing={2}>
-                                        <Typography variant="h4">Billing address</Typography>
-                                        <Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">First name :</Typography>
-                                                <Typography variant="body2">Joseph</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Last name :</Typography>
-                                                <Typography variant="body2">William</Typography>
-                                            </Stack>
-                                        </Stack>
-                                        <Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Address :</Typography>
-                                                <Typography variant="body2">4898 Joanne Lane street</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">City :</Typography>
-                                                <Typography variant="body2">Boston</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Country :</Typography>
-                                                <Typography variant="body2">United States</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">State :</Typography>
-                                                <Typography variant="body2">Massachusetts</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Zip code :</Typography>
-                                                <Typography variant="body2">02110</Typography>
-                                            </Stack>
-                                        </Stack>
-                                        <Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Phone :</Typography>
-                                                <Typography variant="body2">+1 (070) 123-4567</Typography>
-                                            </Stack>
-                                        </Stack>
-                                    </Stack>
-                                </Grid>
-                                <Grid item sm={6} md={4}>
-                                    <Stack spacing={2}>
-                                        <Typography variant="h4">Shipping address</Typography>
-                                        <Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">First name :</Typography>
-                                                <Typography variant="body2">Sara</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Last name :</Typography>
-                                                <Typography variant="body2">Soudan</Typography>
-                                            </Stack>
-                                        </Stack>
-                                        <Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Address :</Typography>
-                                                <Typography variant="body2">4898 Joanne Lane street</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">City :</Typography>
-                                                <Typography variant="body2">Boston</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Country :</Typography>
-                                                <Typography variant="body2">United States</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">State :</Typography>
-                                                <Typography variant="body2">Massachusetts</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Zip code :</Typography>
-                                                <Typography variant="body2">02110</Typography>
-                                            </Stack>
-                                        </Stack>
-                                        <Stack>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="subtitle1">Phone :</Typography>
-                                                <Typography variant="body2">+1 (070) 123-4567</Typography>
-                                            </Stack>
-                                        </Stack>
-                                    </Stack>
+    const [organisationData, setOrganisationData] = useState([]);
+    const { organisations } = useSelector((state) => state.organisation);
+    const [assetData, setAssetData] = useState([]);
+    const { assets } = useSelector((state) => state.asset);
+    const [currencyData, setCurrencyData] = useState([]);
+    const { currencies } = useSelector((state) => state.currency);
+
+
+    useEffect(() => {
+        dispatch(getOrganisations());
+        dispatch(getAssets());
+        dispatch(getCurrencies());
+    }, []);
+
+    useEffect(() => {
+        setOrganisationData(organisations);
+    }, [organisations]);
+
+    useEffect(() => {
+        setAssetData(assets);
+    }, [assets]);
+
+    useEffect(() => {
+        setCurrencyData(currencies);
+    }, [currencies]);
+
+    const formik = useFormik({
+        enableReinitialize: true,
+        initialValues: {
+            name: selectedControl.name,
+            organisation: selectedControl.orgaid
+        },
+        validationSchema,
+
+    });
+
+    return selectedControl && selectedControl.orgaid && (
+        <form onSubmit={formik.handleSubmit} id="asset-forms">
+            <Grid container spacing={gridSpacing}>
+                <Grid item xs={12}>
+                    <SubCard title={
+                        <Chip label={selectedControl.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControl.implemented ? "success" : "error"} />
+                    }
+                        secondary={<Typography variant="subtitle1">Last tested {selectedControl.lasttested ? 'on ' + selectedControl.lasttested : 'Never'}</Typography>}>
+                        <Grid container spacing={gridSpacing}>
+                            <Grid item xs={12}>
+                                <Grid container spacing={12}>
+                                    <Grid item xs={5}>
+                                        <TextField
+                                            id="name"
+                                            name="name"
+                                            label="Name of Control"
+                                            value={formik.values.name || ""}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.name && Boolean(formik.errors.name)}
+                                            helperText={formik.touched.name && formik.errors.name}
+                                            fullWidth
+                                        />
+                                    </Grid>
+                                    <Grid item xs={5}>
+                                        <TextField
+                                            id="organisation"
+                                            name="organisation"
+                                            label="Organisation"
+                                            value={formik.values.organisation || selectedControl.orgaid}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.organisation && Boolean(formik.errors.organisation)}
+                                            helperText={formik.touched.organisation && formik.errors.organisation}
+                                            fullWidth
+                                            select
+                                        >
+                                            <MenuItem value={selectedControl.orgaid}>
+                                                {selectedControl.organame}
+                                            </MenuItem>
+                                            {
+
+                                                organisationData && organisationData.map((parent) => (
+                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                        {parent.name}
+                                                    </MenuItem>
+                                                ))}
+                                        </TextField>
+                                    </Grid>
+
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </Grid>
-                </SubCard>
-            </Grid>
-            <Grid item xs={12}>
-                <SubCard title="Products" content={false}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <TableContainer>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell sx={{ pl: 3 }}>Description</TableCell>
-                                            <TableCell align="right">Quantity</TableCell>
-                                            <TableCell align="right">Amount</TableCell>
-                                            <TableCell align="right">Total</TableCell>
-                                            <TableCell align="right" sx={{ pr: 3 }} />
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {rows.map((row, index) => (
-                                            <TableRow key={index}>
-                                                <TableCell sx={{ pl: 3 }}>
-                                                    <Typography align="left" variant="subtitle1">
-                                                        {row.product}
-                                                    </Typography>
-                                                    <Typography align="left" variant="body2">
-                                                        {row.description}
-                                                    </Typography>
-                                                </TableCell>
-                                                <TableCell align="right">{row.quantity}</TableCell>
-                                                <TableCell align="right">{row.amount}</TableCell>
-                                                <TableCell align="right">{row.total}</TableCell>
-                                                <TableCell sx={{ pr: 3 }} align="right">
-                                                    <IconButton color="primary" size="large" aria-label="product delete">
-                                                        <DeleteTwoToneIcon />
-                                                    </IconButton>
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <SubCard
-                                sx={{
-                                    mx: 3,
-                                    mb: 3,
-                                    bgcolor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.primary.light
-                                }}
-                            >
-                                <Grid container justifyContent="flex-end" spacing={gridSpacing}>
-                                    <Grid item sm={6} md={4}>
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={12}>
-                                                <Grid container spacing={1}>
-                                                    <Grid item xs={6}>
-                                                        <Typography align="right" variant="subtitle1">
-                                                            Sub Total :
-                                                        </Typography>
+                            <Grid item xs={12}>
+                                <Divider sx={sxDivider} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Grid container spacing={gridSpacing}>
+                                    <Grid item xs={12} sm={6} md={4}>
+                                        <Stack spacing={2}>
+                                            <Typography variant="h4">Payment method</Typography>
+                                            <TextField
+                                                id="asset"
+                                                name="asset"
+                                                label="Asset"
+                                                value={formik.values.asset || selectedControl.assetid}
+                                                onChange={formik.handleChange}
+                                                error={formik.touched.asset && Boolean(formik.errors.asset)}
+                                                helperText={formik.touched.asset && formik.errors.asset}
+                                                fullWidth
+                                                select
+                                            >
+                                                <MenuItem value={selectedControl.assetid}>
+                                                    {selectedControl.assetname}
+                                                </MenuItem>
+                                                {
+
+                                                    assetData && assetData.map((parent) => (
+                                                        <MenuItem key={parent.id} value={parent.id}>
+                                                            {parent.name}
+                                                        </MenuItem>
+                                                    ))}
+                                            </TextField>
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} md={4}>
+                                        <Stack spacing={2}>
+                                            <Typography variant="h4">Financial Data</Typography>
+                                            <Stack spacing={2}>
+
+                                                <Stack direction="row" spacing={1}>
+                                                    <Grid item xs={9} >
+                                                        <TextField
+                                                            id="implementationcostnumber"
+                                                            name="implementationcostnumber"
+                                                            label="Implementation Cost"
+                                                            value={formik.values.implementationcostnumber || selectedControl.implementationcost.number}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.implementationcostnumber && Boolean(formik.errors.implementationcostnumber)}
+                                                            helperText={formik.touched.implementationcostnumber && formik.errors.implementationcostnumber}
+                                                            fullWidth
+
+                                                        />
                                                     </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography align="right" variant="body2">
-                                                            $4725.00
-                                                        </Typography>
+                                                    <Grid item xs={3}>
+                                                        <TextField
+                                                            id="implementationcostcurrency"
+                                                            name="implementationcostcurrency"
+                                                            label="Currency"
+                                                            value={formik.values.implementationcostcurrency || selectedControl.implementationcost.currency}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.implementationcostcurrency && Boolean(formik.errors.implementationcostcurrency)}
+                                                            helperText={formik.touched.implementationcostcurrency && formik.errors.implementationcostcurrency}
+                                                            fullWidth
+                                                            select
+                                                        >
+                                                            {
+
+                                                                currencyData && currencyData.map((parent) => (
+                                                                    <MenuItem key={parent.Alpha} value={parent.Alpha}>
+                                                                        {parent.Alpha}
+                                                                    </MenuItem>
+                                                                ))}
+                                                        </TextField>
                                                     </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography align="right" variant="subtitle1">
-                                                            Taxes (10%) :
-                                                        </Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Grid item xs={9} >
+                                                        <TextField
+                                                            id="controlvaluenumber"
+                                                            name="controlvaluenumber"
+                                                            label="Control Value"
+                                                            value={formik.values.controlvaluenumber || selectedControl.controlvalue.number}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.controlvaluenumber && Boolean(formik.errors.controlvaluenumber)}
+                                                            helperText={formik.touched.controlvaluenumber && formik.errors.controlvaluenumber}
+                                                            fullWidth
+
+                                                        />
                                                     </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography align="right" variant="body2">
-                                                            $57.00
-                                                        </Typography>
+                                                    <Grid item xs={3}>
+                                                        <TextField
+                                                            id="controlvaluecurrency"
+                                                            name="controlvaluecurrency"
+                                                            label="Currency"
+                                                            value={formik.values.controlvaluecurrency || selectedControl.controlvalue.currency}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.controlvaluecurrency && Boolean(formik.errors.controlvaluecurrency)}
+                                                            helperText={formik.touched.controlvaluecurrency && formik.errors.controlvaluecurrency}
+                                                            fullWidth
+                                                            select
+                                                        >
+                                                            {
+
+                                                                currencyData && currencyData.map((parent) => (
+                                                                    <MenuItem key={parent.Alpha} value={parent.Alpha}>
+                                                                        {parent.Alpha}
+                                                                    </MenuItem>
+                                                                ))}
+                                                        </TextField>
                                                     </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography align="right" variant="subtitle1">
-                                                            Discount (5%) :
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography align="right" variant="body2">
-                                                            $45.00
-                                                        </Typography>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Divider sx={{ bgcolor: 'dark.main' }} />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <Grid container spacing={1}>
-                                                    <Grid item xs={6}>
-                                                        <Typography align="right" color="primary" variant="subtitle1">
-                                                            Total :
-                                                        </Typography>
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <Typography align="right" color="primary" variant="subtitle1">
-                                                            $4827.00
-                                                        </Typography>
-                                                    </Grid>
-                                                </Grid>
-                                            </Grid>
-                                        </Grid>
+                                                </Stack>
+                                            </Stack>
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} md={4}>
+                                        <Stack spacing={0} sx={{ mt: { xs: 0, md: 3 } }}>
+                                            <Stack direction="row" spacing={1}>
+                                                <Typography variant="h4">Financial Data</Typography>
+                                            </Stack>
+                                            <Stack direction="row" spacing={1}>
+
+
+                                            </Stack>
+                                        </Stack>
                                     </Grid>
                                 </Grid>
-                            </SubCard>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Divider sx={sxDivider} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Grid container spacing={gridSpacing}>
+                                    <Grid item sm={6} md={4}>
+                                        <Stack spacing={2}>
+                                            <Typography variant="h4">Billing address</Typography>
+                                            <Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">First name :</Typography>
+                                                    <Typography variant="body2">Joseph</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Last name :</Typography>
+                                                    <Typography variant="body2">William</Typography>
+                                                </Stack>
+                                            </Stack>
+                                            <Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Address :</Typography>
+                                                    <Typography variant="body2">4898 Joanne Lane street</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">City :</Typography>
+                                                    <Typography variant="body2">Boston</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Country :</Typography>
+                                                    <Typography variant="body2">United States</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">State :</Typography>
+                                                    <Typography variant="body2">Massachusetts</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Zip code :</Typography>
+                                                    <Typography variant="body2">02110</Typography>
+                                                </Stack>
+                                            </Stack>
+                                            <Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Phone :</Typography>
+                                                    <Typography variant="body2">+1 (070) 123-4567</Typography>
+                                                </Stack>
+                                            </Stack>
+                                        </Stack>
+                                    </Grid>
+                                    <Grid item sm={6} md={4}>
+                                        <Stack spacing={2}>
+                                            <Typography variant="h4">Shipping address</Typography>
+                                            <Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">First name :</Typography>
+                                                    <Typography variant="body2">Sara</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Last name :</Typography>
+                                                    <Typography variant="body2">Soudan</Typography>
+                                                </Stack>
+                                            </Stack>
+                                            <Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Address :</Typography>
+                                                    <Typography variant="body2">4898 Joanne Lane street</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">City :</Typography>
+                                                    <Typography variant="body2">Boston</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Country :</Typography>
+                                                    <Typography variant="body2">United States</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">State :</Typography>
+                                                    <Typography variant="body2">Massachusetts</Typography>
+                                                </Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Zip code :</Typography>
+                                                    <Typography variant="body2">02110</Typography>
+                                                </Stack>
+                                            </Stack>
+                                            <Stack>
+                                                <Stack direction="row" spacing={1}>
+                                                    <Typography variant="subtitle1">Phone :</Typography>
+                                                    <Typography variant="body2">+1 (070) 123-4567</Typography>
+                                                </Stack>
+                                            </Stack>
+                                        </Stack>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
                         </Grid>
+                    </SubCard>
+                </Grid>
+                <Grid item xs={12}>
+                    <SubCard title="Products" content={false}>
+                        <Grid container spacing={3}>
+
+
+                        </Grid>
+                    </SubCard>
+                    <Grid item xs={12}>
+                        <Stack direction="row" justifyContent="flex-end">
+                            <AnimateButton>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" >
+                                    Save
+                                </Button>
+                            </AnimateButton>
+                        </Stack>
                     </Grid>
-                </SubCard>
+                </Grid>
             </Grid>
-        </Grid>
+        </form>
     );
 };
 
