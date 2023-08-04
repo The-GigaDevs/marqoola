@@ -120,4 +120,18 @@ export function deleteControl(id, token) {
     };
 }
 
+export function runSquid(id, token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/squids/runsquid/' + id, {headers});
+            dispatch(slice.actions.deleteControlSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
 

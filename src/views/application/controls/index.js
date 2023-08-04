@@ -35,6 +35,8 @@ import { useDispatch, useSelector } from 'store';
 import { getControls, getControlsForTemplate, deleteControl } from 'store/slices/control';
 import { getControlTemplates, deleteControlTemplate } from 'store/slices/controltemplate';
 
+import ControlDetails from './ControlDetails';
+
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterListTwoTone';
@@ -372,6 +374,7 @@ const ControlTable = () => {
     const handleOpenEditDialog = (event, id) => {
         navigate('/control', { state: { id: id } });
     }
+    
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
@@ -432,10 +435,10 @@ const ControlTable = () => {
                         {expandRow && (
                             <Box sx={{ margin: 1 }}>
                                 <TableContainer>
-                                    <SubCard
-                                        sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.800' : 'grey.50', mb: 2 }}
-                                        title="Controls"
-                                        content={false}
+                                    <MainCard
+                                        
+                                        
+                                        content={true}
 
                                     >
                                         <Table size="small" aria-label="dgfgd">
@@ -455,7 +458,8 @@ const ControlTable = () => {
                                             <TableBody>
                                             {controls.map((controlRow) => (<>
                                                     <TableRow hover key={controlRow.id}>
-                                                        <TableCell component="th" scope="row">
+                                                        <TableCell component="th" scope="row" 
+                                            onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, controlRow.id) }}>
                                                             {controlRow.name}
                                                             <Typography variant="caption"> Asset: {controlRow.assetname} </Typography>
                                                         </TableCell>
@@ -492,7 +496,7 @@ const ControlTable = () => {
                                                 ))}
                                             </TableBody>
                                         </Table>
-                                    </SubCard>
+                                    </MainCard>
                                 </TableContainer>
                             </Box>
                         )}
@@ -503,7 +507,7 @@ const ControlTable = () => {
     }
 
     return (
-        <MainCard title="Customer List" content={false}>
+        <MainCard title="Control Templates" content={false}>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>
