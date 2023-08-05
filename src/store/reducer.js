@@ -25,10 +25,15 @@ import subIndustryReducer from './slices/industry'
 import organisationReducer from './slices/organisation'
 import organisationtreeReducer from './slices/organisation'
 import risktoleranceReducer from './slices/risktolerance';
+import securityconceptReducer from './slices/securityconcept';
+import controlCategoryReducer from './slices/controlcategory';
+
+
 
 import assetReducer from './slices/asset'
 import controlReducer from './slices/control'
 import controlTemplateReducer from './slices/controltemplate'
+import objectiveReducer from './slices/objective'
 
 import divisionSelectorReducer from './slices/division-selector';
 
@@ -54,9 +59,12 @@ const reducer = combineReducers({
     industry: industryReducer,
     subindustry: subIndustryReducer,
     risktolerance: risktoleranceReducer,
+    securityconcept: securityconceptReducer,
+    controlcategory: controlCategoryReducer,
     asset: assetReducer,
     control: controlReducer,
     controltemplate: controlTemplateReducer,
+    objective: objectiveReducer,
     divisionselector: divisionSelectorReducer,
     enumlist: enumReducer,
     enumData: enumDataReducer,
