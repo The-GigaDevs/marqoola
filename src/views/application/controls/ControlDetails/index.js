@@ -96,6 +96,7 @@ const ControlDetails = () => {
             >
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Details" {...a11yProps(0)} />
                 
+                
             </Tabs>
 
             {/* tab - details */}
@@ -105,7 +106,7 @@ const ControlDetails = () => {
 
             {/* tab - invoice */}
             <TabPanel value={value} index={1}>
-                
+           
             </TabPanel>
 
             {/* tab - status */}

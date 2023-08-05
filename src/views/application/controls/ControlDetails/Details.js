@@ -1,5 +1,6 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import axios from 'utils/axios';
 import { useEffect, useState } from 'react';
 import {
     Divider,
@@ -122,11 +123,37 @@ const Details = (controlData) => {
         setSecurityConceptData(securityconcepts);
     }, [securityconcepts]);
 
+    const handleSaveControl = async () => {
+        
+        try {
+            
+            const response =  await axios.post('/objects/controls/' + selectedControl.id, 
+            {
+                name: formik.values.name,
+                orgaid: formik.values.organisation, 
+                assetid: formik.values.asset,
+                implementationcost: {number:formik.values.implementationcostnumber,currency:formik.values.implementationcostcurrency}, 
+            },{
+                headers: {
+                  // Overwrite Axios's automatically set Content-Type
+                  'Content-Type': 'application/json'
+                }
+              });
+        } catch (error) {
+            console.log('Could not save control:', error)
+            //handleCloseDialog();
+        }
+    
+}
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
             name: selectedControl.name,
-            organisation: selectedControl.orgaid
+            organisation: selectedControl.orgaid,
+            asset: selectedControl.assetid,
+            implementationcostnumber: selectedControl.implementationcost && selectedControl.implementationcost.number,
+            implementationcostcurrency: selectedControl.implementationcost && selectedControl.implementationcost.currency,
         },
         validationSchema,
 
@@ -201,7 +228,7 @@ const Details = (controlData) => {
                                                 fullWidth
                                                 select
                                             >
-                                                <MenuItem value={selectedControl.assetid}>
+                                                <MenuItem value={selectedControl.assetid} key={selectedControl.assetid}>
                                                     {selectedControl.assetname}
                                                 </MenuItem>
                                                 {
@@ -370,7 +397,7 @@ const Details = (controlData) => {
                     <Grid item xs={12}>
                         <Stack direction="row" justifyContent="flex-end">
                             <AnimateButton>
-                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" >
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" onClick={handleSaveControl}>
                                     Save
                                 </Button>
                             </AnimateButton>
