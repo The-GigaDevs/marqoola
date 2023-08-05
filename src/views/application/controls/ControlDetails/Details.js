@@ -29,6 +29,9 @@ import { useDispatch, useSelector } from 'store';
 import { getOrganisations } from 'store/slices/organisation';
 import { getAssets } from 'store/slices/asset';
 import { getCurrencies } from 'store/slices/currency';
+import { getControlCategories } from 'store/slices/controlcategory';
+import { getObjectives } from 'store/slices/objective';
+import { getSecurityConcepts } from 'store/slices/securityconcept';
 
 // assets
 import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
@@ -78,12 +81,21 @@ const Details = (controlData) => {
     const { assets } = useSelector((state) => state.asset);
     const [currencyData, setCurrencyData] = useState([]);
     const { currencies } = useSelector((state) => state.currency);
+    const [categoryData, setCategoryData] = useState([]);
+    const { controlcategories } = useSelector((state) => state.controlcategory);
+    const [objectiveData, setObjectiveData] = useState([]);
+    const { objectives } = useSelector((state) => state.objective);
+    const [securityConceptData, setSecurityConceptData] = useState([]);
+    const { securityconcepts } = useSelector((state) => state.securityconcept);
 
 
     useEffect(() => {
         dispatch(getOrganisations());
         dispatch(getAssets());
         dispatch(getCurrencies());
+        dispatch(getControlCategories());
+        dispatch(getObjectives());
+        dispatch(getSecurityConcepts());
     }, []);
 
     useEffect(() => {
@@ -97,6 +109,18 @@ const Details = (controlData) => {
     useEffect(() => {
         setCurrencyData(currencies);
     }, [currencies]);
+
+    useEffect(() => {
+        setCategoryData(controlcategories);
+    }, [controlcategories]);
+
+    useEffect(() => {
+        setObjectiveData(objectives);
+    }, [objectives]);
+
+    useEffect(() => {
+        setSecurityConceptData(securityconcepts);
+    }, [securityconcepts]);
 
     const formik = useFormik({
         enableReinitialize: true,
@@ -270,17 +294,6 @@ const Details = (controlData) => {
                                             </Stack>
                                         </Stack>
                                     </Grid>
-                                    <Grid item xs={12} sm={6} md={4}>
-                                        <Stack spacing={0} sx={{ mt: { xs: 0, md: 3 } }}>
-                                            <Stack direction="row" spacing={1}>
-                                                <Typography variant="h4">Financial Data</Typography>
-                                            </Stack>
-                                            <Stack direction="row" spacing={1}>
-
-
-                                            </Stack>
-                                        </Stack>
-                                    </Grid>
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
@@ -291,87 +304,55 @@ const Details = (controlData) => {
                                     <Grid item sm={6} md={4}>
                                         <Stack spacing={2}>
                                             <Typography variant="h4">Billing address</Typography>
-                                            <Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">First name :</Typography>
-                                                    <Typography variant="body2">Joseph</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Last name :</Typography>
-                                                    <Typography variant="body2">William</Typography>
-                                                </Stack>
-                                            </Stack>
-                                            <Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Address :</Typography>
-                                                    <Typography variant="body2">4898 Joanne Lane street</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">City :</Typography>
-                                                    <Typography variant="body2">Boston</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Country :</Typography>
-                                                    <Typography variant="body2">United States</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">State :</Typography>
-                                                    <Typography variant="body2">Massachusetts</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Zip code :</Typography>
-                                                    <Typography variant="body2">02110</Typography>
-                                                </Stack>
-                                            </Stack>
-                                            <Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Phone :</Typography>
-                                                    <Typography variant="body2">+1 (070) 123-4567</Typography>
-                                                </Stack>
-                                            </Stack>
+                                            <TextField
+                                            id="securityconcept"
+                                            name="securityconcept"
+                                            label="Security Concept"
+                                            value={formik.values.securityconcept || selectedControl.securityconceptid}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.securityconcept && Boolean(formik.errors.securityconcept)}
+                                            helperText={formik.touched.securityconcept && formik.errors.securityconcept}
+                                            fullWidth
+                                            select
+                                        >
+                                            <MenuItem value={selectedControl.securityconceptid}>
+                                                {selectedControl.securityconceptname}
+                                            </MenuItem>
+                                            {
+
+                                                securityConceptData && securityConceptData.map((parent) => (
+                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                        {parent.name}
+                                                    </MenuItem>
+                                                ))}
+                                        </TextField>
                                         </Stack>
                                     </Grid>
                                     <Grid item sm={6} md={4}>
                                         <Stack spacing={2}>
                                             <Typography variant="h4">Shipping address</Typography>
-                                            <Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">First name :</Typography>
-                                                    <Typography variant="body2">Sara</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Last name :</Typography>
-                                                    <Typography variant="body2">Soudan</Typography>
-                                                </Stack>
-                                            </Stack>
-                                            <Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Address :</Typography>
-                                                    <Typography variant="body2">4898 Joanne Lane street</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">City :</Typography>
-                                                    <Typography variant="body2">Boston</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Country :</Typography>
-                                                    <Typography variant="body2">United States</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">State :</Typography>
-                                                    <Typography variant="body2">Massachusetts</Typography>
-                                                </Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Zip code :</Typography>
-                                                    <Typography variant="body2">02110</Typography>
-                                                </Stack>
-                                            </Stack>
-                                            <Stack>
-                                                <Stack direction="row" spacing={1}>
-                                                    <Typography variant="subtitle1">Phone :</Typography>
-                                                    <Typography variant="body2">+1 (070) 123-4567</Typography>
-                                                </Stack>
-                                            </Stack>
+                                            <TextField
+                                            id="controlcategory"
+                                            name="controlcategory"
+                                            label="Control Category"
+                                            value={formik.values.controlcategory || selectedControl.controlcategoryid}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.controlcategory && Boolean(formik.errors.controlcategory)}
+                                            helperText={formik.touched.controlcategory && formik.errors.controlcategory}
+                                            fullWidth
+                                            select
+                                        >
+                                            <MenuItem value={selectedControl.controlcategoryid}>
+                                                {selectedControl.controlcategoryname}
+                                            </MenuItem>
+                                            {
+
+                                                categoryData && categoryData.map((parent) => (
+                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                        {parent.name}
+                                                    </MenuItem>
+                                                ))}
+                                        </TextField>
                                         </Stack>
                                     </Grid>
                                 </Grid>
