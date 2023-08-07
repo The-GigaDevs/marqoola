@@ -133,7 +133,7 @@ const DetailsDashboard = (controlData) => {
         for(let i = 0; i < metrics.length; i++){
             let obj = metrics[i];
             values.push(obj.y)
-            xaxis.push(obj.x)
+            xaxis.push(new Date(Date.parse(obj.x)).toLocaleDateString("en-US"))
     
         }
         
