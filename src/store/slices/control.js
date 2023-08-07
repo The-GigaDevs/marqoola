@@ -8,7 +8,8 @@ import { dispatch } from '../index';
 const initialState = {
     error: null,
     controls: [],
-    selectedControl: {}
+    selectedControl: {},
+    metrics : []
 
 };
 
@@ -27,6 +28,10 @@ const slice = createSlice({
 
         getControlByIdSuccess(state, action){
             state.selectedControl=action.payload;
+        },
+
+        getControlMetricsSuccess(state, action){
+            state.metrics=action.payload;
         },
 
         deleteControlSuccess(state, action) {
@@ -84,6 +89,24 @@ export function getControlById(controlid, token) {
     };
 }
 
+export function getControlMetricsById(controlid, token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            
+                const response = await axios.get('/objects/metrics?filter[objectid]=' + controlid, { headers });
+                dispatch(slice.actions.getControlMetricsSuccess(response.data));   
+            
+            
+
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));  
+        }
+    };
+}
+
 export function getControlsForAsset(assetid) {
     return async () => {
         try {
@@ -102,6 +125,10 @@ export function getControlsForTemplate(templateid) {
             dispatch(slice.actions.getControlsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
+            const emptyControl = [{ 
+                
+            }]
+            dispatch(slice.actions.getControlsSuccess(emptyControl))
         }
     };
 }

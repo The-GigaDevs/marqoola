@@ -24,11 +24,8 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import SubCard from 'ui-component/cards/SubCard';
 import Chip from 'ui-component/extended/Chip';
 import { gridSpacing } from 'store/constant';
-import ReactApexChart from 'react-apexcharts';
 
 import { useDispatch, useSelector } from 'store';
-import useConfig from 'hooks/useConfig';
-
 
 import { getOrganisations } from 'store/slices/organisation';
 import { getAssets } from 'store/slices/asset';
@@ -36,7 +33,6 @@ import { getCurrencies } from 'store/slices/currency';
 import { getControlCategories } from 'store/slices/controlcategory';
 import { getObjectives } from 'store/slices/objective';
 import { getSecurityConcepts } from 'store/slices/securityconcept';
-import { getControlMetricsById } from 'store/slices/control';
 
 // assets
 import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
@@ -68,7 +64,15 @@ function createData(product, description, quantity, amount, total) {
     return { product, description, quantity, amount, total };
 }
 
-const DetailsDashboard = (controlData) => {
+const rows = [
+    createData('Logo Design', 'lorem ipsum dolor sit amat, connecter adieu siccing eliot', '6', '$200.00', '$1200.00'),
+    createData('Landing Page', 'lorem ipsum dolor sit amat, connecter adieu siccing eliot', '7', '$100.00', '$700.00'),
+    createData('Admin Template', 'lorem ipsum dolor sit amat, connecter adieu siccing eliot', '5', '$150.00', '$750.00')
+];
+
+
+
+const Details = (controlData) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const { selectedControl } = useSelector((state) => state.control);
@@ -84,13 +88,9 @@ const DetailsDashboard = (controlData) => {
     const { objectives } = useSelector((state) => state.objective);
     const [securityConceptData, setSecurityConceptData] = useState([]);
     const { securityconcepts } = useSelector((state) => state.securityconcept);
-    const [controlMetrics, setControlMetrics] = useState([]);
-    const { metrics } = useSelector((state) => state.control);
-    const [series, setSeries] = useState([]);
-    const [options, setOptions] = useState({});
+
 
     useEffect(() => {
-        
         dispatch(getOrganisations());
         dispatch(getAssets());
         dispatch(getCurrencies());
@@ -99,11 +99,6 @@ const DetailsDashboard = (controlData) => {
         dispatch(getSecurityConcepts());
     }, []);
 
-    useEffect(() => {
-        dispatch(getControlMetricsById(selectedControl.id))
-    }, [selectedControl]);
-
-    
     useEffect(() => {
         setOrganisationData(organisations);
     }, [organisations]);
@@ -127,58 +122,6 @@ const DetailsDashboard = (controlData) => {
     useEffect(() => {
         setSecurityConceptData(securityconcepts);
     }, [securityconcepts]);
-
-    useEffect(() => {
-        setControlMetrics(metrics);
-        for(let i = 0; i < metrics.length; i++){
-            let obj = metrics[i];
-            values.push(obj.y)
-            xaxis.push(obj.x)
-    
-        }
-        
-        setSeries([{
-            name: 'Implementation Cost',
-            data: values
-        }])
-        setOptions({chart: {
-            zoom: {
-                enabled: false
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        xaxis: {
-            categories: xaxis
-        }})
-    }, [metrics]);
-    
-    
-
-    const { primary } = theme.palette.text;
-    const darkLight = theme.palette.dark.light;
-    const grey200 = theme.palette.grey[200];
-    const secondary = theme.palette.secondary.main;
-    let values = [];
-    let xaxis = [];
-    const { navType } = useConfig();
-    
-    
-    
-
-    
-
-    useEffect(() => {
-        setOptions((prevState) => ({
-            ...prevState,
-
-        }));
-    }, [navType, primary, darkLight, grey200, secondary]);
-    
 
     const handleSaveControl = async () => {
         
@@ -216,7 +159,7 @@ const DetailsDashboard = (controlData) => {
 
     });
 
-    return selectedControl && selectedControl.orgaid && series &&  (
+    return selectedControl && selectedControl.orgaid && (
         <form onSubmit={formik.handleSubmit} id="asset-forms">
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
@@ -224,11 +167,7 @@ const DetailsDashboard = (controlData) => {
                         <Chip label={selectedControl.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControl.implemented ? "success" : "error"} />
                     }
                         secondary={<Typography variant="subtitle1">Last tested {selectedControl.lasttested ? 'on ' + selectedControl.lasttested : 'Never'}</Typography>}>
-                        <div id="chart">
-                <ReactApexChart options={options} series={series} type="area" height={350} />
-            </div>
                         <Grid container spacing={gridSpacing}>
-                        
                             <Grid item xs={12}>
                                 <Grid container spacing={12}>
                                     <Grid item xs={5}>
@@ -470,4 +409,4 @@ const DetailsDashboard = (controlData) => {
     );
 };
 
-export default DetailsDashboard;
+export default Details;
