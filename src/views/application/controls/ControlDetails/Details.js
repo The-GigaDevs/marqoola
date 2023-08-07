@@ -15,7 +15,7 @@ import {
     TableRow,
     Typography,
     TextField,
-    Button, MenuItem
+    Button, MenuItem, Card, CardHeader, CardContent
 } from '@mui/material';
 
 // project imports
@@ -224,9 +224,82 @@ const DetailsDashboard = (controlData) => {
                         <Chip label={selectedControl.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControl.implemented ? "success" : "error"} />
                     }
                         secondary={<Typography variant="subtitle1">Last tested {selectedControl.lasttested ? 'on ' + selectedControl.lasttested : 'Never'}</Typography>}>
-                        <div id="chart">
-                <ReactApexChart options={options} series={series} type="area" height={350} />
-            </div>
+                        <Grid container spacing={gridSpacing}>
+                            <Grid item xs={8}>        
+                                <div id="chart">
+                                    <ReactApexChart options={options} series={series} type="area" height={550} />
+                                </div>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Stack direction="column" spacing={1}>
+                                    <Grid item >
+                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>
+                                            <CardContent>
+                                                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
+                                                    <Grid item>
+                                                        <Typography variant="h3">{selectedControl.controlvalueformated}</Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="subtitle1" color={secondary}>
+                                                            Control Value
+                                                        </Typography>
+                                                    </Grid>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Grid item >
+                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                                            <CardContent>
+                                                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
+                                                    <Grid item>
+                                                        <Typography variant="h3">{selectedControl.implementationcostformated}</Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="subtitle1" color={secondary}>
+                                                            Reduction Potential
+                                                        </Typography>
+                                                    </Grid>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Grid item >
+                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                                            <CardContent>
+                                                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
+                                                    <Grid item>
+                                                        <Typography variant="h3">{selectedControl.implementationcostformated}</Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="subtitle1" color={secondary}>
+                                                            Implementation Cost
+                                                        </Typography>
+                                                    </Grid>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    <Grid item >
+                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                                            <CardContent>
+                                                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
+                                                    <Grid item>
+                                                        <Typography variant="h3">{selectedControl.implementationcostformated}</Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="subtitle1" color={secondary}>
+                                                            ROI
+                                                        </Typography>
+                                                    </Grid>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </Grid>
+                                    
+                                </Stack>
+                            </Grid>
+                        </Grid>
                         <Grid container spacing={gridSpacing}>
                         
                             <Grid item xs={12}>
