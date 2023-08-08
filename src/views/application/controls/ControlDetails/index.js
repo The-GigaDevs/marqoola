@@ -59,7 +59,7 @@ const ControlDetails = () => {
 
     useEffect(() => {
         setControlid(id);
-        dispatch(getControlById(controlid, user.accessToken));
+        dispatch(getControlById(id, user.accessToken));
     }, [dispatch]);
 
 
