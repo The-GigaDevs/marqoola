@@ -215,7 +215,7 @@ function renderRow(props) {
     return (
         
         <ListItemButton style={style} key={selectedControl.allrisks[index].id}>
-            <ListItemText primary={selectedControl.allrisks[index].name} />
+            <ListItemText disableTypography style={{color: secondary}} primary={selectedControl.allrisks[index].name} />
         </ListItemButton>
     );
 }
