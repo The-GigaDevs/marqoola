@@ -542,9 +542,7 @@ function renderRow(props) {
                                 </Grid>
                             </Grid>
                             
-                            <Grid item xs={12}>
-                                <Divider sx={sxDivider} />
-                            </Grid>
+                            
                             {/*
                             <Grid item xs={12}>
                                 <Grid container spacing={gridSpacing}>
@@ -607,6 +605,15 @@ function renderRow(props) {
                                                 */}
                         </Grid>
                     </SubCard>
+                    <Grid item xs={12}>
+                        <Stack direction="row" justifyContent="flex-end">
+                            <AnimateButton>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" onClick={handleSaveControl}>
+                                    Save
+                                </Button>
+                            </AnimateButton>
+                        </Stack>
+                    </Grid>
                 </Grid>
                 
             </Grid>

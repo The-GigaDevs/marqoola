@@ -46,7 +46,7 @@ function a11yProps(index) {
 const ControlDetails = () => {
     const theme = useTheme();
     const {state} = useLocation();
-    const { id } = state;
+    //const { id } = state;
     const dispatch = useDispatch();
     const { user } = useAuth();
     const { selectedControl } = useSelector((state) => state.control);
@@ -58,7 +58,7 @@ const ControlDetails = () => {
 
     useEffect(() => {
 
-        dispatch(getControlById(id, user.accessToken));
+        dispatch(getControlById(selectedControl.id, user.accessToken));
     }, [dispatch]);
 
 
@@ -95,7 +95,12 @@ const ControlDetails = () => {
                 }}
             >
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Details" {...a11yProps(0)} />
-                
+
+                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Costs" {...a11yProps(1)} />
+                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Tests" {...a11yProps(2)} />
+                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="sQuids" {...a11yProps(3)} />
+                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Compliance" {...a11yProps(4)} />
+                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Audit Logs" {...a11yProps(5)} />
                 
             </Tabs>
 
@@ -106,7 +111,7 @@ const ControlDetails = () => {
 
             {/* tab - invoice */}
             <TabPanel value={value} index={1}>
-           
+                
             </TabPanel>
 
             {/* tab - status */}
