@@ -18,6 +18,12 @@ import {
     Button, MenuItem, Card, CardHeader, CardContent
 } from '@mui/material';
 
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+
+// third party
+import { FixedSizeList } from 'react-window';
+
 // project imports
 
 import AnimateButton from 'ui-component/extended/AnimateButton';
@@ -203,6 +209,17 @@ const DetailsDashboard = (controlData) => {
     
 }
 
+function renderRow(props) {
+    const { index, style } = props;
+
+    return (
+        
+        <ListItemButton style={style} key={selectedControl.allrisks[index].id}>
+            <ListItemText primary={selectedControl.allrisks[index].name} />
+        </ListItemButton>
+    );
+}
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -220,10 +237,10 @@ const DetailsDashboard = (controlData) => {
         <form onSubmit={formik.handleSubmit} id="asset-forms">
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <SubCard title={
-                        <Chip label={selectedControl.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControl.implemented ? "success" : "error"} />
-                    }
-                        secondary={<Typography variant="subtitle1">Last tested {selectedControl.lasttested ? 'on ' + selectedControl.lasttested : 'Never'}</Typography>}>
+                    <SubCard title={<><Typography variant="h1" color={secondary}> {selectedControl.name}</Typography> 
+                        
+                        </>}
+                        secondary={<><Chip label={selectedControl.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControl.implemented ? "success" : "error"} /><Typography variant="subtitle1">Last tested {selectedControl.lasttested ? 'on ' + selectedControl.lasttested : 'Never'}</Typography></>}>
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={8}>        
                                 <div id="chart">
@@ -302,21 +319,68 @@ const DetailsDashboard = (controlData) => {
                         </Grid>
                         <Grid container spacing={gridSpacing}>
                         
-                            <Grid item xs={12}>
-                                <Grid container spacing={12}>
-                                    <Grid item xs={5}>
+                            <Grid item xs={6}>
+                                <Stack direction="column" spacing={2}>
+                                    <Grid item xs={12}>
                                         <TextField
-                                            id="name"
-                                            name="name"
-                                            label="Name of Control"
-                                            value={formik.values.name || ""}
+                                            id="description"
+                                            name="description"
+                                            label="Description"
+                                            value={formik.values.description || ""}
                                             onChange={formik.handleChange}
-                                            error={formik.touched.name && Boolean(formik.errors.name)}
-                                            helperText={formik.touched.name && formik.errors.name}
+                                            error={formik.touched.description && Boolean(formik.errors.description)}
+                                            helperText={formik.touched.description && formik.errors.description}
                                             fullWidth
                                         />
                                     </Grid>
-                                    <Grid item xs={5}>
+                                    <Grid item xs={12}>
+                                    <TextField
+                                            id="controlcategory"
+                                            name="controlcategory"
+                                            label="Control Category"
+                                            value={formik.values.controlcategory || selectedControl.controlcategoryid}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.controlcategory && Boolean(formik.errors.controlcategory)}
+                                            helperText={formik.touched.controlcategory && formik.errors.controlcategory}
+                                            fullWidth
+                                            select
+                                        >
+                                            <MenuItem value={selectedControl.controlcategoryid}>
+                                                {selectedControl.controlcategoryname}
+                                            </MenuItem>
+                                            {
+
+                                                categoryData && categoryData.map((parent) => (
+                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                        {parent.name}
+                                                    </MenuItem>
+                                                ))}
+                                        </TextField>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                        <TextField
+                                            id="securityconcept"
+                                            name="securityconcept"
+                                            label="Security Concept"
+                                            value={formik.values.securityconcept || selectedControl.securityconceptid}
+                                            onChange={formik.handleChange}
+                                            error={formik.touched.securityconcept && Boolean(formik.errors.securityconcept)}
+                                            helperText={formik.touched.securityconcept && formik.errors.securityconcept}
+                                            fullWidth
+                                            select
+                                        >
+                                            <MenuItem value={selectedControl.securityconceptid}>
+                                                {selectedControl.securityconceptname}
+                                            </MenuItem>
+                                            {
+
+                                                securityConceptData && securityConceptData.map((parent) => (
+                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                        {parent.name}
+                                                    </MenuItem>
+                                                ))}
+                                        </TextField>
+                                        { /*
                                         <TextField
                                             id="organisation"
                                             name="organisation"
@@ -339,15 +403,34 @@ const DetailsDashboard = (controlData) => {
                                                     </MenuItem>
                                                 ))}
                                         </TextField>
+                                                */  }
                                     </Grid>
 
-                                </Grid>
+                                </Stack>
                             </Grid>
+                            <Grid item xs={6}>
+                                <Stack direction="column" spacing={2}>
+                                    <FixedSizeList height={280} width="auto" itemSize={46} itemCount={selectedControl.allrisks && selectedControl.allrisks.length}>
+                                        
+                                            
+                                           
+                                            
+                                                {renderRow}
+                                           
+                                           
+                                        
+                                    </FixedSizeList>
+
+                                </Stack>
+                            </Grid>
+                            
                             <Grid item xs={12}>
                                 <Divider sx={sxDivider} />
                             </Grid>
                             <Grid item xs={12}>
+                               
                                 <Grid container spacing={gridSpacing}>
+                                     {/*
                                     <Grid item xs={12} sm={6} md={4}>
                                         <Stack spacing={2}>
                                             <Typography variant="h4">Payment method</Typography>
@@ -455,11 +538,14 @@ const DetailsDashboard = (controlData) => {
                                             </Stack>
                                         </Stack>
                                     </Grid>
+*/}
                                 </Grid>
                             </Grid>
+                            
                             <Grid item xs={12}>
                                 <Divider sx={sxDivider} />
                             </Grid>
+                            {/*
                             <Grid item xs={12}>
                                 <Grid container spacing={gridSpacing}>
                                     <Grid item sm={6} md={4}>
@@ -518,26 +604,11 @@ const DetailsDashboard = (controlData) => {
                                     </Grid>
                                 </Grid>
                             </Grid>
+                                                */}
                         </Grid>
                     </SubCard>
                 </Grid>
-                <Grid item xs={12}>
-                    <SubCard title="Products" content={false}>
-                        <Grid container spacing={3}>
-
-
-                        </Grid>
-                    </SubCard>
-                    <Grid item xs={12}>
-                        <Stack direction="row" justifyContent="flex-end">
-                            <AnimateButton>
-                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" onClick={handleSaveControl}>
-                                    Save
-                                </Button>
-                            </AnimateButton>
-                        </Stack>
-                    </Grid>
-                </Grid>
+                
             </Grid>
         </form>
     );
