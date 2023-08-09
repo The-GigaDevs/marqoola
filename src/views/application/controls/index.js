@@ -430,7 +430,7 @@ const ControlTable = () => {
         }, [controls]);
         return (
             <TableRow >
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
                     <Collapse in={expandRow} timeout="auto" unmountOnExit>
                         {expandRow && (
                             <Box sx={{ margin: 1 }}>

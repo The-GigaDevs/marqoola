@@ -347,28 +347,32 @@ const ObjectiveTable = () => {
 
     const handleExpandRow = (event, id) => {
         setExpandRow(!expandRow);
+        if (expandedRow[0]  === id){
+            dispatch(getObjectivesForTemplate("1", user.accessToken))
+        }
+        else
+        {
+            dispatch(getObjectivesForTemplate(id, user.accessToken));
+        }
         setExpandedRow(id);
     }
 
-    const isSelected = (name) => selected.indexOf(name) !== -1;
-    const isExpanded = (name) => expandedRow.indexOf(name) !== -1;
+    const isSelected = (code) => selected.indexOf(code) !== -1;
+    const isExpanded = (code) => expandedRow.indexOf(code) !== -1;
 
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - assetTableData.length) : 0;
 
-    function ExpandedRow({ templateid }) {
+    function ExpandedRow({ templateid , isRowExpanded}) {
         const [objectiveTableData, setObjectiveTableData] = React.useState([]);
         const { objectives } = useSelector((state) => state.objective);
-        React.useEffect(() => {
-
-            dispatch(getObjectivesForTemplate(templateid, user.accessToken));
-        }, [dispatch]);
+        
         
         React.useEffect(() => {
             setObjectiveTableData(objectives);
         }, [objectives]);
         return (
             <TableRow >
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
                     <Collapse in={expandRow} timeout="auto" unmountOnExit>
                         {expandRow && (
                             <Box sx={{ margin: 1 }}>
@@ -517,7 +521,7 @@ const ObjectiveTable = () => {
 
                                     </TableRow>
                                     {isRowExpanded && (
-                                        <ExpandedRow templateid={row.id}  />
+                                        <ExpandedRow templateid={row.id} isRowExpanded />
                                     )}
                                 </>
                                 );
