@@ -8,6 +8,7 @@ import { dispatch } from '../index';
 const initialState = {
     error: null,
     objectives: [],
+    objectivetemplates:[],
     objectivedetails: {}
 
 };
@@ -24,6 +25,11 @@ const slice = createSlice({
         getObjectiveSuccess(state, action) {
             state.objectives = action.payload;
         },
+
+        getObjectiveTemplateSuccess(state, action) {
+            state.objectivetemplates = action.payload;
+        },
+
 
         getObjectiveDetailsSuccess(state, action) {
             state.objectivedetails = action.payload;
@@ -63,6 +69,40 @@ export function getObjectiveDetails(id) {
             dispatch(slice.actions.getObjectiveDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
+export function getObjectiveTemplates(token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/objectives?filter[istemplate]=true' , {headers});
+            dispatch(slice.actions.getObjectiveTemplateSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+            const emptyControl = [{ 
+                
+            }]
+            dispatch(slice.actions.getObjectiveTemplateSuccess(emptyControl))
+        }
+    };
+}
+
+
+export function getObjectivesForTemplate(templateid) {
+    return async () => {
+        try {
+            const response = await axios.get('/objects/objectives?filter[templateid]=' + templateid );
+            dispatch(slice.actions.getObjectiveSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+            const emptyControl = [{ 
+                
+            }]
+            dispatch(slice.actions.getObjectiveSuccess(emptyControl))
         }
     };
 }

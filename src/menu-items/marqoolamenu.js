@@ -71,7 +71,7 @@ const marqoolamenu = {
                     id: 'objectives',
                     title: <FormattedMessage id="Objectives" />,
                     type: 'item',
-                    url: '/underconstruction',
+                    url: '/objectives',
                     
                     breadcrumbs: false,
                 },
