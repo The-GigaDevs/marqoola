@@ -46,7 +46,7 @@ function a11yProps(index) {
 const ControlDetails = () => {
     const theme = useTheme();
     const {state} = useLocation();
-    const { id } = state;
+    
     const dispatch = useDispatch();
     const { user } = useAuth();
     const { selectedControl } = useSelector((state) => state.control);
@@ -58,7 +58,7 @@ const ControlDetails = () => {
     };
 
     useEffect(() => {
-        setControlid(id);
+        const { id } = state;
         dispatch(getControlById(id, user.accessToken));
     }, [dispatch]);
 
