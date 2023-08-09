@@ -18,6 +18,7 @@ import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';
 import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';
 import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
 import Details from './Details';
+import Costs from './Costs';
 
 // tab content
 function TabPanel({ children, value, index, ...other }) {
@@ -111,7 +112,7 @@ const ControlDetails = () => {
 
             {/* tab - invoice */}
             <TabPanel value={value} index={1}>
-           
+                <Costs controlData={selectedControl}/>
             </TabPanel>
 
             {/* tab - status */}
