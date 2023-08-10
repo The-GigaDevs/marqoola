@@ -246,17 +246,50 @@ const Costs = (controlData) => {
                                 <Stack spacing={2}>
                                     <Typography variant="h4">Implementation Cost (annualized)</Typography>
                                     <Stack spacing={0}>
-                                        <Typography variant="h6" sx={{ mb: 1 }}>
-                                            Credit Card
-                                        </Typography>
-                                        <Stack direction="row" spacing={1}>
-                                            <Typography variant="subtitle1">Transaction ID :</Typography>
-                                            <Typography variant="body2">000001-TXT</Typography>
-                                        </Stack>
-                                        <Stack direction="row" spacing={1}>
-                                            <Typography variant="subtitle1">Amount :</Typography>
-                                            <Typography variant="body2">$2500</Typography>
-                                        </Stack>
+                                        <Grid container spacing={gridSpacing}>
+                                            <Grid item xs={6}>
+                                                <Stack spacing={0}>
+                                                    <Typography variant="h5" sx={{ mb: 1 }}>
+                                                        Hourly PS Rate
+                                                    </Typography>
+                                                    <Typography variant="h5" sx={{ mb: 1 }}>
+                                                        PS Hours
+                                                    </Typography><Typography variant="h5" sx={{ mb: 1 }}>
+                                                        Other Implementation Costs
+                                                    </Typography>
+                                                    <Typography variant="h5" sx={{ mb: 3 }}>
+                                                        
+                                                    </Typography>
+                                                    <Typography variant="h5" sx={{ mb: 1 }}>
+                                                        Implementation Cost
+                                                    </Typography>
+                                                    </Stack>
+                                            </Grid> 
+                                            <Grid item xs={6}>
+                                                <Stack spacing={0}>
+                                                    <Typography variant="h5" sx={{ mb: 1 }}>
+                                                    {selectedControl.implementationcostformated ? selectedControl.implementationcostformated : 0}
+                                                    </Typography>
+                                                    <Typography variant="h5" sx={{ mb: 1 }}>
+                                                    {selectedControl.implementationhours ? selectedControl.implementationhours : 0}
+                                                    </Typography>
+                                                    <Typography variant="h5" sx={{ mb: 1 }}>
+                                                    {selectedControl.othercostsformatted ? selectedControl.othercostsformatted : '$0'}  +
+                                                    </Typography>
+                                                    <Typography variant="h5" sx={{ mb: 3 }}>
+                                                        
+                                                    </Typography>
+                                                    <Grid item xs={12}>
+                            <Divider sx={ {borderColor: primary, borderBottomWidth: 2, width: '80px', mb: 1}} />
+                        </Grid>
+                                                    <Typography variant="h5" sx={{ mb: 3 }}>
+                                                        {'$' + ((selectedControl.implementationcost ? parseInt(selectedControl.implementationcost.number) : 0) * (selectedControl.implementationhours ? parseInt(selectedControl.implementationhours) : 0)) + (selectedControl.othercosts ? parseInt(selectedControl.othercosts.number) : 0)}
+                                                    </Typography>
+                                                    </Stack>
+                                            </Grid> 
+                                            </Grid>       
+                                        
+                                        
                                     </Stack>
                                 </Stack>
                             </Grid>
