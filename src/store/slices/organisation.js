@@ -66,10 +66,13 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getOrganisations() {
+export function getOrganisations(token) {
     return async () => {
         try {
-            const response = await axios.get('/objects/organisations');
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/organisations', {headers});
             dispatch(slice.actions.getOrganisationSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
@@ -100,10 +103,13 @@ export function getOrganisationsTree() {
 }
 
 
-export function deleteOrganisation(id) {
+export function deleteOrganisation(id, token) {
     return async () => {
         try {
-            const response = await axios.delete('/objects/organisations/' + id);
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.delete('/objects/organisations/' + id, {headers});
             dispatch(slice.actions.deleteOrganisationSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));

@@ -33,7 +33,6 @@ const AppCustomerOrderList = Loadable(lazy(() => import('views/application/custo
 const AppCustomerCreateInvoice = Loadable(lazy(() => import('views/application/customer/CreateInvoice')));
 const AppCustomerOrderDetails = Loadable(lazy(() => import('views/application/customer/OrderDetails')));
 const AppCustomerProduct = Loadable(lazy(() => import('views/application/customer/Product')));
-const OrganizationList = Loadable(lazy(() => import('views/application/organization')));
 const AppCustomerProductReview = Loadable(lazy(() => import('views/application/customer/ProductReview')));
 
 // application routing
@@ -140,6 +139,8 @@ const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 const RoadMap = Loadable(lazy(() => import('views/application/roadmap')));
 const SecurityConceptsMaster = Loadable(lazy(() => import('views/application/mastertables/securityconcepts/SecurityConceptsMaster')));
 const ControlCategoriesMaster = Loadable(lazy(() => import('views/application/mastertables/controlcategories/ControlCategoriesMaster')));
+const OrganizationList = Loadable(lazy(() => import('views/application/organization')));
+const Organizations = Loadable(lazy(() => import('views/application/organization/orgtable')));
 const Assets = Loadable(lazy(() => import('views/application/assets')));
 const Controls = Loadable(lazy(() => import('views/application/controls')));
 const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
@@ -220,10 +221,6 @@ const MainRoutes = {
         {
             path: '/customer/order-details',
             element: <AppCustomerOrderDetails />
-        },
-        {
-            path: '/organisations',
-            element: <OrganizationList />
         },
         {
             path: '/roadmap',
@@ -541,6 +538,14 @@ const MainRoutes = {
         {
             path: '/controlcategories/master',
             element: <ControlCategoriesMaster />
+        },
+        {
+            path: '/organisationtree',
+            element: <OrganizationList />
+        },
+        {
+            path: '/organisations',
+            element: <Organizations />
         },
         {
             path: '/assets',
