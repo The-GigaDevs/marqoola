@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
-        "@auth0/auth0-spa-js": "^2.0.2",
+        "@auth0/auth0-spa-js": "^2.1.1",
         "@emotion/cache": "^11.10.5",
         "@emotion/react": "^11.10.5",
         "@emotion/styled": "^11.10.5",
@@ -122,8 +122,8 @@
         ]
     },
     "devDependencies": {
-        "@babel/core": "^7.20.12",
-        "@babel/preset-react": "^7.18.6",
+        "@babel/core": "^7.22.10",
+        "@babel/preset-react": "^7.22.5",
         "prettier": "^2.8.2"
     }
 }
