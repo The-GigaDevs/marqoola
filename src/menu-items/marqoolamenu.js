@@ -68,14 +68,6 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
-                    id: 'objectives',
-                    title: <FormattedMessage id="Objectives" />,
-                    type: 'item',
-                    url: '/objectives',
-                    
-                    breadcrumbs: false,
-                },
-                {
                     id: 'assets',
                     title: <FormattedMessage id="Assets" />,
                     type: 'item',
@@ -84,13 +76,55 @@ const marqoolamenu = {
                     breadcrumbs: false,
                 },
                 {
+                    id: 'objectives',
+                    title: <FormattedMessage id="Objectives" />,
+                    type: 'item',
+                    url: '/objectives',
+                    
+                    breadcrumbs: false,
+                },
+                {
+                    id: 'risks',
+                    title: <FormattedMessage id="Risks" />,
+                    type: 'item',
+                    url: '/risks',
+                    
+                    breadcrumbs: false,
+                },
+                
+                {
                     id: 'controls',
-                    title: <FormattedMessage id="Controls" />,
+                    title: <FormattedMessage id="Control Templates" />,
                     type: 'item',
                     url: '/controls',
                     
                     breadcrumbs: false,
                 },
+                {
+                    id: 'controlimplementations',
+                    title: <FormattedMessage id="Control Implementations" />,
+                    type: 'item',
+                    url: '/controlimplementations',
+                    
+                    breadcrumbs: false,
+                },
+                {
+                    id: 'squids',
+                    title: <FormattedMessage id="sQuids" />,
+                    type: 'item',
+                    url: '/squids',
+                    
+                    breadcrumbs: false,
+                },
+                {
+                    id: 'incidents',
+                    title: <FormattedMessage id="Incidents" />,
+                    type: 'item',
+                    url: '/underconstruction',
+                    
+                    breadcrumbs: false,
+                }
+                /*
                 {
                     id: 'vendors',
                     title: <FormattedMessage id="Vendors" />,
@@ -117,7 +151,7 @@ const marqoolamenu = {
                 },
                 {
                     id: 'cyberriskportfolio',
-                    title: <FormattedMessage id="Cyber Riks Portfolio" />,
+                    title: <FormattedMessage id="Cyber Risk Portfolio" />,
                     type: 'item',
                     url: '/underconstruction',
                     
@@ -129,14 +163,8 @@ const marqoolamenu = {
                     url: '/underconstruction',
                     
                     breadcrumbs: false,
-                },{
-                    id: 'incidents',
-                    title: <FormattedMessage id="Incidents" />,
-                    type: 'item',
-                    url: '/underconstruction',
-                    
-                    breadcrumbs: false,
-                },{
+                }, 
+                ,{
                     id: 'indicators',
                     title: <FormattedMessage id="Indicators" />,
                     type: 'item',
@@ -150,7 +178,9 @@ const marqoolamenu = {
                     url: '/underconstruction',
                     
                     breadcrumbs: false,
-                }
+                }*/
+                
+                
             ]
         },
         {

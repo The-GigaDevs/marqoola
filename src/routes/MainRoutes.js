@@ -559,6 +559,20 @@ const MainRoutes = {
             element: <Objectives />
         },
         {
+            path: '/risks',
+            element: <UnderConstruction />
+        },
+        {
+            path: '/controlimplementations',
+            element: <UnderConstruction />
+
+        },
+        {
+            path: '/squids',
+            element: <UnderConstruction />
+
+        },
+        {
             path: '/settings',
             element: <Settings />
         }
