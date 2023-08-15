@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import useAuth from 'hooks/useAuth';
 // material-ui
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import {
     Box,
@@ -228,6 +229,7 @@ EnhancedTableToolbar.propTypes = {
 const OrgTable = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
     );
@@ -328,6 +330,7 @@ const OrgTable = () => {
         }
     };
 
+
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -348,9 +351,7 @@ const OrgTable = () => {
     };
 
     const handleOpenEditDialog = (event, id) => {
-        const selectedIndex = selected.indexOf(id);
-        setCurrentAsset(id)
-        setOpenEdit(true);
+        navigate('/organisationdetails', { state: { id: id } });
     }
 
     const handleCloseEditDialog = () => {

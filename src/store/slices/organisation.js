@@ -15,6 +15,8 @@ const initialState = {
     orders: [],
     products: [],
     productreviews: [],
+    selectedOrganisation: {},
+    metrics: []
 };
 
 const slice = createSlice({
@@ -38,6 +40,7 @@ const slice = createSlice({
 
         getOrganisationDetailsSuccess(state, action) {
             state.organisationdetails = action.payload;
+            state.selectedOrganisation = action.payload;
         },
 
         // GET ORDERS
@@ -53,6 +56,9 @@ const slice = createSlice({
         // GET PRODUCT REVIEWS
         getProductReviewsSuccess(state, action) {
             state.productreviews = action.payload;
+        },
+        getOrganisationMetricsSuccess(state, action) {
+            state.metrics = action.payload
         },
 
         deleteOrganisationSuccess(state, action) {
@@ -72,7 +78,7 @@ export function getOrganisations(token) {
             const headers = {
                 Authorization: `Bearer ` + token
             };
-            const response = await axios.get('/objects/organisations', {headers});
+            const response = await axios.get('/objects/organisations', { headers });
             dispatch(slice.actions.getOrganisationSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
@@ -80,13 +86,35 @@ export function getOrganisations(token) {
     };
 }
 
-export function getOrganisationDetails(id) {
+export function getOrganisationDetails(id, token) {
     return async () => {
         try {
-            const response = await axios.get('/objects/organisations/' + id);
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/organisations/' + id, { headers });
             dispatch(slice.actions.getOrganisationDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
+export function getOrganisationMetricsById(controlid, token) {
+    return () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            
+                //const response = await axios.get('/objects/metrics?filter[objectid]=' + controlid, { headers });
+                var data = [{"x": 1, "y": 1},{"x": 2, "y": 2}]
+                dispatch(slice.actions.getOrganisationMetricsSuccess(data));   
+            
+            
+
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));  
         }
     };
 }

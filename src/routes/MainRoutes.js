@@ -141,6 +141,7 @@ const SecurityConceptsMaster = Loadable(lazy(() => import('views/application/mas
 const ControlCategoriesMaster = Loadable(lazy(() => import('views/application/mastertables/controlcategories/ControlCategoriesMaster')));
 const OrganizationList = Loadable(lazy(() => import('views/application/organization')));
 const Organizations = Loadable(lazy(() => import('views/application/organization/orgtable')));
+const OrganisationDetails = Loadable(lazy(() => import('views/application/organization/details')))
 const Assets = Loadable(lazy(() => import('views/application/assets')));
 const Controls = Loadable(lazy(() => import('views/application/controls')));
 const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
@@ -546,6 +547,10 @@ const MainRoutes = {
         {
             path: '/organisations',
             element: <Organizations />
+        },
+        {
+            path: '/organisationdetails',
+            element: <OrganisationDetails />
         },
         {
             path: '/assets',
