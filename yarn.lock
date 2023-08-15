@@ -11395,7 +11395,7 @@ react-18-image-lightbox@^5.1.4:
     prop-types "^15.7.2"
     react-modal "^3.11.1"
 
-react-apexcharts@^1.4.0:
+react-apexcharts@^1.4.1:
   version "1.4.1"
   resolved "https://registry.npmjs.org/react-apexcharts/-/react-apexcharts-1.4.1.tgz"
   integrity sha512-G14nVaD64Bnbgy8tYxkjuXEUp/7h30Q0U33xc3AwtGFijJB9nHqOt1a6eG0WBn055RgRg+NwqbKGtqPxy15d0Q==
@@ -11421,7 +11421,7 @@ react-app-rewired@^2.2.1:
   dependencies:
     semver "^5.6.0"
 
-react-async-script@^1.1.1:
+react-async-script@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/react-async-script/-/react-async-script-1.2.0.tgz"
   integrity sha512-bCpkbm9JiAuMGhkqoAiC0lLkb40DJ0HOEJIku+9JDjxX3Rcs+ztEOG13wbrOskt3n2DTrjshhaQ/iay+SnGg5Q==
@@ -11533,30 +11533,30 @@ react-fast-compare@^2.0.1:
   resolved "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
 
-react-fast-marquee@^1.3.5:
+react-fast-marquee@^1.6.0:
   version "1.6.0"
   resolved "https://registry.npmjs.org/react-fast-marquee/-/react-fast-marquee-1.6.0.tgz"
   integrity sha512-jtuwT9SNjrqxnE7lGZ8mTL1I8Q4+9G4aBta2p+y2Pa3SjR17QROblwrLICyM8rbjQFHgHawTHcaH9HvoVO2NOA==
 
-react-google-recaptcha@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/react-google-recaptcha/-/react-google-recaptcha-2.1.0.tgz"
-  integrity sha512-K9jr7e0CWFigi8KxC3WPvNqZZ47df2RrMAta6KmRoE4RUi7Ys6NmNjytpXpg4HI/svmQJLKR+PncEPaNJ98DqQ==
+react-google-recaptcha@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/react-google-recaptcha/-/react-google-recaptcha-3.1.0.tgz"
+  integrity sha512-cYW2/DWas8nEKZGD7SCu9BSuVz8iOcOLHChHyi7upUuVhkpkhYG/6N3KDiTQ3XAiZ2UAZkfvYKMfAHOzBOcGEg==
   dependencies:
     prop-types "^15.5.0"
-    react-async-script "^1.1.1"
+    react-async-script "^1.2.0"
 
-react-hook-form@^7.0.0, react-hook-form@^7.42.0:
+react-hook-form@^7.0.0, react-hook-form@^7.45.4:
   version "7.45.4"
   resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.45.4.tgz"
   integrity sha512-HGDV1JOOBPZj10LB3+OZgfDBTn+IeEsNOKiq/cxbQAIbKaiJUe/KV8DBUzsx0Gx/7IG/orWqRRm736JwOfUSWQ==
 
-react-intersection-observer@^9.4.1:
+react-intersection-observer@^9.5.2:
   version "9.5.2"
   resolved "https://registry.npmjs.org/react-intersection-observer/-/react-intersection-observer-9.5.2.tgz"
   integrity sha512-EmoV66/yvksJcGa1rdW0nDNc4I1RifDWkT50gXSFnPLYQ4xUptuDD4V7k+Rj1OgVAlww628KLGcxPXFlOkkU/Q==
 
-react-intl@^6.2.5:
+react-intl@^6.4.4:
   version "6.4.4"
   resolved "https://registry.npmjs.org/react-intl/-/react-intl-6.4.4.tgz"
   integrity sha512-/C9Sl/5//ohfkNG6AWlJuf4BhTXsbzyk93K62A4zRhSPANyOGpKZ+fWhN+TLfFd5YjDUHy+exU/09y0w1bO4Xw==
@@ -11597,7 +11597,7 @@ react-lifecycles-compat@^3.0.0:
   resolved "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-markdown@^8.0.4:
+react-markdown@^8.0.7:
   version "8.0.7"
   resolved "https://registry.npmjs.org/react-markdown/-/react-markdown-8.0.7.tgz"
   integrity sha512-bvWbzG4MtOU62XqBx3Xx+zB2raaFFsq4mYiAzfjXJMEz2sixgeAfraA3tvzULF02ZdOMUOKTBFFaZJDDrq+BJQ==
@@ -11670,14 +11670,14 @@ react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.72 || 1000.0.0", react-native
     ws "^6.2.2"
     yargs "^17.6.2"
 
-react-number-format@^5.1.3:
+react-number-format@^5.3.0:
   version "5.3.0"
   resolved "https://registry.npmjs.org/react-number-format/-/react-number-format-5.3.0.tgz"
   integrity sha512-3h5kuO5x9HpifEgCzvw6kDljzjsI3OhgnT/BRzZbzdbHVb755eVzJuNnRUZr3h/ATu3Sct9O+XrYc9HrAj/6bQ==
   dependencies:
     prop-types "^15.7.2"
 
-react-organizational-chart@^2.2.0:
+react-organizational-chart@^2.2.1:
   version "2.2.1"
   resolved "https://registry.npmjs.org/react-organizational-chart/-/react-organizational-chart-2.2.1.tgz"
   integrity sha512-JORmpLeYzCVtztdqCHsnKL8H3WiLRPHjohgh/PxQoszLuaQ+l3F8YefKSfpcBPZJhHwy3SlqjFjPC28a3Hh3QQ==
@@ -11701,7 +11701,7 @@ react-quill@^2.0.0:
     lodash "^4.17.4"
     quill "^1.3.7"
 
-"react-redux@^7.2.1 || ^8.0.2", react-redux@^8.0.5, react-redux@^8.1.1:
+"react-redux@^7.2.1 || ^8.0.2", react-redux@^8.1.1, react-redux@^8.1.2:
   version "8.1.2"
   resolved "https://registry.npmjs.org/react-redux/-/react-redux-8.1.2.tgz"
   integrity sha512-xJKYI189VwfsFc4CJvHqHlDrzyFTY/3vZACbE+rr/zQ34Xx1wQfB4OTOSeOSNrF6BDVe8OOdxIrAnMGXA3ggfw==
@@ -11732,7 +11732,7 @@ react-responsive-carousel@^3.2.23:
     prop-types "^15.5.8"
     react-easy-swipe "^0.0.21"
 
-react-router-dom@^6.6.2:
+react-router-dom@^6.15.0:
   version "6.15.0"
   resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.15.0.tgz"
   integrity sha512-aR42t0fs7brintwBGAv2+mGlCtgtFQeOzK0BM1/OiqEzRejOZtpMZepvgkscpMUnKb8YO84G7s3LsHnnDNonbQ==
@@ -11832,12 +11832,12 @@ react-syntax-highlighter@^15.5.0:
     prismjs "^1.27.0"
     refractor "^3.6.0"
 
-react-timer-hook@^3.0.5:
+react-timer-hook@^3.0.7:
   version "3.0.7"
   resolved "https://registry.npmjs.org/react-timer-hook/-/react-timer-hook-3.0.7.tgz"
   integrity sha512-ATpNcU+PQRxxfNBPVqce2+REtjGAlwmfoNQfcEBMZFxPj0r3GYdKhyPHdStvqrejejEi0QvqaJZjy2lBlFvAsA==
 
-react-to-print@^2.14.11:
+react-to-print@^2.14.13:
   version "2.14.13"
   resolved "https://registry.npmjs.org/react-to-print/-/react-to-print-2.14.13.tgz"
   integrity sha512-PqUGgTRZvkyBzWgaZHVBECWPX2nGEc3HOUy6WNXof6HT4yTFI92wtIkqQtr4jfvHbadqjwTgzgh6vgN8KXlWWw==
@@ -11852,7 +11852,7 @@ react-transition-group@^4.4.5:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react-window@^1.8.8:
+react-window@^1.8.9:
   version "1.8.9"
   resolved "https://registry.npmjs.org/react-window/-/react-window-1.8.9.tgz"
   integrity sha512-+Eqx/fj1Aa5WnhRfj9dJg4VYATGwIUP2ItwItiJ6zboKWA6EX3lYDAXfGF2hyNqplEprhbtjbipiADEcwQ823Q==
