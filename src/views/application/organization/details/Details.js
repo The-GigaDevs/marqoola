@@ -1,11 +1,12 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import useAuth from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import {
     Grid,
     Stack,
     Typography,
-    Card, CardContent
+    TextField, MenuItem, CardContent
 } from '@mui/material';
 
 
@@ -15,15 +16,21 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import SubCard from 'ui-component/cards/SubCard';
 import Chip from 'ui-component/extended/Chip';
 import { gridSpacing } from 'store/constant';
+
+import ThresholdSlider from '../createform/ThresholdSlider';
 import ReactApexChart from 'react-apexcharts';
 
 import { useDispatch, useSelector } from 'store';
 import useConfig from 'hooks/useConfig';
 
 
-import { getOrganisationMetricsById } from 'store/slices/organisation';
+import { getOrganisationMetricsById, getOrganisations } from 'store/slices/organisation';
+import { getRiskTolerances } from 'store/slices/risktolerance';
+import { getIndustries, getSubIndustries } from 'store/slices/industry';
+
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { getCurrencies } from 'store/slices/currency';
 
 const validationSchema = yup.object({
     name: yup.string().required('Organisation name is required'),
@@ -34,52 +41,35 @@ const validationSchema = yup.object({
 const Details = (controlData) => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    const { selectedOrganisation } = useSelector((state) => state.organisation);
+    const { user } = useAuth();
+    const { selectedOrganisation, organisations } = useSelector((state) => state.organisation);
+    const { risktolerances } = useSelector((state) => state.risktolerance)
+    const { industries } = useSelector((state) => state.industry)
+    const { subindustries } = useSelector((state) => state.subindustry)
+    const { currencies } = useSelector((state) => state.currency)
+    const { riskToleranciesData, setRiskToleranciesData} = useState([]);
     const [controlMetrics, setControlMetrics] = useState([]);
     const { metrics } = useSelector((state) => state.organisation);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
 
     useEffect(() => {
-        
-        
+        dispatch(getCurrencies(user.accessToken));
+        dispatch(getOrganisations(user.accessToken));
+        dispatch(getRiskTolerances(user.accessToken));
+        dispatch(getIndustries(user.accessToken));
+        dispatch(getSubIndustries(user.accessToken));
     }, []);
 
     useEffect(() => {
         dispatch(getOrganisationMetricsById(selectedOrganisation.id))
     }, [selectedOrganisation]);
 
-
     useEffect(() => {
-        setControlMetrics(metrics);
-        for(let i = 0; i < metrics.length; i++){
-            let obj = metrics[i];
-            values.push(obj.y)
-            xaxis.push(new Date(Date.parse(obj.x)).toLocaleDateString("en-US"))
-    
-        }
-        
-        setSeries([{
-            name: 'Implementation Cost',
-            data: values
-        }])
-        setOptions({chart: {
-            zoom: {
-                enabled: false
-            }
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        xaxis: {
-            categories: xaxis
-        }})
-    }, [metrics]);
-    
-    
+        setControlMetrics(risktolerances)
+    }, [risktolerances]);
+
+
 
     const { primary } = theme.palette.text;
     const darkLight = theme.palette.dark.light;
@@ -88,7 +78,7 @@ const Details = (controlData) => {
     let values = [];
     let xaxis = [];
     const { navType } = useConfig();
-    
+
 
     useEffect(() => {
         setOptions((prevState) => ({
@@ -96,7 +86,7 @@ const Details = (controlData) => {
 
         }));
     }, [navType, primary, darkLight, grey200, secondary]);
-    
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -105,6 +95,7 @@ const Details = (controlData) => {
             description: selectedOrganisation.description,
             industry: selectedOrganisation.industry,
             subindustry: selectedOrganisation.subindustry,
+            risktolerance: selectedOrganisation.risktoleranceid,
             implementationcost: selectedOrganisation.implementationcost && selectedOrganisation.implementationcost.number,
             implementationcostcurrency: selectedOrganisation.implementationcost && selectedOrganisation.implementationcost.currency,
         },
@@ -112,95 +103,241 @@ const Details = (controlData) => {
 
     });
 
-    return selectedOrganisation && series &&  (
+    return selectedOrganisation && series && (
         <form onSubmit={formik.handleSubmit} id="asset-forms">
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <SubCard title={<><Typography variant="h1" color={secondary}> {selectedOrganisation.name}</Typography> 
-                        
-                        </>}
-                        >
+                    <SubCard title={<><Typography variant="h1" color={secondary}> {selectedOrganisation.name}</Typography>
+
+                    </>}
+                    >
                         <Grid container spacing={gridSpacing}>
-                            <Grid item xs={8}>        
-                                <div id="chart">
-                                    <ReactApexChart options={options} series={series} type="area" height={550} />
-                                </div>
-                            </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
+
                                 <Stack direction="column" spacing={1}>
                                     <Grid item >
-                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>
+                                        <SubCard title={<Typography variant="h4" color={primary}> Basic Information </Typography>} >
                                             <CardContent>
-                                                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
+                                                <Stack direction="column" spacing={3} >
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedOrganisation.controlvalueformated}</Typography>
+                                                        <TextField
+                                                            id="name"
+                                                            name="name"
+                                                            label="Name"
+                                                            value={formik.values.name}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.name && Boolean(formik.errors.name)}
+                                                            helperText={formik.touched.name && formik.errors.name}
+                                                            fullWidth
+                                                        />
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
-                                                            Control Value
-                                                        </Typography>
+                                                        <TextField
+                                                            id="parent"
+                                                            name="parent"
+                                                            label="Parent"
+                                                            value={formik.values.parent}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.parent && Boolean(formik.errors.parent)}
+                                                            helperText={formik.touched.parent && formik.errors.parent}
+                                                            fullWidth
+                                                            select
+                                                        >
+                                                            {
+
+organisations && organisations.map((parent) => (
+                                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                                        {parent.name}
+                                                                    </MenuItem>
+                                                                ))}
+                                                        </TextField>
                                                     </Grid>
+                                                    <Grid item>
+                                                        <TextField
+                                                            id="description"
+                                                            name="description"
+                                                            label="Description"
+                                                            value={formik.values.description}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.description && Boolean(formik.errors.description)}
+                                                            helperText={formik.touched.description && formik.errors.description}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item><p/></Grid>
+                                                    <Grid item><p/></Grid>
                                                 </Stack>
                                             </CardContent>
-                                        </Card>
+                                        </SubCard>
                                     </Grid>
                                     <Grid item >
-                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                                        <SubCard title={<Typography variant="h4" color={primary}> Operations </Typography>}>
                                             <CardContent>
-                                                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
-                                                    <Grid item>
-                                                        <Typography variant="h3">{selectedOrganisation.implementationcostformated}</Typography>
+                                                <Stack direction="column" spacing={3}>
+                                                <Grid item>
+                                                        <TextField
+                                                            id="industry"
+                                                            name="industry"
+                                                            label="Industry"
+                                                            value={formik.values.industry}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.industry && Boolean(formik.errors.industry)}
+                                                            helperText={formik.touched.industry && formik.errors.industry}
+                                                            fullWidth
+                                                            select
+                                                        >
+                                                            {
+
+                                                                industries && industries.map((parent) => (
+                                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                                        {parent.name}
+                                                                    </MenuItem>
+                                                                ))}
+                                                        </TextField>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
-                                                            Reduction Potential
-                                                        </Typography>
+                                                    <TextField
+                                                            id="subindustry"
+                                                            name="subindustry"
+                                                            label="Sub-Industry"
+                                                            value={formik.values.subindustry}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.subindustry && Boolean(formik.errors.subindustry)}
+                                                            helperText={formik.touched.subindustry && formik.errors.subindustry}
+                                                            fullWidth
+                                                            select
+                                                        >
+                                                            {
+
+                                                                subindustries && subindustries.map((parent) => (
+                                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                                        {parent.name}
+                                                                    </MenuItem>
+                                                                ))}
+                                                        </TextField>
                                                     </Grid>
                                                 </Stack>
                                             </CardContent>
-                                        </Card>
+                                        </SubCard>
+                                    </Grid>
+                                </Stack>
+
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Stack direction="column" spacing={1}>
+                                    <Grid item >
+                                        <SubCard title={<Typography variant="h4" color={primary}> Metrics </Typography>}>
+                                            <CardContent>
+                                            <Stack direction="column" spacing={3} >
+                                                    <Grid item>
+                                                        <TextField
+                                                            id="numemployees"
+                                                            name="numemployees"
+                                                            label="Number of Employees"
+                                                            value={formik.values.numemployees}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.numemployees && Boolean(formik.errors.numemployees)}
+                                                            helperText={formik.touched.numemployees && formik.errors.numemployees}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Stack direction="row" spacing={gridSpacing}>
+                                                        <Grid item xs={9}>
+                                                        <TextField
+                                                            id="annualrevenue"
+                                                            name="annualrevenue"
+                                                            label="Annual Revenue"
+                                                            value={formik.values.annualrevenue}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.annualrevenue && Boolean(formik.errors.annualrevenue)}
+                                                            helperText={formik.touched.annualrevenue && formik.errors.annualrevenue}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={3}>
+                                                    <TextField
+                                                            id="currency"
+                                                            name="currency"
+                                                            label="Currency"
+                                                            value={formik.values.currency}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.currency && Boolean(formik.errors.currency)}
+                                                            helperText={formik.touched.currency && formik.errors.currency}
+                                                            fullWidth
+                                                            select
+                                                        >
+                                                            {
+
+currencies && currencies.map((parent) => (
+                                                                    <MenuItem key={parent.Alpha} value={parent.Alpha}>
+                                                                        {parent.Alpha}
+                                                                    </MenuItem>
+                                                                ))}
+                                                        </TextField>
+                                                    </Grid>
+                                                        </Stack>
+                                                    </Grid>
+                                                    <Grid item><p/></Grid>
+                                                    <Grid item><p/></Grid>
+                                                    <Grid item>
+                                                        <TextField
+                                                            id="numcustomers"
+                                                            name="numcustomers"
+                                                            label="Number of Customers"
+                                                            value={formik.values.numcustomers}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.numcustomers && Boolean(formik.errors.numcustomers)}
+                                                            helperText={formik.touched.numcustomers && formik.errors.numcustomers}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                </Stack>
+                                            </CardContent>
+                                        </SubCard>
                                     </Grid>
                                     <Grid item >
-                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                                        <SubCard title={<Typography variant="h4" color={primary}> Risk Tolerance </Typography>}>
                                             <CardContent>
-                                                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
+                                                <Stack direction="column" spacing={3}>
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedOrganisation.implementationcostformated}</Typography>
+                                                        <TextField
+                                                            id="risktolerance"
+                                                            name="risktolerance"
+                                                            label="Risk Classification"
+                                                            value={formik.values.risktolerance}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.risktolerance && Boolean(formik.errors.risktolerance)}
+                                                            helperText={formik.touched.risktolerance && formik.errors.risktolerance}
+                                                            fullWidth
+                                                            select
+                                                        >
+                                                            {
+
+                                                                risktolerances && risktolerances.map((parent) => (
+                                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                                        {parent.label}
+                                                                    </MenuItem>
+                                                                ))}
+                                                        </TextField>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
-                                                            Implementation Cost
-                                                        </Typography>
+                                                        <ThresholdSlider setSliderData={setControlMetrics} />
                                                     </Grid>
                                                 </Stack>
                                             </CardContent>
-                                        </Card>
+                                        </SubCard>
                                     </Grid>
-                                    <Grid item >
-                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
-                                            <CardContent>
-                                                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
-                                                    <Grid item>
-                                                        <Typography variant="h3">{selectedOrganisation.implementationcostformated}</Typography>
-                                                    </Grid>
-                                                    <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
-                                                            ROI
-                                                        </Typography>
-                                                    </Grid>
-                                                </Stack>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                    
+
+
                                 </Stack>
                             </Grid>
                         </Grid>
-                        
+
                     </SubCard>
-                    
+
                 </Grid>
-                
+
             </Grid>
         </form>
     );

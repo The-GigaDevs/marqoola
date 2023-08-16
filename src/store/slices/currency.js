@@ -33,10 +33,13 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getCurrencies() {
+export function getCurrencies(token) {
     return async () => {
         try {
-            const response = await axios.get('/getCurrencies');
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/getCurrencies', { headers});
             dispatch(slice.actions.getCurrenciesSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));

@@ -38,10 +38,13 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getIndustries() {
+export function getIndustries(token) {
     return async () => {
         try {
-            const response = await axios.get('/objects/industry');
+                const headers = {
+                    Authorization: `Bearer ` + token
+                };
+            const response = await axios.get('/objects/industry', { headers });
             dispatch(slice.actions.getIndustriesSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
@@ -49,10 +52,14 @@ export function getIndustries() {
     };
 }
 
-export function getSubIndustries() {
+export function getSubIndustries(token) {
     return async () => {
         try {
-            const response = await axios.get('/objects/subIndustry');
+            
+                const headers = {
+                    Authorization: `Bearer ` + token
+                };
+            const response = await axios.get('/objects/subIndustry', { headers });
             dispatch(slice.actions.getSubIndustriesSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));

@@ -40,10 +40,13 @@ export default slice.reducer;
 
 // ----------------------------------------------------------------------
 
-export function getRiskTolerances() {
+export function getRiskTolerances(token) {
     return async () => {
         try {
-            const response = await axios.get('/manager/enums/riskTolerance');
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/enums/riskTolerance', { headers });
             dispatch(slice.actions.getRiskTolerancesSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
@@ -54,7 +57,7 @@ export function getRiskTolerances() {
 export function getRiskToleranceDetails(id) {
     return async () => {
         try {
-            const response = await axios.get('/manager/enums/riskTolerance/' + id);
+            const response = await axios.get('/enums/riskTolerance/' + id);
             dispatch(slice.actions.getRiskToleranceDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
