@@ -23,7 +23,7 @@ import {
     Toolbar,
     Tooltip,
     Typography,
-    Fab, Collapse
+    Fab, Switch
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { openSnackbar } from 'store/slices/snackbar';
@@ -43,6 +43,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 import AssetCreateForm from '../../assets/createform'
 import AssetEditForm from '../../assets/editform'
+import OrganizationChart from '../OrganizationChart';
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -390,6 +391,13 @@ const OrgTable = () => {
         setExpandedRow(id);
     }
 
+    const [checked, setChecked] = React.useState(false);
+
+    const handleSwitch = (event) => {
+        setChecked(event.target.checked);
+
+    };
+
     const isSelected = (name) => selected.indexOf(name) !== -1;
     const isExpanded = (name) => expandedRow.indexOf(name) !== -1;
 
@@ -397,7 +405,12 @@ const OrgTable = () => {
 
     
     return (
-        <MainCard title="Organisations" content={false}>
+        <MainCard title="Organisations" content={false} secondary={<Switch
+            checked={checked}
+            onChange={handleSwitch}
+            inputProps={{ 'aria-label': 'controlled' }}
+          />}>{ !checked &&
+            (<>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -431,7 +444,7 @@ const OrgTable = () => {
                 </Grid>
             </CardContent>
 
-            {/* table */}
+            
             <TableContainer>
                 <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
                     <EnhancedTableHead
@@ -520,7 +533,7 @@ const OrgTable = () => {
                 <AssetEditForm open={openEdit} parentData={orgTableData} handleCloseDialog={handleCloseEditDialog} assetid={currentAsset} />
             </TableContainer>
 
-            {/* table pagination */}
+            
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
@@ -529,7 +542,11 @@ const OrgTable = () => {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-            />
+            /></>)
+                            }
+            {
+                checked && (<OrganizationChart rows={orgTableData}/>)
+            }
         </MainCard>
     );
 };
