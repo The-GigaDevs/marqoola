@@ -44,6 +44,7 @@ import AddIcon from '@mui/icons-material/AddTwoTone';
 import AssetCreateForm from '../../assets/createform'
 import AssetEditForm from '../../assets/editform'
 import OrganizationChart from '../OrganizationChart';
+import CreateForm from '../createform'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -250,16 +251,19 @@ const OrgTable = () => {
     const { organisations } = useSelector((state) => state.organisation);
 
     const [open, setOpen] = React.useState(false);
+    const [resetForm, setResetForm] = React.useState(false);
     const [openEdit, setOpenEdit] = React.useState(false);
     const [expandRow, setExpandRow] = React.useState(false);
     const [expandedRow, setExpandedRow] = React.useState([]);
 
     const handleClickOpenDialog = () => {
         setOpen(true);
+        setResetForm(false);
     };
     const handleCloseDialog = () => {
         setOpen(false);
-        dispatch(getAssets("", user.accessToken));
+        setResetForm(true);
+        dispatch(getOrganisations(user.accessToken));
     };
 
     // Getting the token
@@ -386,10 +390,7 @@ const OrgTable = () => {
         setPage(0);
     };
 
-    const handleExpandRow = (event, id) => {
-        setExpandRow(!expandRow);
-        setExpandedRow(id);
-    }
+
 
     const [checked, setChecked] = React.useState(false);
 
@@ -439,7 +440,7 @@ const OrgTable = () => {
                                 <AddIcon fontSize="small" />
                             </Fab>
                         </Tooltip>
-                        <AssetCreateForm open={open} parentData={orgTableData} handleCloseDialog={handleCloseDialog} />
+                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} />
                     </Grid>
                 </Grid>
             </CardContent>

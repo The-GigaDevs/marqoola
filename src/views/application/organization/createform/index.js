@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'utils/axios';
 // material-ui
 import { Button, Step, Stepper, StepLabel, Stack, Typography , Dialog} from '@mui/material';
-
+import { useDispatch, useSelector } from 'store';
+import useAuth from 'hooks/useAuth';
 // project imports
 import BasicInformation from './BasicInformation';
 import DivisionDetails from './DivisionDetails';
@@ -12,6 +13,10 @@ import MainCard from 'ui-component/cards/MainCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import IndustryInformation from './IndustryInformation';
 import RiskTolerance from './RiskTolerance';
+import { getIndustries, getSubIndustries } from 'store/slices/industry';
+import { getCurrencies } from 'store/slices/currency';
+import { get } from 'lodash';
+
 
 
 // step options
@@ -83,17 +88,28 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, resetFormDa
 
 // ==============================|| FORMS WIZARD - BASIC ||============================== //
 
-const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, parentData, currencies, industries , subindustries}) => {
+const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, parentData, currencies1, industries1 , subindustries1}) => {
+    const dispatch = useDispatch();
     const [activeStep, setActiveStep] = React.useState(0);
     const [basicInformationData, setBasicInformationData] = React.useState({});
     const [divisionDetailsData, setDivisionDetailsData] = React.useState({});
     const [industryInformationData, setIndustryInformationData] = React.useState({});
     const [riskToleranceData, setRiskToleranceData] = React.useState({});
     const [errorIndex, setErrorIndex] = React.useState(null);
+    const { organisations } = useSelector((state) => state.organisation);
+    const { industries } = useSelector((state) => state.industry)
+    const { subindustries } = useSelector((state) => state.subindustry)
+    const { currencies } = useSelector((state) => state.currency)
     
+    const { user } = useAuth();
     const [resetFormData, setResetFormData] = React.useState(false);
 
     
+    React.useEffect(() => {
+        dispatch(getCurrencies(user.accessToken));
+        dispatch(getIndustries(user.accessToken));
+        dispatch(getSubIndustries(user.accessToken));
+    }, []);
 
     const handleResetData = () => {
         setResetFormData(resetForm)
@@ -162,7 +178,7 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
             }
         }}
     > 
-    {open && parentData.length > 0 && (
+    {open && organisations.length > 0 && (
         <MainCard title="Create Organisational Entity">
             <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                 {steps.map((label, index) => {
@@ -203,7 +219,7 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
                             divisionDetailsData, setDivisionDetailsData,
                             industryInformationData, setIndustryInformationData,
                             riskToleranceData, setRiskToleranceData,
-                            parentData,
+                            organisations,
                             currencies,
                             industries,
                             subindustries

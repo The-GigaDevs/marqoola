@@ -1,5 +1,5 @@
 // https://codesandbox.io/s/metrics-color-threshold-slider-reversed-o58nu6?file=/demo.js:0-3681
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Slider } from "@mui/material";
 
 function DiscreteSlider(props) {
@@ -125,7 +125,9 @@ function DiscreteSlider(props) {
 export default function ThresholdSlider({sliderData, setSliderData}) {
   const [actualData, setActualData] = useState({});
 
-  setSliderData(actualData);
+    //setSliderData(actualData);
+
+ 
 
   return sliderData.value && (
     <Box> 
@@ -141,5 +143,5 @@ export default function ThresholdSlider({sliderData, setSliderData}) {
         setActualData={setActualData}
       />
     </Box>
-  );
+  ) 
 }
