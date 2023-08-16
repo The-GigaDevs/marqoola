@@ -6,7 +6,7 @@ import {
     Grid,
     Stack,
     Typography,
-    TextField, MenuItem, CardContent
+    TextField, MenuItem, CardContent, Button
 } from '@mui/material';
 
 
@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from 'store';
 import useConfig from 'hooks/useConfig';
 
 
-import { getOrganisationMetricsById, getOrganisations } from 'store/slices/organisation';
+import { getOrganisationMetricsById, getOrganisations, updateOrganisation } from 'store/slices/organisation';
 import { getRiskTolerances } from 'store/slices/risktolerance';
 import { getIndustries, getSubIndustries } from 'store/slices/industry';
 
@@ -91,20 +91,43 @@ const Details = (controlData) => {
         enableReinitialize: true,
         initialValues: {
             name: selectedOrganisation.name,
-            parent: selectedOrganisation.parent,
-            description: selectedOrganisation.description,
-            industry: selectedOrganisation.industry,
-            subindustry: selectedOrganisation.subindustry,
+            parent: selectedOrganisation.parentid,
+            description: selectedOrganisation.data.description,
+            industry: selectedOrganisation.data.industry,
+            subindustry: selectedOrganisation.data.subIndustry,
             risktolerance: selectedOrganisation.risktoleranceid,
-            implementationcost: selectedOrganisation.implementationcost && selectedOrganisation.implementationcost.number,
-            implementationcostcurrency: selectedOrganisation.implementationcost && selectedOrganisation.implementationcost.currency,
+            numemployees: selectedOrganisation.employeecount,
+            numcustomers: selectedOrganisation.customercount,
+            annualrevenue: selectedOrganisation.annualrevenue && selectedOrganisation.annualrevenue.number,
+            annualrevenuecurrency: selectedOrganisation.annualrevenue && selectedOrganisation.annualrevenue.currency,
         },
         validationSchema,
-
+        onSubmit: (values, helpers) => {
+            handleSaveOrganisation();
+        }
     });
 
+   
+
+    const handleSaveOrganisation = async () => {
+        const data = {
+            name: formik.values.name,
+            parent: formik.values.parent,
+            data: {
+                description: formik.values.description,
+                industry: formik.values.industry,
+                subIndustry: formik.values.subindustry
+            },
+            risktoleranceid: formik.values.risktolerance,
+            employeecount: formik.values.numemployees,
+            customercount: formik.values.numcustomers,
+            annualrevenue: {number: formik.values.annualrevenue.number, currency: formik.values.annualrevenue.currency}
+        }
+        dispatch(updateOrganisation(selectedOrganisation.id, data, user.accessToken));
+    }
+
     return selectedOrganisation && series && (
-        <form onSubmit={formik.handleSubmit} id="asset-forms">
+        <form onSubmit={formik.handleSubmit} id="org-details">
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
                     <SubCard title={<><Typography variant="h1" color={secondary}> {selectedOrganisation.name}</Typography>
@@ -124,7 +147,7 @@ const Details = (controlData) => {
                                                             id="name"
                                                             name="name"
                                                             label="Name"
-                                                            value={formik.values.name}
+                                                            value={formik.values.name || selectedOrganisation.name}
                                                             onChange={formik.handleChange}
                                                             error={formik.touched.name && Boolean(formik.errors.name)}
                                                             helperText={formik.touched.name && formik.errors.name}
@@ -136,7 +159,7 @@ const Details = (controlData) => {
                                                             id="parent"
                                                             name="parent"
                                                             label="Parent"
-                                                            value={formik.values.parent}
+                                                            value={formik.values.parent || selectedOrganisation.parentid}
                                                             onChange={formik.handleChange}
                                                             error={formik.touched.parent && Boolean(formik.errors.parent)}
                                                             helperText={formik.touched.parent && formik.errors.parent}
@@ -257,13 +280,13 @@ organisations && organisations.map((parent) => (
                                                     </Grid>
                                                     <Grid item xs={3}>
                                                     <TextField
-                                                            id="currency"
-                                                            name="currency"
-                                                            label="Currency"
-                                                            value={formik.values.currency}
+                                                            id="annualrevenuecurrency"
+                                                            name="annualrevenuecurrency"
+                                                            label="annualrevenuecurrency"
+                                                            value={formik.values.annualrevenuecurrency}
                                                             onChange={formik.handleChange}
-                                                            error={formik.touched.currency && Boolean(formik.errors.currency)}
-                                                            helperText={formik.touched.currency && formik.errors.currency}
+                                                            error={formik.touched.annualrevenuecurrency && Boolean(formik.errors.annualrevenuecurrency)}
+                                                            helperText={formik.touched.annualrevenuecurrency && formik.errors.annualrevenuecurrency}
                                                             fullWidth
                                                             select
                                                         >
@@ -335,7 +358,15 @@ currencies && currencies.map((parent) => (
                         </Grid>
 
                     </SubCard>
-
+                    <Grid item xs={12}>
+                        <Stack direction="row" justifyContent="flex-end">
+                            <AnimateButton>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" onClick={handleSaveOrganisation} >
+                                    Save
+                                </Button>
+                            </AnimateButton>
+                        </Stack>
+                    </Grid>
                 </Grid>
 
             </Grid>

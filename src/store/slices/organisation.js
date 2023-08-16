@@ -60,6 +60,9 @@ const slice = createSlice({
         getOrganisationMetricsSuccess(state, action) {
             state.metrics = action.payload
         },
+        updateOrganisationSuccess(state, action) {
+
+        },
 
         deleteOrganisationSuccess(state, action) {
             getOrganisations();
@@ -145,35 +148,29 @@ export function deleteOrganisation(id, token) {
     };
 }
 
-export function getOrders() {
+export function updateOrganisation(id, data, token){
     return async () => {
         try {
-            const response = await axios.get('/api/customer/order/list');
-            dispatch(slice.actions.getOrdersSuccess(response.data.orders));
-        } catch (error) {
-            dispatch(slice.actions.hasError(error));
-        }
-    };
-}
+            const headers = {
+                Authorization: `Bearer ` + token,
+                'Content-Type': 'application/json'
+            };
+            const response =  await axios.post('/objects/organisations/' + id, {name: data.name,
+            parentid: data.parent,
+            employeecount: parseInt(data.employeecount),
+            data: {
+                description: data.description,
+                
+                industry: data.industry,
+                subindustry: data.subIndustry,
+            }},{ headers });
 
-export function getProducts() {
-    return async () => {
-        try {
-            const response = await axios.get('/api/customer/product/list');
-            dispatch(slice.actions.getProductsSuccess(response.data.products));
+            //dispatch(slice.actions.updateOrganisationSuccess(response.data,));
+            getOrganisationDetails(id, token);
+            
         } catch (error) {
             dispatch(slice.actions.hasError(error));
+            console.log(error)
         }
-    };
-}
-
-export function getProductReviews() {
-    return async () => {
-        try {
-            const response = await axios.get('/api/customer/product/reviews');
-            dispatch(slice.actions.getProductReviewsSuccess(response.data.productreviews));
-        } catch (error) {
-            dispatch(slice.actions.hasError(error));
-        }
-    };
+    }
 }
