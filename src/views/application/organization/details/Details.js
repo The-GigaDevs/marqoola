@@ -47,6 +47,7 @@ const Details = (controlData) => {
     const { industries } = useSelector((state) => state.industry)
     const { subindustries } = useSelector((state) => state.subindustry)
     const { currencies } = useSelector((state) => state.currency)
+    const [sliderData, setSliderData] = useState({});
     const { riskToleranciesData, setRiskToleranciesData} = useState([]);
     const [controlMetrics, setControlMetrics] = useState([]);
     const { metrics } = useSelector((state) => state.organisation);
@@ -59,8 +60,13 @@ const Details = (controlData) => {
         dispatch(getRiskTolerances(user.accessToken));
         dispatch(getIndustries(user.accessToken));
         dispatch(getSubIndustries(user.accessToken));
+        setSliderData(test);
     }, []);
 
+    const test = {
+        value: [selectedOrganisation.loweramountmax.number, selectedOrganisation.toleranceamountmax.number]
+    }
+   
     useEffect(() => {
         dispatch(getOrganisationMetricsById(selectedOrganisation.id))
     }, [selectedOrganisation]);
@@ -69,6 +75,9 @@ const Details = (controlData) => {
         setControlMetrics(risktolerances)
     }, [risktolerances]);
 
+    useEffect(() => {
+        setSliderData(sliderData)
+    }, [sliderData]);
 
 
     const { primary } = theme.palette.text;
@@ -87,6 +96,8 @@ const Details = (controlData) => {
         }));
     }, [navType, primary, darkLight, grey200, secondary]);
 
+
+
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -94,7 +105,7 @@ const Details = (controlData) => {
             parent: selectedOrganisation.parentid,
             description: selectedOrganisation.data.description,
             industry: selectedOrganisation.data.industry,
-            subindustry: selectedOrganisation.data.subIndustry,
+            subindustry: selectedOrganisation.data.subindustry,
             risktolerance: selectedOrganisation.risktoleranceid,
             numemployees: selectedOrganisation.employeecount,
             numcustomers: selectedOrganisation.customercount,
@@ -121,7 +132,10 @@ const Details = (controlData) => {
             risktoleranceid: formik.values.risktolerance,
             employeecount: formik.values.numemployees,
             customercount: formik.values.numcustomers,
-            annualrevenue: {number: formik.values.annualrevenue.number, currency: formik.values.annualrevenue.currency}
+            annualrevenue: {number: formik.values.annualrevenue, currency: formik.values.annualrevenuecurrency},
+            sliderData : {
+                value: [sliderData.value[0], sliderData.value[1]]
+            }
         }
         dispatch(updateOrganisation(selectedOrganisation.id, data, user.accessToken));
     }
@@ -180,7 +194,7 @@ organisations && organisations.map((parent) => (
                                                             id="description"
                                                             name="description"
                                                             label="Description"
-                                                            value={formik.values.description}
+                                                            value={formik.values.description || selectedOrganisation.data.description}
                                                             onChange={formik.handleChange}
                                                             error={formik.touched.description && Boolean(formik.errors.description)}
                                                             helperText={formik.touched.description && formik.errors.description}
@@ -328,7 +342,7 @@ currencies && currencies.map((parent) => (
                                                             id="risktolerance"
                                                             name="risktolerance"
                                                             label="Risk Classification"
-                                                            value={formik.values.risktolerance}
+                                                            value={formik.values.risktolerance || selectedOrganisation.risktoleranceid}
                                                             onChange={formik.handleChange}
                                                             error={formik.touched.risktolerance && Boolean(formik.errors.risktolerance)}
                                                             helperText={formik.touched.risktolerance && formik.errors.risktolerance}
@@ -345,7 +359,7 @@ currencies && currencies.map((parent) => (
                                                         </TextField>
                                                     </Grid>
                                                     <Grid item>
-                                                        <ThresholdSlider setSliderData={setControlMetrics} />
+                                                        <ThresholdSlider setSliderData={setSliderData} sliderData={test}/>
                                                     </Grid>
                                                 </Stack>
                                             </CardContent>
