@@ -20,6 +20,7 @@ import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
 import Dashboard from './Dashboard';
 import Details from './Details';
 import Assets from './Assets';
+import ControlImplementations from './ControlImplementations';
 
 
 // tab content
@@ -133,7 +134,7 @@ const OrgDetails = () => {
             </TabPanel>
 
             <TabPanel value={value} index={5}>
-                
+                <ControlImplementations selectedOrganisation={selectedOrganisation}/> 
             </TabPanel>
         </MainCard>
     );
