@@ -54,6 +54,10 @@ const Details = (controlData) => {
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
 
+    const test = {
+        value: [selectedOrganisation.loweramountmax ? selectedOrganisation.loweramountmax.number : 0, selectedOrganisation.toleranceamountmax? selectedOrganisation.toleranceamountmax.number:0]
+    }
+   
     useEffect(() => {
         dispatch(getCurrencies(user.accessToken));
         dispatch(getOrganisations(user.accessToken));
@@ -63,10 +67,7 @@ const Details = (controlData) => {
         setSliderData(test);
     }, []);
 
-    const test = {
-        value: [selectedOrganisation.loweramountmax ? selectedOrganisation.loweramountmax.number : 0, selectedOrganisation.toleranceamountmax? selectedOrganisation.toleranceamountmax.number:0]
-    }
-   
+    
     useEffect(() => {
         dispatch(getOrganisationMetricsById(selectedOrganisation.id))
     }, [selectedOrganisation]);
@@ -134,7 +135,7 @@ const Details = (controlData) => {
             customercount: formik.values.numcustomers,
             annualrevenue: {number: formik.values.annualrevenue, currency: formik.values.annualrevenuecurrency},
             sliderData : {
-                value: [sliderData.value[0], sliderData.value[1]]
+                value: [Object.keys(sliderData).length === 0 && sliderData.constructor === Object ?  selectedOrganisation.loweramountmax.number : sliderData.value[0], Object.keys(sliderData).length === 0 && sliderData.constructor === Object ?  selectedOrganisation.toleranceamountmax.number : sliderData.value[1]]
             }
         }
         dispatch(updateOrganisation(selectedOrganisation.id, data, user.accessToken));

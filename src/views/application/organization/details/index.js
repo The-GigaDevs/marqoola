@@ -124,6 +124,17 @@ const OrgDetails = () => {
                 <Assets selectedOrganisation={selectedOrganisation}/>
             </TabPanel>
            
+            <TabPanel value={value} index={3}>
+                
+            </TabPanel>
+
+            <TabPanel value={value} index={4}>
+                
+            </TabPanel>
+
+            <TabPanel value={value} index={5}>
+                
+            </TabPanel>
         </MainCard>
     );
 };
