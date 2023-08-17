@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const slice = createSlice({
-    name: 'risktolerance',
+    name: 'assettype',
     initialState,
     reducers: {
         // HAS ERROR

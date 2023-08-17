@@ -1,11 +1,12 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import useAuth from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import {
     Grid,
     Stack,
     Typography,
-    Card, CardContent
+    Card, CardContent, TextField, MenuItem, Button
 } from '@mui/material';
 
 import { useFormik } from 'formik';
@@ -23,14 +24,19 @@ import ReactApexChart from 'react-apexcharts';
 import { useDispatch, useSelector } from 'store';
 import useConfig from 'hooks/useConfig';
 
-
-import { getOrganisationMetricsById } from 'store/slices/organisation';
+import { getAssetTypes } from 'store/slices/assettype';
+import { getOrganisations } from 'store/slices/organisation';
+import { getAssets, updateAsset } from 'store/slices/asset';
 
 
 const Details = (controlData) => {
     const theme = useTheme();
     const dispatch = useDispatch();
+    const { user } = useAuth();
     const { selectedAsset } = useSelector((state) => state.asset);
+    const { assettypes } = useSelector((state) => state.assettype);
+    const { assets } = useSelector((state) => state.asset);
+    const { organisations } = useSelector((state) => state.organisation);
     const [controlMetrics, setControlMetrics] = useState([]);
     const { metrics } = useSelector((state) => state.organisation);
     const [series, setSeries] = useState([]);
@@ -64,7 +70,9 @@ const Details = (controlData) => {
                 categories: xaxis
             }})
         }
-        
+        dispatch(getAssetTypes(user.accessToken));
+        dispatch(getOrganisations(user.accessToken));
+        dispatch(getAssets(user.accessToken));
     }, []);
 
     useEffect(() => {
@@ -100,16 +108,29 @@ const Details = (controlData) => {
         initialValues: {
             name: selectedAsset.name,
             parent: selectedAsset.parentid,
-            description: selectedAsset.data.description,
+            description: selectedAsset.data && selectedAsset.data.description,
             assettype: selectedAsset.assettypeid,
         },
         onSubmit: (values, helpers) => {
-            //handleSaveAsset();
+            handleSaveAsset();
         }
     });
 
+    const handleSaveAsset = async () => {
+        const data = {
+            name: formik.values.name,
+            parent: formik.values.parent,
+            orgaId: 'a5e8bdf5-8cf1-424f-ae50-9354c2d870e8',
+            data: {
+                description: formik.values.description,
+            },
+            assettype: formik.values.assettype,
+        }
+        dispatch(updateAsset(selectedAsset.id, data, user.accessToken));
+    }
+
     return selectedAsset && series &&  (
-        
+        <form onSubmit={formik.handleSubmit} id="asset-details">
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
                     <SubCard title={<><Typography variant="h1" color={secondary}> {selectedAsset.name}</Typography> 
@@ -191,14 +212,107 @@ const Details = (controlData) => {
                                     
                                 </Stack>
                             </Grid>
+                            <Grid item xs={6}>
+                            <Stack direction="column" spacing={3} >
+                                                    <Grid item>
+                                                        <TextField
+                                                            id="name"
+                                                            name="name"
+                                                            label="Name"
+                                                            value={formik.values.name || selectedAsset.name}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.name && Boolean(formik.errors.name)}
+                                                            helperText={formik.touched.name && formik.errors.name}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <TextField
+                                                            id="description"
+                                                            name="description"
+                                                            label="Description"
+                                                            value={formik.values.description || selectedAsset.data && selectedAsset.data.description}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.description && Boolean(formik.errors.description)}
+                                                            helperText={formik.touched.description && formik.errors.description}
+                                                            fullWidth
+                                                        />
+                                                    </Grid>
+                                                    <Grid item>
+                                                    <TextField
+                                                            id="assettype"
+                                                            name="assettype"
+                                                            label="Asset Type"
+                                                            value={formik.values.assettype || selectedAsset.assettype}
+                                                            onChange={formik.handleChange}
+                                                            error={formik.touched.assettype && Boolean(formik.errors.assettype)}
+                                                            helperText={formik.touched.assettype && formik.errors.assettype}
+                                                            fullWidth
+                                                            select
+                                                        >
+                                                            {
+                                                                assettypes && assettypes.map((parent) => (
+                                                                    <MenuItem key={parent.id} value={parent.id}>
+                                                                        {parent.label}
+                                                                    </MenuItem>
+                                                                ))}
+                                                        </TextField>
+                                                    </Grid>
+                                                    <Grid item>
+                                            <TextField
+                                                id="owner"
+                                                name="owner"
+                                                label="Owner Name"
+                                                value={formik.values.owner || selectedAsset.owner}
+                                                onChange={formik.handleChange}
+                                                error={formik.touched.owner && Boolean(formik.errors.owner)}
+                                                helperText={formik.touched.owner && formik.errors.owner}
+                                                fullWidth
+                                            />
+                                        </Grid>  
+                                                </Stack>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Stack direction="column" spacing={3} >
+                                        
+                                        <Grid item>
+                                            <TextField
+                                                id="parent"
+                                                name="parent"
+                                                label="Parent"
+                                                value={formik.values.parent || selectedAsset.parentid}
+                                                onChange={formik.handleChange}
+                                                error={formik.touched.parent && Boolean(formik.errors.parent)}
+                                                helperText={formik.touched.parent && formik.errors.parent}
+                                                fullWidth
+                                                select
+                                            >
+                                                {
+                                                    assets && assets.map((parent) => (
+                                                        <MenuItem key={parent.id} value={parent.id}>
+                                                            {parent.name}
+                                                        </MenuItem>
+                                                    ))}
+                                            </TextField>
+                                        </Grid>  
+                                    </Stack>                                  
+                            </Grid>
                         </Grid>
                         
                     </SubCard>
-                    
+                    <Grid item xs={12}>
+                        <Stack direction="row" justifyContent="flex-end">
+                            <AnimateButton>
+                                <Button variant="contained" sx={{ my: 3, ml: 1 }} type="submit" onClick={handleSaveAsset} >
+                                    Save
+                                </Button>
+                            </AnimateButton>
+                        </Stack>
+                    </Grid>
                 </Grid>
                 
             </Grid>
-        
+        </form>
     );
 };
 

@@ -107,6 +107,33 @@ export function getAssetsByOrganisation(orgId, token) {
     };
 }
 
+export function updateAsset(id, data, token){
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token,
+                'Content-Type': 'application/json'
+            };
+            const response =  await axios.post('/objects/assets/' + id, {
+                name: data.name,
+                parentid: data.parent,
+                assettypeid: data.assettype,
+                orgaid: data.orgaId,
+                data: {
+                    description: data.data.description,
+                }
+            },{ headers });
+
+                //dispatch(slice.actions.updateOrganisationSuccess(response.data,));
+            getAssetDetails(id, token);
+            
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+            console.log(error)
+        }
+    }
+}
+
 export function deleteAsset(id) {
     return async () => {
         try {
