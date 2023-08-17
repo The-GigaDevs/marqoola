@@ -68,10 +68,13 @@ export function getAssets(orgId, token) {
     };
 }
 
-export function getAssetDetails(id) {
+export function getAssetDetails(id, token) {
     return async () => {
         try {
-            const response = await axios.get('/objects/assets/' + id);
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/assets/' + id, { headers });
             dispatch(slice.actions.getAssetDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
@@ -79,14 +82,26 @@ export function getAssetDetails(id) {
     };
 }
 
-export function getAssetsByOrganisation(orgId) {
+export function getAssetsByOrganisation(orgId, token) {
     return async () => {
+       
         try {
-            const response = await axios.get('/objects/assets?orga=' + orgId);
-            dispatch(slice.actions.getAssetsByOrganisationSuccess(response.data));
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            var url = ''
+            if (orgId==='0')
+                url = '/objects/assets'
+            else
+                url = '/objects/assets?orga=' + orgId
+            const response = await axios.get(url, { headers});
+            dispatch(slice.actions.getAssetsSuccess(response.data));
         } catch (error) {
+            dispatch(slice.actions.getAssetsSuccess({}));
             dispatch(slice.actions.hasError(error));
+            console.log(error);
         }
+    
     };
 }
 

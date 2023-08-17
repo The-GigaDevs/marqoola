@@ -142,7 +142,7 @@ const ControlCategoriesMaster = Loadable(lazy(() => import('views/application/ma
 const OrganizationList = Loadable(lazy(() => import('views/application/organization')));
 const Organizations = Loadable(lazy(() => import('views/application/organization/orgtable')));
 const OrganisationDetails = Loadable(lazy(() => import('views/application/organization/details')))
-const Assets = Loadable(lazy(() => import('views/application/assets')));
+const Assets = Loadable(lazy(() => import('views/application/assets/assettable')));
 const Controls = Loadable(lazy(() => import('views/application/controls')));
 const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
 const Objectives = Loadable(lazy(() => import('views/application/objectives')));
