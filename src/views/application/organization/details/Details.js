@@ -64,7 +64,7 @@ const Details = (controlData) => {
     }, []);
 
     const test = {
-        value: [selectedOrganisation.loweramountmax.number, selectedOrganisation.toleranceamountmax.number]
+        value: [selectedOrganisation.loweramountmax ? selectedOrganisation.loweramountmax.number : 0, selectedOrganisation.toleranceamountmax? selectedOrganisation.toleranceamountmax.number:0]
     }
    
     useEffect(() => {
