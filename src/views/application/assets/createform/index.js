@@ -95,16 +95,12 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
                 directassetvalue: {number:parseInt(assetDetailsData.directassetvalue.number),currency:assetDetailsData.directassetvalue.currency}, 
             parentid: basicInformationData.parent,
             orgaid: basicInformationData.organisation,
+            assettypeid: basicInformationData.assettype,
             data: {
                 description: basicInformationData.description,
                 title: basicInformationData.name,
                 
-            }},{
-                headers: {
-                  // Overwrite Axios's automatically set Content-Type
-                  'Content-Type': 'application/json'
-                }
-              }).then(handleCloseDialog);
+            }}).then(handleCloseDialog);
         } catch (error) {
             console.log('Could not save asset:', error)
             handleCloseDialog();

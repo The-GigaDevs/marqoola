@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'store';
 import { getOrganisations } from 'store/slices/organisation';
+import { getAssetTypes } from 'store/slices/assettype';
 
 // material-ui
 import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
@@ -23,9 +24,11 @@ const BasicInformation = ({ basicInformationData, setBasicInformationData, handl
     const dispatch = useDispatch();
     const [organisationData, setOrganisationData] = useState([]);
     const { organisations } = useSelector((state) => state.organisation);
+    const { assettypes } = useSelector((state) => state.assettype);
 
     useEffect(() => {
         dispatch(getOrganisations());
+        dispatch(getAssetTypes());
     }, []);
 
     useEffect(() => {
@@ -42,7 +45,8 @@ const BasicInformation = ({ basicInformationData, setBasicInformationData, handl
                 name: values.name,
                 description: values.description,
                 parent: values.parent,
-                organisation: values.organisation
+                organisation: values.organisation,
+                assettype: values.assettype
             });
             handleNext();
             helpers.resetForm()
@@ -104,6 +108,27 @@ const BasicInformation = ({ basicInformationData, setBasicInformationData, handl
                              organisationData && organisationData.map((parent) => (
                                         <MenuItem key={parent.id} value={parent.id}>
                                             {parent.name}
+                                        </MenuItem>
+                                    ))}
+                        </TextField>
+                    </Grid>
+                    <Grid item xs={6}>
+                    <TextField
+                            id="assettype"
+                            name="assettype"
+                            label="Type"
+                            value={formik.values.assettype}
+                            onChange={formik.handleChange}
+                            error={formik.touched.assettype && Boolean(formik.errors.assettype)}
+                            helperText={formik.touched.assettype && formik.errors.assettype}
+                            fullWidth
+                            select
+                        >
+                             {
+                             
+                             assettypes && assettypes.map((parent) => (
+                                        <MenuItem key={parent.id} value={parent.id}>
+                                            {parent.label}
                                         </MenuItem>
                                     ))}
                         </TextField>

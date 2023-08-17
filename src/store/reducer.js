@@ -27,6 +27,7 @@ import organisationtreeReducer from './slices/organisation'
 import risktoleranceReducer from './slices/risktolerance';
 import securityconceptReducer from './slices/securityconcept';
 import controlCategoryReducer from './slices/controlcategory';
+import assetTypeReducer from './slices/assettype';
 
 
 
@@ -62,6 +63,7 @@ const reducer = combineReducers({
     securityconcept: securityconceptReducer,
     controlcategory: controlCategoryReducer,
     asset: assetReducer,
+    assettype: assetTypeReducer,
     control: controlReducer,
     controltemplate: controlTemplateReducer,
     objective: objectiveReducer,

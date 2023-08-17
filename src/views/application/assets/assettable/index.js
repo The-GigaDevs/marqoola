@@ -444,7 +444,7 @@ const AssetTable = () => {
                                 <AddIcon fontSize="small" />
                             </Fab>
                         </Tooltip>
-                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} />
+                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} parentData={assetTableData}/>
                     </Grid>
                 </Grid>
             </CardContent>
