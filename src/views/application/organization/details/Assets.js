@@ -102,13 +102,6 @@ const headCells = [
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'organisation',
-        label: 'Organisation',
-        numeric: false,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US')
-    },
-    {
         id: 'assetvalue',
         label: 'Asset Value',
         numeric: true,
@@ -230,7 +223,7 @@ EnhancedTableToolbar.propTypes = {
 
 // ==============================|| ASSET TABLE ||============================== //
 
-const AssetTable = () => {
+const AssetTable = ({selectedOrganisation}) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -257,6 +250,7 @@ const AssetTable = () => {
     const [openEdit, setOpenEdit] = React.useState(false);
     const [expandRow, setExpandRow] = React.useState(false);
     const [expandedRow, setExpandedRow] = React.useState([]);
+    const secondary = theme.palette.secondary.main;
 
     const handleClickOpenDialog = () => {
         setOpen(true);
@@ -272,7 +266,7 @@ const AssetTable = () => {
 
     React.useEffect(() => {
 
-        dispatch(getAssets(user.accessToken));
+        dispatch(getAssetsByOrganisation(selectedOrganisation.id, user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
@@ -283,13 +277,6 @@ const AssetTable = () => {
         setDivisionSelector(selectedDivision);
 
     }, [selectedDivision]);
-
-    React.useEffect(() => {
-        if (selectedDivision)
-            dispatch(getAssetsByOrganisation(selectedDivision, user.accessToken));
-        else
-            dispatch(getAssets());
-    }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
         for (var selectedid of selected) {
@@ -411,11 +398,10 @@ const AssetTable = () => {
 
     
     return (
-        <MainCard title="Assets" content={false} secondary={<Switch
-            checked={checked}
-            onChange={handleSwitch}
-            inputProps={{ 'aria-label': 'controlled' }}
-          />}>
+        <SubCard title={<><Typography variant="h1" color={secondary}> {selectedOrganisation.name}</Typography>
+
+        </>}
+        >
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -433,6 +419,7 @@ const AssetTable = () => {
                             size="small"
                         />
                     </Grid>
+                    { /*
                     <Grid item xs={12} sm={6} sx={{ textAlign: 'right' }}>
                         <Tooltip title="Create Asset">
                             <Fab
@@ -446,6 +433,7 @@ const AssetTable = () => {
                         </Tooltip>
                         <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} parentData={assetTableData}/>
                     </Grid>
+                    */}
                 </Grid>
             </CardContent>
 
@@ -509,7 +497,6 @@ const AssetTable = () => {
                                         <TableCell align="center"></TableCell>
                                         <TableCell align="center">{row.assettypename}</TableCell>
                                         <TableCell align="center"></TableCell>
-                                        <TableCell align="center">{row.organame}</TableCell>
                                         <TableCell align="center">{row.totalassetvalue ? row.totalassetvalueformated : '0'}</TableCell>
                                         <TableCell align="center">
                                             {row.grossrisk ? row.grossriskformated : '0'}
@@ -547,7 +534,7 @@ const AssetTable = () => {
             />
             
             
-        </MainCard>
+        </SubCard>
     );
 };
 

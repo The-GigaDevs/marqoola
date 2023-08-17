@@ -19,6 +19,7 @@ import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';
 import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
 import Dashboard from './Dashboard';
 import Details from './Details';
+import Assets from './Assets';
 
 
 // tab content
@@ -120,7 +121,7 @@ const OrgDetails = () => {
 
             {/* tab - status */}
             <TabPanel value={value} index={2}>
-                
+                <Assets selectedOrganisation={selectedOrganisation}/>
             </TabPanel>
            
         </MainCard>
