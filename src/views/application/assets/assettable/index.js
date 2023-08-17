@@ -361,7 +361,7 @@ const AssetTable = () => {
     };
 
     const handleOpenEditDialog = (event, id) => {
-        navigate('/organisationdetails', { state: { id: id } });
+        navigate('/asset', { state: { id: id } });
     }
 
     const handleCloseEditDialog = () => {

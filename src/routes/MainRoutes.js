@@ -143,6 +143,7 @@ const OrganizationList = Loadable(lazy(() => import('views/application/organizat
 const Organizations = Loadable(lazy(() => import('views/application/organization/orgtable')));
 const OrganisationDetails = Loadable(lazy(() => import('views/application/organization/details')))
 const Assets = Loadable(lazy(() => import('views/application/assets/assettable')));
+const AssetDetails = Loadable(lazy(() => import('views/application/assets/Details')));
 const Controls = Loadable(lazy(() => import('views/application/controls')));
 const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
 const Objectives = Loadable(lazy(() => import('views/application/objectives')));
@@ -555,6 +556,10 @@ const MainRoutes = {
         {
             path: '/assets',
             element: <Assets />
+        },
+        {
+            path: '/asset',
+            element: <AssetDetails />
         },
         {
             path: '/controls',

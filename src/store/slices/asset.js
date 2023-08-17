@@ -9,7 +9,8 @@ const initialState = {
     error: null,
     assets: [],
     assetdetails: {},
-    assetsbyorg: []
+    assetsbyorg: [],
+    selectedAsset: {}
 
 };
 
@@ -28,6 +29,7 @@ const slice = createSlice({
 
         getAssetDetailsSuccess(state, action) {
             state.assetdetails = action.payload;
+            state.selectedAsset = action.payload;
         },
 
         getAssetsByOrganisationSuccess(state, action) {
