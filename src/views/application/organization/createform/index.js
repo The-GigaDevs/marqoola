@@ -15,6 +15,7 @@ import IndustryInformation from './IndustryInformation';
 import RiskTolerance from './RiskTolerance';
 import { getIndustries, getSubIndustries } from 'store/slices/industry';
 import { getCurrencies } from 'store/slices/currency';
+import { createOrganisation } from 'store/slices/organisation';
 import { get } from 'lodash';
 
 
@@ -139,31 +140,24 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
     
     
     const handleSaveOrganisation = async () => {
-        
-        try {
-            
-            const response =  await axios.post('/objects/organisations', {name: basicInformationData.name,
-            annualrevenue: {number:parseInt(divisionDetailsData.revenue),currency:divisionDetailsData.currency}, 
-            parentid: basicInformationData.parent,
+        const data = {
+            name: basicInformationData.name,
+            parent: basicInformationData.parent,
             data: {
                 description: basicInformationData.description,
-                title: basicInformationData.name,
-                numemployees: parseInt(divisionDetailsData.numEmployees),
                 industry: industryInformationData.industry,
-                subindustry: industryInformationData.subIndustry,
-                numcustomers: industryInformationData.numCustomers,
-                sliderdata: riskToleranceData.sliderData,
-                riskclassification: riskToleranceData.riskClassification
-            }},{
-                headers: {
-                  // Overwrite Axios's automatically set Content-Type
-                  'Content-Type': 'application/json'
-                }
-              }).then(handleCloseDialog);
-        } catch (error) {
-            console.log('Could not save org:', error)
-            handleCloseDialog();
+                subIndustry: industryInformationData.subIndustry
+            },
+            risktoleranceid: riskToleranceData.riskClassification,
+            employeecount: parseInt(divisionDetailsData.numEmployees),
+            customercount: parseInt(industryInformationData.numCustomers),
+            annualrevenue: { number:parseInt(divisionDetailsData.revenue), currency:divisionDetailsData.currency },
+            sliderData : riskToleranceData.sliderData
         }
+        dispatch(createOrganisation( data, user.accessToken));
+        
+            handleCloseDialog();
+        
     
 }
 

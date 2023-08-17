@@ -125,16 +125,16 @@ function DiscreteSlider(props) {
 export default function ThresholdSlider({sliderData, setSliderData}) {
   const [actualData, setActualData] = useState({});
 
-    //setSliderData(actualData);
+    setSliderData(actualData);
 
  
 
-  return sliderData.value && (
+  return (
     <Box> 
       <DiscreteSlider
         reverse={false}
         step={100000}
-        values={[sliderData.value[0],sliderData.value[1]]}
+        values={sliderData.value ? [sliderData.value[0],sliderData.value[1]]: [100000, 500000]}
         min={0}
         max={10000000}
         thresholdMarks={[30, 50, 80]}

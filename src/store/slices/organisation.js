@@ -148,6 +148,40 @@ export function deleteOrganisation(id, token) {
     };
 }
 
+export function createOrganisation(data, token){
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token,
+                'Content-Type': 'application/json'
+            };
+            const response =  await axios.post('/objects/organisations', {
+                name: data.name,
+                parentid: data.parent,
+                employeecount: parseInt(data.employeecount),
+                annualrevenue: {number : parseInt(data.annualrevenue.number), currency: data.annualrevenue.currency},
+                risktoleranceid: data.risktoleranceid,
+                customercount: parseInt(data.customercount),
+                loweramountmax: {number: parseInt(data.sliderData.value[0]), currency: data.annualrevenue.currency},
+                toleranceamountmax: {number: parseInt(data.sliderData.value[1]), currency: data.annualrevenue.currency},
+                data: {
+                    description: data.data.description,
+                    
+                    industry: data.data.industry,
+                    subindustry: data.data.subIndustry,
+                }
+            },{ headers });
+
+                //dispatch(slice.actions.updateOrganisationSuccess(response.data,));
+            getOrganisations(token);
+            
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+            console.log(error)
+        }
+    }
+}
+
 export function updateOrganisation(id, data, token){
     return async () => {
         try {

@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useAuth from 'hooks/useAuth';
+import { useDispatch, useSelector } from 'store';
 
 // material-ui
 import { Button, Grid, Stack, Typography, Box } from '@mui/material';
@@ -15,15 +17,28 @@ import { useFormik } from 'formik';
 import ThresholdSlider from './ThresholdSlider';
 import SummaryCard from './SummaryCard';
 
+import { getRiskTolerances } from 'store/slices/risktolerance';
 
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
 export default function RiskTolerance({ riskToleranceData, setRiskToleranceData, handleNext, handleBack, setErrorIndex, parentData }) {
+    const dispatch = useDispatch();
+    const { user } = useAuth();
+    
     const [sliderData, setSliderData] = useState({});
     const [buttonGroupData, setButtonGroupData] = useState({});
 
-    //console.log(sliderData);
+    const { risktolerances } = useSelector((state) => state.risktolerance)
+
+    useEffect(() => {
+        dispatch(getRiskTolerances(user.accessToken));
+    }, []);
+
+    useEffect(() => {
+        setButtonGroupData(risktolerances)
+    }, [risktolerances]);
+
     const formik = useFormik({
         initialValues: {
             
