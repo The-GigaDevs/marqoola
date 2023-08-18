@@ -128,7 +128,7 @@ const BasicInformation = ({ basicInformationData, setBasicInformationData, handl
                              
                              assettypes && assettypes.map((parent) => (
                                         <MenuItem key={parent.id} value={parent.id}>
-                                            {parent.label}
+                                            {parent.type} &nbsp; / &nbsp; {parent.version}
                                         </MenuItem>
                                     ))}
                         </TextField>

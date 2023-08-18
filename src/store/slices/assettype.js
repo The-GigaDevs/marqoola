@@ -46,7 +46,7 @@ export function getAssetTypes(token) {
             const headers = {
                 Authorization: `Bearer ` + token
             };
-            const response = await axios.get('/enums/assettypes', { headers });
+            const response = await axios.get('/objects/assettypes', { headers });
             dispatch(slice.actions.getAssetTypesSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
@@ -60,7 +60,7 @@ export function getAssetTypeDetails(token, id) {
             const headers = {
                 Authorization: `Bearer ` + token
             };
-            const response = await axios.get('/enums/assettypes/' + id, { headers });
+            const response = await axios.get('/objects/assettypes/' + id, { headers });
             dispatch(slice.actions.getAssetTypeDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
