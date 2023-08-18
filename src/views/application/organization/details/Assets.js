@@ -267,7 +267,7 @@ const AssetTable = ({selectedOrganisation}) => {
     React.useEffect(() => {
 
         dispatch(getAssetsByOrganisation(selectedOrganisation.id, user.accessToken));
-    }, [dispatch]);
+    }, []);
 
     React.useEffect(() => {
         setAssetTableData(assets);

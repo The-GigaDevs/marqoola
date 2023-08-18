@@ -272,7 +272,9 @@ const AssetTable = () => {
 
     React.useEffect(() => {
 
-        dispatch(getAssets(user.accessToken));
+        if (selectedDivision)
+        dispatch(getAssetsByOrganisation(selectedDivision, user.accessToken));
+    
     }, [dispatch]);
 
     React.useEffect(() => {
@@ -285,10 +287,9 @@ const AssetTable = () => {
     }, [selectedDivision]);
 
     React.useEffect(() => {
-        if (selectedDivision)
+       
             dispatch(getAssetsByOrganisation(selectedDivision, user.accessToken));
-        else
-            dispatch(getAssets());
+       
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
