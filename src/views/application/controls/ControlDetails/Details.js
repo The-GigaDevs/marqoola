@@ -195,6 +195,9 @@ const DetailsDashboard = (controlData) => {
                 name: formik.values.name,
                 orgaid: formik.values.organisation, 
                 assetid: formik.values.asset,
+                description: formik.values.description,
+                securityconceptid: formik.values.securityconcept,
+                controlcategoryid: formik.values.controlcategory,
                 implementationcost: {number:formik.values.implementationcostnumber,currency:formik.values.implementationcostcurrency}, 
             },{
                 headers: {
@@ -226,10 +229,16 @@ function renderRow(props) {
             name: selectedControl.name,
             organisation: selectedControl.orgaid,
             asset: selectedControl.assetid,
+            description: selectedControl.description,
+            controlcategory: selectedControl.controlcategoryid,
+            securityconcept: selectedControl.securityconceptid,
             implementationcostnumber: selectedControl.implementationcost && selectedControl.implementationcost.number,
             implementationcostcurrency: selectedControl.implementationcost && selectedControl.implementationcost.currency,
         },
         validationSchema,
+        onSubmit: (values, helpers) => {
+            handleSaveControl();
+        }
 
     });
 

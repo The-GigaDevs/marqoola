@@ -297,7 +297,7 @@ const ControlImplementations = ({selectedOrganisation}) => {
             const newRows = assetTableData.filter((row) => {
                 let matches = true;
 
-                const properties = ['name', 'email', 'location', 'orders'];
+                const properties = ['name', 'description'];
                 let containsQuery = false;
 
                 properties.forEach((property) => {
@@ -338,7 +338,7 @@ const ControlImplementations = ({selectedOrganisation}) => {
     };
 
     const handleOpenEditDialog = (event, id) => {
-        navigate('/asset', { state: { id: id } });
+        navigate('/control', { state: { id: id } });
     }
 
 
@@ -400,7 +400,7 @@ const ControlImplementations = ({selectedOrganisation}) => {
                                 )
                             }}
                             onChange={handleSearch}
-                            placeholder="Search Asset"
+                            placeholder="Search Control Implementations"
                             value={search}
                             size="small"
                         />
@@ -457,7 +457,7 @@ const ControlImplementations = ({selectedOrganisation}) => {
                                             scope="row"
                                             onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, row.id) }}
                                             sx={{ cursor: 'pointer' }}
-                                        >
+                                        > 
                                             <Typography
                                                 variant="subtitle1"
                                                 sx={{ color: '#db72ff' }}
@@ -466,10 +466,10 @@ const ControlImplementations = ({selectedOrganisation}) => {
                                                 {row.name}{' '}
                                             </Typography>
                                         </TableCell>
-                                        <TableCell align="center"></TableCell>
-                                        <TableCell align="center">{row.assettypename}</TableCell>
-                                        <TableCell align="center"></TableCell>
-                                        <TableCell align="center">{row.totalassetvalue ? row.totalassetvalueformated : '0'}</TableCell>
+                                        <TableCell align="center">{row.description}</TableCell>
+                                        <TableCell align="center"><Chip label={row.allrisks.length} /></TableCell>
+                                        <TableCell align="center"><Chip label="0" /></TableCell>
+                                        <TableCell align="center"><Chip label={row.allobjectives.length} /></TableCell>
                                         
 
                                     </TableRow>
