@@ -11,7 +11,7 @@ import OrganizationIcon from './OrganizationIcon';
 
 // ==============================|| CARD ORGANIZATION CHART ||============================== //
 
-function Card({ items }) {
+function Card({ items , data}) {
     return (
         <>
             {items.map((item, id) => (
@@ -27,6 +27,7 @@ function Card({ items }) {
                                     meet={item.meet}
                                     skype={item.skype}
                                     root={false}
+                                    item={item}
                                 />
                             }
                         >
@@ -43,6 +44,7 @@ function Card({ items }) {
                                     meet={item.meet}
                                     skype={item.skype}
                                     root={false}
+                                    item={item}
                                 />
                             }
                         />

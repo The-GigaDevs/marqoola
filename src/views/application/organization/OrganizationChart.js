@@ -8,13 +8,15 @@ import { useTheme } from '@mui/material/styles';
 
 // third-party
 import { Tree, TreeNode } from 'react-organizational-chart';
+import useAuth from 'hooks/useAuth';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import DataCard from './DataCard'
 import Card from './Card';
 import { openDrawer } from 'store/slices/menu';
-import { useDispatch } from 'store';
+import { useDispatch, useSelector } from 'store';
+import { getOrganisations, getOrganisationsTree } from 'store/slices/organisation';
 
 // ==============================|| ORGANIZATION CHARTS ||============================== //
 
@@ -67,36 +69,32 @@ TreeCard.propTypes = {
 const OrganizationChart = ({rows, open, handleCloseDialog}) => {
     const theme = useTheme();
     const dispatch = useDispatch();
-    
+    const { organisationtree, organisations } = useSelector((state) => state.organisation);
+    const { user } = useAuth();
+
     const [orgTree, setOrgTree] = useState([]);
-    var aaa;
-    const getOrgTree = useCallback(async () => {
-        try {
-            const response = await axios.get('/objects/organisations/treeview');
-            setOrgTree(response.data[0]);
-            aaa = response.data[0];
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
+    
+
+   useEffect(() => {
+        setOrgTree(organisationtree);
+        
+   }, [organisationtree]);
 
     useEffect(() => {
-        getOrgTree();
-    }, [getOrgTree]);
-
-    useEffect(() => {
-        getOrgTree();
+        dispatch(getOrganisationsTree(user.accessToken));
     }, [open]);
 
     useEffect(() => {
         dispatch(openDrawer(false));
+        dispatch(getOrganisationsTree(user.accessToken));
+        dispatch(getOrganisations(user.accessToken));
         console.log(rows);
         // eslint-disable-next-line
     }, []);
 
     
 
-    return (
+    return orgTree && orgTree.length > 0 && (
         <Grid container rowSpacing={2} justifyContent="center">
             <Grid item md={12} lg={12} xs={12}>
                 <Grid container spacing={2}>
@@ -108,15 +106,16 @@ const OrganizationChart = ({rows, open, handleCloseDialog}) => {
                                 lineBorderRadius="10px"
                                 label={
                                     <DataCard
-                                        name={orgTree.name}
-                                        role={orgTree.role}
-                                        id={orgTree.id}
+                                        name={orgTree[0].name}
+                                        role={orgTree[0].role}
+                                        id={orgTree[0].id}
                                         root
                                         rows={rows}
+                                        item={orgTree[0]}
                                     />
                                 }
-                            > { orgTree.children && 
-                                <Card items={orgTree.children} />
+                            > { orgTree[0].children && 
+                                <Card items={orgTree[0].children} />
                             }
                             </Tree>
                         </MainCard>

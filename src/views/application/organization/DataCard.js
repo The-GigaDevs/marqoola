@@ -8,6 +8,7 @@ import { Box, Chip, IconButton, List, ListItem, ListItemText, ListItemAvatar, St
 import AddIcon from '@mui/icons-material/AddTwoTone';
 import EditIcon from '@mui/icons-material/Edit';
 import { Delete } from '@mui/icons-material';
+import useAuth from 'hooks/useAuth';
 // third party icons
 
 import OrganizationIcon from './OrganizationIcon';
@@ -16,17 +17,19 @@ import OrganizationIcon from './OrganizationIcon';
 import Avatar from 'ui-component/extended/Avatar';
 import MainCard from 'ui-component/cards/MainCard';
 import OrganizationAddWithParent from './OrganizationAddWithParent';
-import OrganizationModify from './OrganizationModify';
+//import OrganizationModify from './OrganizationModify';
 
 import { useDispatch, useSelector } from 'store';
 
-import { deleteOrganisation } from 'store/slices/organisation';
+import { deleteOrganisation, getOrganisations } from 'store/slices/organisation';
 
 // ==============================|| DATACARD ORGANIZATION CHART ||============================== //
 
-function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
+function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
     const dispatch = useDispatch();
+    const { selectedOrganisation  } = useSelector((state) => state.organisation);
     const { organisations } = useSelector((state) => state.organisation);
+    const { user } = useAuth();
 
     const [open, setOpen] = React.useState(false);
     const [openM, setOpenM] = React.useState(false);
@@ -59,24 +62,23 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
     const rootTree = theme.palette.mode === 'dark' ? `dark.900` : `secondary.light`;
 
     const [orgData, setOrgData] = React.useState([]);
+    const [selectedOrgData, setSelectedOrgData] = React.useState([]);
     var aaa;
 
-
-    const getOrgData = React.useCallback(async () => {
-        try {
-            const response = await axios.get('/objects/organisations/'+ id);
-            setOrgData(response.data);
-            aaa = response.data;
-        } catch (error) {
-            console.log(error);
-        }
+    React.useEffect(() => {
+       // dispatch(getOrganisations(user.accessToken));
+    }, []);
+    
+    React.useEffect(() => {
+       
+        
     }, []);
 
     React.useEffect(() => {
-        getOrgData();
-    }, [getOrgData]);
+        setOrgData(selectedOrganisation);
+    }, [selectedOrganisation]);
 
-    return (
+    return item && (
         <MainCard
             sx={{
                 bgcolor: root ? rootTree : subTree,
@@ -95,7 +97,7 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
                         sx={{ m: 0 }}
                         primary={
                             <Typography variant="subtitle1" sx={{ color: root ? `primary.dark` : `secondary.dark` }}>
-                                {name}
+                                {item.name}
                             </Typography>
                         }
                     />
@@ -104,7 +106,7 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
                     <Box sx={{ display: 'flex' }}>
                         {!root && (
                             <Chip
-                                label={role}
+                                label={item.risktolerancename}
                                 sx={{ fontSize: '0.625rem', height: 20, '& .MuiChip-label': { px: 0.75 } }}
                                 color="primary"
                                 variant="outlined"
@@ -133,7 +135,9 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows }) {
                             sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
                         >
                             <EditIcon fontSize='small'  />
-                            <OrganizationModify open={openM} parents={rows} orgId={orgData} handleCloseDialog={handleCloseDialogM} />
+                            {/*
+                            <OrganizationModify open={openM} parents={rows} orgId={orgData} handleCloseDialog={handleCloseDialogM} /> */
+                            }
                             
                         </IconButton>
                         <IconButton size='small' sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
@@ -159,7 +163,7 @@ DataCard.propTypes = {
     root: PropTypes.bool,
     open: PropTypes.bool,
     handleCloseDialog: PropTypes.func,
-    rows: PropTypes.object
+    rows: PropTypes.array
 };
 
 export default DataCard;

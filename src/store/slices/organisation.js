@@ -122,12 +122,17 @@ export function getOrganisationMetricsById(controlid, token) {
     };
 }
 
-export function getOrganisationsTree() {
+export function getOrganisationsTree(token) {
     return async () => {
         try {
-            const response = await axios.get('/objects/organisations/treeview');
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/organisations/treeview', { headers });
             dispatch(slice.actions.getOrganisationTreeSuccess(response.data));
         } catch (error) {
+            console.log(error)
+            
             dispatch(slice.actions.hasError(error));
         }
     };
