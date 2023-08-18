@@ -150,10 +150,10 @@ const Details = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedAsset.controlvalueformated}</Typography>
+                                                        <Typography variant="h2">{selectedAsset.controlvalueformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Asset Value
                                                         </Typography>
                                                     </Grid>
@@ -166,10 +166,10 @@ const Details = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedAsset.intrinsicassetvalueformated}</Typography>
+                                                        <Typography variant="h2">{selectedAsset.intrinsicassetvalueformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Intrinsic Asset Value
                                                         </Typography>
                                                     </Grid>
@@ -182,10 +182,10 @@ const Details = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedAsset.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedAsset.implementationcostformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Business Continuity
                                                         </Typography>
                                                     </Grid>
@@ -198,10 +198,10 @@ const Details = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedAsset.totalassetvalueformated}</Typography>
+                                                        <Typography variant="h2">{selectedAsset.totalassetvalueformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Total Asset Value
                                                         </Typography>
                                                     </Grid>

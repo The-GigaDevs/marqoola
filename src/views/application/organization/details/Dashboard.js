@@ -113,10 +113,10 @@ const Dashboard = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedOrganisation.controlvalueformated}</Typography>
+                                                        <Typography variant="h2">{selectedOrganisation.controlvalueformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Control Value
                                                         </Typography>
                                                     </Grid>
@@ -129,10 +129,10 @@ const Dashboard = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedOrganisation.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedOrganisation.implementationcostformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Reduction Potential
                                                         </Typography>
                                                     </Grid>
@@ -145,10 +145,10 @@ const Dashboard = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedOrganisation.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedOrganisation.implementationcostformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Implementation Cost
                                                         </Typography>
                                                     </Grid>
@@ -161,10 +161,10 @@ const Dashboard = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedOrganisation.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedOrganisation.implementationcostformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             ROI
                                                         </Typography>
                                                     </Grid>

@@ -263,10 +263,10 @@ function renderRow(props) {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedControl.controlvalueformated}</Typography>
+                                                        <Typography variant="h2">{selectedControl.controlvalueformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Control Value
                                                         </Typography>
                                                     </Grid>
@@ -279,10 +279,10 @@ function renderRow(props) {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedControl.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedControl.implementationcostformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Reduction Potential
                                                         </Typography>
                                                     </Grid>
@@ -295,10 +295,10 @@ function renderRow(props) {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedControl.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedControl.implementationcostformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             Implementation Cost
                                                         </Typography>
                                                     </Grid>
@@ -311,10 +311,10 @@ function renderRow(props) {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h3">{selectedControl.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedControl.implementationcostformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="subtitle1" color={secondary}>
+                                                        <Typography variant="h3" color={secondary}>
                                                             ROI
                                                         </Typography>
                                                     </Grid>
