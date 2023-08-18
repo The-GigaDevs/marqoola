@@ -406,11 +406,11 @@ const OrgTable = () => {
 
     
     return (
-        <MainCard title="Organisations" content={false} secondary={<Switch
+        <MainCard title="Organisations" content={false} secondary={<>{checked ? 'Table View' : 'Tree View'}<Switch
             checked={checked}
             onChange={handleSwitch}
             inputProps={{ 'aria-label': 'controlled' }}
-          />}>{ !checked &&
+          /></>}>{ !checked &&
             (<>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
