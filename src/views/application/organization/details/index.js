@@ -47,7 +47,7 @@ function a11yProps(index) {
 
 // ==============================|| ORDER DETAILS ||============================== //
 
-const OrgDetails = () => {
+const OrgDetails = ({activeTab}) => {
     const theme = useTheme();
     const {state} = useLocation();
     
@@ -64,7 +64,9 @@ const OrgDetails = () => {
     useEffect(() => {
         const { id } = state;
         dispatch(getOrganisationDetails(id, user.accessToken));
-    }, [dispatch]);
+        const { activeTab } = state;
+        activeTab && setValue(activeTab);
+    }, []);
 
 
     return (

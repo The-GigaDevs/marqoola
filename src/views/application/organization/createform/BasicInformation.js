@@ -17,12 +17,12 @@ const validationSchema = yup.object({
 
 // ==============================|| FORM WIZARD - VALIDATION  ||============================== //
 
-const BasicInformation = ({ basicInformationData, setBasicInformationData, handleNext, setErrorIndex, resetFormData, handleResetData, parentData }) => {
+const BasicInformation = ({ basicInformationData, setBasicInformationData, handleNext, setErrorIndex, resetFormData, handleResetData, parentData, parent }) => {
     const [resetData, setResetData] = useState(false)
 
     const formik = useFormik({
         initialValues: {
-            
+            parent: parent ? parent.id : null
         },
         validationSchema,
         onSubmit: (values, helpers) => {

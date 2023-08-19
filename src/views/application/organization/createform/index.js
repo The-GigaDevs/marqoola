@@ -23,7 +23,7 @@ import { get } from 'lodash';
 // step options
 const steps = ['Basic information', 'Division details', 'Industry information', 'Risk tolerance', 'Review'];
 
-const getStepContent = (step, handleNext, handleBack, setErrorIndex, resetFormData, handleResetData, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, riskToleranceData, setRiskToleranceData, parentData, currencies, industries, subindustries) => {
+const getStepContent = (step, handleNext, handleBack, setErrorIndex, resetFormData, handleResetData, basicInformationData, setBasicInformationData, divisionDetailsData, setDivisionDetailsData, industryInformationData, setIndustryInformationData, riskToleranceData, setRiskToleranceData, parentData, currencies, industries, subindustries, parent) => {
     switch (step) {
         case 0:
             return (
@@ -35,6 +35,7 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, resetFormDa
                     basicInformationData={basicInformationData}
                     setBasicInformationData={setBasicInformationData}
                     parentData={parentData}
+                    parent={parent}
                 />
             );
         case 1:
@@ -89,7 +90,7 @@ const getStepContent = (step, handleNext, handleBack, setErrorIndex, resetFormDa
 
 // ==============================|| FORMS WIZARD - BASIC ||============================== //
 
-const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, parentData, currencies1, industries1 , subindustries1}) => {
+const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, parentData, currencies1, industries1 , subindustries1, parent}) => {
     const dispatch = useDispatch();
     const [activeStep, setActiveStep] = React.useState(0);
     const [basicInformationData, setBasicInformationData] = React.useState({});
@@ -216,7 +217,8 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
                             organisations,
                             currencies,
                             industries,
-                            subindustries
+                            subindustries,
+                            parent
                         )}
                         {activeStep === steps.length -1 && (
                             <Stack direction="row" justifyContent={activeStep !== 0 ? 'space-between' : 'flex-end'}>

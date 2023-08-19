@@ -1,12 +1,14 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'utils/axios'
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Box, Chip, IconButton, List, ListItem, ListItemText, ListItemAvatar, Stack, Typography, Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 import EditIcon from '@mui/icons-material/Edit';
+import SearchIcon from '@mui/icons-material/Search';
 import { Delete } from '@mui/icons-material';
 import useAuth from 'hooks/useAuth';
 // third party icons
@@ -17,6 +19,7 @@ import OrganizationIcon from './OrganizationIcon';
 import Avatar from 'ui-component/extended/Avatar';
 import MainCard from 'ui-component/cards/MainCard';
 import OrganizationAddWithParent from './OrganizationAddWithParent';
+import CreateForm from './createform'
 //import OrganizationModify from './OrganizationModify';
 
 import { useDispatch, useSelector } from 'store';
@@ -27,14 +30,21 @@ import { deleteOrganisation, getOrganisations } from 'store/slices/organisation'
 
 function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {state} = useLocation();
     const { selectedOrganisation  } = useSelector((state) => state.organisation);
     const { organisations } = useSelector((state) => state.organisation);
     const { user } = useAuth();
 
     const [open, setOpen] = React.useState(false);
-    const [openM, setOpenM] = React.useState(false);
+    const [openM, setOpenM] = React.useState(true);
+    
+    React.useEffect (() => {
+        setOpen(false);
+    }, []);
     const handleClickOpenDialog = () => {
-        setOpen(true);
+        setOpen(true)
+        
     };
     const handleClickOpenDialogM = () => {
         setOpenM(true);
@@ -44,6 +54,7 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
     }
     const handleCloseDialog = () => {
         setOpen(false);
+        
     };
     const handleCloseDialogM = () => {
         setOpenM(false);
@@ -65,15 +76,13 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
     const [selectedOrgData, setSelectedOrgData] = React.useState([]);
     var aaa;
 
-    React.useEffect(() => {
-       // dispatch(getOrganisations(user.accessToken));
-    }, []);
-    
-    React.useEffect(() => {
-       
-        
-    }, []);
+    const handleOpenDashboard = (event, id) => {
+        navigate('/organisationdetails', { state: { id: item.id , activeTab:0} });
+    }
 
+    const handleOpenDetails = (event, id) => {
+        navigate('/organisationdetails', { state: { id: item.id , activeTab:1} });
+    }
     React.useEffect(() => {
         setOrgData(selectedOrganisation);
     }, [selectedOrganisation]);
@@ -122,15 +131,26 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
                     <Stack direction="row" spacing={1} alignItems="center">
                         <IconButton
                             size="small"
-                            onClick={handleClickOpenDialog}
+                            onClick={() => handleClickOpenDialog()}
                             sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
                         >
                            <AddIcon fontSize="small" />
                            
-                            <OrganizationAddWithParent open={open} parent={{id: id, name:name}} handleCloseDialog={handleCloseDialog} />
+                            <CreateForm open={open} handleCloseDialog={handleCloseDialog} parent={{id: id, name:name}} />
                         </IconButton>
                         <IconButton
-                            onClick={handleClickOpenEditDialog}
+                            onClick={handleOpenDashboard}
+                            size="small"
+                            sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
+                        >
+                            <SearchIcon fontSize='small'  />
+                            {/*
+                            <OrganizationModify open={openM} parents={rows} orgId={orgData} handleCloseDialog={handleCloseDialogM} /> */
+                            }
+                            
+                        </IconButton>
+                        <IconButton
+                            onClick={handleOpenDetails}
                             size="small"
                             sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
                         >
