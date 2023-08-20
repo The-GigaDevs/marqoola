@@ -33,6 +33,7 @@ import assetTypeReducer from './slices/assettype';
 
 import assetReducer from './slices/asset'
 import controlReducer from './slices/control'
+import riskReducer from './slices/risk'
 import controlTemplateReducer from './slices/controltemplate'
 import objectiveReducer from './slices/objective'
 
@@ -66,6 +67,7 @@ const reducer = combineReducers({
     assettype: assetTypeReducer,
     control: controlReducer,
     controltemplate: controlTemplateReducer,
+    risk: riskReducer,
     objective: objectiveReducer,
     divisionselector: divisionSelectorReducer,
     enumlist: enumReducer,

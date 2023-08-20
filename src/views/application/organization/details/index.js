@@ -21,7 +21,8 @@ import Dashboard from './Dashboard';
 import Details from './Details';
 import Assets from './Assets';
 import ControlImplementations from './ControlImplementations';
-
+import Risks from './Risks';
+import Objectives from './Objectives';
 
 // tab content
 function TabPanel({ children, value, index, ...other }) {
@@ -105,7 +106,7 @@ const OrgDetails = ({activeTab}) => {
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Details" {...a11yProps(1)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Assets" {...a11yProps(2)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Objectives" {...a11yProps(3)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Risk Scenarios" {...a11yProps(4)} />
+                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Risks" {...a11yProps(4)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Control Implementations" {...a11yProps(5)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Incidents" {...a11yProps(6)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(7)} />
@@ -128,11 +129,11 @@ const OrgDetails = ({activeTab}) => {
             </TabPanel>
            
             <TabPanel value={value} index={3}>
-                
+               <Objectives selectedOrganisation={selectedOrganisation}/>
             </TabPanel>
 
             <TabPanel value={value} index={4}>
-                
+                <Risks selectedOrganisation={selectedOrganisation}/>
             </TabPanel>
 
             <TabPanel value={value} index={5}>

@@ -107,10 +107,27 @@ export function getObjectivesForTemplate(templateid) {
     };
 }
 
-export function deleteObjective(id) {
+export function getObjectivesForDivision(templateid, token) {
     return async () => {
         try {
-            const response = await axios.delete('/objects/objectives/' + id);
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/objectives?filter[orgaid]=' + templateid , { headers });
+            dispatch(slice.actions.getObjectiveSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
+export function deleteObjective(id, token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.delete('/objects/objectives/' + id, { headers });
             dispatch(slice.actions.deleteObjectiveSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
