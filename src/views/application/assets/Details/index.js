@@ -19,7 +19,7 @@ import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';
 import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
 
 import Details from './Details'
-import Risks from './Risks'
+
 
 // tab content
 function TabPanel({ children, value, index, ...other }) {
@@ -113,7 +113,7 @@ const AssetDetails = () => {
 
             {/* tab - invoice */}
             <TabPanel value={value} index={1}>
-                <Risks selectedAsset={selectedAsset}/>
+                
             </TabPanel>
 
             {/* tab - status */}
