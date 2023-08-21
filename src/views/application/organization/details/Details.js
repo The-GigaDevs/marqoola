@@ -33,8 +33,7 @@ import * as yup from 'yup';
 import { getCurrencies } from 'store/slices/currency';
 
 const validationSchema = yup.object({
-    name: yup.string().required('Organisation name is required'),
-    parent: yup.string().required('Organisation parent is required'),
+    name: yup.string().required('Organisation name is required')
 });
 
 
