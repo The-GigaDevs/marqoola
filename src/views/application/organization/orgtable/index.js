@@ -45,6 +45,7 @@ import AssetCreateForm from '../../assets/createform'
 import AssetEditForm from '../../assets/editform'
 import OrganizationChart from '../OrganizationChart';
 import CreateForm from '../createform'
+import Details from '../details'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -255,6 +256,8 @@ const OrgTable = () => {
     const [openEdit, setOpenEdit] = React.useState(false);
     const [expandRow, setExpandRow] = React.useState(false);
     const [expandedRow, setExpandedRow] = React.useState([]);
+    const [openDetails, setOpenDetails] = React.useState(false);
+    const [identifier, setIdentifier] = React.useState({});
 
     const handleClickOpenDialog = () => {
         setOpen(true);
@@ -356,7 +359,9 @@ const OrgTable = () => {
     };
 
     const handleOpenEditDialog = (event, id) => {
-        navigate('/organisationdetails', { state: { id: id } });
+        //navigate('/organisationdetails', { state: { id: id } });
+        setIdentifier({id: id})
+        setOpenDetails(true)
     }
 
     const handleCloseEditDialog = () => {
@@ -405,7 +410,7 @@ const OrgTable = () => {
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - orgTableData.length) : 0;
 
     
-    return (
+    return (!openDetails && (
         <MainCard title="Organisations" content={false} secondary={<>{checked ? 'Table View' : 'Tree View'}<Switch
             checked={checked}
             onChange={handleSwitch}
@@ -531,6 +536,7 @@ const OrgTable = () => {
                         )}
                     </TableBody>
                 </Table>
+                
                 <AssetEditForm open={openEdit} parentData={orgTableData} handleCloseDialog={handleCloseEditDialog} assetid={currentAsset} />
             </TableContainer>
 
@@ -548,7 +554,10 @@ const OrgTable = () => {
             {
                 checked && (<OrganizationChart rows={orgTableData}/>)
             }
-        </MainCard>
+        </MainCard>) ||
+        openDetails && (
+            <Details identifier={identifier} />
+        )
     );
 };
 
