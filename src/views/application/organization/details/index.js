@@ -70,7 +70,7 @@ const OrgDetails = ({activeTab, identifier, setOpenDetails}) => {
         const { id } = identifier;
         dispatch(getOrganisationDetails(id, user.accessToken));
         //const { activeTab } = state;
-        //activeTab && setValue(activeTab);
+        setValue(activeTab);
     }, []);
 
 

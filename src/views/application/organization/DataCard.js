@@ -25,10 +25,11 @@ import CreateForm from './createform'
 import { useDispatch, useSelector } from 'store';
 
 import { deleteOrganisation, getOrganisationDetails } from 'store/slices/organisation';
+import { set } from 'lodash';
 
 // ==============================|| DATACARD ORGANIZATION CHART ||============================== //
 
-function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item, setOpenDetails, setIdentifier }) {
+function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item, setOpenDetails, setIdentifier, setActiveTab }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {state} = useLocation();
@@ -81,12 +82,14 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item, set
     const handleOpenDashboard = (event, id) => {
        //navigate('/organisationdetails', { state: { id: item.id , activeTab:0} });
        setIdentifier({id: event})
+       setActiveTab(0);
        setOpenDetails(true)
     }
 
     const handleOpenDetails = (event, id) => {
         //navigate('/organisationdetails', { state: { id: item.id , activeTab:1} });
         setIdentifier({id: event})
+        setActiveTab(1);
         setOpenDetails(true)
     }
     React.useEffect(() => {

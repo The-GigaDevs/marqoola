@@ -258,6 +258,7 @@ const OrgTable = () => {
     const [expandedRow, setExpandedRow] = React.useState([]);
     const [openDetails, setOpenDetails] = React.useState(false);
     const [identifier, setIdentifier] = React.useState({});
+    const [activeTab, setActiveTab] = React.useState(0);
 
     const handleClickOpenDialog = () => {
         setOpen(true);
@@ -552,11 +553,11 @@ const OrgTable = () => {
             /></>)
                             }
             {
-                checked && (<OrganizationChart rows={orgTableData} setOpenDetails={setOpenDetails} setIdentifier={setIdentifier}/>)
+                checked && (<OrganizationChart setActiveTab={setActiveTab} rows={orgTableData} setOpenDetails={setOpenDetails} setIdentifier={setIdentifier}/>)
             }
         </MainCard>) ||
         openDetails && (
-            <Details identifier={identifier} setOpenDetails={setOpenDetails}/>
+            <Details activeTab={activeTab} identifier={identifier} setOpenDetails={setOpenDetails}/>
         )
     );
 };

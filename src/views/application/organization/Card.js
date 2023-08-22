@@ -11,7 +11,7 @@ import OrganizationIcon from './OrganizationIcon';
 
 // ==============================|| CARD ORGANIZATION CHART ||============================== //
 
-function Card({ items , data, setOpenDetails, setIdentifier}) {
+function Card({ items , data, setOpenDetails, setIdentifier, setActiveTab}) {
 
     return (
         <>
@@ -31,10 +31,11 @@ function Card({ items , data, setOpenDetails, setIdentifier}) {
                                     item={item}
                                     setOpenDetails={setOpenDetails}
                                     setIdentifier={setIdentifier}
+                                    setActiveTab={setActiveTab}
                                 />
                             }
                         >
-                            <Card items={item.children} setIdentifier={setIdentifier} setOpenDetails={setOpenDetails}/>
+                            <Card items={item.children} setIdentifier={setIdentifier} setOpenDetails={setOpenDetails} setActiveTab={setActiveTab}/>
                         </TreeNode>
                     ) : (
                         <TreeNode
@@ -50,6 +51,7 @@ function Card({ items , data, setOpenDetails, setIdentifier}) {
                                     item={item}
                                     setOpenDetails={setOpenDetails}
                                     setIdentifier={setIdentifier}
+                                    setActiveTab={setActiveTab}
                                 />
                             }
                         />
