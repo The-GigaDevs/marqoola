@@ -66,14 +66,17 @@ TreeCard.propTypes = {
     items: PropTypes.array
 };
 
-const OrganizationChart = ({rows, open, handleCloseDialog}) => {
+const OrganizationChart = ({rows, open, setOpenDetails, setIdentifier}) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const { organisationtree, organisations } = useSelector((state) => state.organisation);
     const { user } = useAuth();
 
     const [orgTree, setOrgTree] = useState([]);
-    
+    const [details, setDetails] = useState(false);
+    const [details2, setDetails2] = useState({});
+
+            
 
    useEffect(() => {
         setOrgTree(organisationtree);
@@ -112,10 +115,12 @@ const OrganizationChart = ({rows, open, handleCloseDialog}) => {
                                         root
                                         rows={rows}
                                         item={orgTree[0]}
+                                        setOpenDetails={setOpenDetails}
+                                        setIdentifier={setIdentifier}
                                     />
                                 }
                             > { orgTree[0].children && 
-                                <Card items={orgTree[0].children} />
+                                <Card items={orgTree[0].children} setOpenDetails={setOpenDetails} setIdentifier={setIdentifier} />
                             }
                             </Tree>
                         </MainCard>

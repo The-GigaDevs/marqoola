@@ -24,23 +24,25 @@ import CreateForm from './createform'
 
 import { useDispatch, useSelector } from 'store';
 
-import { deleteOrganisation, getOrganisations } from 'store/slices/organisation';
+import { deleteOrganisation, getOrganisationDetails } from 'store/slices/organisation';
 
 // ==============================|| DATACARD ORGANIZATION CHART ||============================== //
 
-function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
+function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item, setOpenDetails, setIdentifier }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {state} = useLocation();
     const { selectedOrganisation  } = useSelector((state) => state.organisation);
     const { organisations } = useSelector((state) => state.organisation);
     const { user } = useAuth();
+    const [details, setDetails] = React.useState('');
 
     const [open, setOpen] = React.useState(false);
     const [openM, setOpenM] = React.useState(true);
     
     React.useEffect (() => {
         setOpen(false);
+        
     }, []);
     const handleClickOpenDialog = () => {
         setOpen(true)
@@ -77,11 +79,15 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
     var aaa;
 
     const handleOpenDashboard = (event, id) => {
-        navigate('/organisationdetails', { state: { id: item.id , activeTab:0} });
+       //navigate('/organisationdetails', { state: { id: item.id , activeTab:0} });
+       setIdentifier({id: event})
+       setOpenDetails(true)
     }
 
     const handleOpenDetails = (event, id) => {
-        navigate('/organisationdetails', { state: { id: item.id , activeTab:1} });
+        //navigate('/organisationdetails', { state: { id: item.id , activeTab:1} });
+        setIdentifier({id: event})
+        setOpenDetails(true)
     }
     React.useEffect(() => {
         setOrgData(selectedOrganisation);
@@ -131,7 +137,7 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
                     <Stack direction="row" spacing={1} alignItems="center">
                         <IconButton
                             size="small"
-                            onClick={() => handleClickOpenDialog()}
+                            onClick={() => handleClickOpenDialog(id)}
                             sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
                         >
                            <AddIcon fontSize="small" />
@@ -139,7 +145,7 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item }) {
                             <CreateForm open={open} handleCloseDialog={handleCloseDialog} parent={{id: id, name:name}} />
                         </IconButton>
                         <IconButton
-                            onClick={handleOpenDashboard}
+                            onClick={ () => handleOpenDashboard(id)}
                             size="small"
                             sx={{ bgcolor: theme.palette.mode === 'dark' ? 'dark.main' : 'background.paper', borderRadius: 3, p: 0.25 }}
                         >
@@ -183,7 +189,9 @@ DataCard.propTypes = {
     root: PropTypes.bool,
     open: PropTypes.bool,
     handleCloseDialog: PropTypes.func,
-    rows: PropTypes.array
+    rows: PropTypes.array,
+    setOpenDetails: PropTypes.func,
+    setIdentifier: PropTypes.func
 };
 
 export default DataCard;

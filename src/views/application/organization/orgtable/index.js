@@ -552,7 +552,7 @@ const OrgTable = () => {
             /></>)
                             }
             {
-                checked && (<OrganizationChart rows={orgTableData}/>)
+                checked && (<OrganizationChart rows={orgTableData} setOpenDetails={setOpenDetails} setIdentifier={setIdentifier}/>)
             }
         </MainCard>) ||
         openDetails && (

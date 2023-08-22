@@ -11,7 +11,8 @@ import OrganizationIcon from './OrganizationIcon';
 
 // ==============================|| CARD ORGANIZATION CHART ||============================== //
 
-function Card({ items , data}) {
+function Card({ items , data, setOpenDetails, setIdentifier}) {
+
     return (
         <>
             {items.map((item, id) => (
@@ -28,10 +29,12 @@ function Card({ items , data}) {
                                     skype={item.skype}
                                     root={false}
                                     item={item}
+                                    setOpenDetails={setOpenDetails}
+                                    setIdentifier={setIdentifier}
                                 />
                             }
                         >
-                            <Card items={item.children} />
+                            <Card items={item.children} setIdentifier={setIdentifier} setOpenDetails={setOpenDetails}/>
                         </TreeNode>
                     ) : (
                         <TreeNode
@@ -45,6 +48,8 @@ function Card({ items , data}) {
                                     skype={item.skype}
                                     root={false}
                                     item={item}
+                                    setOpenDetails={setOpenDetails}
+                                    setIdentifier={setIdentifier}
                                 />
                             }
                         />
