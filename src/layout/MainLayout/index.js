@@ -7,7 +7,7 @@ import { AppBar, Box, Container, CssBaseline, Toolbar, useMediaQuery } from '@mu
 
 // project imports
 import Breadcrumbs from 'ui-component/extended/Breadcrumbs';
-import Customization from '../Customization';
+import ContextSelector from '../ContextSelector';
 import Header from './Header';
 import HorizontalBar from './HorizontalBar';
 import Sidebar from './Sidebar';
@@ -149,7 +149,7 @@ const MainLayout = () => {
                     <Outlet />
                 </Container>
             </Main>
-            
+         <ContextSelector />   
         </Box>
     );
 };

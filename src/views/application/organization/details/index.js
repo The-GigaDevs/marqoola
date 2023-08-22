@@ -26,6 +26,8 @@ import ControlImplementations from './ControlImplementations';
 import Risks from './Risks';
 import Objectives from './Objectives';
 
+import OrganizationIcon from '../OrganizationIcon';
+
 // tab content
 function TabPanel({ children, value, index, ...other }) {
     return (
@@ -115,7 +117,7 @@ const OrgDetails = ({activeTab, identifier, setOpenDetails}) => {
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Incidents" {...a11yProps(6)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(7)} />
                 <IconButton sx={{marginLeft: 'auto'}} onClick={() => setOpenDetails(false)}>
-                    <DescriptionTwoToneIcon /> Back
+                    <OrganizationIcon /> Back
                 </IconButton>
                 
             </Tabs>
