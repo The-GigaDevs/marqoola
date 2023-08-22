@@ -556,7 +556,7 @@ const OrgTable = () => {
             }
         </MainCard>) ||
         openDetails && (
-            <Details identifier={identifier} />
+            <Details identifier={identifier} setOpenDetails={setOpenDetails}/>
         )
     );
 };

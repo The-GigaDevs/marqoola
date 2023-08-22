@@ -4,7 +4,9 @@ import { Link, useLocation } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Box, Tab, Tabs } from '@mui/material';
+
+
+import { Box, Tab, Tabs, IconButton } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -46,10 +48,12 @@ function a11yProps(index) {
     };
 }
 
+
 // ==============================|| ORDER DETAILS ||============================== //
 
-const OrgDetails = ({activeTab, identifier}) => {
+const OrgDetails = ({activeTab, identifier, setOpenDetails}) => {
     const theme = useTheme();
+
     const {state} = useLocation();
     
     const dispatch = useDispatch();
@@ -71,8 +75,9 @@ const OrgDetails = ({activeTab, identifier}) => {
 
 
     return (
-        <MainCard>
+        <MainCard >
             <Tabs
+            
                 value={value}
                 indicatorColor="primary"
                 textColor="primary"
@@ -85,7 +90,7 @@ const OrgDetails = ({activeTab, identifier}) => {
                         minWidth: 10,
                         px: 1,
                         py: 1.5,
-                        mr: 2.25,
+                        mr: 2.5,
                         color: theme.palette.grey[600],
                         display: 'flex',
                         flexDirection: 'row',
@@ -110,6 +115,13 @@ const OrgDetails = ({activeTab, identifier}) => {
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Control Implementations" {...a11yProps(5)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Incidents" {...a11yProps(6)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(7)} />
+                
+                    <IconButton sx={{marginLeft: 'auto'}} onClick={() => setOpenDetails(false)}>
+                        <DescriptionTwoToneIcon /> Back
+                    </IconButton>
+                
+            
+
                 
             </Tabs>
 
