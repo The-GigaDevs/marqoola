@@ -77,7 +77,6 @@ const OrgDetails = ({activeTab, identifier, setOpenDetails}) => {
     return (
         <MainCard >
             <Tabs
-            
                 value={value}
                 indicatorColor="primary"
                 textColor="primary"
