@@ -16,6 +16,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import SubCard from 'ui-component/cards/SubCard';
 import Chip from 'ui-component/extended/Chip';
 import { gridSpacing } from 'store/constant';
+import { openSnackbar } from 'store/slices/snackbar';
 
 import ThresholdSlider from '../createform/ThresholdSlider';
 import ReactApexChart from 'react-apexcharts';
@@ -41,7 +42,10 @@ const Details = (controlData) => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const { user } = useAuth();
-    const { selectedOrganisation, organisations } = useSelector((state) => state.organisation);
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
+    const { selectedOrganisation, organisations, hasError } = useSelector((state) => state.organisation);
     const { risktolerances } = useSelector((state) => state.risktolerance)
     const { industries } = useSelector((state) => state.industry)
     const { subindustries } = useSelector((state) => state.subindustry)
@@ -79,6 +83,7 @@ const Details = (controlData) => {
         setSliderData(sliderData)
     }, [sliderData]);
 
+    
 
     const { primary } = theme.palette.text;
     const darkLight = theme.palette.dark.light;
@@ -138,6 +143,23 @@ const Details = (controlData) => {
             }
         }
         dispatch(updateOrganisation(selectedOrganisation.id, data, user.accessToken));
+        await delay(500);
+        if (!hasError) {
+            dispatch(
+                openSnackbar({
+                    open: true,
+                    message: 'Item updated successfully',
+                    variant: 'alert',
+                    alert: {
+                        color: 'success'
+                    },
+                    close: true
+    
+                })
+            )
+        }
+        dispatch(getOrganisations(user.accessToken));
+        
     }
 
     return selectedOrganisation && series && (

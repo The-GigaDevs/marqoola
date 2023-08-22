@@ -366,7 +366,7 @@ const OrgTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getAssets("", user.accessToken));
+        dispatch(getOrganisations(user.accessToken));
     };
 
     const handleClick = (event, name) => {

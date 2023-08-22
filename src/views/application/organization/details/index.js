@@ -115,13 +115,9 @@ const OrgDetails = ({activeTab, identifier, setOpenDetails}) => {
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Control Implementations" {...a11yProps(5)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Incidents" {...a11yProps(6)} />
                 <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(7)} />
-                
-                    <IconButton sx={{marginLeft: 'auto'}} onClick={() => setOpenDetails(false)}>
-                        <DescriptionTwoToneIcon /> Back
-                    </IconButton>
-                
-            
-
+                <IconButton sx={{marginLeft: 'auto'}} onClick={() => setOpenDetails(false)}>
+                    <DescriptionTwoToneIcon /> Back
+                </IconButton>
                 
             </Tabs>
 
