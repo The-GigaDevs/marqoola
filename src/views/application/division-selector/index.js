@@ -3,13 +3,17 @@ import { useDispatch, useSelector } from 'store';
 import { setDivisionSelector } from 'store/slices/division-selector';
 import { useEffect, useState } from "react";
 import { getOrganisations } from "store/slices/organisation";
+import useAuth from 'hooks/useAuth';
 
 
 export default function DivisionSelector(){
     const dispatch = useDispatch();
 
     const { organisations } = useSelector((state) => state.organisation);
+    const { selectedDivision } = useSelector((state) => state.divisionselector);
     const [rows, setRows] = useState([]);
+    const [value, setValue] = useState('')
+    const { user } = useAuth();
 
 
     useEffect(() => {
@@ -27,9 +31,9 @@ export default function DivisionSelector(){
             <TextField
                 id="divisionselector"
                 select
-                onChange={(e) => {dispatch(setDivisionSelector(e.target.value))}}
+                onChange={(e) => { setValue(e.target.value); dispatch(setDivisionSelector(e.target.value))}}
                 fullWidth
-               defaultValue={'0'}
+               defaultValue={selectedDivision? selectedDivision : '0'}
                 
             >
                 <MenuItem key={'0'} value={'0'}>

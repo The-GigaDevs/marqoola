@@ -10,6 +10,7 @@ import { dispatch } from '../index';
 const initialState = {
     error: null,
     selectedDivision:'',
+    selectedDivisionData: {}
     
 };
 
@@ -27,7 +28,9 @@ const slice = createSlice({
             state.selectedDivision = action.payload;
         },
 
-       
+        getOrganisationDetailsSuccess(state, action) {
+            state.selectedDivisionData = action.payload;
+        }
     }
 });
 
@@ -37,18 +40,23 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function setDivisionSelector(id) {
-    return () => {
+export function setDivisionSelector(id, token) {
+    if (id == '0'){
+        dispatch(slice.actions.setDivisionSelectorSuccess(id));
+    }
+    return async () => {
         try {
-            
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/organisations/' + id, { headers });
             dispatch(slice.actions.setDivisionSelectorSuccess(id));
+            dispatch(slice.actions.getOrganisationDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }
     };
 }
-
-
 
 
 
