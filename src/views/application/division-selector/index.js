@@ -17,7 +17,7 @@ export default function DivisionSelector(){
 
 
     useEffect(() => {
-        dispatch(getOrganisations());
+        dispatch(getOrganisations(user.accessToken));
       }, []);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function DivisionSelector(){
             <TextField
                 id="divisionselector"
                 select
-                onChange={(e) => { setValue(e.target.value); dispatch(setDivisionSelector(e.target.value))}}
+                onChange={(e) => { setValue(e.target.value); dispatch(setDivisionSelector(e.target.value, user.accessToken))}}
                 fullWidth
                defaultValue={selectedDivision? selectedDivision : '0'}
                 
