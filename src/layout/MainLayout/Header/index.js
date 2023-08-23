@@ -13,6 +13,7 @@ import ProfileSection from './ProfileSection';
 import LocalizationSection from './LocalizationSection';
 import MegaMenuSection from './MegaMenuSection';
 import NotificationSection from './NotificationSection';
+import SelectedDivisionCard from 'layout/ContextSelector/SelectedDivisionCard';
 
 import { useDispatch, useSelector } from 'store';
 import { openDrawer } from 'store/slices/menu';
@@ -74,12 +75,13 @@ const Header = () => {
             </Box>
 
             {/* header search */}
-            <SearchSection />
+            <SelectedDivisionCard />
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ flexGrow: 1 }} />
 
-            {/* mega-menu */}
+            {/* mega-menu 
             <DivisionSelector />
+            */}
             <Box sx={{ display: { xs: 'none', sm: 'block' }, mx:2 }}>
             <Tooltip title="Roadmap">
   

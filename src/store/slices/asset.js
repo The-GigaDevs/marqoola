@@ -99,7 +99,7 @@ export function getAssetsByOrganisation(orgId, token) {
             const response = await axios.get(url, { headers});
             dispatch(slice.actions.getAssetsSuccess(response.data));
         } catch (error) {
-            dispatch(slice.actions.getAssetsSuccess([{}]));
+            dispatch(slice.actions.getAssetsSuccess([]));
             dispatch(slice.actions.hasError(error));
             console.log(error);
         }
