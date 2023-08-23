@@ -12,6 +12,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
+import DivisionSelector from 'views/application/division-selector';
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
@@ -70,7 +71,7 @@ const Customization = () => {
                         <Grid container spacing={gridSpacing} sx={{ p: 3 }}>
                             <Grid item xs={12}>
                                 {/* layout type */}
-                                Hello
+                                <DivisionSelector />
                             </Grid>
                             <Grid item xs={12}>
                                 {/* Theme Preset Color */}
