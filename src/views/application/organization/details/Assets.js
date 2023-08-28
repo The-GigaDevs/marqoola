@@ -32,7 +32,7 @@ import Chip from 'ui-component/extended/Chip';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { useDispatch, useSelector } from 'store';
-import { getAssets, deleteAsset, getAssetsByOrganisation } from 'store/slices/asset';
+import { getAssets, deleteAsset } from 'store/slices/asset';
 
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -266,7 +266,7 @@ const AssetTable = ({selectedOrganisation}) => {
 
     React.useEffect(() => {
 
-        dispatch(getAssetsByOrganisation(selectedOrganisation.id, user.accessToken));
+        dispatch(getAssets(selectedOrganisation.id, user.accessToken));
     }, []);
 
     React.useEffect(() => {

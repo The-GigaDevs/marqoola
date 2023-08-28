@@ -20,7 +20,7 @@ import { openDrawer } from 'store/slices/menu';
 
 // assets
 import { IconMenu2 } from '@tabler/icons';
-import DivisionSelector from 'views/application/division-selector';
+import DivisionSelector from 'views/application/ContextSelector/division-selector';
 
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 

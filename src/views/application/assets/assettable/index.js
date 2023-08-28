@@ -32,7 +32,7 @@ import Chip from 'ui-component/extended/Chip';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { useDispatch, useSelector } from 'store';
-import { getAssets, deleteAsset, getAssetsByOrganisation } from 'store/slices/asset';
+import { getAssets, deleteAsset, getAssetClusters } from 'store/slices/asset';
 
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -257,6 +257,7 @@ const AssetTable = () => {
     const [openEdit, setOpenEdit] = React.useState(false);
     const [expandRow, setExpandRow] = React.useState(false);
     const [expandedRow, setExpandedRow] = React.useState([]);
+    const [checked, setChecked] = React.useState(false);
 
     const handleClickOpenDialog = () => {
         setOpen(true);
@@ -273,7 +274,7 @@ const AssetTable = () => {
     React.useEffect(() => {
 
         if (selectedDivision)
-        dispatch(getAssetsByOrganisation(selectedDivision, user.accessToken));
+        dispatch(getAssets(selectedDivision, null, user.accessToken));
     
     }, [dispatch]);
 
@@ -288,9 +289,19 @@ const AssetTable = () => {
 
     React.useEffect(() => {
        
-            dispatch(getAssetsByOrganisation(selectedDivision, user.accessToken));
+            dispatch(getAssets(selectedDivision, null, user.accessToken));
        
     }, [divisionSelector]);
+
+    React.useEffect(() => {
+        if (checked){
+            dispatch(getAssetClusters(selectedDivision, null, user.accessToken));
+        }
+        else
+        {
+            dispatch(getAssets(selectedDivision, null, user.accessToken));
+        }
+    }, [checked])
 
     const handleDelete = async (selected) => {
         for (var selectedid of selected) {
@@ -309,7 +320,7 @@ const AssetTable = () => {
 
             })
         )
-        dispatch(getAssets(user.accessToken));
+        dispatch(getAssets(selectedDivision, null, user.accessToken));
         setSelected([])
     };
 
@@ -367,7 +378,7 @@ const AssetTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getAssets("", user.accessToken));
+        dispatch(getAssets("", null, user.accessToken));
     };
 
     const handleClick = (event, name) => {
@@ -398,11 +409,10 @@ const AssetTable = () => {
 
 
 
-    const [checked, setChecked] = React.useState(false);
+   
 
     const handleSwitch = (event) => {
         setChecked(event.target.checked);
-
     };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
@@ -416,6 +426,7 @@ const AssetTable = () => {
             checked={checked}
             onChange={handleSwitch}
             inputProps={{ 'aria-label': 'controlled' }}
+            
           />}>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>

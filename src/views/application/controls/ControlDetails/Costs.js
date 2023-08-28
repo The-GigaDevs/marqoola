@@ -274,7 +274,7 @@ const Costs = (controlData) => {
                                                     {selectedControl.implementationhours ? selectedControl.implementationhours : 0}
                                                     </Typography>
                                                     <Typography variant="h5" sx={{ mb: 1 }}>
-                                                    {selectedControl.othercostsformatted ? selectedControl.othercostsformatted : '$0'}  +
+                                                    {selectedControl.othercostsformatted ? selectedControl.othercostsformatted : '$0'}  +s
                                                     </Typography>
                                                     <Typography variant="h5" sx={{ mb: 3 }}>
                                                         

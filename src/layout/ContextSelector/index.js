@@ -12,7 +12,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
-import DivisionSelector from 'views/application/division-selector';
+import DivisionSelector from 'views/application/ContextSelector/division-selector';
+import AssetSelector from 'views/application/ContextSelector/asset-selector';
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
@@ -75,7 +76,7 @@ const Customization = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 {/* Theme Preset Color */}
-                                Make your selection here
+                               <AssetSelector/>
                             </Grid>
                             <Grid item xs={12}>
                                 {/* font family */}

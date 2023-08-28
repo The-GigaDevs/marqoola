@@ -48,27 +48,6 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getAssets(orgId, token) {
-    return async () => {
-        try {
-            const headers = {
-                Authorization: `Bearer ` + token
-            };
-            if (orgId ==='' || orgId === '0' || orgId === undefined){
-                const response = await axios.get('/objects/assets', { headers });
-                dispatch(slice.actions.getAssetsSuccess(response.data));    
-            }
-            else {
-                const response = await axios.get('/objects/assets?orga=' + orgId, { headers });
-                dispatch(slice.actions.getAssetsSuccess(response.data));   
-            }
-            
-
-        } catch (error) {
-            dispatch(slice.actions.hasError(error));  
-        }
-    };
-}
 
 export function getAssetDetails(id, token) {
     return async () => {
@@ -84,7 +63,7 @@ export function getAssetDetails(id, token) {
     };
 }
 
-export function getAssetsByOrganisation(orgId, token) {
+export function getAssets(orgId, parentId, token) {
     return async () => {
        
         try {
@@ -96,8 +75,44 @@ export function getAssetsByOrganisation(orgId, token) {
                 url = '/objects/assets'
             else
                 url = '/objects/assets?filter[orgaid]=' + orgId
+            
+            if (parentId != null)
+                url = url + '&filter[parentId]=' + parentId
+
+            url = url.replace('?&', '?');
             const response = await axios.get(url, { headers});
             dispatch(slice.actions.getAssetsSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.getAssetsSuccess([]));
+            dispatch(slice.actions.hasError(error));
+            console.log(error);
+        }
+    
+    };
+}
+
+export function getAssetClusters(orgId, parentId, token) {
+    return async () => {
+       
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            var url = ''
+            if (orgId==='0')
+                url = '/objects/assets'
+            else
+                url = '/objects/assets?filter[orgaid]=' + orgId
+            
+            if (parentId != null || parentId === '0')
+                url = url + '&filter[parentId]=' + parentId
+
+            url = url.replace('?&', '?');
+            const response = await axios.get(url, { headers});
+            var assetsFiltered = response.data.filter(function (el) {
+                return el.parentid === undefined;
+              });
+            dispatch(slice.actions.getAssetsSuccess(assetsFiltered));
         } catch (error) {
             dispatch(slice.actions.getAssetsSuccess([]));
             dispatch(slice.actions.hasError(error));
