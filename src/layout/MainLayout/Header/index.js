@@ -14,6 +14,7 @@ import LocalizationSection from './LocalizationSection';
 import MegaMenuSection from './MegaMenuSection';
 import NotificationSection from './NotificationSection';
 import SelectedDivisionCard from 'layout/ContextSelector/SelectedDivisionCard';
+import SelectedAssetCard from 'layout/ContextSelector/SelectedAssetCard';
 
 import { useDispatch, useSelector } from 'store';
 import { openDrawer } from 'store/slices/menu';
@@ -76,7 +77,9 @@ const Header = () => {
 
             {/* header search */}
             <SelectedDivisionCard />
+            <SelectedAssetCard />
             <Box sx={{ flexGrow: 1 }} />
+            
             <Box sx={{ flexGrow: 1 }} />
 
             {/* mega-menu 

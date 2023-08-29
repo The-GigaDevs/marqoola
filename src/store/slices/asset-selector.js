@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const slice = createSlice({
-    name: 'divisionselector',
+    name: 'assetselector',
     initialState,
     reducers: {
         // HAS ERROR

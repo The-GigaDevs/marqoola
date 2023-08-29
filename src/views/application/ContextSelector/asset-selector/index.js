@@ -2,15 +2,14 @@ import { TextField, MenuItem } from "@mui/material";
 import { useDispatch, useSelector } from 'store';
 import { setAssetSelector } from 'store/slices/asset-selector';
 import { useEffect, useState } from "react";
-import { getAssetClusters } from "store/slices/asset";
+import { getAssetsForSelector } from "store/slices/asset";
 import useAuth from 'hooks/useAuth';
 
 
-export default function DivisionSelector(){
+export default function AssetSelector(){
     const dispatch = useDispatch();
 
-    const { assets } = useSelector((state) => state.asset);
-    const { selectedDivision } = useSelector((state) => state.divisionselector);
+    const { contextSelectorAssets } = useSelector((state) => state.asset);
     const { selectedAsset } = useSelector((state) => state.assetselector);
     const [rows, setRows] = useState([]);
     const [value, setValue] = useState('')
@@ -18,16 +17,13 @@ export default function DivisionSelector(){
 
 
     useEffect(() => {
-        dispatch(getAssetClusters(selectedDivision, null, user.accessToken));
+        dispatch(getAssetsForSelector(user.accessToken));
       }, []);
 
     useEffect(() => {
-        setRows(assets);
-    }, [assets]);
+        setRows(contextSelectorAssets);
+    }, [contextSelectorAssets]);
 
-    useEffect(() => {
-        dispatch(getAssetClusters(selectedDivision, null, user.accessToken));
-    }, [selectedDivision]);
 
     return(
         

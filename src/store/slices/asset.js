@@ -10,7 +10,8 @@ const initialState = {
     assets: [],
     assetdetails: {},
     assetsbyorg: [],
-    selectedAsset: {}
+    selectedAsset: {},
+    contextSelectorAssets: []
 
 };
 
@@ -34,6 +35,10 @@ const slice = createSlice({
 
         getAssetsByOrganisationSuccess(state, action) {
             state.assetsbyorg = action.payload;
+        },
+
+        getAssetsForSelectorSuccess(state, action) {
+            state.contextSelectorAssets = action.payload;
         },
 
         deleteAssetSuccess(state, action) {
@@ -71,12 +76,12 @@ export function getAssets(orgId, parentId, token) {
                 Authorization: `Bearer ` + token
             };
             var url = ''
-            if (orgId==='0')
+            if (orgId == null || orgId === '0' || orgId === '')
                 url = '/objects/assets'
             else
                 url = '/objects/assets?filter[orgaid]=' + orgId
             
-            if (parentId != null)
+            if (parentId != null && parentId != '0')
                 url = url + '&filter[parentId]=' + parentId
 
             url = url.replace('?&', '?');
@@ -84,6 +89,26 @@ export function getAssets(orgId, parentId, token) {
             dispatch(slice.actions.getAssetsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.getAssetsSuccess([]));
+            dispatch(slice.actions.hasError(error));
+            console.log(error);
+        }
+    
+    };
+}
+
+export function getAssetsForSelector(token) {
+    return async () => {
+       
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            var url = '/objects/assets'
+            
+            const response = await axios.get(url, { headers});
+            dispatch(slice.actions.getAssetsForSelectorSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.getAssetsForSelectorSuccess([]));
             dispatch(slice.actions.hasError(error));
             console.log(error);
         }

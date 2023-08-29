@@ -248,6 +248,7 @@ const AssetTable = () => {
     const { customers } = useSelector((state) => state.customer);
     const [divisionSelector, setDivisionSelector] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
+    const { selectedAsset } = useSelector((state) => state.assetselector);
     const { user } = useAuth();
     const [assetTableData, setAssetTableData] = React.useState([]);
     const { assets } = useSelector((state) => state.asset);
@@ -288,8 +289,13 @@ const AssetTable = () => {
     }, [selectedDivision]);
 
     React.useEffect(() => {
+        dispatch(getAssets(selectedDivision, selectedAsset, user.accessToken));
+
+    }, [selectedAsset]);
+
+    React.useEffect(() => {
        
-            dispatch(getAssets(selectedDivision, null, user.accessToken));
+            dispatch(getAssets(selectedDivision, selectedAsset, user.accessToken));
        
     }, [divisionSelector]);
 
