@@ -72,7 +72,7 @@ const SelectedAssetCard = () => {
                                     }}
                                     primary={
                                         <Typography variant="h4" sx={{ color: '#fff' }}>
-                                           {selectedAsset.length > 1 ? selectedAssetData.name : 'All Divisions' }
+                                           {selectedAsset.length > 1 ? selectedAssetData.name : 'All Assets' }
                                         </Typography>
                                     }
                                     secondary={

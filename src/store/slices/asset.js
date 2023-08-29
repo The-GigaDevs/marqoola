@@ -82,7 +82,7 @@ export function getAssets(orgId, parentId, token) {
                 url = '/objects/assets?filter[orgaid]=' + orgId
             
             if (parentId != null && parentId != '0')
-                url = url + '&filter[parentId]=' + parentId
+                url = url + '&filter[parentid]=' + parentId
 
             url = url.replace('?&', '?');
             const response = await axios.get(url, { headers});
@@ -129,8 +129,8 @@ export function getAssetClusters(orgId, parentId, token) {
             else
                 url = '/objects/assets?filter[orgaid]=' + orgId
             
-            if (parentId != null || parentId === '0')
-                url = url + '&filter[parentId]=' + parentId
+            if (parentId != null || parentId != '0')
+                url = url + '&filter[parentid]=' + parentId
 
             url = url.replace('?&', '?');
             const response = await axios.get(url, { headers});
