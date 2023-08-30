@@ -6,6 +6,7 @@ import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography }
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { useDispatch, useSelector } from 'store';
+import { useNavigate } from 'react-router-dom';
 
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -43,11 +44,16 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const SelectedAssetCard = () => {
     const theme = useTheme();
     const { selectedAssetData, selectedAsset } = useSelector((state) => state.assetselector);
+    const navigate = useNavigate();
+
+    const handleOpenEditDialog = (event, id) => {
+        navigate('/asset', { state: { id: id } });
+    }
 
     return (
         <>
             
-                <CardWrapper border={false} content={false} sx={{marginLeft: 2}}>
+                <CardWrapper border={false} content={false} sx={{marginLeft: 2}} onClick={(event) => { handleOpenEditDialog(event, selectedAsset) }}>
                     <Box sx={{ p: 2 }}>
                         <List sx={{ py: 0 }}>
                             <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>

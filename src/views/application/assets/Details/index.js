@@ -61,6 +61,7 @@ const AssetDetails = () => {
 
     useEffect(() => {
         const { id } = state;
+        
         dispatch(getAssetDetails(id, user.accessToken));
     }, [dispatch]);
 
