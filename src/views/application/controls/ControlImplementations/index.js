@@ -23,7 +23,7 @@ import {
     Toolbar,
     Tooltip,
     Typography,
-    Fab, Switch
+    Fab, Switch, Button
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { openSnackbar } from 'store/slices/snackbar';
@@ -75,47 +75,53 @@ function stableSort(array, comparator) {
 
 // table header options
 const headCells = [
-    { id: 'name', label: 'Entity Name', minWidth: 170 },
+    { id: 'name', label: 'Control Implementation', minWidth: 170 },
 
+    
     {
-        id: 'parent',
-        label: 'Parents',
-        numeric: false,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US')
-    },
-    {
-        id: 'numemployees',
-        label: '# Employees',
+        id: 'implementationcost',
+        label: 'Impl. Cost',
         numeric: true,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'annualrevenue',
-        label: '$ Annual Revenue',
+        id: 'value',
+        label: '$ Value',
         numeric: true,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'numcustomers',
-        label: '# Customers',
+        id: 'currentriskreduction',
+        label: 'Curr. Risk Reduction',
         numeric: true,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'riskclassification',
-        label: 'Risk Classification',
+        id: 'potentialriskreduction',
+        label: 'Pot. Risk Reduction',
         numeric: true,
         align: 'center',
         format: (value) => typeof value === 'number' && value.toFixed(2)
     },
     {
-        id: 'risktolerance',
+        id: 'currentroi',
         align: 'center',
-        label: 'Risk Tolerance',
+        label: 'Current ROI',
+        numeric: false
+    },
+    {
+        id: 'potentialroi',
+        align: 'center',
+        label: 'Potential ROI',
+        numeric: false
+    },
+    {
+        id: 'action',
+        align: 'center',
+        label: 'Action',
         numeric: false
     }
 ];
@@ -506,12 +512,40 @@ const ControlTable = () => {
                                                 variant="subtitle1"
                                                 sx={{ color: '#db72ff' }}
                                             >
-                                                {' '}
+                                                {''}
                                                 {row.name}{' '}
                                             </Typography>
+                                            <Typography
+                                                variant="subtitle2"
+                                                sx={{ color: '#808080' }}
+                                            >
+                                                {'Organisation: '}
+                                                {row.organame}{' '}
+                                            </Typography>
+                                            <Typography
+                                                variant="subtitle2"
+                                                sx={{ color: '#808080' }}
+                                            >
+                                                {'Asset: '}
+                                                {row.assetname}{' '}
+                                            </Typography>
+                                            <Typography
+                                                variant="subtitle2"
+                                                sx={{ color: '#808080' }}
+                                            >
+                                                {'Risk: '}
+                                                {row.riskname}{' '}
+                                            </Typography>
+                                            <Typography
+                                                variant="subtitle2"
+                                                sx={{ color: '#808080' }}
+                                            >
+                                                {'Objective: '}
+                                                {row.objectivename}{' '}
+                                            </Typography>
                                         </TableCell>
-                                        <TableCell align="center">{row.parentname}</TableCell>
-                                        <TableCell align="center">{row.employeecount}</TableCell>
+                                        <TableCell align="center">{row.implementationcost ? row.implementationcostformated : ''}</TableCell>
+                                        <TableCell align="center">{row.controlvalue ? row.controlvalueformated : ''}</TableCell>
                                         <TableCell align="center">{row.annualrevenue ? row.annualrevenueformated : '0'}</TableCell>
                                         <TableCell align="center">
                                             {row.customercount ? row.customercount : '0'}
@@ -520,7 +554,12 @@ const ControlTable = () => {
                                             {row.risktolerancename}
                                         </TableCell>
                                         <TableCell align="center">
-                                            {row.loweramountmax ? row.loweramountmaxformated : '0'} - {row.toleranceamountmax ? row.toleranceamountmaxformated : '0'}
+                                            {row.loweramountmax ? row.loweramountmaxformated : '0'} 
+                                        </TableCell>
+                                        <TableCell align="center">
+                                        <Button variant="contained" color="error" >
+                                            Fix Now !
+                                            </Button>
                                         </TableCell>
 
                                     </TableRow>
