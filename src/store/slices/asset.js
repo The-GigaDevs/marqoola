@@ -83,7 +83,7 @@ export function getAssets(orgId, parentId, token) {
                 url = '/objects/assets?filter[orgaid]=' + orgId
             
             if (parentId != null && parentId != '0' && parentId != '')
-                url = url + '&filter[parentid]=' + parentId
+                url = url + '&filter[id]=' + parentId
 
             url = url.replace('?&', '?');
             const response = await axios.get(url, { headers});
@@ -132,7 +132,7 @@ export function getAssetClusters(orgId, parentId, token) {
                 url = '/objects/assets?filter[orgaid]=' + orgId
             
             if (parentId != null || parentId != '0')
-                url = url + '&filter[parentid]=' + parentId
+                url = url + '&filter[id]=' + parentId
 
             url = url.replace('?&', '?');
             const response = await axios.get(url, { headers});
@@ -140,19 +140,8 @@ export function getAssetClusters(orgId, parentId, token) {
                 return el.parentid === undefined;
               });
             
-              var url2 = ''
-              if (orgId==='0')
-                  url2 = '/objects/assets?'
-              else
-                  url2 = '/objects/assets?filter[orgaid]=' + orgId
-              
-              if (parentId != null || parentId != '0')
-                  url2= url2 + '&filter[id]=' + parentId
-  
-              url2 = url2.replace('?&', '?');
-              const response2 = await axios.get(url2, { headers});
 
-            dispatch(slice.actions.getAssetsSuccess([...assetsFiltered, ...response2.data]));
+            dispatch(slice.actions.getAssetsSuccess(assetsFiltered));
         } catch (error) {
             dispatch(slice.actions.getAssetsSuccess([]));
             dispatch(slice.actions.hasError(error));
