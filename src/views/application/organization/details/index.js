@@ -28,6 +28,7 @@ import Objectives from './Objectives';
 
 import OrganizationIcon from '../OrganizationIcon';
 
+
 // tab content
 function TabPanel({ children, value, index, ...other }) {
     return (
@@ -69,10 +70,11 @@ const OrgDetails = ({activeTab, identifier, setOpenDetails}) => {
     };
 
     useEffect(() => {
-        const { id } = identifier;
+        const { id } = identifier === undefined? state : identifier;
         dispatch(getOrganisationDetails(id, user.accessToken));
-        //const { activeTab } = state;
-        setValue(activeTab);
+       
+        const tab = activeTab===undefined ? 0 : activeTab;
+        setValue(tab);
     }, []);
 
 
