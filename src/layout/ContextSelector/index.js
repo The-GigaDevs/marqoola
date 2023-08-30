@@ -14,6 +14,7 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import { gridSpacing } from 'store/constant';
 import DivisionSelector from 'views/application/ContextSelector/division-selector';
 import AssetSelector from 'views/application/ContextSelector/asset-selector';
+import RiskSelector from 'views/application/ContextSelector/risk-selector';
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
@@ -80,7 +81,7 @@ const Customization = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 {/* font family */}
-                                
+                                <RiskSelector />
                             </Grid>
                             <Grid item xs={12}>
                                 {/* border radius */}

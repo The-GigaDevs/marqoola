@@ -24,6 +24,7 @@ import { IconMenu2 } from '@tabler/icons';
 import DivisionSelector from 'views/application/ContextSelector/division-selector';
 
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import SelectedRiskCard from 'layout/ContextSelector/SelectedRiskCard';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -78,6 +79,7 @@ const Header = () => {
             {/* header search */}
             <SelectedDivisionCard />
             <SelectedAssetCard />
+            <SelectedRiskCard />
             <Box sx={{ flexGrow: 1 }} />
             
             <Box sx={{ flexGrow: 1 }} />

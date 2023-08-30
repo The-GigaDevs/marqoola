@@ -39,6 +39,7 @@ import objectiveReducer from './slices/objective'
 
 import divisionSelectorReducer from './slices/division-selector';
 import assetSelectorReducer from './slices/asset-selector';
+import riskSelectorReducer from './slices/risk-selector'
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -72,6 +73,7 @@ const reducer = combineReducers({
     objective: objectiveReducer,
     divisionselector: divisionSelectorReducer,
     assetselector: assetSelectorReducer,
+    riskselector: riskSelectorReducer,
     enumlist: enumReducer,
     enumData: enumDataReducer,
     chat: chatReducer,

@@ -9,7 +9,8 @@ const initialState = {
     error: null,
     risks: [],
     selectedRisk: {},
-    metrics : []
+    metrics : [],
+    contextSelectorRisks: []
 
 };
 
@@ -36,7 +37,10 @@ const slice = createSlice({
 
         deleteRiskSuccess(state, action) {
             getRisks();
-        }
+        },
+        getRisksForSelectorSuccess(state, action) {
+            state.contextSelectorRisks = action.payload;
+        },
 
     }
 });
@@ -86,6 +90,26 @@ export function getRiskById(riskid, token) {
         } catch (error) {
             dispatch(slice.actions.hasError(error));  
         }
+    };
+}
+
+export function getRisksForSelector(token) {
+    return async () => {
+       
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            var url = '/objects/risks'
+            
+            const response = await axios.get(url, { headers});
+            dispatch(slice.actions.getRisksForSelectorSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.getRisksForSelectorSuccess([]));
+            dispatch(slice.actions.hasError(error));
+            console.log(error);
+        }
+    
     };
 }
 
