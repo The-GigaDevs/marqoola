@@ -253,6 +253,7 @@ const ControlTable = () => {
     const { selectedDivision } = useSelector((state) => state.divisionselector);
     const { selectedAsset } = useSelector((state) => state.assetselector);
     const { selectedRisk } = useSelector((state) => state.riskselector);
+    const { selectedObjective } = useSelector((state) => state.objectiveselector);
     const { user } = useAuth();
     const [orgTableData, setOrgTableData] = React.useState([]);
     const { controlscenarios } = useSelector((state) => state.control);
@@ -273,14 +274,14 @@ const ControlTable = () => {
     const handleCloseDialog = () => {
         setOpen(false);
         setResetForm(true);
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '', user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective, user.accessToken));
     };
 
     // Getting the token
 
     React.useEffect(() => {
 
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '', user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective , user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
@@ -289,20 +290,11 @@ const ControlTable = () => {
 
     React.useEffect(() => {
         setDivisionSelector(selectedDivision);
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
-    }, [selectedDivision]);
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective,user.accessToken));
+    }, [selectedDivision, selectedAsset, selectedRisk, selectedObjective]);
 
     React.useEffect(() => {
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
-    }, [selectedAsset]);
-
-    React.useEffect(() => {
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
-    }, [selectedRisk]);
-
-
-    React.useEffect(() => {
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective ,user.accessToken));
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
@@ -322,7 +314,7 @@ const ControlTable = () => {
 
             })
         )
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective ,user.accessToken));
         setSelected([])
     };
 

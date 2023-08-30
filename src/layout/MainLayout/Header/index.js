@@ -25,6 +25,7 @@ import DivisionSelector from 'views/application/ContextSelector/division-selecto
 
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SelectedRiskCard from 'layout/ContextSelector/SelectedRiskCard';
+import SelectedObjectiveCard from 'layout/ContextSelector/SelectedObjectiveCard';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -80,6 +81,7 @@ const Header = () => {
             <SelectedDivisionCard />
             <SelectedAssetCard />
             <SelectedRiskCard />
+            <SelectedObjectiveCard />
             <Box sx={{ flexGrow: 1 }} />
             
             <Box sx={{ flexGrow: 1 }} />

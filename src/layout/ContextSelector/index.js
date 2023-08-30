@@ -15,6 +15,7 @@ import { gridSpacing } from 'store/constant';
 import DivisionSelector from 'views/application/ContextSelector/division-selector';
 import AssetSelector from 'views/application/ContextSelector/asset-selector';
 import RiskSelector from 'views/application/ContextSelector/risk-selector';
+import ObjectiveSelector from 'views/application/ContextSelector/objective-selector';
 
 // ==============================|| LIVE CUSTOMIZATION ||============================== //
 
@@ -84,7 +85,7 @@ const Customization = () => {
                                 <RiskSelector />
                             </Grid>
                             <Grid item xs={12}>
-                                {/* border radius */}
+                                <ObjectiveSelector />
                                 
                             </Grid>
                             <Grid item xs={12}>

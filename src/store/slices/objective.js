@@ -9,7 +9,8 @@ const initialState = {
     error: null,
     objectives: [],
     objectivetemplates:[],
-    objectivedetails: {}
+    objectivedetails: {},
+    contextSelectorObjectives: []
 
 };
 
@@ -33,6 +34,10 @@ const slice = createSlice({
 
         getObjectiveDetailsSuccess(state, action) {
             state.objectivedetails = action.payload;
+        },
+
+        getObjectivesForSelectorSuccess(state, action){
+            state.contextSelectorObjectives = action.payload;
         },
 
         deleteObjectiveSuccess(state, action) {
@@ -70,6 +75,26 @@ export function getObjectiveDetails(id) {
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }
+    };
+}
+
+export function getObjectivesForSelector(token) {
+    return async () => {
+       
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            var url = '/objects/objectives'
+            
+            const response = await axios.get(url, { headers});
+            dispatch(slice.actions.getObjectivesForSelectorSuccess(response.data));
+        } catch (error) {
+            dispatch(slice.actions.getObjectivesForSelectorSuccess([]));
+            dispatch(slice.actions.hasError(error));
+            console.log(error);
+        }
+    
     };
 }
 
