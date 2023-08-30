@@ -145,6 +145,7 @@ const OrganisationDetails = Loadable(lazy(() => import('views/application/organi
 const Assets = Loadable(lazy(() => import('views/application/assets/assettable')));
 const AssetDetails = Loadable(lazy(() => import('views/application/assets/Details')));
 const Controls = Loadable(lazy(() => import('views/application/controls')));
+const ControlImplementations = Loadable(lazy(() => import('views/application/controls/ControlImplementations')));
 const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
 const Objectives = Loadable(lazy(() => import('views/application/objectives')));
 // ==============================|| MAIN ROUTING ||============================== //
@@ -566,6 +567,10 @@ const MainRoutes = {
             element: <Controls />
         },
         {
+            path: '/controlimplementations',
+            element: <ControlImplementations />
+        },
+        {
             path: '/control',
             element: <ControlDetails />
         },
@@ -576,11 +581,6 @@ const MainRoutes = {
         {
             path: '/risks',
             element: <UnderConstruction />
-        },
-        {
-            path: '/controlimplementations',
-            element: <UnderConstruction />
-
         },
         {
             path: '/squids',

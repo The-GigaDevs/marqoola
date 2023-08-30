@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
 import useAuth from 'hooks/useAuth';
 // material-ui
+import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import {
     Box,
@@ -23,7 +23,7 @@ import {
     Toolbar,
     Tooltip,
     Typography,
-    Fab, Collapse, Tab, Button
+    Fab, Switch
 } from '@mui/material';
 import { visuallyHidden } from '@mui/utils';
 import { openSnackbar } from 'store/slices/snackbar';
@@ -32,10 +32,7 @@ import Chip from 'ui-component/extended/Chip';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { useDispatch, useSelector } from 'store';
-import { getControls, getControlsForTemplate, deleteControl } from 'store/slices/control';
-import { getControlTemplates, deleteControlTemplate } from 'store/slices/controltemplate';
-
-import ControlDetails from './ControlDetails';
+import { getAssets, deleteAsset } from 'store/slices/asset';
 
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -44,8 +41,13 @@ import PrintIcon from '@mui/icons-material/PrintTwoTone';
 import FileCopyIcon from '@mui/icons-material/FileCopyTwoTone';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
+
+//import CreateForm from '../createform'
+import Details from '../ControlDetails'
+
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { deleteControl, getControls } from 'store/slices/control';
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -70,78 +72,55 @@ function stableSort(array, comparator) {
     });
     return stabilizedThis.map((el) => el[0]);
 }
-/*
-"templateid": null,
-        "templatename": null,
-        "assetid": "c19c3a4a-fcff-4e2d-8346-5c61f0a90635",
-        "assetname": "asset 5",
-        "objectiveid": null,
-        "objectivename": null,
-        "riskid": null,
-        "riskname": null,
-        "squidid": "5587f38f-971f-477b-ac34-c92bfc8b13b4",
-        "squidname": "CIS_AWS_1_1",
-        "orgaid": null,
-        "organame": null,
-        "implementationcost": null,
-        "implementationcostformated": "",
-        "controlvalue": null,
-        "controlvalueformated": "",
-        "istemplate": false,
-*/
+
 // table header options
 const headCells = [
-    { id: 'name', label: 'Template Name', minWidth: 170 },
+    { id: 'name', label: 'Entity Name', minWidth: 170 },
+
     {
-        id: 'totalrisk',
-        label: 'Total % of Risk',
+        id: 'parent',
+        label: 'Parents',
         numeric: false,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'currentriskreduction',
-        label: 'Current Risk Reduction',
-        numeric: false,
+        id: 'numemployees',
+        label: '# Employees',
+        numeric: true,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'potentialriskreduction',
-        label: 'Potential Risk Reduction',
-        align: 'center',
-        numeric: false,
-        
-    },
-    {
-        id: 'implementationcost',
-        label: 'Current Implementation Cost',
-        align: 'center',
-        numeric: true,
-        
-    },
-    {
-        id: 'potentialcost',
-        label: 'Potential Implementation Cost',
+        id: 'annualrevenue',
+        label: '$ Annual Revenue',
         numeric: true,
         align: 'center',
-        format: (value) => typeof value === 'number' && value.toFixed(2)
+        format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'currentroi',
-        label: 'Current ROI',
+        id: 'numcustomers',
+        label: '# Customers',
+        numeric: true,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US')
+    },
+    {
+        id: 'riskclassification',
+        label: 'Risk Classification',
         numeric: true,
         align: 'center',
         format: (value) => typeof value === 'number' && value.toFixed(2)
     },
     {
-        id: 'potentialcost',
-        label: 'Potential ROI',
-        numeric: true,
+        id: 'risktolerance',
         align: 'center',
-        format: (value) => typeof value === 'number' && value.toFixed(2)
+        label: 'Risk Tolerance',
+        numeric: false
     }
 ];
+
+// ==============================|| TABLE HEADER ||============================== //
 
 function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort, selected, handleDelete }) {
     const createSortHandler = (property) => (event) => {
@@ -167,7 +146,7 @@ function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowC
                         <EnhancedTableToolbar numSelected={selected.length} selection={selected} handleDelete={handleDelete} />
                     </TableCell>
                 )}
-                <TableCell sx={{ pl: 3 }} />
+                
                 {numSelected <= 0 &&
                     headCells.map((headCell) => (
                         <TableCell
@@ -259,40 +238,48 @@ const ControlTable = () => {
     const [orderBy, setOrderBy] = React.useState('calories');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(25);
     const [search, setSearch] = React.useState('');
     const [currentAsset, setCurrentAsset] = React.useState('');
     const [rows, setRows] = React.useState([]);
     const { customers } = useSelector((state) => state.customer);
     const [divisionSelector, setDivisionSelector] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
+    const { selectedAsset } = useSelector((state) => state.assetselector);
+    const { selectedRisk } = useSelector((state) => state.riskselector);
     const { user } = useAuth();
-    const [assetTableData, setAssetTableData] = React.useState([]);
-    const { controltemplates } = useSelector((state) => state.controltemplate);
+    const [orgTableData, setOrgTableData] = React.useState([]);
+    const { controls } = useSelector((state) => state.control);
 
     const [open, setOpen] = React.useState(false);
+    const [resetForm, setResetForm] = React.useState(false);
     const [openEdit, setOpenEdit] = React.useState(false);
     const [expandRow, setExpandRow] = React.useState(false);
     const [expandedRow, setExpandedRow] = React.useState([]);
+    const [openDetails, setOpenDetails] = React.useState(false);
+    const [identifier, setIdentifier] = React.useState({});
+    const [activeTab, setActiveTab] = React.useState(0);
 
     const handleClickOpenDialog = () => {
         setOpen(true);
+        setResetForm(false);
     };
     const handleCloseDialog = () => {
         setOpen(false);
-        dispatch(getControls("", user.accessToken));
+        setResetForm(true);
+        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
     };
 
     // Getting the token
 
     React.useEffect(() => {
 
-        dispatch(getControlTemplates(divisionSelector, user.accessToken));
+        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
-        setAssetTableData(controltemplates);
-    }, [controltemplates]);
+        setOrgTableData(controls);
+    }, [controls]);
 
     React.useEffect(() => {
         setDivisionSelector(selectedDivision);
@@ -300,12 +287,12 @@ const ControlTable = () => {
     }, [selectedDivision]);
 
     React.useEffect(() => {
-        dispatch(getControls(divisionSelector, user.accessToken));
+        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
         for (var selectedid of selected) {
-            dispatch(deleteControl(selectedid));
+            dispatch(deleteControl(selectedid, user.accessToken));
         }
         await delay(500);
         dispatch(
@@ -320,7 +307,7 @@ const ControlTable = () => {
 
             })
         )
-        dispatch(getControls(divisionSelector, user.accessToken));
+        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
         setSelected([])
     };
 
@@ -329,7 +316,7 @@ const ControlTable = () => {
         setSearch(newString || '');
 
         if (newString) {
-            const newRows = assetTableData.filter((row) => {
+            const newRows = orgTableData.filter((row) => {
                 let matches = true;
 
                 const properties = ['name', 'email', 'location', 'orders'];
@@ -352,6 +339,7 @@ const ControlTable = () => {
         }
     };
 
+
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -363,7 +351,7 @@ const ControlTable = () => {
             if (selected.length > 0) {
                 setSelected([]);
             } else {
-                const newSelectedId = assetTableData.map((n) => n.id);
+                const newSelectedId = orgTableData.map((n) => n.id);
                 setSelected(newSelectedId);
             }
             return;
@@ -372,13 +360,14 @@ const ControlTable = () => {
     };
 
     const handleOpenEditDialog = (event, id) => {
-        navigate('/control', { state: { id: id } });
+        //navigate('/organisationdetails', { state: { id: id } });
+        setIdentifier({id: id})
+        setOpenDetails(true)
     }
-    
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getControls("", user.accessToken));
+        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
     };
 
     const handleClick = (event, name) => {
@@ -407,107 +396,28 @@ const ControlTable = () => {
         setPage(0);
     };
 
-    const handleExpandRow = (event, id) => {
-        setExpandRow(!expandRow);
-        setExpandedRow(id);
-    }
+
+
+    const [checked, setChecked] = React.useState(false);
+
+    const handleSwitch = (event) => {
+        setChecked(event.target.checked);
+
+    };
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
     const isExpanded = (name) => expandedRow.indexOf(name) !== -1;
 
-    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - assetTableData.length) : 0;
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - orgTableData.length) : 0;
 
-    function ExpandedRow({ templateid }) {
-        const [controlTableData, setControlTableData] = React.useState([]);
-        const { controls } = useSelector((state) => state.control);
-        React.useEffect(() => {
-
-            dispatch(getControlsForTemplate(templateid, user.accessToken));
-        }, [dispatch]);
-        
-        React.useEffect(() => {
-            setControlTableData(controls);
-        }, [controls]);
-        return (
-            <TableRow >
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
-                    <Collapse in={expandRow} timeout="auto" unmountOnExit>
-                        {expandRow && (
-                            <Box sx={{ margin: 1 }}>
-                                <TableContainer>
-                                    <MainCard
-                                        
-                                        
-                                        content={true}
-
-                                    >
-                                        <Table size="small" aria-label="dgfgd">
-                                            <TableHead>
-                                                <TableRow>
-                                                    <TableCell>Control</TableCell>
-                                                    <TableCell>Control Category</TableCell>
-                                                    <TableCell>Organisation</TableCell>
-                                                    <TableCell>Risk</TableCell>
-                                                    <TableCell>Concept</TableCell>
-                                                    <TableCell>Implementation</TableCell>
-                                                    <TableCell>Control Value</TableCell>
-                                                    <TableCell>Vulnerability</TableCell>
-                                                    <TableCell>Last Tested</TableCell>
-                                                </TableRow>
-                                            </TableHead>
-                                            <TableBody>
-                                            {controls.map((controlRow) => (<>
-                                                    <TableRow hover key={controlRow.id}>
-                                                        <TableCell component="th" scope="row" 
-                                            onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, controlRow.id) }}>
-                                                            {controlRow.name}
-                                                            <Typography variant="caption"> Asset: {controlRow.assetname} </Typography>
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.controlcategoryname}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.organame}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.riskname}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.securityconceptname}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.implementationcostformated}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.controlvalueformated}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.vulnerability}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.lasttested? controlRow.lasttested: "Never"}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <Button variant='contained' color="secondary">Run Test</Button>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                    
-                                                    </>
-                                                ))}
-                                            </TableBody>
-                                        </Table>
-                                    </MainCard>
-                                </TableContainer>
-                            </Box>
-                        )}
-                    </Collapse>
-                </TableCell>
-            </TableRow>
-        )
-    }
-
-    return (
-        <MainCard title="Control Templates" content={false}>
+    
+    return (!openDetails && (
+        <MainCard title="controls" content={false} secondary={<>{checked ? 'Table View' : 'Tree View'}<Switch
+            checked={checked}
+            onChange={handleSwitch}
+            inputProps={{ 'aria-label': 'controlled' }}
+          /></>}>{ !checked &&
+            (<>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -520,13 +430,13 @@ const ControlTable = () => {
                                 )
                             }}
                             onChange={handleSearch}
-                            placeholder="Search Asset"
+                            placeholder="Search Organisation"
                             value={search}
                             size="small"
                         />
                     </Grid>
                     <Grid item xs={12} sm={6} sx={{ textAlign: 'right' }}>
-                        <Tooltip title="Create Asset">
+                        <Tooltip title="Create Organisation">
                             <Fab
                                 color="primary"
                                 size="small"
@@ -535,14 +445,15 @@ const ControlTable = () => {
                             >
                                 <AddIcon fontSize="small" />
                             </Fab>
-                        </Tooltip>{
-                       // <AssetCreateForm open={open} parentData={assetTableData} handleCloseDialog={handleCloseDialog} />
-                     }
+                        </Tooltip>
+                        { /*
+                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} />
+                        */}
                     </Grid>
                 </Grid>
             </CardContent>
 
-            {/* table */}
+            
             <TableContainer>
                 <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
                     <EnhancedTableHead
@@ -552,12 +463,12 @@ const ControlTable = () => {
                         orderBy={orderBy}
                         onSelectAllClick={handleSelectAllClick}
                         onRequestSort={handleRequestSort}
-                        rowCount={assetTableData.length}
+                        rowCount={orgTableData.length}
                         selected={selected}
                         handleDelete={handleDelete}
                     />
                     <TableBody>
-                        {stableSort(assetTableData, getComparator(order, orderBy))
+                        {stableSort(orgTableData, getComparator(order, orderBy))
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((row, index) => {
                                 /** Make sure no display bugs if row isn't an OrderData object */
@@ -584,11 +495,6 @@ const ControlTable = () => {
                                                 }}
                                             />
                                         </TableCell>
-                                        <TableCell sx={{ pl: 3 }}>
-                                            <IconButton aria-label="expand row" size="small" onClick={(event) => { handleExpandRow(event, row.id) }}>
-                                                {expandRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                                            </IconButton>
-                                        </TableCell>
                                         <TableCell
                                             component="th"
                                             id={labelId}
@@ -601,30 +507,24 @@ const ControlTable = () => {
                                                 sx={{ color: '#db72ff' }}
                                             >
                                                 {' '}
-                                                {row.name} - {row.title}
+                                                {row.name}{' '}
                                             </Typography>
-                                            
                                         </TableCell>
-                                        <TableCell>{row.totalriskpercentage ? row.totalriskpercentage : 0}%</TableCell>
-                                        <TableCell align="center">{row.currentriskreduction ? row.currentriskreductionformatted : '0'}</TableCell>
-                                        <TableCell align="center">{row.potentialriskreduction ? row.potentialriskreductionformatted : '0'}</TableCell> 
+                                        <TableCell align="center">{row.parentname}</TableCell>
+                                        <TableCell align="center">{row.employeecount}</TableCell>
+                                        <TableCell align="center">{row.annualrevenue ? row.annualrevenueformated : '0'}</TableCell>
                                         <TableCell align="center">
-                                            {row.implementationcost? row.implementationcostformated : '0'}
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            {row.potentialimplementationcost? row.potentialimplementationcostformated : '0'}
+                                            {row.customercount ? row.customercount : '0'}
                                         </TableCell>
                                         <TableCell align="center">
-                                            {row.currentroi? row.currentroiformatted  : '0'}
+                                            {row.risktolerancename}
                                         </TableCell>
                                         <TableCell align="center">
-                                            {row.potentialroi? row.potentialroiformatted  : '0'}
+                                            {row.loweramountmax ? row.loweramountmaxformated : '0'} - {row.toleranceamountmax ? row.toleranceamountmaxformated : '0'}
                                         </TableCell>
 
                                     </TableRow>
-                                    {isRowExpanded && (
-                                        <ExpandedRow templateid={row.id}  />
-                                    )}
+                                    
                                 </>
                                 );
                             })}
@@ -639,23 +539,26 @@ const ControlTable = () => {
                         )}
                     </TableBody>
                 </Table>
-                {
                 
-                //<AssetEditForm open={openEdit} parentData={assetTableData} handleCloseDialog={handleCloseEditDialog} assetid={currentAsset} />
-                }
-                </TableContainer>
 
-            {/* table pagination */}
+            </TableContainer>
+
+            
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={assetTableData.length}
+                count={orgTableData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-        </MainCard>
+            /></>)
+                            }
+            
+        </MainCard>) ||
+        openDetails && (
+            <Details activeTab={activeTab} identifier={identifier} setOpenDetails={setOpenDetails}/>
+        )
     );
 };
 

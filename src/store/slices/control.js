@@ -47,22 +47,16 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getControls(orgId, token) {
+export function getControls(orgId, assetid, riskid, token) {
     return async () => {
         try {
             const headers = {
                 Authorization: `Bearer ` + token
             };
-            if (orgId ==='' || orgId === '0' || orgId === undefined){
-                const response = await axios.get('/objects/controls', { headers });
-                dispatch(slice.actions.getControlsSuccess(response.data));    
-            }
-            else {
-                const response = await axios.get('/objects/controls?orga=' + orgId, { headers });
-                dispatch(slice.actions.getControlsSuccess(response.data));   
-            }
-            
-
+            const orgid = (orgId === '0' || orgId === '') ? null : orgId;
+            const url = '/objects/controls?[orgaid]=' + orgid + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid; 
+            const response = await axios.get(url, { headers });
+            dispatch(slice.actions.getControlsSuccess(response.data));   
         } catch (error) {
             dispatch(slice.actions.hasError(error));  
         }
