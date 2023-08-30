@@ -50,13 +50,15 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getControls(orgId, assetid, riskid, token) {
+export function getControls(orgId, assetId, riskId, token) {
     return async () => {
         try {
             const headers = {
                 Authorization: `Bearer ` + token
             };
             const orgid = (orgId === '0' || orgId === '') ? null : orgId;
+            const assetid = (assetId === '0' || assetId === null) ? '' : assetId;
+            const riskid = (riskId === '0' || riskId === null) ? '' : riskId;
             const url = '/objects/controls?filter[orgaid]=' + orgid + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid; 
             const response = await axios.get(url, { headers });
             dispatch(slice.actions.getControlsSuccess(response.data));   

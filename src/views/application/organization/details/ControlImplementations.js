@@ -256,7 +256,7 @@ const ControlImplementations = ({selectedOrganisation}) => {
 
     React.useEffect(() => {
 
-        dispatch(getControls(selectedOrganisation.id, user.accessToken));
+        dispatch(getControls(selectedOrganisation.id, '', '', user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
@@ -285,7 +285,7 @@ const ControlImplementations = ({selectedOrganisation}) => {
 
             })
         )
-        dispatch(getControls(selectedOrganisation.id,user.accessToken));
+        dispatch(getControls(selectedOrganisation.id, '', '', user.accessToken));
         setSelected([])
     };
 
