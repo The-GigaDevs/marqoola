@@ -326,7 +326,7 @@ const ControlTable = () => {
             const newRows = orgTableData.filter((row) => {
                 let matches = true;
 
-                const properties = ['name', 'email', 'location', 'orders'];
+                const properties = ['name'];
                 let containsQuery = false;
 
                 properties.forEach((property) => {
@@ -340,7 +340,7 @@ const ControlTable = () => {
                 }
                 return matches;
             });
-            setRows(newRows);
+            setOrgTableData(newRows);
         } else {
             setRows(customers);
         }
@@ -433,22 +433,13 @@ const ControlTable = () => {
                                 )
                             }}
                             onChange={handleSearch}
-                            placeholder="Search Organisation"
+                            placeholder="Search Control Implementations"
                             value={search}
                             size="small"
                         />
                     </Grid>
                     <Grid item xs={12} sm={6} sx={{ textAlign: 'right' }}>
-                        <Tooltip title="Create Organisation">
-                            <Fab
-                                color="primary"
-                                size="small"
-                                onClick={handleClickOpenDialog}
-                                sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}
-                            >
-                                <AddIcon fontSize="small" />
-                            </Fab>
-                        </Tooltip>
+                        
                         { /*
                         <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} />
                         */}
