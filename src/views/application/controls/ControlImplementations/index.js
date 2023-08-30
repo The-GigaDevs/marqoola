@@ -342,7 +342,7 @@ const ControlTable = () => {
             });
             setOrgTableData(newRows);
         } else {
-            setRows(customers);
+            setOrgTableData(controlscenarios);
         }
     };
 
