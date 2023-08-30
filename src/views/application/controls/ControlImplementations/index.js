@@ -47,7 +47,7 @@ import Details from '../ControlDetails'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { deleteControl, getControls } from 'store/slices/control';
+import { deleteControl, getControlScenarios } from 'store/slices/control';
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -255,7 +255,7 @@ const ControlTable = () => {
     const { selectedRisk } = useSelector((state) => state.riskselector);
     const { user } = useAuth();
     const [orgTableData, setOrgTableData] = React.useState([]);
-    const { controls } = useSelector((state) => state.control);
+    const { controlscenarios } = useSelector((state) => state.control);
 
     const [open, setOpen] = React.useState(false);
     const [resetForm, setResetForm] = React.useState(false);
@@ -273,27 +273,36 @@ const ControlTable = () => {
     const handleCloseDialog = () => {
         setOpen(false);
         setResetForm(true);
-        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '', user.accessToken));
     };
 
     // Getting the token
 
     React.useEffect(() => {
 
-        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '', user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
-        setOrgTableData(controls);
-    }, [controls]);
+        setOrgTableData(controlscenarios);
+    }, [controlscenarios]);
 
     React.useEffect(() => {
         setDivisionSelector(selectedDivision);
-
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
     }, [selectedDivision]);
 
     React.useEffect(() => {
-        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
+    }, [selectedAsset]);
+
+    React.useEffect(() => {
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
+    }, [selectedRisk]);
+
+
+    React.useEffect(() => {
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
@@ -313,7 +322,7 @@ const ControlTable = () => {
 
             })
         )
-        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, '',user.accessToken));
         setSelected([])
     };
 
@@ -373,7 +382,7 @@ const ControlTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getControls(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
     };
 
     const handleClick = (event, name) => {
@@ -418,11 +427,7 @@ const ControlTable = () => {
 
     
     return (!openDetails && (
-        <MainCard title="controls" content={false} secondary={<>{checked ? 'Table View' : 'Tree View'}<Switch
-            checked={checked}
-            onChange={handleSwitch}
-            inputProps={{ 'aria-label': 'controlled' }}
-          /></>}>{ !checked &&
+        <MainCard title="Control Implementations" content={false}>{ !checked &&
             (<>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
@@ -546,15 +551,15 @@ const ControlTable = () => {
                                         </TableCell>
                                         <TableCell align="center">{row.implementationcost ? row.implementationcostformated : ''}</TableCell>
                                         <TableCell align="center">{row.controlvalue ? row.controlvalueformated : ''}</TableCell>
-                                        <TableCell align="center">{row.annualrevenue ? row.annualrevenueformated : '0'}</TableCell>
+                                        <TableCell align="center">{row.actualriskreduction ? row.actualriskreductionformated : '0'}</TableCell>
                                         <TableCell align="center">
-                                            {row.customercount ? row.customercount : '0'}
+                                            {row.potentialriskreduction ? row.potentialriskreductionformated : '0'}
                                         </TableCell>
                                         <TableCell align="center">
-                                            {row.risktolerancename}
+                                            {row.currentroi ? row.currentroiformated : 0}
                                         </TableCell>
                                         <TableCell align="center">
-                                            {row.loweramountmax ? row.loweramountmaxformated : '0'} 
+                                            {row.potentialroi ? row.potentialroiformated : '0'} 
                                         </TableCell>
                                         <TableCell align="center">
                                         <Button variant="contained" color="error" >

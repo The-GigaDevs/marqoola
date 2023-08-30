@@ -9,7 +9,8 @@ const initialState = {
     error: null,
     controls: [],
     selectedControl: {},
-    metrics : []
+    metrics : [],
+    controlscenarios: []
 
 };
 
@@ -33,7 +34,9 @@ const slice = createSlice({
         getControlMetricsSuccess(state, action){
             state.metrics=action.payload;
         },
-
+        getControlScenariosSuccess(state, action){
+            state.controlscenarios = action.payload;
+        },
         deleteControlSuccess(state, action) {
             getControls();
         }
@@ -54,7 +57,7 @@ export function getControls(orgId, assetid, riskid, token) {
                 Authorization: `Bearer ` + token
             };
             const orgid = (orgId === '0' || orgId === '') ? null : orgId;
-            const url = '/objects/controls?[orgaid]=' + orgid + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid; 
+            const url = '/objects/controls?filter[orgaid]=' + orgid + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid; 
             const response = await axios.get(url, { headers });
             dispatch(slice.actions.getControlsSuccess(response.data));   
         } catch (error) {
@@ -63,7 +66,22 @@ export function getControls(orgId, assetid, riskid, token) {
     };
 }
 
-
+export function getControlScenarios(orgId, assetid, riskid, objectiveid, token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const orgid = (orgId === '0' || orgId === null) ? '' : orgId;
+            const url = '/objects/controlscenarios?filter[orgaid]=' + orgid + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid + '&filter[objectiveid]=' + objectiveid; 
+            const response = await axios.get(url, { headers });
+            dispatch(slice.actions.getControlScenariosSuccess(response.data));   
+        } catch (error) {
+            dispatch(slice.actions.getControlScenariosSuccess([]));
+            dispatch(slice.actions.hasError(error));  
+        }
+    };
+}
 
 export function getControlById(controlid, token) {
     return async () => {
