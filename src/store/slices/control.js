@@ -66,13 +66,16 @@ export function getControls(orgId, assetid, riskid, token) {
     };
 }
 
-export function getControlScenarios(orgId, assetid, riskid, objectiveid, token) {
+export function getControlScenarios(orgId, assetId, riskId, objectiveId, token) {
     return async () => {
         try {
             const headers = {
                 Authorization: `Bearer ` + token
             };
             const orgid = (orgId === '0' || orgId === null) ? '' : orgId;
+            const assetid = (assetId === '0' || assetId === null) ? '' : assetId;
+            const riskid = (riskId === '0' || riskId === null) ? '' : riskId;
+            const objectiveid = (objectiveId === '0' || objectiveId === null) ? '' : objectiveId;
             const url = '/objects/controlscenarios?filter[orgaid]=' + orgid + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid + '&filter[objectiveid]=' + objectiveid; 
             const response = await axios.get(url, { headers });
             dispatch(slice.actions.getControlScenariosSuccess(response.data));   

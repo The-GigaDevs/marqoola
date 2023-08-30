@@ -38,7 +38,7 @@ export default function ObjectiveSelector(){
                 
             >
                 <MenuItem key={'0'} value={'0'}>
-                        All Assets
+                        All Objectives
                     </MenuItem>
                 {rows.map((parent) => (
                     <MenuItem key={parent.id} value={parent.id}>
