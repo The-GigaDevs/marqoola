@@ -73,15 +73,16 @@ export function getAssets(orgId, parentId, token) {
        
         try {
             const headers = {
-                Authorization: `Bearer ` + token
+                Authorization: `Bearer ` + token,
+                'Content-Type': 'application/json'
             };
             var url = ''
             if (orgId == null || orgId === '0' || orgId === '')
-                url = '/objects/assets'
+                url = '/objects/assets?'
             else
                 url = '/objects/assets?filter[orgaid]=' + orgId
             
-            if (parentId != null && parentId != '0')
+            if (parentId != null && parentId != '0' && parentId != '')
                 url = url + '&filter[parentid]=' + parentId
 
             url = url.replace('?&', '?');
@@ -121,11 +122,12 @@ export function getAssetClusters(orgId, parentId, token) {
        
         try {
             const headers = {
-                Authorization: `Bearer ` + token
+                Authorization: `Bearer ` + token,
+                'Content-Type': 'application/json'
             };
             var url = ''
             if (orgId==='0')
-                url = '/objects/assets'
+                url = '/objects/assets?'
             else
                 url = '/objects/assets?filter[orgaid]=' + orgId
             
@@ -137,7 +139,20 @@ export function getAssetClusters(orgId, parentId, token) {
             var assetsFiltered = response.data.filter(function (el) {
                 return el.parentid === undefined;
               });
-            dispatch(slice.actions.getAssetsSuccess(assetsFiltered));
+            
+              var url2 = ''
+              if (orgId==='0')
+                  url2 = '/objects/assets?'
+              else
+                  url2 = '/objects/assets?filter[orgaid]=' + orgId
+              
+              if (parentId != null || parentId != '0')
+                  url2= url2 + '&filter[id]=' + parentId
+  
+              url2 = url2.replace('?&', '?');
+              const response2 = await axios.get(url2, { headers});
+
+            dispatch(slice.actions.getAssetsSuccess([...assetsFiltered, ...response2.data]));
         } catch (error) {
             dispatch(slice.actions.getAssetsSuccess([]));
             dispatch(slice.actions.hasError(error));

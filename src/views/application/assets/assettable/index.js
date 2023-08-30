@@ -301,11 +301,11 @@ const AssetTable = () => {
 
     React.useEffect(() => {
         if (checked){
-            dispatch(getAssetClusters(selectedDivision, null, user.accessToken));
+            dispatch(getAssetClusters(selectedDivision, selectedAsset, user.accessToken));
         }
         else
         {
-            dispatch(getAssets(selectedDivision, null, user.accessToken));
+            dispatch(getAssets(selectedDivision, selectedAsset, user.accessToken));
         }
     }, [checked])
 
