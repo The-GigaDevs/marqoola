@@ -19,6 +19,7 @@ import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';
 import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
 
 import DetailsDashboard from './Dashboard';
+import Details from './Details';
 
 // tab content
 function TabPanel({ children, value, index, ...other }) {
@@ -110,7 +111,7 @@ const ControlImplementationDetails = (row) => {
 
             {/* tab - invoice */}
             <TabPanel value={value} index={1}>
-                
+                <Details selectedControlScenario={rowData} />
             </TabPanel>
 
             {/* tab - status */}
