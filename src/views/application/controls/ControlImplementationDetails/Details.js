@@ -134,7 +134,7 @@ const DetailsDashboard = () => {
         setControlMetrics(scenariometrics);
         for(let i = 0; i < scenariometrics.length; i++){
             let obj = scenariometrics[i];
-            values.push(obj.y)
+            values.push(parseInt(obj.y))
             xaxis.push(new Date(Date.parse(obj.x)).toLocaleDateString("en-US"))
     
         }
