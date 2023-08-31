@@ -146,7 +146,7 @@ export function getControlScenarioMetricsById(controlid, riskid, objectiveid, to
                 Authorization: `Bearer ` + token
             };
             
-                const response = await axios.get('/objects/metrics?filter[objectid]=' + controlid + '&filter[objectid2]=' + riskid + '&filter[objectid3]=' + objectiveid, { headers });
+                const response = await axios.get('/objects/metrics?filter[objectid]=' + controlid + '&filter[objectid2]=' + riskid + '&filter[objectid3]=' + objectiveid + '&filter[metrictype]=controlvalue', { headers });
                 dispatch(slice.actions.getControlScenarioMetricsSuccess(response.data));   
             
             
