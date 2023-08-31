@@ -18,7 +18,7 @@ import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';
 import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';
 import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
 
-import DetailsDashboard from './Details';
+import DetailsDashboard from './Dashboard';
 
 // tab content
 function TabPanel({ children, value, index, ...other }) {
