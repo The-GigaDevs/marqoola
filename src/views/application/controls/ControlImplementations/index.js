@@ -43,11 +43,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 
 //import CreateForm from '../createform'
-import Details from '../ControlDetails'
+import Details from '../ControlImplementationDetails'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { deleteControl, getControlScenarios } from 'store/slices/control';
+import { deleteControl, getControlScenarios, getControlScenarioById } from 'store/slices/control';
+
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -366,9 +367,10 @@ const ControlTable = () => {
         setSelected([]);
     };
 
-    const handleOpenEditDialog = (event, id) => {
+    const handleOpenEditDialog = (event, row) => {
         //navigate('/organisationdetails', { state: { id: id } });
-        setIdentifier({id: id})
+        getControlScenarioById(row)
+        setIdentifier(row)
         setOpenDetails(true)
     }
 
@@ -493,7 +495,7 @@ const ControlTable = () => {
                                             component="th"
                                             id={labelId}
                                             scope="row"
-                                            onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, row.id) }}
+                                            onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, row) }}
                                             sx={{ cursor: 'pointer' }}
                                         >
                                             <Typography
@@ -584,7 +586,7 @@ const ControlTable = () => {
             
         </MainCard>) ||
         openDetails && (
-            <Details activeTab={activeTab} identifier={identifier} setOpenDetails={setOpenDetails}/>
+            <Details activeTab={activeTab} row={identifier} setOpenDetails={setOpenDetails}/>
         )
     );
 };

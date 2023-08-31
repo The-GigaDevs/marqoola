@@ -10,7 +10,8 @@ const initialState = {
     controls: [],
     selectedControl: {},
     metrics : [],
-    controlscenarios: []
+    controlscenarios: [],
+    selectedControlScenario: {}
 
 };
 
@@ -37,9 +38,13 @@ const slice = createSlice({
         getControlScenariosSuccess(state, action){
             state.controlscenarios = action.payload;
         },
+        getControlScenarioByIdSuccess(state, action){
+            state.selectedControlScenario = action.payload;
+        },
         deleteControlSuccess(state, action) {
             getControls();
         }
+
 
     }
 });
@@ -86,6 +91,12 @@ export function getControlScenarios(orgId, assetId, riskId, objectiveId, token) 
             dispatch(slice.actions.hasError(error));  
         }
     };
+}
+
+export function getControlScenarioById(controlscenario) {
+    
+        dispatch(slice.actions.getControlScenarioByIdSuccess(controlscenario));
+    
 }
 
 export function getControlById(controlid, token) {
