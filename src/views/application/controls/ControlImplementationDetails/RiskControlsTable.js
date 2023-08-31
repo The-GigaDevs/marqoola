@@ -76,23 +76,17 @@ function stableSort(array, comparator) {
 
 // table header options
 const headCells = [
-    { id: 'name', label: 'Control Implementation', minWidth: 170 },
+    { id: 'name', label: 'Risk Controls', minWidth: 170 },
 
     
     {
-        id: 'implementationcost',
-        label: 'Impl. Cost',
+        id: 'score',
+        label: 'Score',
         numeric: true,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
-    {
-        id: 'value',
-        label: '$ Value',
-        numeric: true,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US')
-    },
+    
     {
         id: 'currentriskreduction',
         label: 'Curr. Risk Reduction',
@@ -108,21 +102,15 @@ const headCells = [
         format: (value) => typeof value === 'number' && value.toFixed(2)
     },
     {
-        id: 'currentroi',
+        id: 'roi',
         align: 'center',
-        label: 'Current ROI',
+        label: 'ROI',
         numeric: false
     },
     {
-        id: 'potentialroi',
+        id: 'tests',
         align: 'center',
-        label: 'Potential ROI',
-        numeric: false
-    },
-    {
-        id: 'action',
-        align: 'center',
-        label: 'Action',
+        label: 'Outstanding Tests',
         numeric: false
     }
 ];
