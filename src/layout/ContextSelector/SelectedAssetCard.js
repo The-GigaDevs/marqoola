@@ -13,8 +13,8 @@ import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-    backgroundColor: theme.palette.primary.dark,
-    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.dark,
+    color: theme.palette.secondary.light,
     overflow: 'hidden',
     position: 'relative',
     '&:after': {
@@ -63,7 +63,7 @@ const SelectedAssetCard = () => {
                                         sx={{
                                             ...theme.typography.commonAvatar,
                                             ...theme.typography.largeAvatar,
-                                            backgroundColor: theme.palette.primary[800],
+                                            backgroundColor: theme.palette.secondary[800],
                                             color: '#fff'
                                         }}
                                     >

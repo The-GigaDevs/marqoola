@@ -43,7 +43,7 @@ import { getCurrencies } from 'store/slices/currency';
 import { getControlCategories } from 'store/slices/controlcategory';
 import { getObjectives } from 'store/slices/objective';
 import { getSecurityConcepts } from 'store/slices/securityconcept';
-import { getControlMetricsById } from 'store/slices/control';
+import { getControlScenarioMetricsById } from 'store/slices/control';
 
 // assets
 import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
@@ -92,7 +92,7 @@ const DetailsDashboard = () => {
     const { securityconcepts } = useSelector((state) => state.securityconcept);
     const [controlMetrics, setControlMetrics] = useState([]);
     const [scenarioData, setScenarioData] = useState({});
-    const { metrics, selectedControlScenario } = useSelector((state) => state.control);
+    const { scenariometrics, selectedControlScenario } = useSelector((state) => state.control);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
     const { user } = useAuth();
@@ -102,7 +102,7 @@ const DetailsDashboard = () => {
     }, []);
 
     useEffect(() => {
-        //dispatch(getControlMetricsById(selectedControlScenario.id, user.accessToken))
+        dispatch(getControlScenarioMetricsById(selectedControlScenario.controlid, selectedControlScenario.riskid, selectedControlScenario.objectiveid, user.accessToken))
     }, [selectedControlScenario]);
 
     
@@ -131,9 +131,9 @@ const DetailsDashboard = () => {
     }, [securityconcepts]);
 
     useEffect(() => {
-        setControlMetrics(metrics);
-        for(let i = 0; i < metrics.length; i++){
-            let obj = metrics[i];
+        setControlMetrics(scenariometrics);
+        for(let i = 0; i < scenariometrics.length; i++){
+            let obj = scenariometrics[i];
             values.push(obj.y)
             xaxis.push(new Date(Date.parse(obj.x)).toLocaleDateString("en-US"))
     
@@ -157,7 +157,7 @@ const DetailsDashboard = () => {
         xaxis: {
             categories: xaxis
         }})
-    }, [metrics]);
+    }, [scenariometrics]);
     
     
 
@@ -275,7 +275,7 @@ function renderRow(props) {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h2">{selectedControlScenario.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedControlScenario.potentialriskreductionformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h3" color={secondary}>
@@ -307,7 +307,7 @@ function renderRow(props) {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h2">{selectedControlScenario.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">{selectedControlScenario.currentroiformated}</Typography>
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h3" color={secondary}>
@@ -353,8 +353,10 @@ function renderRow(props) {
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h5">
-                                                            Name: {selectedControlScenario.name}<br/>
-                                                            Description : {selectedControlScenario.description}
+                                                            Organisation: {selectedControlScenario.organame}<br/>
+                                                            Asset : {selectedControlScenario.assetname}<br/>
+                                                            Risk: {selectedControlScenario.riskname}<br/>
+                                                            Objective: {selectedControlScenario.objectivename}
                                                         </Typography>
                                                     </Grid>
                                                     
@@ -375,7 +377,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Button>Run Now</Button>
+                                                        <Button variant="contained">Run Now</Button>
                                                     </Grid>
                                                 </Stack>
                                             </CardContent>

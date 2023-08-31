@@ -11,7 +11,8 @@ const initialState = {
     selectedControl: {},
     metrics : [],
     controlscenarios: [],
-    selectedControlScenario: {}
+    selectedControlScenario: {},
+    scenariometrics: []
 
 };
 
@@ -40,6 +41,9 @@ const slice = createSlice({
         },
         getControlScenarioByIdSuccess(state, action){
             state.selectedControlScenario = action.payload;
+        },
+        getControlScenarioMetricsSuccess(state, action){
+            state.scenariometrics = action.payload;
         },
         deleteControlSuccess(state, action) {
             getControls();
@@ -126,6 +130,24 @@ export function getControlMetricsById(controlid, token) {
             
                 const response = await axios.get('/objects/metrics?filter[objectid]=' + controlid, { headers });
                 dispatch(slice.actions.getControlMetricsSuccess(response.data));   
+            
+            
+
+        } catch (error) {
+            dispatch(slice.actions.hasError(error));  
+        }
+    };
+}
+
+export function getControlScenarioMetricsById(controlid, riskid, objectiveid, token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            
+                const response = await axios.get('/objects/metrics?filter[objectid]=' + controlid + '&filter[objectid2]=' + riskid + '&filter[objectid3]=' + objectiveid, { headers });
+                dispatch(slice.actions.getControlScenarioMetricsSuccess(response.data));   
             
             
 
