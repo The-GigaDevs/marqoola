@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import * as React from 'react';
+
 import useAuth from 'hooks/useAuth';
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -204,6 +205,7 @@ EnhancedTableToolbar.propTypes = {
 
 const RiskTable = () => {
     const theme = useTheme();
+    
     const dispatch = useDispatch();
     const delay = ms => new Promise(
         resolve => setTimeout(resolve, ms)
@@ -241,6 +243,7 @@ const RiskTable = () => {
         dispatch(getRisks(selectedDivision, selectedAsset, selectedRisk, selectedObjective, user.accessToken));
     };
 
+    
     // Getting the token
 
     React.useEffect(() => {
@@ -506,7 +509,7 @@ const RiskTable = () => {
             
         </MainCard>) ||
         openDetails && (
-            <Details activeTab={activeTab} row={identifier} setOpenDetails={setOpenDetails}/>
+            <Details activeTab={activeTab} identifier={identifier} setOpenDetails={setOpenDetails}/>
         )
     );
 };

@@ -43,7 +43,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/AddTwoTone';
 
 //import CreateForm from '../createform'
-import Details from '../ControlImplementationDetails'
+import Details from '../../controls/ControlImplementationDetails'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';

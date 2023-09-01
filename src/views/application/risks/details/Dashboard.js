@@ -43,17 +43,11 @@ import { getCurrencies } from 'store/slices/currency';
 import { getControlCategories } from 'store/slices/controlcategory';
 import { getObjectives } from 'store/slices/objective';
 import { getSecurityConcepts } from 'store/slices/securityconcept';
-import { getControlScenarioMetricsById } from 'store/slices/control';
-
-// assets
-import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
-import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
-import EmailTwoToneIcon from '@mui/icons-material/EmailTwoTone';
-import PhoneAndroidTwoToneIcon from '@mui/icons-material/PhoneAndroidTwoTone';
+import { getRiskMetricsById } from 'store/slices/risk';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import RiskControlsTable from '../../risks/details/RiskControlsTable';
+import RiskControlsTable from './RiskControlsTable';
 
 const validationSchema = yup.object({
     name: yup.string().required('Control name is required'),
@@ -71,7 +65,7 @@ const detailsIconSX = {
     mt: 0.25
 };
 
-const Details = () => {
+const Dashboard = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
     const [organisationData, setOrganisationData] = useState([]);
@@ -88,7 +82,7 @@ const Details = () => {
     const { securityconcepts } = useSelector((state) => state.securityconcept);
     const [controlMetrics, setControlMetrics] = useState([]);
     const [scenarioData, setScenarioData] = useState({});
-    const { scenariometrics, selectedControlScenario } = useSelector((state) => state.control);
+    const { metrics, selectedRisk } = useSelector((state) => state.risk);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
     const { user } = useAuth();
@@ -98,8 +92,8 @@ const Details = () => {
     }, []);
 
     useEffect(() => {
-        dispatch(getControlScenarioMetricsById(selectedControlScenario.controlid, selectedControlScenario.riskid, selectedControlScenario.objectiveid, user.accessToken))
-    }, [selectedControlScenario]);
+        dispatch(getRiskMetricsById(selectedRisk.id, user.accessToken))
+    }, [selectedRisk]);
 
     
     useEffect(() => {
@@ -127,9 +121,9 @@ const Details = () => {
     }, [securityconcepts]);
 
     useEffect(() => {
-        setControlMetrics(scenariometrics);
-        for(let i = 0; i < scenariometrics.length; i++){
-            let obj = scenariometrics[i];
+        setControlMetrics(metrics);
+        for(let i = 0; i < metrics.length; i++){
+            let obj = metrics[i];
             values.push(parseInt(obj.y))
             xaxis.push(new Date(Date.parse(obj.x)).toLocaleDateString("en-US"))
     
@@ -153,7 +147,7 @@ const Details = () => {
         xaxis: {
             categories: xaxis
         }})
-    }, [scenariometrics]);
+    }, [metrics]);
     
     
 
@@ -182,7 +176,7 @@ const Details = () => {
         
         try {
             
-            const response =  await axios.post('/objects/controls/' + selectedControlScenario.id, 
+            const response =  await axios.post('/objects/controls/' + selectedRisk.id, 
             {
                 name: formik.values.name,
                 orgaid: formik.values.organisation, 
@@ -209,8 +203,8 @@ function renderRow(props) {
 
     return (
         
-        <ListItemButton style={style} key={selectedControlScenario.allrisks[index].id}>
-            <ListItemText disableTypography style={{color: secondary}} primary={selectedControlScenario.allrisks[index].name} />
+        <ListItemButton style={style} key={selectedRisk.allrisks[index].id}>
+            <ListItemText disableTypography style={{color: secondary}} primary={selectedRisk.allrisks[index].name} />
         </ListItemButton>
     );
 }
@@ -218,14 +212,14 @@ function renderRow(props) {
     const formik = useFormik({
         enableReinitialize: true,
         initialValues: {
-            name: selectedControlScenario.name,
-            organisation: selectedControlScenario.orgaid,
-            asset: selectedControlScenario.assetid,
-            description: selectedControlScenario.description,
-            controlcategory: selectedControlScenario.controlcategoryid,
-            securityconcept: selectedControlScenario.securityconceptid,
-            implementationcostnumber: selectedControlScenario.implementationcost && selectedControlScenario.implementationcost.number,
-            implementationcostcurrency: selectedControlScenario.implementationcost && selectedControlScenario.implementationcost.currency,
+            name: selectedRisk.name,
+            organisation: selectedRisk.orgaid,
+            asset: selectedRisk.assetid,
+            description: selectedRisk.description,
+            controlcategory: selectedRisk.controlcategoryid,
+            securityconcept: selectedRisk.securityconceptid,
+            implementationcostnumber: selectedRisk.implementationcost && selectedRisk.implementationcost.number,
+            implementationcostcurrency: selectedRisk.implementationcost && selectedRisk.implementationcost.currency,
         },
         validationSchema,
         onSubmit: (values, helpers) => {
@@ -234,14 +228,14 @@ function renderRow(props) {
 
     });
 
-    return selectedControlScenario && selectedControlScenario.orgaid && series &&  (
+    return selectedRisk && selectedRisk.orgaid && series &&  (
         <form onSubmit={formik.handleSubmit} id="asset-forms">
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <SubCard title={<><Typography variant="h1" color={secondary}> {selectedControlScenario.name}</Typography> 
+                    <SubCard title={<><Typography variant="h1" color={secondary}> {selectedRisk.name}</Typography> 
                         
                         </>}
-                        secondary={<><Chip label={selectedControlScenario.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControlScenario.implemented ? "success" : "error"} /><Typography variant="subtitle1">Last tested {selectedControlScenario.lasttested ? 'on ' + selectedControlScenario.lasttested : 'Never'}</Typography></>}>
+                        secondary={<><Chip label={selectedRisk.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedRisk.implemented ? "success" : "error"} /><Typography variant="subtitle1">Last tested {selectedRisk.lasttested ? 'on ' + selectedRisk.lasttested : 'Never'}</Typography></>}>
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={8}>        
                                 <div id="chart">
@@ -255,7 +249,7 @@ function renderRow(props) {
                                             <CardContent>
                                                 <Stack direction="column" spacing={0} >
                                                     <Grid item>
-                                                        <Typography variant="h4">{selectedControlScenario.name}</Typography>
+                                                        <Typography variant="h4">{selectedRisk.name}</Typography>
                                                         <Typography variant="h4">Risk Scenario</Typography>
                                                     </Grid>
                                                     <Grid item><br/></Grid>
@@ -268,7 +262,7 @@ function renderRow(props) {
                                                             </Grid>
                                                             <Grid item xs={4}>
                                                                 <Typography variant="h5" color={primary}>
-                                                                    {selectedControlScenario.fo}
+                                                                    {selectedRisk.fo}
                                                                 </Typography>
                                                             </Grid>
                                                         </Stack>
@@ -283,11 +277,11 @@ function renderRow(props) {
                                             <CardContent>
                                                 <Stack direction="column" spacing={1}>
                                                     <Grid item>
-                                                        <Typography variant="h4">About {selectedControlScenario.name}</Typography>
+                                                        <Typography variant="h4">About {selectedRisk.name}</Typography>
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h5" color={primary}>
-                                                            {selectedControlScenario.description}
+                                                            {selectedRisk.description}
                                                         </Typography>
                                                     </Grid>
                                                 </Stack>
@@ -322,4 +316,4 @@ function renderRow(props) {
     );
 };
 
-export default Details;
+export default Dashboard;
