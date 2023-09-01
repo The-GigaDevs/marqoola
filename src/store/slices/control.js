@@ -178,25 +178,20 @@ export function getControlsForRisk(riskid, token) {
             const response = await axios.get('/objects/controls', {headers} );
 
             var subIndustriesFiltered = filterByAllRiskId(response.data, riskid)
-            subIndustriesFiltered    
-                
+            
+            const filtered = response.data.filter((el) => {
+                return subIndustriesFiltered.some((f) => {
+                  return f.id === el.id;
+                });
+              });
               
-            dispatch(slice.actions.getControlsSuccess(subIndustriesFiltered));
+            dispatch(slice.actions.getControlsSuccess(filtered));
         } catch (error) {
             dispatch(slice.actions.getControlsSuccess([]));
             dispatch(slice.actions.hasError(error));
         }
     };
 }
-
-function setUsername(id, newUsername) {
-    for (var i = 0; i < jsonObj.length; i++) {
-      if (jsonObj[i].Id === id) {
-        jsonObj[i].Username = newUsername;
-        return;
-      }
-    }
-  }
 
 function filterByAllRiskId(data, idToFilter) {
     // Use the map function to iterate over the outer array and filter the inner 'allrisks' array
@@ -206,7 +201,7 @@ function filterByAllRiskId(data, idToFilter) {
     });
   
     // Remove items with empty 'allrisks' arrays
-    return filteredData.filter(item => item.allrisks.length > 0);
+    return filteredData.filter(item => item.allrisks.length > 0 && Object.keys(item.allrisks[0]).length > 0);
   }
 
 export function getControlsForTemplate(templateid, token) {

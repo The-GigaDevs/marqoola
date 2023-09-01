@@ -47,7 +47,7 @@ import Details from '../../controls/ControlImplementationDetails'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { deleteControl, getControlsForRisk } from 'store/slices/control';
+import { deleteControl, getControlScenarios } from 'store/slices/control';
 
 
 // table sort
@@ -242,7 +242,7 @@ const RiskControlsTable = () => {
     const { selectedObjective } = useSelector((state) => state.objectiveselector);
     const { user } = useAuth();
     const [orgTableData, setOrgTableData] = React.useState([]);
-    const { controls } = useSelector((state) => state.control);
+    const { controlscenarios } = useSelector((state) => state.control);
 
     const [open, setOpen] = React.useState(false);
     const [resetForm, setResetForm] = React.useState(false);
@@ -254,20 +254,20 @@ const RiskControlsTable = () => {
 
     React.useEffect(() => {
 
-        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk.id, selectedObjective, user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
-        setOrgTableData(controls);
-    }, [controls]);
+        setOrgTableData(controlscenarios);
+    }, [controlscenarios]);
 
     React.useEffect(() => {
         setDivisionSelector(selectedDivision);
-        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk.id, selectedObjective, user.accessToken));
     }, [selectedDivision, selectedAsset, selectedRisk, selectedObjective]);
 
     React.useEffect(() => {
-        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk.id, selectedObjective, user.accessToken));
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
@@ -287,7 +287,7 @@ const RiskControlsTable = () => {
 
             })
         )
-        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk.id, selectedObjective, user.accessToken));
         setSelected([])
     };
 
@@ -320,7 +320,7 @@ const RiskControlsTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
+        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk.id, selectedObjective, user.accessToken));
     };
 
     const handleClick = (event, name) => {
@@ -452,8 +452,7 @@ const RiskControlsTable = () => {
                                                 {row.objectivename}{' '}
                                             </Typography>
                                         </TableCell>
-                                        <TableCell align="center">{row.implementationcost ? row.implementationcostformated : ''}</TableCell>
-                                        <TableCell align="center">{row.controlvalue ? row.controlvalueformated : ''}</TableCell>
+                                        <TableCell align="center"></TableCell>
                                         <TableCell align="center">{row.actualriskreduction ? row.actualriskreductionformated : '0'}</TableCell>
                                         <TableCell align="center">
                                             {row.potentialriskreduction ? row.potentialriskreductionformated : '0'}
