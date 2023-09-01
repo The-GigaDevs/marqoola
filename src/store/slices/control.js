@@ -163,10 +163,51 @@ export function getControlsForAsset(assetid) {
             const response = await axios.get('/objects/controls?filter[assetid]=' + assetid );
             dispatch(slice.actions.getControlsSuccess(response.data));
         } catch (error) {
+            dispatch(slice.actions.getControlsSuccess([]));
             dispatch(slice.actions.hasError(error));
         }
     };
 }
+
+export function getControlsForRisk(riskid, token) {
+    return async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/controls', {headers} );
+
+            var subIndustriesFiltered = filterByAllRiskId(response.data, riskid)
+            subIndustriesFiltered    
+                
+              
+            dispatch(slice.actions.getControlsSuccess(subIndustriesFiltered));
+        } catch (error) {
+            dispatch(slice.actions.getControlsSuccess([]));
+            dispatch(slice.actions.hasError(error));
+        }
+    };
+}
+
+function setUsername(id, newUsername) {
+    for (var i = 0; i < jsonObj.length; i++) {
+      if (jsonObj[i].Id === id) {
+        jsonObj[i].Username = newUsername;
+        return;
+      }
+    }
+  }
+
+function filterByAllRiskId(data, idToFilter) {
+    // Use the map function to iterate over the outer array and filter the inner 'allrisks' array
+    const filteredData = data.map(item => {
+      const filteredAllRisks = item.allrisks.filter(allRisk => allRisk.id === idToFilter);
+      return { id: item.id, allrisks: filteredAllRisks };
+    });
+  
+    // Remove items with empty 'allrisks' arrays
+    return filteredData.filter(item => item.allrisks.length > 0);
+  }
 
 export function getControlsForTemplate(templateid, token) {
     return async () => {
