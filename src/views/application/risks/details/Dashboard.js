@@ -228,7 +228,7 @@ function renderRow(props) {
 
     });
 
-    return selectedRisk && selectedRisk.orgaid && series &&  (
+    return selectedRisk  && series &&  (
         <form onSubmit={formik.handleSubmit} id="asset-forms">
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>

@@ -124,6 +124,7 @@ export function getRiskMetricsById(riskid, token) {
             
 
         } catch (error) {
+            dispatch(slice.actions.getRiskMetricsSuccess([]));  
             dispatch(slice.actions.hasError(error));  
         }
     };

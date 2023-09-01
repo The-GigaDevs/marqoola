@@ -293,7 +293,7 @@ const RiskTable = () => {
             const newRows = orgTableData.filter((row) => {
                 let matches = true;
 
-                const properties = ['name', 'description'];
+                const properties = ['name', 'description', 'id'];
                 let containsQuery = false;
 
                 properties.forEach((property) => {

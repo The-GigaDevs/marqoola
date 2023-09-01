@@ -47,7 +47,7 @@ import Details from '../../controls/ControlImplementationDetails'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { deleteControl, getControlScenarios, getControlScenarioById } from 'store/slices/control';
+import { deleteControl, getControlsForRisk } from 'store/slices/control';
 
 
 // table sort
@@ -235,55 +235,39 @@ const RiskControlsTable = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
     const [search, setSearch] = React.useState('');
-    const [currentAsset, setCurrentAsset] = React.useState('');
-    const [rows, setRows] = React.useState([]);
-    const { customers } = useSelector((state) => state.customer);
     const [divisionSelector, setDivisionSelector] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
     const { selectedAsset } = useSelector((state) => state.assetselector);
-    const { selectedRisk } = useSelector((state) => state.riskselector);
+    const { selectedRisk } = useSelector((state) => state.risk);
     const { selectedObjective } = useSelector((state) => state.objectiveselector);
     const { user } = useAuth();
     const [orgTableData, setOrgTableData] = React.useState([]);
-    const { controlscenarios } = useSelector((state) => state.control);
+    const { controls } = useSelector((state) => state.control);
 
     const [open, setOpen] = React.useState(false);
     const [resetForm, setResetForm] = React.useState(false);
     const [openEdit, setOpenEdit] = React.useState(false);
-    const [expandRow, setExpandRow] = React.useState(false);
     const [expandedRow, setExpandedRow] = React.useState([]);
     const [openDetails, setOpenDetails] = React.useState(false);
     const [identifier, setIdentifier] = React.useState({});
     const [activeTab, setActiveTab] = React.useState(0);
 
-    const handleClickOpenDialog = () => {
-        setOpen(true);
-        setResetForm(false);
-    };
-    const handleCloseDialog = () => {
-        setOpen(false);
-        setResetForm(true);
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective, user.accessToken));
-    };
-
-    // Getting the token
-
     React.useEffect(() => {
 
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective , user.accessToken));
+        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
-        setOrgTableData(controlscenarios);
-    }, [controlscenarios]);
+        setOrgTableData(controls);
+    }, [controls]);
 
     React.useEffect(() => {
         setDivisionSelector(selectedDivision);
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective,user.accessToken));
+        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
     }, [selectedDivision, selectedAsset, selectedRisk, selectedObjective]);
 
     React.useEffect(() => {
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective ,user.accessToken));
+        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
@@ -303,36 +287,8 @@ const RiskControlsTable = () => {
 
             })
         )
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective ,user.accessToken));
+        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
         setSelected([])
-    };
-
-    const handleSearch = (event) => {
-        const newString = event?.target.value;
-        setSearch(newString || '');
-
-        if (newString) {
-            const newRows = orgTableData.filter((row) => {
-                let matches = true;
-
-                const properties = ['name'];
-                let containsQuery = false;
-
-                properties.forEach((property) => {
-                    if (row[property].toString().toLowerCase().includes(newString.toString().toLowerCase())) {
-                        containsQuery = true;
-                    }
-                });
-
-                if (!containsQuery) {
-                    matches = false;
-                }
-                return matches;
-            });
-            setOrgTableData(newRows);
-        } else {
-            setOrgTableData(controlscenarios);
-        }
     };
 
 
@@ -357,14 +313,14 @@ const RiskControlsTable = () => {
 
     const handleOpenEditDialog = (event, row) => {
         //navigate('/organisationdetails', { state: { id: id } });
-        getControlScenarioById(row)
+        //getControlScenarioById(row)
         setIdentifier(row)
         setOpenDetails(true)
     }
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
+        dispatch(getControlsForRisk(selectedRisk.id, user.accessToken));
     };
 
     const handleClick = (event, name) => {
