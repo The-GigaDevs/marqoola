@@ -86,7 +86,7 @@ const AllIntegrations = () => {
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={1}>
                         </Grid>
-                        <Grid item xs={9}>
+                        <Grid item xs={10}>
                             <Stack direction="row" spacing={1}>
                                 <Grid item sx={{ width: 1 / 4 }}>
                                     <Card
@@ -94,7 +94,7 @@ const AllIntegrations = () => {
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
-                                            height: '400px',
+                                            
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -289,7 +289,7 @@ const AllIntegrations = () => {
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={1}>
                         </Grid>
-                        <Grid item xs={9}>
+                        <Grid item xs={10}>
                             <Stack direction="row" spacing={1}>
                                 <Grid item sx={{ width: 1 / 4 }}>
                                     <Card
@@ -297,7 +297,7 @@ const AllIntegrations = () => {
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
-                                            height: '400px',
+                                            
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -489,6 +489,211 @@ const AllIntegrations = () => {
                         
                     </Grid>
 
+                    </SubCard>
+                    <br/>
+                    <SubCard title="Server Software">
+                    <Grid container spacing={gridSpacing}>
+                        <Grid item xs={1}>
+                        </Grid>
+                        <Grid item xs={10}>
+                            <Stack direction="row" spacing={1}>
+                                <Grid item sx={{ width: 1 / 4 }}>
+                                    <Card
+                                        sx={{
+                                            p: 2,
+                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
+                                            border: '1px solid',
+                                            
+                                            borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
+                                            '&:hover': {
+                                                border: `1px solid${theme.palette.primary.main}`
+                                            }
+                                        }}
+                                    >
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Grid container spacing={gridSpacing}>
+                                                    <Grid item>
+                                                        <img src={avatarImage(`./26.IIS.png`)} height='50px' />
+                                                    </Grid>
+                                                    <Grid item xs zeroMinWidth>
+                                                        <Typography
+                                                            variant="h4"
+                                                            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
+                                                        >
+                                                            Microsoft IIS Web Server
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="subtitle2"
+                                                            sx={{ mt: 0.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap', display: 'block' }}
+                                                        >
+                                                            <PinDropTwoToneIcon fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.875rem', verticalAlign: 'text-top' }} />
+                                                            Microsoft Internet Information Services (IIS) is a web server software developed by Microsoft for hosting websites, web applications, and services on Windows servers, providing robust and scalable web hosting solutions.
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch />
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Grid>
+
+                                        </Grid>
+                                        <br />
+                                        <SubCard >
+                                            View Integration
+                                        </SubCard>
+                                    </Card>
+                                </Grid>
+                                <Grid item sx={{ width: 1 / 4 }}>
+                                    <Card
+                                        sx={{
+                                            p: 2,
+                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
+                                            border: '1px solid',
+                                            borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
+                                            '&:hover': {
+                                                border: `1px solid${theme.palette.primary.main}`
+                                            }
+                                        }}
+                                    >
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Grid container spacing={gridSpacing}>
+                                                    <Grid item>
+                                                        <img src={avatarImage(`./29.MongoDB.png`)} height='50px' />
+                                                    </Grid>
+                                                    <Grid item xs zeroMinWidth>
+                                                        <Typography
+                                                            variant="h4"
+                                                            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
+                                                        >
+                                                            Mongo DB
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="subtitle2"
+                                                            sx={{ mt: 0.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap', display: 'block' }}
+                                                        >
+                                                            <PinDropTwoToneIcon fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.875rem', verticalAlign: 'text-top' }} />
+                                                            MongoDB is a NoSQL database management system known for its flexibility and scalability, which stores data in a JSON-like format and is designed for handling large volumes of unstructured or semi-structured data.
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch />
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Grid>
+
+                                        </Grid>
+                                        <br />
+                                        <SubCard >
+                                            View Integration
+                                        </SubCard>
+                                    </Card>
+                                </Grid>
+                                <Grid item sx={{ width: 1 / 4 }}>
+                                    <Card
+                                        sx={{
+                                            p: 2,
+                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
+                                            border: '1px solid',
+                                            borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
+                                            '&:hover': {
+                                                border: `1px solid${theme.palette.primary.main}`
+                                            }
+                                        }}
+                                    >
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Grid container spacing={gridSpacing}>
+                                                    <Grid item>
+                                                        <img src={avatarImage(`./30.IBM DB2.jpg`)} height='60px' />
+                                                    </Grid>
+                                                    <Grid item xs zeroMinWidth>
+                                                        <Typography
+                                                            variant="h4"
+                                                            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
+                                                        >
+                                                            IBM DB2
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="subtitle2"
+                                                            sx={{ mt: 0.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap', display: 'block' }}
+                                                        >
+                                                            <PinDropTwoToneIcon fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.875rem', verticalAlign: 'text-top' }} />
+                                                            IBM Db2 is a family of data management products, including relational database systems and data warehousing solutions, known for their reliability, scalability, and support for various data types
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch />
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Grid>
+
+                                        </Grid>
+                                        <br />
+                                        <SubCard >
+                                            View Integration
+                                        </SubCard>
+                                    </Card>
+                                </Grid>
+                                <Grid item sx={{ width: 1 / 4 }}>
+                                    <Card
+                                        sx={{
+                                            p: 2,
+                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
+                                            border: '1px solid',
+                                            borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
+                                            '&:hover': {
+                                                border: `1px solid${theme.palette.primary.main}`
+                                            }
+                                        }}
+                                    >
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Grid container spacing={gridSpacing}>
+                                                    <Grid item>
+                                                        <img src={avatarImage(`./34.NGINX.png`)} height='50px' />
+                                                    </Grid>
+                                                    <Grid item xs zeroMinWidth>
+                                                        <Typography
+                                                            variant="h4"
+                                                            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
+                                                        >
+                                                            Nginx
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="subtitle2"
+                                                            sx={{ mt: 0.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap', display: 'block' }}
+                                                        >
+                                                            <PinDropTwoToneIcon fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.875rem', verticalAlign: 'text-top' }} />
+                                                            Nginx is a high-performance, open-source web server and reverse proxy server known for its efficiency in serving web content and handling HTTP and other network protocols.
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch />
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Grid>
+
+                                        </Grid>
+                                        <br />
+                                        <SubCard >
+                                            View Integration
+                                        </SubCard>
+                                    </Card>
+                                </Grid>
+
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={1}>
+                        </Grid>
+
+                        
+                    </Grid>
                     </SubCard>
                 </SubCard>
             </Grid>
