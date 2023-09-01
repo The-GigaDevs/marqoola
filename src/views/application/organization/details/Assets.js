@@ -266,7 +266,7 @@ const AssetTable = ({selectedOrganisation}) => {
 
     React.useEffect(() => {
 
-        dispatch(getAssets(selectedOrganisation.id, user.accessToken));
+        dispatch(getAssets(selectedOrganisation.id, null, user.accessToken));
     }, []);
 
     React.useEffect(() => {

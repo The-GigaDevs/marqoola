@@ -261,11 +261,12 @@ const ControlTable = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [search, setSearch] = React.useState('');
-    const [currentAsset, setCurrentAsset] = React.useState('');
     const [rows, setRows] = React.useState([]);
     const { customers } = useSelector((state) => state.customer);
     const [divisionSelector, setDivisionSelector] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
+    const { selectedAsset } = useSelector((state) => state.assetselector);
+    const { selectedRisk } = useSelector((state) => state.riskselector);
     const { user } = useAuth();
     const [assetTableData, setAssetTableData] = React.useState([]);
     const { controltemplates } = useSelector((state) => state.controltemplate);
@@ -278,11 +279,7 @@ const ControlTable = () => {
     const handleClickOpenDialog = () => {
         setOpen(true);
     };
-    const handleCloseDialog = () => {
-        setOpen(false);
-        dispatch(getControls("", user.accessToken));
-    };
-
+    
     // Getting the token
 
     React.useEffect(() => {
@@ -300,7 +297,7 @@ const ControlTable = () => {
     }, [selectedDivision]);
 
     React.useEffect(() => {
-        dispatch(getControls(divisionSelector, user.accessToken));
+        dispatch(getControls(divisionSelector, selectedAsset, selectedRisk, user.accessToken));
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
@@ -320,7 +317,7 @@ const ControlTable = () => {
 
             })
         )
-        dispatch(getControls(divisionSelector, user.accessToken));
+        dispatch(getControls(divisionSelector, selectedAsset, selectedRisk, user.accessToken));
         setSelected([])
     };
 
@@ -375,12 +372,6 @@ const ControlTable = () => {
         navigate('/control', { state: { id: id } });
     }
     
-
-    const handleCloseEditDialog = () => {
-        setOpenEdit(false);
-        dispatch(getControls("", user.accessToken));
-    };
-
     const handleClick = (event, name) => {
         const selectedIndex = selected.indexOf(name);
         let newSelected = [];
