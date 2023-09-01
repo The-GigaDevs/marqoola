@@ -221,7 +221,7 @@ const marqoolamenu = {
                     id: 'repository',
                     title: <FormattedMessage id="Repository" />,
                     type: 'item',
-                    url: '/underconstruction',
+                    url: '/integrations',
                     
                     breadcrumbs: false,
                 },
