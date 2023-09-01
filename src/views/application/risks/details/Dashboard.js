@@ -95,15 +95,20 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        if (expandDescription == true)
+        if (Object.keys(selectedRisk).length > 0){
+            if (expandDescription == true)
             setDescription(selectedRisk.description)
         else
             setDescription(selectedRisk.description.slice(0, 350))
+        }
+        
     }, [expandDescription]);
 
     useEffect(() => {
+        if (Object.keys(selectedRisk).length > 0){
         dispatch(getRiskMetricsById(selectedRisk.id, user.accessToken))
         setDescription(selectedRisk.description.slice(0, 350))
+        }
     }, [selectedRisk]);
 
     
