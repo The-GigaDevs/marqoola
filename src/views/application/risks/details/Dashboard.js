@@ -87,11 +87,11 @@ const Dashboard = () => {
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
     const [description, setDescription] = useState('');
-    const [expandDescription, setExpandDescription] = useState(true);
+    const [expandDescription, setExpandDescription] = useState(false);
     const { user } = useAuth();
 
     useEffect(() => {
-       setDescription(selectedRisk.description)
+       
     }, []);
 
     useEffect(() => {
@@ -103,6 +103,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         dispatch(getRiskMetricsById(selectedRisk.id, user.accessToken))
+        setDescription(selectedRisk.description.slice(0, 350))
     }, [selectedRisk]);
 
     
@@ -247,10 +248,7 @@ function renderRow(props) {
         <form onSubmit={formik.handleSubmit} id="asset-forms">
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
-                    <SubCard title={<><Typography variant="h1" color={secondary}> {selectedRisk.name}</Typography> 
-                        
-                        </>}
-                        secondary={<><Chip label={selectedRisk.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedRisk.implemented ? "success" : "error"} /><Typography variant="subtitle1">Last tested {selectedRisk.lasttested ? 'on ' + selectedRisk.lasttested : 'Never'}</Typography></>}>
+                    <SubCard title={<><Typography variant="h1" color={secondary}> {selectedRisk.name}</Typography></>}>
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={8}>        
                                 <div id="chart">
