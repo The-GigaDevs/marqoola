@@ -148,6 +148,7 @@ const Controls = Loadable(lazy(() => import('views/application/controls')));
 const ControlImplementations = Loadable(lazy(() => import('views/application/controls/ControlImplementations')));
 const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
 const Objectives = Loadable(lazy(() => import('views/application/objectives')));
+const Risks = Loadable(lazy(() => import('views/application/risks')));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -580,7 +581,7 @@ const MainRoutes = {
         },
         {
             path: '/risks',
-            element: <UnderConstruction />
+            element: <Risks />
         },
         {
             path: '/squids',

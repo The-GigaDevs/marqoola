@@ -51,23 +51,21 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getRisks(orgId, token) {
+export function getRisks(orgId, assetId, riskId, objectiveId, token) {
     return async () => {
         try {
             const headers = {
                 Authorization: `Bearer ` + token
             };
-            if (orgId ==='' || orgId === '0' || orgId === undefined){
-                const response = await axios.get('/objects/risks', { headers });
-                dispatch(slice.actions.getRisksSuccess(response.data));    
-            }
-            else {
-                const response = await axios.get('/objects/risks?filter[orgaid]=' + orgId, { headers });
-                dispatch(slice.actions.getRisksSuccess(response.data));   
-            }
+            const orgid = (orgId === '0' || orgId === '') ? '' : orgId;
+            const assetid = (assetId === '0' || assetId === null) ? '' : assetId;
+            const riskid = (riskId === '0' || riskId === null) ? '' : riskId;
+            const objectiveid = (objectiveId === '0' || objectiveId === null) ? '' : objectiveId;
+            const response = await axios.get('/objects/risks?filter[orgaid]=' + orgId + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid + '&filter[objectiveid]=' + objectiveid, { headers });
+            dispatch(slice.actions.getRisksSuccess(response.data));   
             
-
         } catch (error) {
+            dispatch(slice.actions.getRisksSuccess([]));   
             dispatch(slice.actions.hasError(error));  
         }
     };
