@@ -14,6 +14,7 @@ import {
     TableHead,
     TableRow,
     Typography,
+    Tooltip,
     TextField,
     Button, MenuItem, Card, CardHeader, CardContent
 } from '@mui/material';
@@ -85,11 +86,20 @@ const Dashboard = () => {
     const { metrics, selectedRisk } = useSelector((state) => state.risk);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
+    const [description, setDescription] = useState('');
+    const [expandDescription, setExpandDescription] = useState(true);
     const { user } = useAuth();
 
     useEffect(() => {
-       
+       setDescription(selectedRisk.description)
     }, []);
+
+    useEffect(() => {
+        if (expandDescription == true)
+            setDescription(selectedRisk.description)
+        else
+            setDescription(selectedRisk.description.slice(0, 350))
+    }, [expandDescription]);
 
     useEffect(() => {
         dispatch(getRiskMetricsById(selectedRisk.id, user.accessToken))
@@ -198,6 +208,11 @@ const Dashboard = () => {
     
 }
 
+const handleExpandDescription = (event ) => {
+    setExpandDescription(!expandDescription)
+    
+}
+
 function renderRow(props) {
     const { index, style } = props;
 
@@ -281,8 +296,11 @@ function renderRow(props) {
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h5" color={primary}>
-                                                            {selectedRisk.description}
+                                                            {description} { expandDescription ? '' : ' ...'}
                                                         </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h4" onClick={(event) => { handleExpandDescription(event) }}>{ expandDescription ? 'Less' : 'More'} </Typography>
                                                     </Grid>
                                                 </Stack>
                                             </CardContent>

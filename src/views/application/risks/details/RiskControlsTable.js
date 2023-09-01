@@ -80,27 +80,27 @@ const headCells = [
 
     
     {
-        id: 'score',
-        label: 'Score',
+        id: 'value',
+        label: 'Value',
         numeric: true,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     
     {
-        id: 'currentriskreduction',
-        label: 'Curr. Risk Reduction',
-        numeric: true,
+        id: 'passfail',
+        label: 'Pass / Fail',
+        numeric: false,
         align: 'center',
-        format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'potentialriskreduction',
-        label: 'Pot. Risk Reduction',
-        numeric: true,
+        id: 'lastrun',
+        label: 'Last Run',
+        numeric: false,
         align: 'center',
-        format: (value) => typeof value === 'number' && value.toFixed(2)
+        
     },
+    /*
     {
         id: 'roi',
         align: 'center',
@@ -113,6 +113,7 @@ const headCells = [
         label: 'Outstanding Tests',
         numeric: false
     }
+    */
 ];
 
 // ==============================|| TABLE HEADER ||============================== //
@@ -441,36 +442,14 @@ const RiskControlsTable = () => {
                                                 variant="subtitle2"
                                                 sx={{ color: '#808080' }}
                                             >
-                                                {'Risk: '}
-                                                {row.riskname}{' '}
-                                            </Typography>
-                                            <Typography
-                                                variant="subtitle2"
-                                                sx={{ color: '#808080' }}
-                                            >
                                                 {'Objective: '}
                                                 {row.objectivename}{' '}
                                             </Typography>
                                         </TableCell>
-                                        <TableCell align="center"></TableCell>
-                                        <TableCell align="center">{row.actualriskreduction ? row.actualriskreductionformated : '0'}</TableCell>
-                                        <TableCell align="center">
-                                            {row.potentialriskreduction ? row.potentialriskreductionformated : '0'}
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            {row.currentroi ? row.currentroiformated : 0}
-                                        </TableCell>
-                                        <TableCell align="center">
-                                            {row.potentialroi ? row.potentialroiformated : '0'} 
-                                        </TableCell>
-                                        <TableCell align="center">
-                                        <Button variant="contained" color="error" >
-                                            Fix Now !
-                                            </Button>
-                                        </TableCell>
-
+                                        <TableCell align="center">{row.controlvalue ? row.controlvalueformated : '0'}</TableCell>
+                                        <TableCell align="center">{row.iseffective ?  <Chip label="Pass" chipcolor="success" /> : <Chip label="Fail" chipcolor="error" />}</TableCell>
+                                        <TableCell align="center">{ row.lasttested } </TableCell>
                                     </TableRow>
-                                    
                                 </>
                                 );
                             })}
