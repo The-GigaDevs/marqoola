@@ -64,7 +64,7 @@ function DataCard({ name, role, id, linkedin, meet, skype, root, rows, item, set
     };
 
     const handleDelete = () => {
-        dispatch(deleteOrganisation(id));
+        dispatch(deleteOrganisation(id, user.accessToken));
     };
     
     const linkHandler = (link) => {

@@ -147,6 +147,8 @@ export function deleteOrganisation(id, token) {
             };
             const response = await axios.delete('/objects/organisations/' + id, {headers});
             dispatch(slice.actions.deleteOrganisationSuccess(response.data));
+            dispatch(getOrganisationsTree(token))
+            dispatch(getOrganisations(token))
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }
