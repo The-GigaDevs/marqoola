@@ -3,7 +3,7 @@ import { useState } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Drawer, Fab, Grid, IconButton, Tooltip } from '@mui/material';
-import { IconSettings } from '@tabler/icons';
+import { IconFilter } from '@tabler/icons';
 
 // third-party
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -31,7 +31,7 @@ const Customization = () => {
     return (
         <>
             {/* toggle button */}
-            <Tooltip title="Live Customize">
+            <Tooltip title="Context Selector">
                 <Fab
                     component="div"
                     onClick={handleToggle}
@@ -51,9 +51,9 @@ const Customization = () => {
                         boxShadow: theme.customShadows.secondary
                     }}
                 >
-                    <AnimateButton type="rotate">
-                        <IconButton color="inherit" size="large" disableRipple aria-label="live customize">
-                            <IconSettings />
+                    <AnimateButton type="scale">
+                        <IconButton color="inherit" size="large" children="" disableRipple aria-label="live customize">
+                            <IconFilter />
                         </IconButton>
                     </AnimateButton>
                 </Fab>
