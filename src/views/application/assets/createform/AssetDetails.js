@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'store';
 import { getCurrencies } from 'store/slices/currency';
-
+import useAuth from 'hooks/useAuth';
 // material-ui
 import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
 
@@ -23,9 +23,10 @@ const AssetDetails = ({ assetDetailsData, setAssetDetailsData, handleNext, setEr
     const dispatch = useDispatch();
     const [currencyData, setCurrencyData] = useState([]);
     const { currencies } = useSelector((state) => state.currency);
+    const { user } = useAuth();
 
     useEffect(() => {
-        dispatch(getCurrencies());
+        dispatch(getCurrencies(user.accessToken));
     }, []);
 
     useEffect(() => {

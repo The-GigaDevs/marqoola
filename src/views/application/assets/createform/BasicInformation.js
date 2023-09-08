@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'store';
 import { getOrganisations } from 'store/slices/organisation';
 import { getAssetTypes } from 'store/slices/assettype';
+import useAuth from 'hooks/useAuth';
 
 // material-ui
 import { Button, MenuItem, Grid, Stack, TextField } from '@mui/material';
@@ -25,10 +26,11 @@ const BasicInformation = ({ basicInformationData, setBasicInformationData, handl
     const [organisationData, setOrganisationData] = useState([]);
     const { organisations } = useSelector((state) => state.organisation);
     const { assettypes } = useSelector((state) => state.assettype);
+    const { user } = useAuth();
 
     useEffect(() => {
-        dispatch(getOrganisations());
-        dispatch(getAssetTypes());
+        dispatch(getOrganisations(user.accessToken));
+        dispatch(getAssetTypes(user.accessToken));
     }, []);
 
     useEffect(() => {

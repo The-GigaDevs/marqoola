@@ -267,7 +267,7 @@ const AssetTable = () => {
     const handleCloseDialog = () => {
         setOpen(false);
         setResetForm(true);
-        dispatch(getAssets(user.accessToken));
+        dispatch(getAssets(selectedDivision, selectedAsset,user.accessToken));
     };
 
     // Getting the token

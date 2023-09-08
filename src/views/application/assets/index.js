@@ -46,6 +46,7 @@ import AssetEditForm from './editform'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { getControlsForAsset } from 'store/slices/control';
+import assetSelector from 'store/slices/asset-selector';
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -232,6 +233,7 @@ const AssetTable = () => {
     const { customers } = useSelector((state) => state.customer);
     const [divisionSelector, setDivisionSelector] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
+    const { selectedAsset } = useSelector((state) => state.assetselector);
     const { user } = useAuth();
     const [assetTableData, setAssetTableData] = React.useState([]);
     const { assets } = useSelector((state) => state.asset);
@@ -246,14 +248,14 @@ const AssetTable = () => {
     };
     const handleCloseDialog = () => {
         setOpen(false);
-        dispatch(getAssets("", user.accessToken));
+        dispatch(getAssets(divisionSelector, selectedAsset,user.accessToken));
     };
 
     // Getting the token
 
     React.useEffect(() => {
 
-        dispatch(getAssets(divisionSelector, user.accessToken));
+        dispatch(getAssets(divisionSelector, selectedAsset, user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
@@ -266,12 +268,12 @@ const AssetTable = () => {
     }, [selectedDivision]);
 
     React.useEffect(() => {
-        dispatch(getAssets(divisionSelector, user.accessToken));
+        dispatch(getAssets(divisionSelector, selectedAsset, user.accessToken));
     }, [divisionSelector]);
 
     const handleDelete = async (selected) => {
         for (var selectedid of selected) {
-            dispatch(deleteAsset(selectedid));
+            dispatch(deleteAsset(selectedid, user.accessToken));
         }
         await delay(500);
         dispatch(
@@ -286,7 +288,7 @@ const AssetTable = () => {
 
             })
         )
-        dispatch(getAssets(divisionSelector, user.accessToken));
+        dispatch(getAssets(divisionSelector, selectedAsset, user.accessToken));
         setSelected([])
     };
 
@@ -298,7 +300,7 @@ const AssetTable = () => {
             const newRows = assetTableData.filter((row) => {
                 let matches = true;
 
-                const properties = ['name', 'email', 'location', 'orders'];
+                const properties = ['name', 'id'];
                 let containsQuery = false;
 
                 properties.forEach((property) => {
@@ -312,9 +314,9 @@ const AssetTable = () => {
                 }
                 return matches;
             });
-            setRows(newRows);
+            setAssetTableData(newRows);
         } else {
-            setRows(customers);
+            setAssetTableData(customers);
         }
     };
 
@@ -345,7 +347,7 @@ const AssetTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getAssets("", user.accessToken));
+        dispatch(getAssets(divisionSelector, selectedAsset, user.accessToken));
     };
 
     const handleClick = (event, name) => {
@@ -445,7 +447,7 @@ const AssetTable = () => {
     }
 
     return (
-        <MainCard title="Customer List" content={false}>
+        <MainCard title="Assets" content={false}>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>

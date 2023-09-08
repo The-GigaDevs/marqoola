@@ -10,6 +10,7 @@ import AssetDetails from './AssetDetails';
 import Review from './Review'
 import MainCard from 'ui-component/cards/MainCard';
 import AnimateButton from 'ui-component/extended/AnimateButton';
+import useAuth from 'hooks/useAuth';
 
 
 
@@ -56,7 +57,7 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
     const [basicInformationData, setBasicInformationData] = React.useState({});
     const [assetDetailsData, setAssetDetailsData] = React.useState({});
      const [errorIndex, setErrorIndex] = React.useState(null);
-    
+     const { user } = useAuth();
     const [resetFormData, setResetFormData] = React.useState(false);
 
     
@@ -89,7 +90,9 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
     const handleSaveAsset = async () => {
         
         try {
-            
+            const headers = {
+                Authorization: `Bearer ` + user.accessToken
+            };
             const response =  await axios.post('/objects/assets', {name: basicInformationData.name,
                 indirectassetvalue: {number:parseInt(assetDetailsData.indirectassetvalue.number),currency:assetDetailsData.indirectassetvalue.currency}, 
                 directassetvalue: {number:parseInt(assetDetailsData.directassetvalue.number),currency:assetDetailsData.directassetvalue.currency}, 
@@ -100,7 +103,7 @@ const AssetCreateForm = ({ open, handleCloseDialog, resetForm, setResetForm, par
                 description: basicInformationData.description,
                 title: basicInformationData.name,
                 
-            }}).then(handleCloseDialog);
+            }}, {headers}).then(handleCloseDialog);
         } catch (error) {
             console.log('Could not save asset:', error)
             handleCloseDialog();

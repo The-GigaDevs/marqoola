@@ -178,11 +178,15 @@ export function updateAsset(id, data, token){
     }
 }
 
-export function deleteAsset(id) {
+export function deleteAsset(id, token) {
     return async () => {
         try {
-            const response = await axios.delete('/objects/assets/' + id);
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.delete('/objects/assets/' + id, {headers});
             dispatch(slice.actions.deleteAssetSuccess(response.data));
+            dispatch(getAssets(null, null, token))
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }
