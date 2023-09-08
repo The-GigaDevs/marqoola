@@ -203,6 +203,7 @@ const ObjectiveTable = () => {
     const { customers } = useSelector((state) => state.customer);
     const [divisionSelector, setDivisionSelector] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
+    const { selectedAsset } = useSelector((state) => state.assetselector);
     const { user } = useAuth();
     const [assetTableData, setAssetTableData] = React.useState([]);
     const { objectives, objectivetemplates } = useSelector((state) => state.objective);
@@ -217,7 +218,7 @@ const ObjectiveTable = () => {
     };
     const handleCloseDialog = () => {
         setOpen(false);
-        dispatch(getObjectives("", user.accessToken));
+        dispatch(getObjectives(selectedDivision, selectedAsset, user.accessToken));
     };
 
     // Getting the token
@@ -231,6 +232,9 @@ const ObjectiveTable = () => {
         setAssetTableData(objectivetemplates);
     }, [objectivetemplates]);
 
+    React.useEffect(() => {
+        setAssetTableData(objectivetemplates);
+    }, [selectedAsset]);
 
     React.useEffect(() => {
         setDivisionSelector(selectedDivision);
@@ -258,7 +262,7 @@ const ObjectiveTable = () => {
 
             })
         )
-        dispatch(getObjectives(divisionSelector, user.accessToken));
+        dispatch(getObjectives(divisionSelector, selectedAsset, user.accessToken));
         setSelected([])
     };
 
@@ -316,7 +320,7 @@ const ObjectiveTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getObjectives("", user.accessToken));
+        dispatch(getObjectives(selectedDivision, selectedAsset, user.accessToken));
     };
 
     const handleClick = (event, name) => {
@@ -348,11 +352,11 @@ const ObjectiveTable = () => {
     const handleExpandRow = (event, id) => {
         setExpandRow(!expandRow);
         if (expandedRow[0]  === id){
-            dispatch(getObjectivesForTemplate("1", user.accessToken))
+            dispatch(getObjectivesForTemplate("1", selectedDivision, selectedAsset, user.accessToken))
         }
         else
         {
-            dispatch(getObjectivesForTemplate(id, user.accessToken));
+            dispatch(getObjectivesForTemplate(id, selectedDivision, selectedAsset, user.accessToken));
         }
         setExpandedRow(id);
     }
@@ -366,6 +370,9 @@ const ObjectiveTable = () => {
         const [objectiveTableData, setObjectiveTableData] = React.useState([]);
         const { objectives } = useSelector((state) => state.objective);
         
+        React.useEffect(() => {
+            dispatch(getObjectivesForTemplate(expandedRow, selectedDivision, selectedAsset, user.accessToken))
+        }, [selectedAsset, selectedDivision]);
         
         React.useEffect(() => {
             setObjectiveTableData(objectives);

@@ -52,13 +52,16 @@ export default slice.reducer;
 // ----------------------------------------------------------------------
 
 
-export function getObjectives(token) {
+export function getObjectives(orgId,assetId, token) {
     return async () => {
         try {
+            const orgid = (orgId === '0' || orgId === null) ? '' : orgId;
+            const assetid = (assetId === '0' || assetId === null) ? '' : assetId;
+            const url = '/objects/objectives?filter[orgaid]=' + orgid + '&filter[assetid]=' + assetid; 
             const headers = {
                 Authorization: `Bearer ` + token
             };
-            const response = await axios.get('/objects/objectives', { headers });
+            const response = await axios.get(url, { headers });
             dispatch(slice.actions.getObjectiveSuccess(response.data));    
             
         } catch (error) {
@@ -117,13 +120,16 @@ export function getObjectiveTemplates(token) {
 }
 
 
-export function getObjectivesForTemplate(templateid, token) {
+export function getObjectivesForTemplate(templateid, orgId, assetId, token) {
     return async () => {
         try {
+            const orgid = (orgId === '0' || orgId === null) ? '' : orgId;
+            const assetid = (assetId === '0' || assetId === null) ? '' : assetId;
+            const url = '/objects/objectives?filter[templateid]=' + templateid + '&filter[orgaid]=' + orgid + '&filter[assetid]=' + assetid; 
             const headers = {
                 Authorization: `Bearer ` + token
             };
-            const response = await axios.get('/objects/objectives?filter[templateid]=' + templateid , {headers});
+            const response = await axios.get(url , {headers});
             dispatch(slice.actions.getObjectiveSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
