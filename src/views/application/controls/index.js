@@ -423,7 +423,7 @@ const ControlTable = () => {
             <TableRow >
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
                     <Collapse in={expandRow} timeout="auto" unmountOnExit>
-                        {expandRow && (
+                        {expandRow && controls.length > 0 && Object.keys(controls[0]).length > 0 &&(
                             <Box sx={{ margin: 1 }}>
                                 <TableContainer>
                                     <MainCard
