@@ -54,7 +54,7 @@ const SelectedAssetCard = () => {
         <>
             
                 <CardWrapper border={false} content={false} sx={{marginLeft: 2}} onClick={(event) => { handleOpenEditDialog(event, selectedAsset) }}>
-                    <Box sx={{ p: 2 }}>
+                    <Box sx={{ p: 1 }}>
                         <List sx={{ py: 0 }}>
                             <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
                                 <ListItemAvatar>
