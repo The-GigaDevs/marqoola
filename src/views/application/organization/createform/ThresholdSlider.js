@@ -134,7 +134,7 @@ export default function ThresholdSlider({sliderData, setSliderData}) {
       <DiscreteSlider
         reverse={false}
         step={100000}
-        values={sliderData.value ? [sliderData.value[0],sliderData.value[1]]: [100000, 500000]}
+        values={sliderData.value ? [sliderData.value[0],sliderData.value[1]]: [3000000, 5000000]}
         min={0}
         max={10000000}
         thresholdMarks={[30, 50, 80]}

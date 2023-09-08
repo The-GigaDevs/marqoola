@@ -47,7 +47,7 @@ const CenteredCellWithSeparator = ({ value1, value2 }) => {
   );
 };
 
-const SummaryCard = () => {
+const SummaryCard = ({sliderData}) => {
   
 
   return (
@@ -64,13 +64,13 @@ const SummaryCard = () => {
           
             <TableRow key='1'>
               <StyledLightPurpleTableCell>
-                <CenteredCellWithSeparator value1={'$0'} value2={'$250,000'}/>
+                <CenteredCellWithSeparator value1={'$ 0'} value2={Object.keys(sliderData).length > 0 ? '$ ' + sliderData.value[0]: '$0'}/>
               </StyledLightPurpleTableCell>
               <StyledLightPurpleTableCell>
-                <CenteredCellWithSeparator value1={'$252,000'} value2={'$1,550,000'}/>
+                <CenteredCellWithSeparator value1={Object.keys(sliderData).length > 0 ? '$ ' + sliderData.value[0]: '$0'} value2={Object.keys(sliderData).length > 0 ? '$ ' + sliderData.value[1]: '$0'}/>
               </StyledLightPurpleTableCell>
               <StyledLightBlueTableCell>
-                 &lt; $1,550,000
+                 &lt; {Object.keys(sliderData).length > 0 ? '$ ' + sliderData.value[1]: '$0'}
               </StyledLightBlueTableCell>
             </TableRow>
       

@@ -74,7 +74,7 @@ export default function RiskTolerance({ riskToleranceData, setRiskToleranceData,
                         <ThresholdSlider sliderData={sliderData} setSliderData={setSliderData}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <SummaryCard />
+                        <SummaryCard sliderData={sliderData}/>
                     </Grid>
                     
                     <Grid item xs={12} sx={{textAlign:'center'}}>
