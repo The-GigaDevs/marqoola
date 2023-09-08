@@ -168,7 +168,7 @@ const ValidationWizard = ({ open, handleCloseDialog, resetForm, setResetForm, pa
         sx={{
             '&>div:nth-of-type(3)': {
                 '&>div': {
-                    maxWidth: 800
+                    maxWidth: 1200
                 }
             }
         }}

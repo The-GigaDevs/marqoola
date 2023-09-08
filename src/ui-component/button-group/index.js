@@ -8,7 +8,7 @@ import { getRiskTolerances } from "store/slices/risktolerance";
 export const ButtonGroupCustom = ({buttonGroupData, setButtonGroupData}) => {
     const redTheme = createTheme({ palette: { primary: grey, secondary: purple } })
     
-    const [selectedBtn, setSelectedBtn] = useState(-1);
+    const [selectedBtn, setSelectedBtn] = useState(0);
 
     const [selectedId, setSelectedId] = useState("");
   
@@ -18,7 +18,7 @@ export const ButtonGroupCustom = ({buttonGroupData, setButtonGroupData}) => {
 
       return buttonGroupData && (
       <div>
-        <ThemeProvider theme={redTheme}>
+        
       <ButtonGroup disableElevation variant="contained" color="primary" >
       
         <Button  variant='outlined' color={selectedBtn === 1 ? "secondary" : "primary"} onClick={()=>{setSelectedBtn(1); setSelectedId(buttonGroupData[0].id);}}>Averse</Button>
@@ -32,7 +32,7 @@ export const ButtonGroupCustom = ({buttonGroupData, setButtonGroupData}) => {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Button  variant='outlined' color={selectedBtn === 5 ? "secondary" : "primary"} onClick={()=>{setSelectedBtn(5); setSelectedId(buttonGroupData[4].id);}}>Hungry</Button>
       </ButtonGroup>
-      </ThemeProvider>
+      
     </div>
     );
   };

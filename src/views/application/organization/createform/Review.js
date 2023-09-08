@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import useAuth from 'hooks/useAuth';
 // material-ui
 import { Grid, List, ListItem, ListItemText, Typography, Divider } from '@mui/material';
 import { useDispatch, useSelector } from 'store';
@@ -22,12 +22,13 @@ export default function Review({basicInformationData, divisionDetailsData, indus
     const [ filteredClassification, setFilteredClassification] = React.useState([]);
     const { risktolerances } = useSelector((state) => state.risktolerance);
     const [ riskToleranceDetailsData, setRiskToleranceData] = React.useState([]);
+    const { user } = useAuth();
 
     React.useEffect(() => {
-        dispatch(getOrganisationDetails(basicInformationData.parent));
-        dispatch(getRiskTolerances());
-        dispatch(getIndustries());
-        dispatch(getSubIndustries());
+        dispatch(getOrganisationDetails(basicInformationData.parent, user.accessToken));
+        dispatch(getRiskTolerances(user.accessToken));
+        dispatch(getIndustries(user.accessToken));
+        dispatch(getSubIndustries(user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
@@ -77,13 +78,13 @@ export default function Review({basicInformationData, divisionDetailsData, indus
             <Typography variant="h3" gutterBottom sx={{ mb: 2 }}>
                Parent: {organisationDetailsData.name}
             </Typography>
-            <Typography variant="h5" gutterBottom sx={{ mb: 2 , mt: 15, ml: 10}}>
+            <Typography variant="h5" gutterBottom sx={{ mb: 2 , mt: 5, ml: 10}}>
                {basicInformationData.name}
             </Typography>
             <Typography variant="h5" gutterBottom sx={{ mb: 2, mt: 2, ml: 10 }}>
                {basicInformationData.description}
             </Typography>
-            <Divider sx={{mt: 5, mb: 5}}/>
+            <Divider sx={{mt: 3, mb: 3}}/>
             <Grid container sx={{mx: 10}}>
                 <Grid item xs={6}>
                     {divisionDetailsData.numEmployees} Employees
@@ -100,7 +101,7 @@ export default function Review({basicInformationData, divisionDetailsData, indus
                    {industryInformationData.numCustomers} Customers
                 </Grid>
             </Grid>
-            <Grid container sx={{my: 20, mx: 10}}>
+            <Grid container sx={{my: 10, mx: 10}}>
                 <Grid item xs={6}>
                     { filteredClassification.length > 0 && (<>
                     Risk class is {filteredClassification[0].label} </>)}

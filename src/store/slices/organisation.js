@@ -180,7 +180,7 @@ export function createOrganisation(data, token){
             },{ headers });
 
                 //dispatch(slice.actions.updateOrganisationSuccess(response.data,));
-            getOrganisations(token);
+            dispatch(getOrganisations(token));
             
         } catch (error) {
             dispatch(slice.actions.hasError(error));
@@ -214,7 +214,7 @@ export function updateOrganisation(id, data, token){
             },{ headers });
 
                 //dispatch(slice.actions.updateOrganisationSuccess(response.data,));
-            getOrganisationDetails(id, token);
+            dispatch(getOrganisationDetails(id, token));
             
         } catch (error) {
             dispatch(slice.actions.hasError(error));

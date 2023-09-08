@@ -54,7 +54,7 @@ function DiscreteSlider(props) {
     setActualData({value, perc, marks})
   };
   
-  console.log(value, perc, marks);
+  
   return (
     <Box
       sx={{
