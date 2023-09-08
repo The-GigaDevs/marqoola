@@ -319,7 +319,7 @@ const OrgTable = () => {
             const newRows = orgTableData.filter((row) => {
                 let matches = true;
 
-                const properties = ['name', 'email', 'location', 'orders'];
+                const properties = ['name', 'id'];
                 let containsQuery = false;
 
                 properties.forEach((property) => {
@@ -333,9 +333,9 @@ const OrgTable = () => {
                 }
                 return matches;
             });
-            setRows(newRows);
+            setOrgTableData(newRows);
         } else {
-            setRows(customers);
+            setOrgTableData(organisations);
         }
     };
 
