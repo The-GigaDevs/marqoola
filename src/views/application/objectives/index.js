@@ -243,7 +243,7 @@ const ObjectiveTable = () => {
 
     const handleDelete = async (selected) => {
         for (var selectedid of selected) {
-            dispatch(deleteObjective(selectedid));
+            dispatch(deleteObjective(selectedid, user.accessToken));
         }
         await delay(500);
         dispatch(
@@ -270,7 +270,7 @@ const ObjectiveTable = () => {
             const newRows = assetTableData.filter((row) => {
                 let matches = true;
 
-                const properties = ['name', 'email', 'location', 'orders'];
+                const properties = ['name', 'id'];
                 let containsQuery = false;
 
                 properties.forEach((property) => {
@@ -284,9 +284,9 @@ const ObjectiveTable = () => {
                 }
                 return matches;
             });
-            setRows(newRows);
+            setAssetTableData(newRows);
         } else {
-            setRows(customers);
+            setAssetTableData(objectivetemplates);
         }
     };
 
@@ -374,7 +374,7 @@ const ObjectiveTable = () => {
             <TableRow >
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
                     <Collapse in={expandRow} timeout="auto" unmountOnExit>
-                        {expandRow && (
+                        {expandRow && objectives.length > 0 &&(
                             <Box sx={{ margin: 1 }}>
                                 <TableContainer>
                                     <MainCard
@@ -395,8 +395,8 @@ const ObjectiveTable = () => {
                                                     <TableRow hover key={objectiveRow.id}>
                                                     <TableCell component="th" scope="row" 
                                             onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, objectiveRow.id) }}>
-                                                            {objectiveRow.code}
-                                                            <Typography variant="caption"> Asset: {objectiveRow.code} </Typography>
+                                                            {objectiveRow.code}<br/>
+                                                            <Typography variant="caption"> Asset: {objectiveRow.assetname} </Typography>
                                                         </TableCell>
                                                         <TableCell>
                                                             {objectiveRow.risks.length}

@@ -117,17 +117,18 @@ export function getObjectiveTemplates(token) {
 }
 
 
-export function getObjectivesForTemplate(templateid) {
+export function getObjectivesForTemplate(templateid, token) {
     return async () => {
         try {
-            const response = await axios.get('/objects/objectives?filter[templateid]=' + templateid );
+            const headers = {
+                Authorization: `Bearer ` + token
+            };
+            const response = await axios.get('/objects/objectives?filter[templateid]=' + templateid , {headers});
             dispatch(slice.actions.getObjectiveSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
-            const emptyControl = [{ 
-                
-            }]
-            dispatch(slice.actions.getObjectiveSuccess(emptyControl))
+            
+            dispatch(slice.actions.getObjectiveSuccess([]))
         }
     };
 }
@@ -154,6 +155,7 @@ export function deleteObjective(id, token) {
             };
             const response = await axios.delete('/objects/objectives/' + id, { headers });
             dispatch(slice.actions.deleteObjectiveSuccess(response.data));
+            dispatch(getObjectiveTemplates(token))
         } catch (error) {
             dispatch(slice.actions.hasError(error));
         }
