@@ -36,7 +36,7 @@ env:
   ECS_SERVICE: marqoola-ui-service               # set this to your Amazon ECS service name
   ECS_CLUSTER: dev-de-cluster  # set this to your Amazon ECS cluster name
   ECS_TASK_DEFINITION: marqoola-ui # set this to the path to your Amazon ECS task definition
-                                               # file, e.g. .aws/task-definition.json
+  MQENV: dev-de
 
 permissions:
   contents: read
@@ -51,6 +51,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -64,17 +66,14 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
+      uses: docker/bake-action@v3
+      with:
+        push: true
+        files: docker-bake.hcl
       id: build-image
       env:
         ECR_REGISTRY: 786821818288.dkr.ecr.eu-central-1.amazonaws.com
         IMAGE_TAG: latest
-      run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
     - name: Download task definition
       run: |

@@ -1,0 +1,6 @@
+version: '3.7'
+services:
+  marqoola-ui:
+    image: marqoola-ui-dev2:latest
+    ports:
+      - 3001:3000
