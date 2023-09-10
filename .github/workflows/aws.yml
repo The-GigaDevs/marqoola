@@ -70,6 +70,7 @@ jobs:
       with:
         push: true
         files: docker-bake.hcl
+        targets: dev-de
       id: build-image
       env:
         ECR_REGISTRY: 786821818288.dkr.ecr.eu-central-1.amazonaws.com

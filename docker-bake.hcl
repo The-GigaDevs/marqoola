@@ -13,7 +13,6 @@ variable "TAGVERSION" {
 }
 group "default" {
   targets = [
-    "dev-de",
     "dev-fr",
   ]
 }
