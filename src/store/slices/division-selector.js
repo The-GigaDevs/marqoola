@@ -54,6 +54,7 @@ export function setDivisionSelector(id, token) {
             dispatch(slice.actions.getOrganisationDetailsSuccess(response.data));
         } catch (error) {
             dispatch(slice.actions.hasError(error));
+            console.log(error);
         }
     };
 }
