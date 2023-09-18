@@ -467,11 +467,9 @@ const ControlTable = () => {
                                     >
                                         <Table size="small" aria-label="dgfgd">
                                             <TableHead>
-                                                <TableRow>
+                                                <TableRow key="header">
                                                     <TableCell>Control</TableCell>
                                                     <TableCell>Control Category</TableCell>
-                                                    <TableCell>Organisation</TableCell>
-                                                    <TableCell>Risk</TableCell>
                                                     <TableCell>Concept</TableCell>
                                                     <TableCell>Implementation</TableCell>
                                                     <TableCell>Control Value</TableCell>
@@ -485,16 +483,11 @@ const ControlTable = () => {
                                                         <TableCell component="th" scope="row" 
                                             onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, controlRow.id) }}>
                                                             {controlRow.name}
-                                                            <Typography variant="caption"> Asset: {controlRow.assetname} </Typography>
+                                                            <Typography variant="subtitle2" sx={{ color: '#808080' }}> Organisation: {controlRow.organame} </Typography>
+                                                            <Typography variant="subtitle2" sx={{ color: '#808080' }}> Asset: {controlRow.assetname} </Typography>
                                                         </TableCell>
                                                         <TableCell>
                                                             {controlRow.controlcategoryname}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.organame}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.riskname}
                                                         </TableCell>
                                                         <TableCell>
                                                             {controlRow.securityconceptname}

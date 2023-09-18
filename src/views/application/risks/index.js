@@ -468,6 +468,8 @@ const RiskTable = () => {
                                             >
                                                 {''}
                                                 {row.name}{' '}
+                                            <Typography variant="subtitle2" sx={{ color: '#808080' }}> Organisation: {row.organame} </Typography>
+                                            <Typography variant="subtitle2" sx={{ color: '#808080' }}> Asset: {row.assetname} </Typography>
                                             </Typography>
                                             
                                         </TableCell>
