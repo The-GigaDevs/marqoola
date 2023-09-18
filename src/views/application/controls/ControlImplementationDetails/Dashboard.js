@@ -17,7 +17,7 @@ import {
     TextField,
     Button, MenuItem, Card, CardHeader, CardContent
 } from '@mui/material';
-
+import { openSnackbar } from 'store/slices/snackbar';
 import useAuth from 'hooks/useAuth';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -43,7 +43,7 @@ import { getCurrencies } from 'store/slices/currency';
 import { getControlCategories } from 'store/slices/controlcategory';
 import { getObjectives } from 'store/slices/objective';
 import { getSecurityConcepts } from 'store/slices/securityconcept';
-import { getControlScenarioMetricsById } from 'store/slices/control';
+import { getControlScenarioMetricsById, runSquid } from 'store/slices/control';
 
 // assets
 import CalendarTodayTwoToneIcon from '@mui/icons-material/CalendarTodayTwoTone';
@@ -238,6 +238,39 @@ function renderRow(props) {
 
     });
 
+    const handleSquidButton = async (event, id) => {
+        const result = await dispatch(runSquid(id, user.accessToken));
+        if (result == true){
+        dispatch(
+            openSnackbar({
+                open: true,
+                message: 'Squid started successfully',
+                variant: 'alert',
+                alert: {
+                    color: 'success'
+                },
+                close: true
+
+            })
+        )
+        }
+        else if (result == false){
+            dispatch(
+                openSnackbar({
+                    open: true,
+                    message: 'Squid failed to start',
+                    variant: 'alert',
+                    alert: {
+                        color: 'error'
+                    },
+                    close: true
+    
+                })
+            )
+        }
+        dispatch(getControlsForTemplate(templateid, user.accessToken));
+    }
+
     return selectedControlScenario && selectedControlScenario.orgaid && series &&  (
         <form onSubmit={formik.handleSubmit} id="asset-forms">
             <Grid container spacing={gridSpacing}>
@@ -377,7 +410,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Button variant="contained">Run Now</Button>
+                                                        <Button variant="contained" onClick={(event) => { handleSquidButton(event, selectedControlScenario.controlid) }}>Run Now</Button>
                                                     </Grid>
                                                 </Stack>
                                             </CardContent>

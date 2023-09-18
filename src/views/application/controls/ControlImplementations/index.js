@@ -47,7 +47,7 @@ import Details from '../ControlImplementationDetails'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { deleteControl, getControlScenarios, getControlScenarioById } from 'store/slices/control';
+import { deleteControl, getControlScenarios, setControlScenarioBy } from 'store/slices/control';
 
 
 // table sort
@@ -369,7 +369,7 @@ const ControlTable = () => {
 
     const handleOpenEditDialog = (event, row) => {
         //navigate('/organisationdetails', { state: { id: id } });
-        getControlScenarioById(row)
+        setControlScenarioBy(row)
         setIdentifier(row)
         setOpenDetails(true)
     }

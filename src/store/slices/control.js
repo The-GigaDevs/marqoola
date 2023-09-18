@@ -101,7 +101,7 @@ export function getControlScenarios(orgId, assetId, riskId, objectiveId, token) 
     };
 }
 
-export function getControlScenarioById(controlscenario) {
+export function setControlScenarioBy(controlscenario) {
     
         dispatch(slice.actions.getControlScenarioByIdSuccess(controlscenario));
     
