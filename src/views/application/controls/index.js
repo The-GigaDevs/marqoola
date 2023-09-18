@@ -32,7 +32,7 @@ import Chip from 'ui-component/extended/Chip';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { useDispatch, useSelector } from 'store';
-import { getControls, getControlsForTemplate, deleteControl } from 'store/slices/control';
+import { getControls, getControlsForTemplate, deleteControl, runSquid } from 'store/slices/control';
 import { getControlTemplates, deleteControlTemplate } from 'store/slices/controltemplate';
 
 import ControlDetails from './ControlDetails';
@@ -419,6 +419,22 @@ const ControlTable = () => {
         React.useEffect(() => {
             setControlTableData(controls);
         }, [controls]);
+
+        const handleSquidButton = (event, id) => {
+            dispatch(runSquid(id, user.accessToken))
+            dispatch(
+                openSnackbar({
+                    open: true,
+                    message: 'Squid started successfully',
+                    variant: 'alert',
+                    alert: {
+                        color: 'success'
+                    },
+                    close: true
+    
+                })
+            )
+        }
         return (
             <TableRow >
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
@@ -479,7 +495,7 @@ const ControlTable = () => {
                                                             {controlRow.lasttested? controlRow.lasttested: "Never"}
                                                         </TableCell>
                                                         <TableCell>
-                                                            <Button variant='contained' color="secondary">Run Test</Button>
+                                                            <Button variant='contained' color="secondary" onClick={(event) => { handleSquidButton(event, controlRow.id) }}>Run Test</Button>
                                                         </TableCell>
                                                     </TableRow>
                                                     
