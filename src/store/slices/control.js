@@ -210,13 +210,20 @@ function filterByAllRiskId(data, idToFilter) {
 
 export function runSquid(squidid, token){
     return async () => {
-       
+        try{
             const headers = {
-                Authorization: `Bearer ` + token
+                Authorization: `Bearer ` + token,
+                'Content-Type': 'application/json'
             };
             const response = await axios.get('/squids/runsquid/' + squidid , {headers});
             dispatch(slice.actions.runSquidResult(response.data.message));
-       
+            return true;
+        }
+        catch(error)
+        {
+            console.log(error);
+            return false;
+        }
     };
 }
 

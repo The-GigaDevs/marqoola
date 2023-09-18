@@ -420,8 +420,9 @@ const ControlTable = () => {
             setControlTableData(controls);
         }, [controls]);
 
-        const handleSquidButton = (event, id) => {
-            dispatch(runSquid(id, user.accessToken))
+        const handleSquidButton = async (event, id) => {
+            const result = await dispatch(runSquid(id, user.accessToken));
+            if (result == true){
             dispatch(
                 openSnackbar({
                     open: true,
@@ -434,6 +435,21 @@ const ControlTable = () => {
     
                 })
             )
+            }
+            else if (result == false){
+                dispatch(
+                    openSnackbar({
+                        open: true,
+                        message: 'Squid failed to start',
+                        variant: 'alert',
+                        alert: {
+                            color: 'error'
+                        },
+                        close: true
+        
+                    })
+                )
+            }
         }
         return (
             <TableRow >
