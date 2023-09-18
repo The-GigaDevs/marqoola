@@ -450,6 +450,7 @@ const ControlTable = () => {
                     })
                 )
             }
+            dispatch(getControlsForTemplate(templateid, user.accessToken));
         }
         return (
             <TableRow >
