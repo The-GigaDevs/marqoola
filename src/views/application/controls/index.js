@@ -604,7 +604,7 @@ const ControlTable = () => {
                                         </TableCell>
                                         <TableCell sx={{ pl: 3 }}>
                                             <IconButton aria-label="expand row" size="small" onClick={(event) => { handleExpandRow(event, row.id) }}>
-                                                {expandRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                                {expandRow && isRowExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                                             </IconButton>
                                         </TableCell>
                                         <TableCell
