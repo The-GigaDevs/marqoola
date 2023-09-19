@@ -526,6 +526,7 @@ const ControlTable = () => {
                                                 {''}
                                                 {row.name}{' '}
                                             </Typography>
+                                            <div onClick={(event) => {  handleDivisionClick(event, row.orgaid);handleAssetClick(event, row.assetid);handleRiskClick(event, row.riskid);handleObjectiveClick(event, row.objectiveid); }}>
                                             <Typography
                                                 variant="subtitle2"
                                                 sx={{ color: '#808080' }}
@@ -558,6 +559,7 @@ const ControlTable = () => {
                                                 {'Objective: '}
                                                 {row.objectivename}{' '}
                                             </Typography>
+                                            </div>
                                         </TableCell>
                                         <TableCell align="center">{row.implementationcost ? row.implementationcostformated : ''}</TableCell>
                                         <TableCell align="center">{row.controlvalue ? row.controlvalueformated : ''}</TableCell>
