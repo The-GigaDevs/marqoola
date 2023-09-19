@@ -61,7 +61,7 @@ export function getRisks(orgId, assetId, riskId, objectiveId, token) {
             const assetid = (assetId === '0' || assetId === null) ? '' : assetId;
             const riskid = (riskId === '0' || riskId === null) ? '' : riskId;
             const objectiveid = (objectiveId === '0' || objectiveId === null) ? '' : objectiveId;
-            const response = await axios.get('/objects/risks?filter[orgaid]=' + orgId + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid + '&filter[objectiveid]=' + objectiveid, { headers });
+            const response = await axios.get('/objects/risks?filter[orgaid]=' + orgid + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid + '&filter[objectiveid]=' + objectiveid, { headers });
             dispatch(slice.actions.getRisksSuccess(response.data));   
             
         } catch (error) {

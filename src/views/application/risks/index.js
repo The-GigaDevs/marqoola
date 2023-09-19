@@ -43,6 +43,8 @@ import Details from './details'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { deleteRisk, getRisks, getRiskById } from 'store/slices/risk';
+import { setDivisionSelector } from 'store/slices/division-selector';
+import { setAssetSelector } from 'store/slices/asset-selector';
 
 
 // table sort
@@ -216,7 +218,7 @@ const RiskTable = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(25);
     const [search, setSearch] = React.useState('');
-    const [divisionSelector, setDivisionSelector] = React.useState('');
+    const [divisionSelector, setDivisionSelector2] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
     const { selectedAsset } = useSelector((state) => state.assetselector);
     const { selectedRisk } = useSelector((state) => state.riskselector);
@@ -243,6 +245,13 @@ const RiskTable = () => {
         dispatch(getRisks(selectedDivision, selectedAsset, selectedRisk, selectedObjective, user.accessToken));
     };
 
+    const handleDivisionClick = (event, division) => {
+        dispatch(setDivisionSelector(division, user.accessToken));
+    };
+
+    const handleAssetClick = (event, asset) => {
+        dispatch(setAssetSelector(asset, user.accessToken));
+    };
     
     // Getting the token
 
@@ -459,18 +468,21 @@ const RiskTable = () => {
                                             component="th"
                                             id={labelId}
                                             scope="row"
-                                            onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, row.id) }}
                                             sx={{ cursor: 'pointer' }}
                                         >
                                             <Typography
                                                 variant="subtitle1"
                                                 sx={{ color: '#db72ff' }}
+                                                onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, row.id) }}
                                             >
                                                 {''}
                                                 {row.name}{' '}
+                                            </Typography>
+                                            <div onClick={(event) => {  handleDivisionClick(event, row.orgaid);handleAssetClick(event, row.assetid);}}>
                                             <Typography variant="subtitle2" sx={{ color: '#808080' }}> Organisation: {row.organame} </Typography>
                                             <Typography variant="subtitle2" sx={{ color: '#808080' }}> Asset: {row.assetname} </Typography>
-                                            </Typography>
+                                            </div>
+                                            
                                             
                                         </TableCell>
                                         <TableCell align="center">{row.description.slice(0,300)}...</TableCell>
