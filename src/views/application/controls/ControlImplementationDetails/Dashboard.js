@@ -268,7 +268,7 @@ function renderRow(props) {
                 })
             )
         }
-        dispatch(getControlsForTemplate(templateid, user.accessToken));
+        
     }
 
     return selectedControlScenario && selectedControlScenario.orgaid && series &&  (
