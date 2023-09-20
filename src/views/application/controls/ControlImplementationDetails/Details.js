@@ -244,66 +244,326 @@ function renderRow(props) {
                         secondary={<><Chip label={selectedControlScenario.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControlScenario.implemented ? "success" : "error"} /><Typography variant="subtitle1">Last tested {selectedControlScenario.lasttested ? 'on ' + selectedControlScenario.lasttested : 'Never'}</Typography></>}>
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={8}>        
-                                <div id="chart">
-                                    <ReactApexChart options={options} series={series} type="area" height={400} />
-                                </div>
+                            <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                            <CardContent>
+                            <Grid item>
+                                                        <Typography variant="h4">General</Typography>
+                                                        <br/>
+                                                        <br/>
+                                                    </Grid>
+                                                <Stack direction="column" spacing={1} >
+                                                    
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Name:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.name}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Code:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.code}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Description:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.description}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    
+                                                </Stack>
+                                            </CardContent>
+                            </Card>
                             </Grid>
                             <Grid item xs={4}>
                                 <Stack direction="column" spacing={1}>
                                     <Grid item >
                                         <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>
                                             <CardContent>
-                                                <Stack direction="column" spacing={0} >
-                                                    <Grid item>
-                                                        <Typography variant="h4">{selectedControlScenario.name}</Typography>
-                                                        <Typography variant="h4">Risk Scenario</Typography>
+                                            <Grid item>
+                                                        <Typography variant="h4">References</Typography>
                                                     </Grid>
-                                                    <Grid item><br/></Grid>
-                                                    <Grid item>
-                                                        <Stack direction="row">
-                                                            <Grid item xs={8}>
-                                                                <Typography variant="h5" color={primary}>
-                                                                    Current Risk
-                                                                </Typography>
-                                                            </Grid>
-                                                            <Grid item xs={4}>
-                                                                <Typography variant="h5" color={primary}>
-                                                                    {selectedControlScenario.fo}
-                                                                </Typography>
-                                                            </Grid>
-                                                        </Stack>
-                                                        
-                                                    </Grid>
-                                                </Stack>
-                                            </CardContent>
-                                        </Card>
-                                    </Grid>
-                                    <Grid item >
-                                        <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
-                                            <CardContent>
-                                                <Stack direction="column" spacing={1}>
-                                                    <Grid item>
-                                                        <Typography variant="h4">About {selectedControlScenario.name}</Typography>
-                                                    </Grid>
-                                                    <Grid item>
-                                                        <Typography variant="h5" color={primary}>
-                                                            {selectedControlScenario.description}
-                                                        </Typography>
-                                                    </Grid>
-                                                </Stack>
                                             </CardContent>
                                         </Card>
                                     </Grid>
                                 </Stack>
                             </Grid>
                         </Grid>
+                        <br/>
                         <Grid container spacing={gridSpacing}>
                         
-                            <Grid item xs={12}>
+                            <Grid item xs={5}>
                                 
-                                <RiskControlsTable />
-                            </Grid>
+                                <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                                            <CardContent>
+                                                <Stack direction="column" spacing={3} >
+                                                    <Grid item>
+                                                        <Typography variant="h4">Baseline Properties</Typography>
+                                                    </Grid>
+                                                    <Stack direction="column" spacing={1} >
+                                                    
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Name:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.name}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Security Concept:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.securityconceptname}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Implemented:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.implemented}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <br/>
+                                                    <br/>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Pass Fail:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.iseffective}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <br/>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Date Tested:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.lasttested}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                </Stack>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
 
+                                
+                            </Grid>
+                            <Grid item xs={3}>
+                                <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                                            <CardContent>
+                                            <Stack direction="column" spacing={3} >
+                                                    <Grid item>
+                                                        <Typography variant="h4">Value</Typography>
+                                                    </Grid>
+                                                    <Stack direction="column" spacing={1} >
+                                                    
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Control Value:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.controlvalueformated}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Actual Risk Reduction:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.actualriskreductionformated}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Potential Risk Reduction:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.potentialriskreductionformated}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <br/>
+                                                    <br/>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Current ROI:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.currentroiformated}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Potential ROI:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.potentialroiformated}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                </Stack>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                            </Grid>
+                            <Grid item xs={4}>
+                            <Card sx={{ border: `1px solid ${theme.palette.secondary.main}`}}>  
+                                            <CardContent>
+                                            <Stack direction="column" spacing={3} >
+                                                    <Grid item>
+                                                        <Typography variant="h4">Implementation Cost (annualized)</Typography>
+                                                    </Grid>
+                                                    <Stack direction="column" spacing={1} >
+                                                    
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Hourly PS Rate:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.othercostsformated}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            PS Hours:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.implementationhourlyformated}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Other Implementation Cost:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.implementationhours}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            --------------------------
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                    <Grid item>
+                                                    <Stack direction="row" spacing={3}>
+                                                    <Grid item>
+                                                        <Typography variant="h4">
+                                                            Implementation Cost:
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Typography variant="h5">
+                                                            {selectedControlScenario.implementationcostformated}
+                                                        </Typography>
+                                                    </Grid>
+                                                    </Stack>
+                                                    </Grid>
+                                                </Stack>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                            </Grid>
                             <Grid item xs={12}>
                                 <Divider sx={sxDivider} />
                             </Grid>
