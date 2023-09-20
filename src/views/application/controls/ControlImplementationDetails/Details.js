@@ -260,7 +260,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.name}
                                                         </Typography>
                                                     </Grid>
@@ -273,7 +273,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.code}
                                                         </Typography>
                                                     </Grid>
@@ -287,7 +287,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.description}
                                                         </Typography>
                                                     </Grid>
@@ -332,7 +332,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.name}
                                                         </Typography>
                                                     </Grid>
@@ -345,7 +345,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.securityconceptname}
                                                         </Typography>
                                                     </Grid>
@@ -359,7 +359,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.implemented}
                                                         </Typography>
                                                     </Grid>
@@ -375,7 +375,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.iseffective}
                                                         </Typography>
                                                     </Grid>
@@ -390,7 +390,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.lasttested}
                                                         </Typography>
                                                     </Grid>
@@ -419,7 +419,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.controlvalueformated}
                                                         </Typography>
                                                     </Grid>
@@ -432,7 +432,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.actualriskreductionformated}
                                                         </Typography>
                                                     </Grid>
@@ -446,7 +446,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.potentialriskreductionformated}
                                                         </Typography>
                                                     </Grid>
@@ -462,7 +462,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.currentroiformated}
                                                         </Typography>
                                                     </Grid>
@@ -476,7 +476,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.potentialroiformated}
                                                         </Typography>
                                                     </Grid>
@@ -503,7 +503,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.othercostsformated}
                                                         </Typography>
                                                     </Grid>
@@ -516,7 +516,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.implementationhourlyformated}
                                                         </Typography>
                                                     </Grid>
@@ -530,7 +530,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.implementationhours}
                                                         </Typography>
                                                     </Grid>
@@ -553,7 +553,7 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
+                                                        <Typography variant="h8">
                                                             {selectedControlScenario.implementationcostformated}
                                                         </Typography>
                                                     </Grid>
