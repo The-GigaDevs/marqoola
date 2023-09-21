@@ -7,6 +7,7 @@ import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography }
 import MainCard from 'ui-component/cards/MainCard';
 import { useDispatch, useSelector } from 'store';
 import { useNavigate } from 'react-router-dom';
+import { IconAsset } from '@tabler/icons';
 
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -67,7 +68,7 @@ const SelectedAssetCard = () => {
                                             color: '#fff'
                                         }}
                                     >
-                                        <TableChartOutlinedIcon fontSize="inherit" />
+                                        <IconAsset fontSize="inherit" />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText

@@ -7,6 +7,8 @@ import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography }
 import MainCard from 'ui-component/cards/MainCard';
 import { useDispatch, useSelector } from 'store';
 import { useNavigate } from 'react-router-dom';
+import { IconBinaryTree } from '@tabler/icons';
+
 
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -67,7 +69,7 @@ const SelectedDivisionCard = () => {
                                             color: '#fff'
                                         }}
                                     >
-                                        <TableChartOutlinedIcon fontSize="inherit" />
+                                        <IconBinaryTree fontSize="inherit" />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
