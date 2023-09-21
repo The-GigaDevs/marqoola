@@ -582,7 +582,10 @@ const IncidentTable = () => {
                                                         <TableCell>01-01-2023</TableCell>
                                                         <TableCell>02-01-2023</TableCell>
                                                         <TableCell>
-                                                            <PersonIcon></PersonIcon>Anton
+                                                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                                <PersonIcon />
+                                                                Anton
+                                                            </Box>
                                                         </TableCell>
                                                         <TableCell>{row.potentialroi ? row.potentialroiformated : '0'}</TableCell>
                                                         {/* <TableCell align="center">
