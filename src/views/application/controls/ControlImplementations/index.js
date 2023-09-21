@@ -47,7 +47,11 @@ import Details from '../ControlImplementationDetails'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { deleteControl, getControlScenarios, getControlScenarioById } from 'store/slices/control';
+import { deleteControl, getControlScenarios, setControlScenarioBy } from 'store/slices/control';
+import { setDivisionSelector } from 'store/slices/division-selector';
+import { setAssetSelector } from 'store/slices/asset-selector';
+import { setRiskSelector } from 'store/slices/risk-selector';
+import { setObjectiveSelector } from 'store/slices/objective-selector';
 
 
 // table sort
@@ -250,7 +254,7 @@ const ControlTable = () => {
     const [currentAsset, setCurrentAsset] = React.useState('');
     const [rows, setRows] = React.useState([]);
     const { customers } = useSelector((state) => state.customer);
-    const [divisionSelector, setDivisionSelector] = React.useState('');
+    const [divisionSelector, setDivisionSelector2] = React.useState('');
     const { selectedDivision } = useSelector((state) => state.divisionselector);
     const { selectedAsset } = useSelector((state) => state.assetselector);
     const { selectedRisk } = useSelector((state) => state.riskselector);
@@ -290,13 +294,29 @@ const ControlTable = () => {
     }, [controlscenarios]);
 
     React.useEffect(() => {
-        setDivisionSelector(selectedDivision);
+        setDivisionSelector2(selectedDivision);
         dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective,user.accessToken));
     }, [selectedDivision, selectedAsset, selectedRisk, selectedObjective]);
 
     React.useEffect(() => {
         dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective ,user.accessToken));
     }, [divisionSelector]);
+
+    const handleDivisionClick = (event, division) => {
+        dispatch(setDivisionSelector(division, user.accessToken));
+    };
+
+    const handleAssetClick = (event, asset) => {
+        dispatch(setAssetSelector(asset, user.accessToken));
+    };
+
+    const handleRiskClick = (event, risk) => {
+        dispatch(setRiskSelector(risk, user.accessToken));
+    };
+
+    const handleObjectiveClick = (event, objective) => {
+        dispatch(setObjectiveSelector(objective, user.accessToken));
+    };
 
     const handleDelete = async (selected) => {
         for (var selectedid of selected) {
@@ -369,7 +389,7 @@ const ControlTable = () => {
 
     const handleOpenEditDialog = (event, row) => {
         //navigate('/organisationdetails', { state: { id: id } });
-        getControlScenarioById(row)
+        setControlScenarioBy(row)
         setIdentifier(row)
         setOpenDetails(true)
     }
@@ -495,19 +515,22 @@ const ControlTable = () => {
                                             component="th"
                                             id={labelId}
                                             scope="row"
-                                            onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, row) }}
+                                            
                                             sx={{ cursor: 'pointer' }}
                                         >
                                             <Typography
                                                 variant="subtitle1"
                                                 sx={{ color: '#db72ff' }}
+                                                onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, row) }}
                                             >
                                                 {''}
                                                 {row.name}{' '}
                                             </Typography>
+                                            <div onClick={(event) => {  handleDivisionClick(event, row.orgaid);handleAssetClick(event, row.assetid);handleRiskClick(event, row.riskid);handleObjectiveClick(event, row.objectiveid); }}>
                                             <Typography
                                                 variant="subtitle2"
                                                 sx={{ color: '#808080' }}
+                                                onClick={(event) => {  handleDivisionClick(event, row.orgaid)}}
                                             >
                                                 {'Organisation: '}
                                                 {row.organame}{' '}
@@ -515,6 +538,7 @@ const ControlTable = () => {
                                             <Typography
                                                 variant="subtitle2"
                                                 sx={{ color: '#808080' }}
+                                                onClick={(event) => {  handleAssetClick(event, row.assetid)}}
                                             >
                                                 {'Asset: '}
                                                 {row.assetname}{' '}
@@ -522,6 +546,7 @@ const ControlTable = () => {
                                             <Typography
                                                 variant="subtitle2"
                                                 sx={{ color: '#808080' }}
+                                                onClick={(event) => {  handleRiskClick(event, row.riskid)}}
                                             >
                                                 {'Risk: '}
                                                 {row.riskname}{' '}
@@ -529,10 +554,12 @@ const ControlTable = () => {
                                             <Typography
                                                 variant="subtitle2"
                                                 sx={{ color: '#808080' }}
+                                                onClick={(event) => {  handleObjectiveClick(event, row.objectiveid)}}
                                             >
                                                 {'Objective: '}
                                                 {row.objectivename}{' '}
                                             </Typography>
+                                            </div>
                                         </TableCell>
                                         <TableCell align="center">{row.implementationcost ? row.implementationcostformated : ''}</TableCell>
                                         <TableCell align="center">{row.controlvalue ? row.controlvalueformated : ''}</TableCell>

@@ -11,7 +11,7 @@ import MainCard from 'ui-component/cards/MainCard';
 
 import useAuth from 'hooks/useAuth';
 import { useDispatch, useSelector } from 'store';
-import { getControlScenarioById } from 'store/slices/control';
+import { setControlScenarioBy } from 'store/slices/control';
 
 // assets
 import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';

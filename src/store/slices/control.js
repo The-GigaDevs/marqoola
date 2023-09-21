@@ -12,7 +12,8 @@ const initialState = {
     metrics : [],
     controlscenarios: [],
     selectedControlScenario: {},
-    scenariometrics: []
+    scenariometrics: [],
+    squidresponse: ''
 
 };
 
@@ -44,6 +45,9 @@ const slice = createSlice({
         },
         getControlScenarioMetricsSuccess(state, action){
             state.scenariometrics = action.payload;
+        },
+        runSquidResult(state, action){
+            state.squidresponse = action.payload;
         },
         deleteControlSuccess(state, action) {
             getControls();
@@ -97,7 +101,7 @@ export function getControlScenarios(orgId, assetId, riskId, objectiveId, token) 
     };
 }
 
-export function getControlScenarioById(controlscenario) {
+export function setControlScenarioBy(controlscenario) {
     
         dispatch(slice.actions.getControlScenarioByIdSuccess(controlscenario));
     
@@ -204,6 +208,25 @@ function filterByAllRiskId(data, idToFilter) {
     return filteredData.filter(item => item.allrisks.length > 0 && Object.keys(item.allrisks[0]).length > 0);
   }
 
+export function runSquid(squidid, token){
+    return async () => {
+        try{
+            const headers = {
+                Authorization: `Bearer ` + token,
+                'Content-Type': 'application/json'
+            };
+            const response = await axios.get('/squids/runsquid/' + squidid , {headers});
+            dispatch(slice.actions.runSquidResult(response.data.message));
+            return true;
+        }
+        catch(error)
+        {
+            console.log(error);
+            return false;
+        }
+    };
+}
+
 export function getControlsForTemplate(templateid, token) {
     return async () => {
         try {
@@ -236,18 +259,6 @@ export function deleteControl(id, token) {
     };
 }
 
-export function runSquid(id, token) {
-    return async () => {
-        try {
-            const headers = {
-                Authorization: `Bearer ` + token
-            };
-            const response = await axios.get('/squids/runsquid/' + id, {headers});
-            dispatch(slice.actions.deleteControlSuccess(response.data));
-        } catch (error) {
-            dispatch(slice.actions.hasError(error));
-        }
-    };
-}
+
 
 

@@ -32,7 +32,7 @@ import Chip from 'ui-component/extended/Chip';
 import MainCard from 'ui-component/cards/MainCard';
 import SubCard from 'ui-component/cards/SubCard';
 import { useDispatch, useSelector } from 'store';
-import { getControls, getControlsForTemplate, deleteControl } from 'store/slices/control';
+import { getControls, getControlsForTemplate, deleteControl, runSquid } from 'store/slices/control';
 import { getControlTemplates, deleteControlTemplate } from 'store/slices/controltemplate';
 
 import ControlDetails from './ControlDetails';
@@ -419,6 +419,39 @@ const ControlTable = () => {
         React.useEffect(() => {
             setControlTableData(controls);
         }, [controls]);
+
+        const handleSquidButton = async (event, id) => {
+            const result = await dispatch(runSquid(id, user.accessToken));
+            if (result == true){
+            dispatch(
+                openSnackbar({
+                    open: true,
+                    message: 'Squid started successfully',
+                    variant: 'alert',
+                    alert: {
+                        color: 'success'
+                    },
+                    close: true
+    
+                })
+            )
+            }
+            else if (result == false){
+                dispatch(
+                    openSnackbar({
+                        open: true,
+                        message: 'Squid failed to start',
+                        variant: 'alert',
+                        alert: {
+                            color: 'error'
+                        },
+                        close: true
+        
+                    })
+                )
+            }
+            dispatch(getControlsForTemplate(templateid, user.accessToken));
+        }
         return (
             <TableRow >
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
@@ -434,11 +467,9 @@ const ControlTable = () => {
                                     >
                                         <Table size="small" aria-label="dgfgd">
                                             <TableHead>
-                                                <TableRow>
+                                                <TableRow key="header">
                                                     <TableCell>Control</TableCell>
                                                     <TableCell>Control Category</TableCell>
-                                                    <TableCell>Organisation</TableCell>
-                                                    <TableCell>Risk</TableCell>
                                                     <TableCell>Concept</TableCell>
                                                     <TableCell>Implementation</TableCell>
                                                     <TableCell>Control Value</TableCell>
@@ -452,16 +483,11 @@ const ControlTable = () => {
                                                         <TableCell component="th" scope="row" 
                                             onClick={(event) => { if (selected.length === 0) handleOpenEditDialog(event, controlRow.id) }}>
                                                             {controlRow.name}
-                                                            <Typography variant="caption"> Asset: {controlRow.assetname} </Typography>
+                                                            <Typography variant="subtitle2" sx={{ color: '#808080' }}> Organisation: {controlRow.organame} </Typography>
+                                                            <Typography variant="subtitle2" sx={{ color: '#808080' }}> Asset: {controlRow.assetname} </Typography>
                                                         </TableCell>
                                                         <TableCell>
                                                             {controlRow.controlcategoryname}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.organame}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {controlRow.riskname}
                                                         </TableCell>
                                                         <TableCell>
                                                             {controlRow.securityconceptname}
@@ -479,7 +505,7 @@ const ControlTable = () => {
                                                             {controlRow.lasttested? controlRow.lasttested: "Never"}
                                                         </TableCell>
                                                         <TableCell>
-                                                            <Button variant='contained' color="secondary">Run Test</Button>
+                                                            <Button variant='contained' color="secondary" onClick={(event) => { handleSquidButton(event, controlRow.id) }}>Run Test</Button>
                                                         </TableCell>
                                                     </TableRow>
                                                     
@@ -498,7 +524,8 @@ const ControlTable = () => {
     }
 
     return (
-        <MainCard title="Control Templates" content={false}>
+        <MainCard title="Control Templates" content={false} sx={{ height: `calc(100vh - 160px)`, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+            <Box>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -577,7 +604,7 @@ const ControlTable = () => {
                                         </TableCell>
                                         <TableCell sx={{ pl: 3 }}>
                                             <IconButton aria-label="expand row" size="small" onClick={(event) => { handleExpandRow(event, row.id) }}>
-                                                {expandRow ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                                                {expandRow && isRowExpanded ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                                             </IconButton>
                                         </TableCell>
                                         <TableCell
@@ -635,7 +662,7 @@ const ControlTable = () => {
                 //<AssetEditForm open={openEdit} parentData={assetTableData} handleCloseDialog={handleCloseEditDialog} assetid={currentAsset} />
                 }
                 </TableContainer>
-
+                </Box>
             {/* table pagination */}
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
@@ -645,6 +672,10 @@ const ControlTable = () => {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
+                sx={{
+                    marginTop: 'auto',
+                    overflowY: 'hidden'
+                }}
             />
         </MainCard>
     );

@@ -412,12 +412,12 @@ const OrgTable = () => {
 
     
     return (!openDetails && (
-        <MainCard title="Organisations" content={false} secondary={<>{checked ? 'Table View' : 'Tree View'}<Switch
+        <MainCard title="Organisations" content={false} sx={{ height: `calc(100vh - 160px)`, display: 'flex', flexDirection: 'column', overflowY: 'auto' }} secondary={<>{checked ? 'Table View' : 'Tree View'}<Switch
             checked={checked}
             onChange={handleSwitch}
             inputProps={{ 'aria-label': 'controlled' }}
           /></>}>{ !checked &&
-            (<>
+            (<><Box>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -540,7 +540,7 @@ const OrgTable = () => {
                 
                 <AssetEditForm open={openEdit} parentData={orgTableData} handleCloseDialog={handleCloseEditDialog} assetid={currentAsset} />
             </TableContainer>
-
+            </Box>
             
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
@@ -550,6 +550,10 @@ const OrgTable = () => {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
+                sx={{
+                    marginTop: 'auto',
+                    overflowY: 'hidden'
+                }}
             /></>)
                             }
             {

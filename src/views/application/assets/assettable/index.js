@@ -428,12 +428,13 @@ const AssetTable = () => {
 
     
     return (
-        <MainCard title="Assets" content={false} secondary={<Switch
+        <MainCard title="Assets" content={false} sx={{ height: `calc(100vh - 160px)`, display: 'flex', flexDirection: 'column', overflowY: 'auto' }} secondary={<Switch
             checked={checked}
             onChange={handleSwitch}
             inputProps={{ 'aria-label': 'controlled' }}
             
           />}>
+            <Box>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -552,7 +553,7 @@ const AssetTable = () => {
                 </Table>
                 <AssetEditForm open={openEdit} parentData={assetTableData} handleCloseDialog={handleCloseEditDialog} assetid={currentAsset} />
             </TableContainer>
-
+            </Box>
             
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
@@ -562,6 +563,10 @@ const AssetTable = () => {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
+                sx={{
+                    marginTop: 'auto',
+                    overflowY: 'hidden'
+                }}
             />
             
             

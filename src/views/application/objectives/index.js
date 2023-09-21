@@ -425,7 +425,8 @@ const ObjectiveTable = () => {
     }
 
     return (
-        <MainCard title="Objective Templates" content={false}>
+        <MainCard title="Objective Templates" content={false} sx={{ height: `calc(100vh - 160px)`, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+            <Box>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
                     <Grid item xs={12} sm={6}>
@@ -549,7 +550,7 @@ const ObjectiveTable = () => {
                 //<AssetEditForm open={openEdit} parentData={assetTableData} handleCloseDialog={handleCloseEditDialog} assetid={currentAsset} />
                 }
                 </TableContainer>
-
+                </Box>
             {/* table pagination */}
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
@@ -559,6 +560,10 @@ const ObjectiveTable = () => {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
+                sx={{
+                    marginTop: 'auto',
+                    overflowY: 'hidden'
+                }}
             />
         </MainCard>
     );
