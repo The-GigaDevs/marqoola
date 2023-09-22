@@ -44,6 +44,8 @@ import useAuth from 'hooks/useAuth';
 import { getIncidents } from 'store/slices/incident';
 import { useNavigate } from 'react-router-dom';
 import { visuallyHidden } from '@mui/utils';
+import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
+
 
 import AddIcon from '@mui/icons-material/AddTwoTone';
 
@@ -73,11 +75,11 @@ function stableSort(array, comparator) {
 
 // table header options
 const headCells = [
-    { id: 'Risk', label: 'Risk', },
+    { id: 'control', label: 'Control Name', },
 
     {
-        id: 'gross',
-        label: 'Gross Risk',
+        id: 'implementationCost',
+        label: 'Implementation Cost ($)',
         numeric: false,
         format: (value) => value.toLocaleString('en-US')
     },
@@ -96,15 +98,15 @@ const headCells = [
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'potential',
-        label: 'Potential Risk Reduction',
+        id: 'actualRisl',
+        label: 'Actual Risk Reduction',
         numeric: false,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'lossEvent',
-        label: 'Loss Event Frequencey',
+        id: 'currentROI',
+        label: 'Current ROI',
         numeric: false,
         align: 'center',
         format: (value) => typeof value === 'number' && value.toFixed(2)
@@ -207,7 +209,7 @@ EnhancedTableToolbar.propTypes = {
 };
 
 
-function Risks({ selectedIncident }) {
+function Controls({ selectedIncident }) {
 
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -436,65 +438,20 @@ function Risks({ selectedIncident }) {
                                                     >
 
                                                         <TableCell component="th" id={labelId} scope="row" sx={{ cursor: 'pointer' }}>
-                                                            <Typography
-                                                                variant="subtitle1"
-                                                                sx={{ color: '#db72ff' }}
-                                                                onClick={(event) => {
-                                                                    handleOpenEditDialog(event, row);
-                                                                }}
-                                                            >
-                                                                {''}
-                                                                {row.name}{' '}
-                                                            </Typography>
-                                                            <div
-                                                                onClick={(event) => {
-                                                                    handleDivisionClick(event, row.orgaid);
-                                                                    handleAssetClick(event, row.assetid);
-                                                                    handleRiskClick(event, row.riskid);
-                                                                    handleObjectiveClick(event, row.objectiveid);
-                                                                }}
-                                                            >
+                                                            <Box style={{ display: 'flex', alignItems: 'center', }}>
+
+                                                                <SportsEsportsOutlinedIcon sx={{marginRight: '1rem'}}/>
                                                                 <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
+                                                                    variant="subtitle1"
+                                                                    sx={{ color: '#db72ff' }}
                                                                     onClick={(event) => {
-                                                                        handleDivisionClick(event, row.orgaid);
+                                                                        handleOpenEditDialog(event, row);
                                                                     }}
                                                                 >
-                                                                    {'Organisation: '}
-                                                                    {row.organame}{' '}
+                                                                    {''}
+                                                                    {row.name}{' '}
                                                                 </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleAssetClick(event, row.assetid);
-                                                                    }}
-                                                                >
-                                                                    {'Asset: '}
-                                                                    {row.assetname}{' '}
-                                                                </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleRiskClick(event, row.riskid);
-                                                                    }}
-                                                                >
-                                                                    {'Risk: '}
-                                                                    {row.riskname}{' '}
-                                                                </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleObjectiveClick(event, row.objectiveid);
-                                                                    }}
-                                                                >
-                                                                    {'Objective: '}
-                                                                    {row.objectivename}{' '}
-                                                                </Typography>
-                                                            </div>
+                                                           </Box>
                                                         </TableCell>
                                                         <TableCell align="center" > $ 1,123,123  </TableCell>
                                                         <TableCell align="center" >$ 1,234</TableCell>
@@ -537,4 +494,4 @@ function Risks({ selectedIncident }) {
     )
 }
 
-export default Risks
+export default Controls

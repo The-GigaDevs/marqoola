@@ -21,6 +21,8 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import { getIncidentById } from 'store/slices/incident';
 import Details from './Details';
 import Risks from './Risks';
+import Controls from './Controls';
+import AuditLogs from './AuditLogs';
 
 // tab content
 function TabPanel({ children, value, index, ...other }) {
@@ -49,7 +51,7 @@ function a11yProps(index) {
 const IncidentDetail = () => {
     const theme = useTheme();
     const { id } = useParams();
-    
+
     const dispatch = useDispatch();
     const { user } = useAuth();
     const { selectedIncident } = useSelector((state) => state.incident);
@@ -62,7 +64,7 @@ const IncidentDetail = () => {
 
     useEffect(() => {
         dispatch(getIncidentById(id, user.accessToken));
-    }, [dispatch, id,user?.accessToken]);
+    }, [dispatch, id, user?.accessToken]);
 
 
     return (
@@ -101,24 +103,27 @@ const IncidentDetail = () => {
                 <Tab icon={<ReportProblemOutlinedIcon />} component={Link} to="#" label="Risks" {...a11yProps(1)} />
                 <Tab icon={<SportsEsportsOutlinedIcon />} component={Link} to="#" label="Controls" {...a11yProps(2)} />
                 <Tab icon={<DescriptionOutlinedIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(3)} />
-                
+
             </Tabs>
 
             {/* tab - details */}
             <TabPanel value={value} index={0}>
-               <Details selectedIncident={selectedIncident}/>
+                <Details selectedIncident={selectedIncident} />
             </TabPanel>
 
             {/* tab - invoice */}
             <TabPanel value={value} index={1}>
-                <Risks selectedIncident={selectedIncident}/>
+                <Risks selectedIncident={selectedIncident} />
             </TabPanel>
 
             {/* tab - status */}
             <TabPanel value={value} index={2}>
-                
+                <Controls selectedIncident={selectedIncident} />
             </TabPanel>
-           
+            <TabPanel value={value} index={3}>
+                <AuditLogs selectedIncident={selectedIncident} />
+            </TabPanel>
+
         </MainCard>
     );
 };
