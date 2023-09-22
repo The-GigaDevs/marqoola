@@ -145,6 +145,7 @@ const AssetDetails = Loadable(lazy(() => import('views/application/assets/Detail
 const Controls = Loadable(lazy(() => import('views/application/controls')));
 const ControlImplementations = Loadable(lazy(() => import('views/application/controls/ControlImplementations')));
 const Incidents = Loadable(lazy(() => import('views/application/incidents')));
+const IncidentDetail = Loadable(lazy(() => import('views/application/incidents/incident')));
 const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
 const Objectives = Loadable(lazy(() => import('views/application/objectives')));
 const Risks = Loadable(lazy(() => import('views/application/risks')));
@@ -591,6 +592,10 @@ const MainRoutes = {
         {
             path: '/incidents',
             element: <Incidents />
+        },
+        {
+            path: '/incident/:id',
+            element: <IncidentDetail />
         },
         {
             path: '/settings',
