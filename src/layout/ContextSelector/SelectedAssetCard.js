@@ -1,20 +1,23 @@
 import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography, IconButton } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { useDispatch, useSelector } from 'store';
 import { useNavigate } from 'react-router-dom';
-
+import { IconAsset } from '@tabler/icons';
+import { IconX } from '@tabler/icons';
+import useAuth from 'hooks/useAuth';
+import { setAssetSelector } from 'store/slices/asset-selector';
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
-    backgroundColor: theme.palette.secondary.dark,
-    color: theme.palette.secondary.light,
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.primary.light,
     overflow: 'hidden',
     position: 'relative',
     '&:after': {
@@ -45,53 +48,71 @@ const SelectedAssetCard = () => {
     const theme = useTheme();
     const { selectedAssetData, selectedAsset } = useSelector((state) => state.assetselector);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const { user } = useAuth();
     const handleOpenEditDialog = (event, id) => {
         navigate('/asset', { state: { id: id } });
     }
 
     return (
         <>
-            
-                <CardWrapper border={false} content={false} sx={{marginLeft: 2}} onClick={(event) => { handleOpenEditDialog(event, selectedAsset) }}>
-                    <Box sx={{ p: 1 }}>
-                        <List sx={{ py: 0 }}>
-                            <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
-                                <ListItemAvatar>
-                                    <Avatar
-                                        variant="rounded"
-                                        sx={{
-                                            ...theme.typography.commonAvatar,
-                                            ...theme.typography.largeAvatar,
-                                            backgroundColor: theme.palette.secondary[800],
-                                            color: '#fff'
-                                        }}
-                                    >
-                                        <TableChartOutlinedIcon fontSize="inherit" />
-                                    </Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
+
+            <CardWrapper border={false} content={false} sx={{ marginLeft: 2 }} >
+                <Box sx={{ p: 1 }}>
+                    <List sx={{ py: 0 }}>
+                        <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
+                            <ListItemAvatar>
+                                <Avatar
+                                    variant="rounded"
                                     sx={{
-                                        py: 0,
-                                        mt: 0.45,
-                                        mb: 0.45
+                                        ...theme.typography.commonAvatar,
+                                        ...theme.typography.largeAvatar,
+                                        backgroundColor: theme.palette.primary[800],
+                                        color: '#fff'
                                     }}
-                                    primary={
-                                        <Typography variant="h4" sx={{ color: '#fff' }}>
-                                           {selectedAsset.length > 1 ? selectedAssetData.name : 'All Assets' }
-                                        </Typography>
-                                    }
-                                    secondary={
-                                        <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
-                                            Selected Asset
-                                        </Typography>
-                                    }
-                                />
-                            </ListItem>
-                        </List>
-                    </Box>
-                </CardWrapper>
-            
+                                >
+                                    <IconAsset fontSize="inherit" onClick={(event) => { handleOpenEditDialog(event, selectedAsset) }} />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                sx={{
+                                    py: 0,
+                                    mt: 0.45,
+                                    mb: 0.45
+                                }}
+                                primary={
+                                    <Typography variant="h4" sx={{ color: '#fff' }}>
+                                        {selectedAsset.length > 1 ? selectedAssetData.name : 'All Assets'}
+                                    </Typography>
+                                }
+                                secondary={
+                                    <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
+                                        Selected Asset
+                                    </Typography>
+                                }
+                            />
+                            <IconButton
+                                disableElevation
+                                disableRipple
+                                size="small"
+                                sx={{
+                                    ml: 1,
+                                    "&.MuiButtonBase-root:hover": {
+                                        bgcolor: "transparent"
+                                    },
+                                    color: 'primary.light', mt: -3, mr: -2, scale: '0.75'
+                                }}
+                                onClick={() => { dispatch(setAssetSelector('0', user.accessToken)) }}
+                            >
+
+                                <IconX />
+                            </IconButton>
+                        </ListItem>
+
+                    </List>
+                </Box>
+            </CardWrapper>
+
         </>
     );
 };

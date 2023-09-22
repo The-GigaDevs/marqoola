@@ -294,7 +294,7 @@ const ControlTable = () => {
     }, [controlscenarios]);
 
     React.useEffect(() => {
-        setDivisionSelector2(selectedDivision);
+        setDivisionSelector(selectedDivision);
         dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective,user.accessToken));
     }, [selectedDivision, selectedAsset, selectedRisk, selectedObjective]);
 

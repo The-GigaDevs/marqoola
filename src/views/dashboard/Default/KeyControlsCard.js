@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { Avatar, Button, CardActions, CardContent, Divider, Grid, Menu, MenuItem, Typography } from '@mui/material';
 
 // project imports
-import BajajAreaChartCard from './BajajAreaChartCard';
+import KeyControlsChartCard from './KeyControlsChartCard';
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonPopularCard from 'ui-component/cards/Skeleton/PopularCard';
 import { gridSpacing } from 'store/constant';
@@ -19,7 +19,7 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 
 // ==============================|| DASHBOARD DEFAULT - POPULAR CARD ||============================== //
 
-const PopularCard = ({ isLoading }) => {
+const KeyControlCard = ({ isLoading }) => {
     const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,7 +43,7 @@ const PopularCard = ({ isLoading }) => {
                             <Grid item xs={12}>
                                 <Grid container alignContent="center" justifyContent="space-between">
                                     <Grid item>
-                                        <Typography variant="h4" color="secondary">Key Risks</Typography>
+                                        <Typography variant="h4" color="secondary">Key Controls Cost Reduction</Typography>
                                     </Grid>
                                     <Grid item>
                                         <MoreHorizOutlinedIcon
@@ -80,7 +80,7 @@ const PopularCard = ({ isLoading }) => {
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} sx={{ pt: '16px !important' }}>
-                                <BajajAreaChartCard />
+                                <KeyControlsChartCard />
                             </Grid>
                             <Grid item xs={12}>
                                 <Grid container direction="column">
@@ -302,8 +302,8 @@ const PopularCard = ({ isLoading }) => {
     );
 };
 
-PopularCard.propTypes = {
+KeyControlCard.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default PopularCard;
+export default KeyControlCard;

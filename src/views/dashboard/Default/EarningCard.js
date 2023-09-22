@@ -177,7 +177,7 @@ const EarningCard = ({ isLoading }) => {
                                         color: theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary[200]
                                     }}
                                 >
-                                    Total Earning
+                                    Control Environment Cost
                                 </Typography>
                             </Grid>
                         </Grid>

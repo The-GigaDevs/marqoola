@@ -69,7 +69,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
 
-const TotalOrderLineChartCard = ({ isLoading }) => {
+const TotalControlReductionCard = ({ isLoading }) => {
     const theme = useTheme();
 
     const [timeValue, setTimeValue] = React.useState(false);
@@ -162,7 +162,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                                                                 : theme.palette.primary[200]
                                                     }}
                                                 >
-                                                    Total Risk Reduction
+                                                    Total Control Reduction
                                                 </Typography>
                                             </Grid>
                                         </Grid>
@@ -180,8 +180,8 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
     );
 };
 
-TotalOrderLineChartCard.propTypes = {
+TotalControlReductionCard.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default TotalOrderLineChartCard;
+export default TotalControlReductionCard;

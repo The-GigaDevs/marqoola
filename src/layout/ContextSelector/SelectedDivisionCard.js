@@ -1,15 +1,21 @@
 import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, Typography, IconButton } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { useDispatch, useSelector } from 'store';
 import { useNavigate } from 'react-router-dom';
+import { IconBinaryTree } from '@tabler/icons';
 
+import { setDivisionSelector } from 'store/slices/division-selector';
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
+import { IconX } from '@tabler/icons';
+import  useAuth  from 'hooks/useAuth';
+
+
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -45,7 +51,8 @@ const SelectedDivisionCard = () => {
     const theme = useTheme();
     const { selectedDivisionData, selectedDivision } = useSelector((state) => state.divisionselector);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
+    const { user } = useAuth();
     const handleOpenEditDialog = (event, id) => {
         navigate('/organisationdetails', { state: { id: id } });
     }
@@ -53,7 +60,7 @@ const SelectedDivisionCard = () => {
     return (
         <>
             
-                <CardWrapper border={false} content={false} sx={{marginLeft: 2}} onClick={(event) => { handleOpenEditDialog(event, selectedDivision) }}>
+                <CardWrapper border={false} content={false} sx={{marginLeft: 2}} >
                     <Box sx={{ p: 1 }}>
                         <List sx={{ py: 0 }}>
                             <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
@@ -67,7 +74,7 @@ const SelectedDivisionCard = () => {
                                             color: '#fff'
                                         }}
                                     >
-                                        <TableChartOutlinedIcon fontSize="inherit" />
+                                        <IconBinaryTree fontSize="inherit" onClick={(event) => { handleOpenEditDialog(event, selectedDivision) }} />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
@@ -87,8 +94,29 @@ const SelectedDivisionCard = () => {
                                         </Typography>
                                     }
                                 />
+                                
+                                <IconButton
+            disableElevation
+            disableRipple
+            size="small"
+            sx={{
+              ml: 1,
+              "&.MuiButtonBase-root:hover": {
+                bgcolor: "transparent"
+              },
+              color: 'primary.light',  mt: -3, mr: -2, scale: '0.75'
+            }}
+            onClick={() => { dispatch(setDivisionSelector('0', user.accessToken))}}
+          >
+
+                                    <IconX /></IconButton>
+                                
                             </ListItem>
+                            
+                           
+                           
                         </List>
+                        
                     </Box>
                 </CardWrapper>
             
