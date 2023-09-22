@@ -14,7 +14,7 @@ import chartData from './chart-data/bajaj-area-chart';
 
 // ===========================|| DASHBOARD DEFAULT - BAJAJ AREA CHART CARD ||=========================== //
 
-const BajajAreaChartCard = () => {
+const KeyControlsChartCard = () => {
     const theme = useTheme();
     const { navType } = useConfig();
 
@@ -38,7 +38,7 @@ const BajajAreaChartCard = () => {
                     <Grid container alignItems="center" justifyContent="space-between">
                         <Grid item>
                             <Typography variant="subtitle1" sx={{ color: theme.palette.secondary.dark }}>
-                                Data Breach Malicious Internal
+                                MFA
                             </Typography>
                         </Grid>
                         <Grid item>
@@ -50,7 +50,7 @@ const BajajAreaChartCard = () => {
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant="subtitle2" sx={{ color: theme.palette.grey[800] }}>
-                        15% Up in the last 6 months
+                        10% Profit
                     </Typography>
                 </Grid>
             </Grid>
@@ -59,4 +59,4 @@ const BajajAreaChartCard = () => {
     );
 };
 
-export default BajajAreaChartCard;
+export default KeyControlsChartCard;
