@@ -73,42 +73,28 @@ function stableSort(array, comparator) {
 
 // table header options
 const headCells = [
-    { id: 'Risk', label: 'Risk', },
+    {
+        id: 'date',
+        label: 'Date',
+        minWidth: 170,
+        align: 'center',
+
+    },
 
     {
-        id: 'gross',
-        label: 'Gross Risk',
-        numeric: false,
-        format: (value) => value.toLocaleString('en-US')
+        id: 'time',
+        label: 'Time',
+        minWidth: 170,
+        align: 'center',
+
     },
     {
-        id: 'net',
-        label: 'Net Risk',
+        id: 'message',
+        label: 'Message',
         numeric: false,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US')
+        align: 'start',
     },
-    {
-        id: 'control',
-        label: 'Control Value',
-        numeric: false,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US')
-    },
-    {
-        id: 'potential',
-        label: 'Potential Risk Reduction',
-        numeric: false,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US')
-    },
-    {
-        id: 'lossEvent',
-        label: 'Loss Event Frequencey',
-        numeric: false,
-        align: 'center',
-        format: (value) => typeof value === 'number' && value.toFixed(2)
-    },
+    
 
 ];
 
@@ -207,7 +193,7 @@ EnhancedTableToolbar.propTypes = {
 };
 
 
-function Risks({ selectedIncident }) {
+function AuditLogs({ selectedIncident }) {
 
     const theme = useTheme();
     const dispatch = useDispatch();
@@ -381,22 +367,13 @@ function Risks({ selectedIncident }) {
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>
                 <SubCard title={
-                    <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingLeft: '16px' }}>
-                        <Box style={{ display: 'flex', alignItems: 'center', }}>
-                            <ConfirmationNumberOutlined style={{ marginRight: '8px' }} />
-                            <Typography variant="h2" color={secondary}>
-                                {selectedIncident.name || 'Data Over-retention'}
-                            </Typography>
-                        </Box>
-                        <Fab
-                            color="primary"
-                            size="small"
-                            onClick={handleClickOpenDialog}
-                            sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}
-                        >
-                            <AddIcon fontSize="small" />
-                        </Fab>
+                    <Box style={{ display: 'flex', alignItems: 'center', }}>
+                        <ConfirmationNumberOutlined style={{ marginRight: '8px' }} />
+                        <Typography variant="h2" color={secondary}>
+                            {selectedIncident.name || 'Data Over-retention'}
+                        </Typography>
                     </Box>
+
                 }
                 >
 
@@ -435,72 +412,13 @@ function Risks({ selectedIncident }) {
                                                         selected={isItemSelected}
                                                     >
 
-                                                        <TableCell component="th" id={labelId} scope="row" sx={{ cursor: 'pointer' }}>
-                                                            <Typography
-                                                                variant="subtitle1"
-                                                                sx={{ color: '#db72ff' }}
-                                                                onClick={(event) => {
-                                                                    handleOpenEditDialog(event, row);
-                                                                }}
-                                                            >
-                                                                {''}
-                                                                {row.name}{' '}
-                                                            </Typography>
-                                                            <div
-                                                                onClick={(event) => {
-                                                                    handleDivisionClick(event, row.orgaid);
-                                                                    handleAssetClick(event, row.assetid);
-                                                                    handleRiskClick(event, row.riskid);
-                                                                    handleObjectiveClick(event, row.objectiveid);
-                                                                }}
-                                                            >
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleDivisionClick(event, row.orgaid);
-                                                                    }}
-                                                                >
-                                                                    {'Organisation: '}
-                                                                    {row.organame}{' '}
-                                                                </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleAssetClick(event, row.assetid);
-                                                                    }}
-                                                                >
-                                                                    {'Asset: '}
-                                                                    {row.assetname}{' '}
-                                                                </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleRiskClick(event, row.riskid);
-                                                                    }}
-                                                                >
-                                                                    {'Risk: '}
-                                                                    {row.riskname}{' '}
-                                                                </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleObjectiveClick(event, row.objectiveid);
-                                                                    }}
-                                                                >
-                                                                    {'Objective: '}
-                                                                    {row.objectivename}{' '}
-                                                                </Typography>
-                                                            </div>
-                                                        </TableCell>
-                                                        <TableCell align="center" > $ 1,123,123  </TableCell>
-                                                        <TableCell align="center" >$ 1,234</TableCell>
-                                                        <TableCell align="center" >$ 987 </TableCell>
-                                                        <TableCell align="center" >$ 3,456  </TableCell>
-                                                        <TableCell align="center" >  0.31  </TableCell>
+
+                                                        <TableCell align="center" > 10/8/23 </TableCell>
+                                                        <TableCell align="center" >10:00</TableCell>
+                                                        <TableCell align="start" >
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rutrum suscipit lectus, eu ullamcorper erat sodales non
+                                                             </TableCell>
+                                                      
 
                                                     </TableRow>
                                                 </>
@@ -537,4 +455,4 @@ function Risks({ selectedIncident }) {
     )
 }
 
-export default Risks
+export default AuditLogs
