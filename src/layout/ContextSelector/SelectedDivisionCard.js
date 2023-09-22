@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, Typography, IconButton } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -94,9 +94,23 @@ const SelectedDivisionCard = () => {
                                         </Typography>
                                     }
                                 />
-                                <ListItemButton sx={{ color: 'primary.light',  mt: -3, mr: -2, scale: '0.75' }} onClick={() => { dispatch(setDivisionSelector('0', user.accessToken))}} >
-                                    <IconX onClick={() => { dispatch(setDivisionSelector('0', null))}} />
-                                </ListItemButton>
+                                
+                                <IconButton
+            disableElevation
+            disableRipple
+            size="small"
+            sx={{
+              ml: 1,
+              "&.MuiButtonBase-root:hover": {
+                bgcolor: "transparent"
+              },
+              color: 'primary.light',  mt: -3, mr: -2, scale: '0.75'
+            }}
+            onClick={() => { dispatch(setDivisionSelector('0', user.accessToken))}}
+          >
+
+                                    <IconX /></IconButton>
+                                
                             </ListItem>
                             
                            

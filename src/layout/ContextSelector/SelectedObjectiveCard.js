@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography, IconButton } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { useDispatch, useSelector } from 'store';
 import { IconTargetArrow } from '@tabler/icons';
-
+import { IconX } from '@tabler/icons';
+import  useAuth  from 'hooks/useAuth';
+import { setObjectiveSelector } from 'store/slices/objective-selector';
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 
@@ -44,7 +46,9 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const SelectedObjectiveCard = () => {
     const theme = useTheme();
     const { selectedObjectiveData, selectedObjective } = useSelector((state) => state.objectiveselector);
-
+    const dispatch = useDispatch();
+    const { user } = useAuth();
+    
     return (
         <>
             
@@ -82,6 +86,22 @@ const SelectedObjectiveCard = () => {
                                         </Typography>
                                     }
                                 />
+                                <IconButton
+                                disableElevation
+                                disableRipple
+                                size="small"
+                                sx={{
+                                    ml: 1,
+                                    "&.MuiButtonBase-root:hover": {
+                                        bgcolor: "transparent"
+                                    },
+                                    color: 'primary.light', mt: -3, mr: -2, scale: '0.75'
+                                }}
+                                onClick={() => { dispatch(setObjectiveSelector('0', user.accessToken)) }}
+                            >
+
+                                <IconX />
+                            </IconButton>
                             </ListItem>
                         </List>
                     </Box>
