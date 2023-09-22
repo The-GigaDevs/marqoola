@@ -89,12 +89,13 @@ export function getControlScenarios(orgId, assetId, riskId, objectiveId, token) 
             };
             const orgid = (orgId === '0' || orgId === null) ? '' : orgId;
             const assetid = (assetId === '0' || assetId === null) ? '' : assetId;
-            const riskid = (riskId === '0' || riskId === null) ? '' : riskId;
-            const objectiveid = (objectiveId === '0' || objectiveId === null) ? '' : objectiveId;
+            const riskid = (riskId === '0' || riskId === null || riskId === '') ? '' : riskId;
+            const objectiveid = (objectiveId === '0' || objectiveId === null || objectiveId === '') ? '' : objectiveId;
             const url = '/objects/controlscenarios?filter[orgaid]=' + orgid + '&filter[assetid]=' + assetid + '&filter[riskid]=' + riskid + '&filter[objectiveid]=' + objectiveid; 
             const response = await axios.get(url, { headers });
             dispatch(slice.actions.getControlScenariosSuccess(response.data));   
         } catch (error) {
+            console.log(error);
             dispatch(slice.actions.getControlScenariosSuccess([]));
             dispatch(slice.actions.hasError(error));  
         }

@@ -54,7 +54,7 @@ const SelectedAssetCard = () => {
     return (
         <>
             
-                <CardWrapper border={false} content={false} sx={{marginLeft: 2}} onClick={(event) => { handleOpenEditDialog(event, selectedAsset) }}>
+                <CardWrapper border={false} content={false} sx={{marginLeft: 2}} >
                     <Box sx={{ p: 1 }}>
                         <List sx={{ py: 0 }}>
                             <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
@@ -68,7 +68,7 @@ const SelectedAssetCard = () => {
                                             color: '#fff'
                                         }}
                                     >
-                                        <IconAsset fontSize="inherit" />
+                                        <IconAsset fontSize="inherit" onClick={(event) => { handleOpenEditDialog(event, selectedAsset) }}/>
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
