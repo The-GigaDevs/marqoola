@@ -47,7 +47,7 @@ import Details from '../../controls/ControlImplementationDetails'
 
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { deleteControl, getControlScenarios } from 'store/slices/control';
+import { deleteControl, getControlScenarios, setControlScenarioBy } from 'store/slices/control';
 
 
 // table sort
@@ -316,6 +316,7 @@ const RiskControlsTable = () => {
         //navigate('/organisationdetails', { state: { id: id } });
         //getControlScenarioById(row)
         setIdentifier(row)
+        setControlScenarioBy(row)
         setOpenDetails(true)
     }
 
