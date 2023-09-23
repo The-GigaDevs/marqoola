@@ -32,16 +32,16 @@ const barChartOptions = {
     },
     xaxis: {
         categories: [
-            'South Korea',
-            'Canada',
-            'United Kingdom',
-            'Netherlands',
-            'Italy',
-            'France',
-            'Japan',
-            'United States',
-            'China',
-            'Germany'
+            'Eden Corporation ',
+'Sales Department ',
+'Manufacturing Division ',
+'Tech Innovations Inc. ',
+'Marketing Team ',
+'Healthcare Providers Network ',
+'Financial Services Group ',
+'Educational Institutions ',
+'Research Institute ',
+'Government Agencies ',
         ]
     }
 };
@@ -60,7 +60,16 @@ const OrgChart = () => {
 
     const [series] = useState([
         {
-            data: [392, 587, 215, 731, 849, 623, 176, 418, 524, 954]
+            data: [27895,
+                13765,
+                14567,
+                29876,
+                8234,
+                22345,
+                15789,
+                11234,
+                6543,
+                11242,]
         }
     ]);
 
@@ -74,14 +83,24 @@ const OrgChart = () => {
                 labels: {
                     style: {
                         colors: [primary, primary, primary, primary, primary, primary]
-                    }
+                    },
+                    formatter: (value) => { return value.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        maximumFractionDigits: 0
+                    });  },
                 }
             },
             yaxis: {
                 labels: {
                     style: {
                         colors: [primary, primary, primary, primary, primary, primary, primary, primary, primary, primary]
-                    }
+                    },
+                    formatter: (value) => { return value.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        maximumFractionDigits: 0
+                    });  },
                 }
             },
             grid: {
