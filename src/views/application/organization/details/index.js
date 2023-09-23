@@ -16,9 +16,25 @@ import { useDispatch, useSelector } from 'store';
 import { getOrganisationDetails } from 'store/slices/organisation';
 
 // assets
-import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';
-import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';
-import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
+// Marqoola ICONS
+import SquidsIcon from '@mui/icons-material/SettingsSuggestOutlined';
+import ComplianceIcon from '@mui/icons-material/FactCheckOutlined';
+import TestsIcon from '@mui/icons-material/RuleOutlined';
+import CostsIcon from '@mui/icons-material/MonetizationOnOutlined';
+import IntegrationsIcon from '@mui/icons-material/CloudSyncOutlined';
+import DetailsIcon from '@mui/icons-material/DescriptionOutlined';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AuditLogsIcon from '@mui/icons-material/EventNoteOutlined';
+import IncidentsIcon from '@mui/icons-material/ConfirmationNumberOutlined';
+import ControlsIcon from '@mui/icons-material/HealthAndSafetyOutlined';
+import {IconAlertTriangle as RisksIcon}   from '@tabler/icons';
+import  {IconAsset as AssetsIcon}  from '@tabler/icons';
+import {IconBinaryTree as DivisionsIcon}  from '@tabler/icons';
+import {IconTargetArrow as ObjectivesIcon}  from '@tabler/icons';
+import DashboardIcon from '@mui/icons-material/Insights';
+
+
+
 import Dashboard from './Dashboard';
 import Details from './Details';
 import Assets from './Assets';
@@ -110,16 +126,16 @@ const OrgDetails = ({activeTab, identifier, setOpenDetails}) => {
                     mb: 3
                 }}
             >
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Dashboard" {...a11yProps(0)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Details" {...a11yProps(1)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Assets" {...a11yProps(2)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Objectives" {...a11yProps(3)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Risks" {...a11yProps(4)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Control Implementations" {...a11yProps(5)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Incidents" {...a11yProps(6)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(7)} />
+                <Tab icon={<DashboardIcon />} component={Link} to="#" label="Dashboard" {...a11yProps(0)} />
+                <Tab icon={<DetailsIcon />} component={Link} to="#" label="Details" {...a11yProps(1)} />
+                <Tab icon={<AssetsIcon />} component={Link} to="#" label="Assets" {...a11yProps(2)} />
+                <Tab icon={<ObjectivesIcon />} component={Link} to="#" label="Objectives" {...a11yProps(3)} />
+                <Tab icon={<RisksIcon />} component={Link} to="#" label="Risks" {...a11yProps(4)} />
+                <Tab icon={<ControlsIcon />} component={Link} to="#" label="Control Implementations" {...a11yProps(5)} />
+                <Tab icon={<IncidentsIcon />} component={Link} to="#" label="Incidents" {...a11yProps(6)} />
+                <Tab icon={<AuditLogsIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(7)} />
                 <IconButton sx={{marginLeft: 'auto'}} onClick={() => setOpenDetails(false)}>
-                    <OrganizationIcon /> Back
+                    <ArrowBackIcon />
                 </IconButton>
                 
             </Tabs>

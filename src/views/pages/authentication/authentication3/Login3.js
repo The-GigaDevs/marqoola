@@ -11,7 +11,7 @@ import AuthLogin from '../auth-forms/AuthLogin';
 import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 import useAuth from 'hooks/useAuth';
-
+import logo from 'assets/images/Marqoola-LOGO-Blk.svg'
 // assets
 
 // ================================|| AUTH3 - LOGIN ||================================ //
@@ -29,9 +29,9 @@ const Login = () => {
                         <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
                             <AuthCardWrapper>
                                 <Grid container spacing={2} alignItems="center" justifyContent="center">
-                                    <Grid item sx={{ mb: 3 }}>
-                                        <Link to="#" aria-label="theme-logo">
-                                            <Logo />
+                                    <Grid item sx={{ mb: 3}} >
+                                        <Link to="#" aria-label="theme-logo"  >
+                                        <img src={logo} alt="Marqoola" height={50} /> 
                                         </Link>
                                     </Grid>
                                     <Grid item xs={12}>
