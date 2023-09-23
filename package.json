@@ -35,7 +35,7 @@
         "currency.js": "^2.0.4",
         "date-fns": "^2.30.0",
         "draft-js": "^0.11.7",
-        "emoji-picker-react": "^4.4.10",
+        "emoji-picker-react": "^4.4.12",
         "firebase": "^10.3.1",
         "formik": "^2.4.3",
         "framer-motion": "^10.16.0",
