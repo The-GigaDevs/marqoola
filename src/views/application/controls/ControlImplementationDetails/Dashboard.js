@@ -51,6 +51,8 @@ import DeleteTwoToneIcon from '@mui/icons-material/DeleteTwoTone';
 import EmailTwoToneIcon from '@mui/icons-material/EmailTwoTone';
 import PhoneAndroidTwoToneIcon from '@mui/icons-material/PhoneAndroidTwoTone';
 
+import IntegrationInformation from '../IntegrationInformation';
+
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -93,6 +95,7 @@ const DetailsDashboard = () => {
     const [controlMetrics, setControlMetrics] = useState([]);
     const [scenarioData, setScenarioData] = useState({});
     const { scenariometrics, selectedControlScenario } = useSelector((state) => state.control);
+    const [open, setOpen] = useState(false);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
     const { user } = useAuth();
@@ -410,7 +413,11 @@ function renderRow(props) {
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Button variant="contained" onClick={(event) => { handleSquidButton(event, selectedControlScenario.controlid) }}>Run Now</Button>
+                                                        <Button variant="contained" onClick={(event) => { handleSquidButton(event, selectedControlScenario.controlid) }}>Run Now</Button>&nbsp;&nbsp;&nbsp;
+                                                        <Button variant="contained" color="error" onClick={(event) => { setOpen(true)  }}>
+                                            Fix Now !
+                                            </Button>
+                                            <IntegrationInformation setOpen={setOpen} open={open}/>
                                                     </Grid>
                                                 </Stack>
                                             </CardContent>
