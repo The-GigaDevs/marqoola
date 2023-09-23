@@ -1,33 +1,21 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
 import { Box, Tab, Tabs } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 
 import useAuth from 'hooks/useAuth';
 import { useDispatch, useSelector } from 'store';
-import { setControlScenarioBy } from 'store/slices/control';
 
 // Marqoola ICONS
-import SquidsIcon from '@mui/icons-material/SettingsSuggestOutlined';
-import ComplianceIcon from '@mui/icons-material/FactCheckOutlined';
-import TestsIcon from '@mui/icons-material/RuleOutlined';
-import CostsIcon from '@mui/icons-material/MonetizationOnOutlined';
-import IntegrationsIcon from '@mui/icons-material/CloudSyncOutlined';
-import DetailsIcon from '@mui/icons-material/DescriptionOutlined';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import AuditLogsIcon from '@mui/icons-material/EventNoteOutlined';
 import IncidentsIcon from '@mui/icons-material/ConfirmationNumberOutlined';
-import ControlsIcon from '@mui/icons-material/HealthAndSafetyOutlined';
-import {IconAlertTriangle as RisksIcon}   from '@tabler/icons';
-import  {IconAsset as AssetsIcon}  from '@tabler/icons';
-import {IconBinaryTree as DivisionsIcon}  from '@tabler/icons';
-import {IconTargetArrow as ObjectivesIcon}  from '@tabler/icons';
+import DetailsIcon from '@mui/icons-material/DescriptionOutlined';
+import AuditLogsIcon from '@mui/icons-material/EventNoteOutlined';
 import DashboardIcon from '@mui/icons-material/Insights';
 
 import DetailsDashboard from './Dashboard';

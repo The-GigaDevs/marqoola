@@ -3,7 +3,6 @@ import * as React from 'react';
 
 import useAuth from 'hooks/useAuth';
 // material-ui
-import { useTheme } from '@mui/material/styles';
 import {
     Box,
     CardContent,
@@ -22,29 +21,26 @@ import {
     TextField,
     Toolbar,
     Tooltip,
-    Typography,
-    Fab, Switch, Button
+    Typography
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { visuallyHidden } from '@mui/utils';
 import { openSnackbar } from 'store/slices/snackbar';
 // project imports
-import Chip from 'ui-component/extended/Chip';
-import MainCard from 'ui-component/cards/MainCard';
 import { useDispatch, useSelector } from 'store';
+import MainCard from 'ui-component/cards/MainCard';
+import Chip from 'ui-component/extended/Chip';
 
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
 import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/AddTwoTone';
 
 //import CreateForm from '../createform'
-import Details from './details'
+import Details from './details';
 
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { deleteRisk, getRisks, getRiskById } from 'store/slices/risk';
-import { setDivisionSelector } from 'store/slices/division-selector';
 import { setAssetSelector } from 'store/slices/asset-selector';
+import { setDivisionSelector } from 'store/slices/division-selector';
+import { deleteRisk, getRisks } from 'store/slices/risk';
 
 
 // table sort

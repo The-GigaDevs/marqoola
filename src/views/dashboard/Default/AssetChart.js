@@ -4,13 +4,12 @@ import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 
 // third-party
-import ReactApexChart from 'react-apexcharts';
 import {
+    CardContent,
     Grid,
-    Stack,
-    Typography,
-    Card, CardContent
+    Typography
 } from '@mui/material';
+import ReactApexChart from 'react-apexcharts';
 import { gridSpacing } from 'store/constant';
 // project import
 import useConfig from 'hooks/useConfig';

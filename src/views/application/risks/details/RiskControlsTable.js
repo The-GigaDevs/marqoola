@@ -1,16 +1,11 @@
+import useAuth from 'hooks/useAuth';
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import useAuth from 'hooks/useAuth';
 // material-ui
-import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
 import {
     Box,
-    CardContent,
     Checkbox,
-    Grid,
     IconButton,
-    InputAdornment,
     Table,
     TableBody,
     TableCell,
@@ -19,34 +14,24 @@ import {
     TablePagination,
     TableRow,
     TableSortLabel,
-    TextField,
     Toolbar,
     Tooltip,
-    Typography,
-    Fab, Switch, Button
+    Typography
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { visuallyHidden } from '@mui/utils';
+import { useNavigate } from 'react-router-dom';
 import { openSnackbar } from 'store/slices/snackbar';
 // project imports
-import Chip from 'ui-component/extended/Chip';
-import MainCard from 'ui-component/cards/MainCard';
-import SubCard from 'ui-component/cards/SubCard';
 import { useDispatch, useSelector } from 'store';
-import { getAssets, deleteAsset } from 'store/slices/asset';
+import Chip from 'ui-component/extended/Chip';
 
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterListTwoTone';
-import PrintIcon from '@mui/icons-material/PrintTwoTone';
-import FileCopyIcon from '@mui/icons-material/FileCopyTwoTone';
-import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/AddTwoTone';
 
 //import CreateForm from '../createform'
-import Details from '../../controls/ControlImplementationDetails'
+import Details from '../../controls/ControlImplementationDetails';
 
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { deleteControl, getControlScenarios, setControlScenarioBy } from 'store/slices/control';
 
 

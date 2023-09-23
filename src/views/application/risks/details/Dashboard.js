@@ -1,49 +1,32 @@
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import axios from 'utils/axios';
-import { useEffect, useState } from 'react';
 import {
+    Card,
+    CardContent,
     Divider,
     Grid,
-    IconButton,
     Stack,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Typography,
-    Tooltip,
-    TextField,
-    Button, MenuItem, Card, CardHeader, CardContent
+    Typography
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
+import axios from 'utils/axios';
 
-import useAuth from 'hooks/useAuth';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import useAuth from 'hooks/useAuth';
 
 // third party
-import { FixedSizeList } from 'react-window';
 
 // project imports
 
-import AnimateButton from 'ui-component/extended/AnimateButton';
-import SubCard from 'ui-component/cards/SubCard';
-import Chip from 'ui-component/extended/Chip';
-import { gridSpacing } from 'store/constant';
 import ReactApexChart from 'react-apexcharts';
+import { gridSpacing } from 'store/constant';
+import SubCard from 'ui-component/cards/SubCard';
 
-import { useDispatch, useSelector } from 'store';
 import useConfig from 'hooks/useConfig';
+import { useDispatch, useSelector } from 'store';
 
 
-import { getOrganisations } from 'store/slices/organisation';
-import { getAssets } from 'store/slices/asset';
-import { getCurrencies } from 'store/slices/currency';
-import { getControlCategories } from 'store/slices/controlcategory';
-import { getObjectives } from 'store/slices/objective';
-import { getSecurityConcepts } from 'store/slices/securityconcept';
 import { getRiskMetricsById } from 'store/slices/risk';
 
 import { useFormik } from 'formik';
