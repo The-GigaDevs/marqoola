@@ -72,7 +72,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const TotalControlReductionCard = ({ isLoading }) => {
     const theme = useTheme();
 
-    const [timeValue, setTimeValue] = React.useState(false);
+    const [timeValue, setTimeValue] = React.useState(true);
     const handleChangeTime = (event, newValue) => {
         setTimeValue(newValue);
     };
@@ -131,11 +131,11 @@ const TotalControlReductionCard = ({ isLoading }) => {
                                             <Grid item>
                                                 {timeValue ? (
                                                     <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                        $108
+                                                        $19,421.00
                                                     </Typography>
                                                 ) : (
                                                     <Typography sx={{ fontSize: '2.125rem', fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                        $961
+                                                        $225,067.00
                                                     </Typography>
                                                 )}
                                             </Grid>

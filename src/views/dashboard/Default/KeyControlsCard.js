@@ -88,14 +88,14 @@ const KeyControlCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    Bajaj Finery
+                                                    1.1 Establish and Maintain Enterprise Asset Inventory
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $1839.00
+                                                            $208,652.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -119,7 +119,7 @@ const KeyControlCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: 'success.dark' }}>
-                                            10% Profit
+                                            10% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -129,14 +129,14 @@ const KeyControlCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    TTML
+                                                1.2 Address Unauthorized Assets
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $100.00
+                                                            $245,173.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -160,7 +160,7 @@ const KeyControlCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            10% loss
+                                            -12% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -170,14 +170,14 @@ const KeyControlCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    Reliance
+                                                1.3 Utilize an Active Discovery Tool
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $200.00
+                                                            $380,035.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -201,7 +201,7 @@ const KeyControlCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                            10% Profit
+                                            14% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -211,14 +211,14 @@ const KeyControlCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    TTML
+                                                1.4 Use Dynamic Host Configuration Protocol (DHCP)<br/> Logging to Update Enterprise Asset Inventory
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $189.00
+                                                            $354,232.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -242,7 +242,7 @@ const KeyControlCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            10% loss
+                                            -2% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -252,14 +252,14 @@ const KeyControlCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    Stolon
+                                                1.5 Use a Passive Asset Discovery Tool
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $189.00
+                                                            $356,321.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -283,7 +283,7 @@ const KeyControlCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            10% loss
+                                            -11% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>

@@ -95,7 +95,7 @@ const PopularCard = ({ isLoading }) => {
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $185439.00
+                                                            $185,439.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -136,7 +136,7 @@ const PopularCard = ({ isLoading }) => {
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $225743.00
+                                                            $225,743.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -177,7 +177,7 @@ const PopularCard = ({ isLoading }) => {
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $249267.00
+                                                            $249,267.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -218,7 +218,7 @@ const PopularCard = ({ isLoading }) => {
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $364331.00
+                                                            $364,331.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -259,7 +259,7 @@ const PopularCard = ({ isLoading }) => {
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $168171.00
+                                                            $168,171.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>

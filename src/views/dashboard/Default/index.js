@@ -1,34 +1,31 @@
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
 import {
+    CardContent,
     Grid,
     Stack,
-    Typography,
-    Card, CardContent
+    Typography
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
 
 
 // project imports
-import MainCard from 'ui-component/cards/MainCard';
-import AnimateButton from 'ui-component/extended/AnimateButton';
-import SubCard from 'ui-component/cards/SubCard';
-import Chip from 'ui-component/extended/Chip';
-import { gridSpacing } from 'store/constant';
 import ReactApexChart from 'react-apexcharts';
+import { gridSpacing } from 'store/constant';
+import SubCard from 'ui-component/cards/SubCard';
 
-import { useDispatch, useSelector } from 'store';
 import useConfig from 'hooks/useConfig';
+import { useDispatch, useSelector } from 'store';
 
 
 import { getOrganisationMetricsById } from 'store/slices/organisation';
+import AssetChart from './AssetChart';
 import EarningCard from './EarningCard';
-import TotalOrderLineChartCard from './TotalOrderLineChartCard';
-import TotalControlReductionCard from './TotalControlReductionCard';
-import PopularCard from './PopularCard';
 import KeyControlCard from './KeyControlsCard';
 import OrgChart from './OrgChart';
-import AssetChart from './AssetChart';
+import PopularCard from './PopularCard';
+import TotalControlReductionCard from './TotalControlReductionCard';
+import TotalOrderLineChartCard from './TotalOrderLineChartCard';
 
 
 const Dashboard = (controlData) => {
@@ -39,68 +36,37 @@ const Dashboard = (controlData) => {
     const { metrics } = useSelector((state) => state.organisation);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
-    const fakeData = [{ "x" : "8/1/2023", "y" :248008},
-    { "x" : "8/2/2023", "y" :346410},
-    { "x" : "8/3/2023", "y" :325842},
-    { "x" : "8/4/2023", "y" :267136},
-    { "x" : "8/5/2023", "y" :394077},
-    { "x" : "8/6/2023", "y" :402806},
-    { "x" : "8/7/2023", "y" :279684},
-    { "x" : "8/8/2023", "y" :248358},
-    { "x" : "8/9/2023", "y" :352187},
-    { "x" : "8/10/2023", "y" :355727},
-    { "x" : "8/11/2023", "y" :347623},
-    { "x" : "8/12/2023", "y" :197225},
-    { "x" : "8/13/2023", "y" :298944},
-    { "x" : "8/14/2023", "y" :298380},
-    { "x" : "8/15/2023", "y" :177710},
-    { "x" : "8/16/2023", "y" :353267},
-    { "x" : "8/17/2023", "y" :333175},
-    { "x" : "8/18/2023", "y" :204675},
-    { "x" : "8/19/2023", "y" :429777},
-    { "x" : "8/20/2023", "y" :377027},
-    { "x" : "8/21/2023", "y" :292395},
-    { "x" : "8/22/2023", "y" :307157},
-    { "x" : "8/23/2023", "y" :209747},
-    { "x" : "8/24/2023", "y" :209089},
-    { "x" : "8/25/2023", "y" :414141},
-    { "x" : "8/26/2023", "y" :358295},
-    { "x" : "8/27/2023", "y" :374130},
-    { "x" : "8/28/2023", "y" :230430},
-    { "x" : "8/29/2023", "y" :333860},
-    { "x" : "8/30/2023", "y" :412899},
-    { "x" : "8/31/2023", "y" :417200},
-    { "x" : "9/1/2023", "y" :226064},
-    { "x" : "9/2/2023", "y" :248830},
-    { "x" : "9/3/2023", "y" :287662},
-    { "x" : "9/4/2023", "y" :320908},
-    { "x" : "9/5/2023", "y" :289382},
-    { "x" : "9/6/2023", "y" :249766},
-    { "x" : "9/7/2023", "y" :181502},
-    { "x" : "9/8/2023", "y" :199372},
-    { "x" : "9/9/2023", "y" :399436},
-    { "x" : "9/10/2023", "y" :328279},
-    { "x" : "9/11/2023", "y" :377338},
-    { "x" : "9/12/2023", "y" :306056},
-    { "x" : "9/13/2023", "y" :257586},
-    { "x" : "9/14/2023", "y" :409316},
-    { "x" : "9/15/2023", "y" :292373},
-    { "x" : "9/16/2023", "y" :292337},
-    { "x" : "9/17/2023", "y" :283538},
-    { "x" : "9/18/2023", "y" :432966},
-    { "x" : "9/19/2023", "y" :399688},
-    { "x" : "9/20/2023", "y" :211157},
-    { "x" : "9/21/2023", "y" :243712},
-    { "x" : "9/22/2023", "y" :219702},
-    { "x" : "9/23/2023", "y" :309100},
-    { "x" : "9/24/2023", "y" :448791},
-    { "x" : "9/25/2023", "y" :317233},
-    { "x" : "9/26/2023", "y" :297179},
-    { "x" : "9/27/2023", "y" :369730},
-    { "x" : "9/28/2023", "y" :341497},
-    { "x" : "9/29/2023", "y" :196527},
-    { "x" : "9/30/2023", "y" :245088},
-    { "x" : "10/1/2023", "y" :340648}]
+    const fakeData = [{ "x" : "3/1/2023", "y" :448791},
+    { "x" : "3/8/2023", "y" :421123},
+    { "x" : "3/15/2023", "y" :400212},
+    { "x" : "3/22/2023", "y" :392232},
+    { "x" : "3/29/2023", "y" :385623},
+    { "x" : "4/5/2023", "y" :320230},
+    { "x" : "4/12/2023", "y" :280312},
+    { "x" : "4/19/2023", "y" :250312},
+    { "x" : "4/26/2023", "y" :260312},
+    { "x" : "5/3/2023", "y" :270312},
+    { "x" : "5/10/2023", "y" :290312},
+    { "x" : "5/17/2023", "y" :320045},
+    { "x" : "5/24/2023", "y" :275646},
+    { "x" : "5/31/2023", "y" :274146},
+    { "x" : "6/7/2023", "y" :272646},
+    { "x" : "6/14/2023", "y" :252646},
+    { "x" : "6/21/2023", "y" :251146},
+    { "x" : "6/28/2023", "y" :236146},
+    { "x" : "7/5/2023", "y" :171146},
+    { "x" : "7/12/2023", "y" :169646},
+    { "x" : "7/19/2023", "y" :168146},
+    { "x" : "7/26/2023", "y" :183146},
+    { "x" : "8/2/2023", "y" :213146},
+    { "x" : "8/9/2023", "y" :228146},
+    { "x" : "8/16/2023", "y" :226646},
+    { "x" : "8/23/2023", "y" :225146},
+    { "x" : "8/30/2023", "y" :198146},
+    { "x" : "9/6/2023", "y" :196646},
+    { "x" : "9/13/2023", "y" :181646},
+    { "x" : "9/20/2023", "y" :166646},
+    { "x" : "9/27/2023", "y" :151646},]
     useEffect(() => {
 
 
@@ -121,7 +87,7 @@ const Dashboard = (controlData) => {
         }
 
         setSeries([{
-            name: 'Implementation Cost',
+            name: 'Net Risk',
             data: values
         }])
         setOptions({
