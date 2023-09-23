@@ -32,16 +32,16 @@ const barChartOptions = {
     },
     xaxis: {
         categories: [
-            'South Korea',
-            'Canada',
-            'United Kingdom',
-            'Netherlands',
-            'Italy',
-            'France',
-            'Japan',
-            'United States',
-            'China',
-            'Germany'
+            'AWS S3 Storage ',
+'Dell PowerEdge Server ',
+'Cisco Catalyst Switch ',
+'HP ProLiant Blade Server ',
+'VMware vSphere Licenses ',
+'Microsoft Azure Cloud Credits ',
+'Cisco ASA Firewall ',
+'HP Storage Area Network (SAN) ',
+'MacBook Pro Laptops (x5) ',
+'Cisco IP Phones (x50) '
         ]
     }
 };
@@ -60,7 +60,16 @@ const AssetChart = () => {
 
     const [series] = useState([
         {
-            data: [783, 428, 592, 231, 674, 367, 819, 145, 562, 946]
+            data: [30123,
+                15432,
+                10567,
+                12345,
+                8765,
+                9876,
+                11234,
+                14321,
+                18654,
+                3210,]
         }
     ]);
 
@@ -74,14 +83,24 @@ const AssetChart = () => {
                 labels: {
                     style: {
                         colors: [primary, primary, primary, primary, primary, primary]
-                    }
+                    },
+                    formatter: (value) => { return value.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        maximumFractionDigits: 0
+                    });  },
                 }
             },
             yaxis: {
                 labels: {
                     style: {
                         colors: [primary, primary, primary, primary, primary, primary, primary, primary, primary, primary]
-                    }
+                    },
+                    formatter: (value) => { return value.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        maximumFractionDigits: 0
+                    });  },
                 }
             },
             grid: {
