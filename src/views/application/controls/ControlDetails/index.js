@@ -13,10 +13,23 @@ import useAuth from 'hooks/useAuth';
 import { useDispatch, useSelector } from 'store';
 import { getControlById } from 'store/slices/control';
 
-// assets
-import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';
-import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';
-import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
+// Marqoola ICONS
+import SquidsIcon from '@mui/icons-material/SettingsSuggestOutlined';
+import ComplianceIcon from '@mui/icons-material/FactCheckOutlined';
+import TestsIcon from '@mui/icons-material/RuleOutlined';
+import CostsIcon from '@mui/icons-material/MonetizationOnOutlined';
+import IntegrationsIcon from '@mui/icons-material/CloudSyncOutlined';
+import DetailsIcon from '@mui/icons-material/DescriptionOutlined';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AuditLogsIcon from '@mui/icons-material/EventNoteOutlined';
+import IncidentsIcon from '@mui/icons-material/ConfirmationNumberOutlined';
+import ControlsIcon from '@mui/icons-material/HealthAndSafetyOutlined';
+import {IconAlertTriangle as RisksIcon}   from '@tabler/icons';
+import  {IconAsset as AssetsIcon}  from '@tabler/icons';
+import {IconBinaryTree as DivisionsIcon}  from '@tabler/icons';
+import {IconTargetArrow as ObjectivesIcon}  from '@tabler/icons';
+import DashboardIcon from '@mui/icons-material/Insights';
+
 import Details from './Details';
 import Costs from './Costs';
 
@@ -96,12 +109,12 @@ const ControlDetails = () => {
                     mb: 3
                 }}
             >
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Details" {...a11yProps(0)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Costs" {...a11yProps(1)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Tests" {...a11yProps(2)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="sQuids" {...a11yProps(3)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Compliance" {...a11yProps(4)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Audit" {...a11yProps(5)} />
+                <Tab icon={<DetailsIcon />} component={Link} to="#" label="Details" {...a11yProps(0)} />
+                <Tab icon={<CostsIcon />} component={Link} to="#" label="Costs" {...a11yProps(1)} />
+                <Tab icon={<TestsIcon />} component={Link} to="#" label="Tests" {...a11yProps(2)} />
+                <Tab icon={<SquidsIcon />} component={Link} to="#" label="sQuids" {...a11yProps(3)} />
+                <Tab icon={<ComplianceIcon />} component={Link} to="#" label="Compliance" {...a11yProps(4)} />
+                <Tab icon={<AuditLogsIcon />} component={Link} to="#" label="Audit" {...a11yProps(5)} />
                 
             </Tabs>
 
