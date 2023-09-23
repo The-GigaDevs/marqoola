@@ -88,14 +88,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    Bajaj Finery
+                                                Data Breach: Malicious External
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $1839.00
+                                                            $185439.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -119,7 +119,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: 'success.dark' }}>
-                                            10% Profit
+                                            10% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -129,14 +129,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    TTML
+                                                Insider Threat: Access, Misuse, Internal Disclosure
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $100.00
+                                                            $225743.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -160,7 +160,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            10% loss
+                                            -8% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -170,14 +170,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    Reliance
+                                                Phishing
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $200.00
+                                                            $249267.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -201,7 +201,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                            10% Profit
+                                            5% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -211,14 +211,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    TTML
+                                                Ransomware
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $189.00
+                                                            $364331.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -242,7 +242,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            10% loss
+                                            -30% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -252,14 +252,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                    Stolon
+                                                Spear Phishing/Business Email Compromise (BEC)
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $189.00
+                                                            $168171.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -283,7 +283,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            10% loss
+                                            -40% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
