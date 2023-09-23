@@ -82,6 +82,171 @@ const AllIntegrations = () => {
 
                 </>}
                 >
+                   <SubCard title="Cloud Providers">
+                    <Grid container spacing={gridSpacing}>
+                        <Grid item xs={1}>
+                        </Grid>
+
+                        <Grid item xs={10}>
+                            <Stack direction="row" spacing={1}>
+                                <Grid item sx={{ width: 1 / 4 }}>
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
+                                        sx={{
+                                            p: 2,
+                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
+                                            border: '1px solid',
+                                            minHeight: '11vw',
+                                            borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
+                                            '&:hover': {
+                                                border: `1px solid${theme.palette.primary.main}`
+                                            }
+                                        }}
+                                    >
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Grid container spacing={gridSpacing}>
+                                                    <Grid item>
+                                                        <img src={avatarImage(`./39.AWS.svg`)} height='50px' />
+                                                    </Grid>
+                                                    <Grid item xs zeroMinWidth>
+                                                        <Typography
+                                                            variant="h4"
+                                                            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
+                                                        >
+                                                            Amazon Web Services
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="subtitle2"
+                                                            sx={{ mt: 0.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap', display: 'block' }}
+                                                        >
+                                                            <PinDropTwoToneIcon fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.875rem', verticalAlign: 'text-top' }} />
+                                                            Amazon Web Services, Inc. is a subsidiary of Amazon that provides on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered, pay-as-you-go basis. Clients will often use this in combination with autoscaling
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch />
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Grid>
+
+                                        </Grid>
+                                        <br />
+                                        <SubCard sx={{ mt: "auto" }}>
+                                           View Integration
+                                        </SubCard>
+                                    </Card>
+                                </Grid>
+                                <Grid item sx={{ width: 1 / 4 }}>
+                                    <Card
+                                   style={{ display: "flex", flexDirection: "column" }}
+                                        sx={{
+                                            p: 2,
+                                            minHeight: '11vw',
+                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
+                                            border: '1px solid',
+                                            borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
+                                            '&:hover': {
+                                                border: `1px solid${theme.palette.primary.main}`
+                                            }
+                                        }}
+                                    >
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Grid container spacing={gridSpacing}>
+                                                    <Grid item>
+                                                        <img src={avatarImage(`./40.Azure.png`)} height='50px' />
+                                                    </Grid>
+                                                    <Grid item xs zeroMinWidth>
+                                                        <Typography
+                                                            variant="h4"
+                                                            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
+                                                        >
+                                                             Microsoft Azure
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="subtitle2"
+                                                            sx={{ mt: 0.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap', display: 'block' }}
+                                                        >
+                                                            <PinDropTwoToneIcon fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.875rem', verticalAlign: 'text-top' }} />
+                                                            Microsoft Azure, often referred to as Azure, is a cloud computing platform run by Microsoft. It offers access, management, and the development of applications and services through global data centers
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch />
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Grid>
+
+                                        </Grid>
+                                        <br />
+                                        <SubCard style={{ marginTop: "auto" }}>
+                                            View Integration
+                                        </SubCard>
+                                    </Card>
+                                </Grid>
+                                <Grid item sx={{ width: 1 / 4 }}>
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
+                                        sx={{
+                                            p: 2,
+                                            background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
+                                            border: '1px solid',
+                                            minHeight: '11vw',
+                                            borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
+                                            '&:hover': {
+                                                border: `1px solid${theme.palette.primary.main}`
+                                            }
+                                        }}
+                                    >
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12}>
+                                                <Grid container spacing={gridSpacing}>
+                                                    <Grid item>
+                                                        <img src={avatarImage(`./41.GCP.png`)} height='60px' />
+                                                    </Grid>
+                                                    <Grid item xs zeroMinWidth>
+                                                        <Typography
+                                                            variant="h4"
+                                                            sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', display: 'block' }}
+                                                        >
+                                                            Google Cloud Platform
+                                                        </Typography>
+                                                        <Typography
+                                                            variant="subtitle2"
+                                                            sx={{ mt: 0.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap', display: 'block' }}
+                                                        >
+                                                            <PinDropTwoToneIcon fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.875rem', verticalAlign: 'text-top' }} />
+                                                            Google Cloud Platform, offered by Google, is a suite of cloud computing services that runs on the same infrastructure that Google uses internally for its end-user products
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Switch />
+                                                    </Grid>
+
+                                                </Grid>
+                                            </Grid>
+
+                                        </Grid>
+                                        <br />
+                                        <SubCard style={{ marginTop: "auto" }}>
+                                            View Integration
+                                        </SubCard>
+                                    </Card>
+                                </Grid>
+
+
+                            </Stack>
+                        </Grid>
+                        <Grid item xs={1}>
+                        </Grid>
+
+                        
+                    </Grid>
+
+          
+                    </SubCard>
+                    <br/>
                     <SubCard title="Operating Systems">
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={1}>
@@ -89,12 +254,12 @@ const AllIntegrations = () => {
                         <Grid item xs={10}>
                             <Stack direction="row" spacing={1}>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
-                                            
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -131,17 +296,18 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -178,17 +344,18 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -225,17 +392,18 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -272,7 +440,7 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
@@ -292,12 +460,12 @@ const AllIntegrations = () => {
                         <Grid item xs={10}>
                             <Stack direction="row" spacing={1}>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
-                                            
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -334,17 +502,18 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -381,17 +550,18 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -428,17 +598,18 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -475,7 +646,7 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
@@ -498,12 +669,12 @@ const AllIntegrations = () => {
                         <Grid item xs={10}>
                             <Stack direction="row" spacing={1}>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
-                                            
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -540,17 +711,18 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -587,17 +759,18 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -634,17 +807,19 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
                                 </Grid>
                                 <Grid item sx={{ width: 1 / 4 }}>
-                                    <Card
+                                    <Card style={{ display: "flex", flexDirection: "column" }}
                                         sx={{
                                             p: 2,
                                             background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
                                             border: '1px solid',
+                                            minHeight: '11vw',
+                                            maxHeight: '11vw',
                                             borderColor: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[100],
                                             '&:hover': {
                                                 border: `1px solid${theme.palette.primary.main}`
@@ -669,7 +844,7 @@ const AllIntegrations = () => {
                                                             sx={{ mt: 0.5, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap', display: 'block' }}
                                                         >
                                                             <PinDropTwoToneIcon fontSize="inherit" sx={{ mr: 0.5, fontSize: '0.875rem', verticalAlign: 'text-top' }} />
-                                                            Nginx is a high-performance, open-source web server and reverse proxy server known for its efficiency in serving web content and handling HTTP and other network protocols.
+                                                            Nginx is a high-performance, open-source web server and reverse proxy server known for its efficiency in serving web content
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -681,7 +856,7 @@ const AllIntegrations = () => {
 
                                         </Grid>
                                         <br />
-                                        <SubCard >
+                                        <SubCard style={{ marginTop: "auto" }}>
                                             View Integration
                                         </SubCard>
                                     </Card>
