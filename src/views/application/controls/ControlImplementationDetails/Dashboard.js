@@ -426,13 +426,14 @@ Date.now()
                                                         <Typography variant="h4">Run Details</Typography>
                                                     </Grid>
                                                     <Grid item>
+                                                        
                                                         <Typography variant="h5" >
-                                                        <MuiTooltip title={(selectedControlScenario.lasttested).toLocaleString() } arrow placement="left">
+                                                        {selectedControlScenario.lasttested ? <MuiTooltip title={(selectedControlScenario.lasttested).toLocaleString() } arrow placement="left">
                                                             Last run {intlFormatDistance(
           Date.parse(selectedControlScenario.lasttested) ,
           Date.now()
         )}
-        </MuiTooltip>
+        </MuiTooltip> : "Never run"}
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
