@@ -21,7 +21,7 @@ import { openSnackbar } from 'store/slices/snackbar';
 import useAuth from 'hooks/useAuth';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-
+import MuiTooltip, { tooltipClasses } from '@mui/material/Tooltip';
 // third party
 import { FixedSizeList } from 'react-window';
 
@@ -35,7 +35,7 @@ import ReactApexChart from 'react-apexcharts';
 
 import { useDispatch, useSelector } from 'store';
 import useConfig from 'hooks/useConfig';
-
+import { intlFormatDistance } from 'date-fns'
 
 import { getOrganisations } from 'store/slices/organisation';
 import { getAssets } from 'store/slices/asset';
@@ -71,6 +71,8 @@ const detailsIconSX = {
     mr: 0.5,
     mt: 0.25
 };
+
+
 
 // table data
 function createData(product, description, quantity, amount, total) {
@@ -292,7 +294,12 @@ function renderRow(props) {
                     <SubCard title={<><Typography variant="h1" color={secondary}> {selectedControlScenario.name}</Typography> 
                         
                         </>}
-                        secondary={<><Chip label={selectedControlScenario.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControlScenario.implemented ? "success" : "error"} /><Typography variant="subtitle1">Last tested {selectedControlScenario.lasttested ? 'on ' + selectedControlScenario.lasttested : 'Never'}</Typography></>}>
+                        secondary={<><Chip label={selectedControlScenario.implemented ? "Implemented" : "Not Implemented"} variant="outlined" size="small" chipcolor={selectedControlScenario.implemented ? "success" : "error"} /><Typography variant="subtitle1">Last tested {selectedControlScenario.lasttested ? <MuiTooltip title={(selectedControlScenario.lasttested).toLocaleString() } arrow placement="bottom">
+                        {intlFormatDistance(
+Date.parse(selectedControlScenario.lasttested) ,
+Date.now()
+)}
+</MuiTooltip>: 'Never'}</Typography></>}>
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={10}>        
                                 <div id="chart">
@@ -419,8 +426,13 @@ function renderRow(props) {
                                                         <Typography variant="h4">Run Details</Typography>
                                                     </Grid>
                                                     <Grid item>
-                                                        <Typography variant="h5">
-                                                            Last Run: {selectedControlScenario.lasttested}
+                                                        <Typography variant="h5" >
+                                                        <MuiTooltip title={(selectedControlScenario.lasttested).toLocaleString() } arrow placement="left">
+                                                            Last run {intlFormatDistance(
+          Date.parse(selectedControlScenario.lasttested) ,
+          Date.now()
+        )}
+        </MuiTooltip>
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
