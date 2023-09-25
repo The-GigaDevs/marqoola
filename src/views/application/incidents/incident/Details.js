@@ -28,7 +28,7 @@ function Details({ selectedIncident }) {
                     }
                 >
                     <Grid container spacing={gridSpacing}>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={3}>
                             <Grid container spacing={gridSpacing}>
                                 <Grid item xs={12}>
                                     <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -100,7 +100,7 @@ function Details({ selectedIncident }) {
                                         <Typography variant="h4" style={{ marginRight: '16px' }}>
                                             Responsible :
                                         </Typography>
-                                        <Grid item xs={4}>
+                                        <Grid item xs={8}>
                                             <Select
                                                 id="demo-multiple-chip"
                                                 fullWidth
@@ -151,7 +151,7 @@ function Details({ selectedIncident }) {
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={9}>
                             {' '}
                         </Grid>
                     </Grid>
