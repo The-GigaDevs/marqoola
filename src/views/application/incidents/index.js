@@ -386,7 +386,7 @@ const IncidentTable = () => {
     };
 
     const handleOpenEditDialog = (event, row) => {
-        navigate('/incident/'+row?.id);
+        navigate('/incident/' + row?.id);
         setIncident(row);
         setIdentifier(row);
         setOpenDetails(true);
@@ -451,15 +451,23 @@ const IncidentTable = () => {
                                             )
                                         }}
                                         onChange={handleSearch}
-                                        placeholder="Search Incidents"
+                                        placeholder="Search Incident"
                                         value={search}
                                         size="small"
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6} sx={{ textAlign: 'right' }}>
-                                    {/*
-                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} />
-                        */}
+                                    <Tooltip title="Create Incident">
+                                        <Fab
+                                            color="primary"
+                                            size="small"
+                                            onClick={handleClickOpenDialog}
+                                            sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}
+                                        >
+                                            <AddIcon fontSize="small" />
+                                        </Fab>
+                                    </Tooltip>
+                                    {}
                                 </Grid>
                             </Grid>
                         </CardContent>
@@ -519,7 +527,7 @@ const IncidentTable = () => {
                                                                 variant="subtitle1"
                                                                 sx={{ color: '#db72ff' }}
                                                                 onClick={(event) => {
-                                                                     handleOpenEditDialog(event, row);
+                                                                    handleOpenEditDialog(event, row);
                                                                 }}
                                                             >
                                                                 {''}
