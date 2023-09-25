@@ -25,7 +25,8 @@ import { openSnackbar } from 'store/slices/snackbar';
 // project imports
 import { useDispatch, useSelector } from 'store';
 import Chip from 'ui-component/extended/Chip';
-
+import { intlFormatDistance } from 'date-fns'
+import MuiTooltip, { tooltipClasses } from '@mui/material/Tooltip';
 // assets
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -434,7 +435,12 @@ const RiskControlsTable = () => {
                                         </TableCell>
                                         <TableCell align="center">{row.controlvalue ? row.controlvalueformated : '0'}</TableCell>
                                         <TableCell align="center">{row.iseffective ?  <Chip label="Pass" chipcolor="success" /> : <Chip label="Fail" chipcolor="error" />}</TableCell>
-                                        <TableCell align="center">{ row.lasttested } </TableCell>
+                                        <TableCell align="center"> {row.lasttested ? <MuiTooltip title={(row.lasttested).toLocaleString() } arrow placement="left">
+                                                            Last run {intlFormatDistance(
+          Date.parse(row.lasttested) ,
+          Date.now()
+        )}
+        </MuiTooltip> : "No Execution"}</TableCell>
                                     </TableRow>
                                 </>
                                 );
