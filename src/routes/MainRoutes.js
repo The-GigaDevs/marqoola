@@ -51,8 +51,6 @@ const AppECommProductDetails = Loadable(lazy(() => import('views/application/e-c
 const AppECommProductList = Loadable(lazy(() => import('views/application/e-commerce/ProductList')));
 const AppECommCheckout = Loadable(lazy(() => import('views/application/e-commerce/Checkout')));
 
-
-
 // forms component routing
 const FrmComponentsTextfield = Loadable(lazy(() => import('views/forms/components/TextField')));
 const FrmComponentsButton = Loadable(lazy(() => import('views/forms/components/Button')));
@@ -141,11 +139,13 @@ const SecurityConceptsMaster = Loadable(lazy(() => import('views/application/mas
 const ControlCategoriesMaster = Loadable(lazy(() => import('views/application/mastertables/controlcategories/ControlCategoriesMaster')));
 const OrganizationList = Loadable(lazy(() => import('views/application/organization')));
 const Organizations = Loadable(lazy(() => import('views/application/organization/orgtable')));
-const OrganisationDetails = Loadable(lazy(() => import('views/application/organization/details')))
+const OrganisationDetails = Loadable(lazy(() => import('views/application/organization/details')));
 const Assets = Loadable(lazy(() => import('views/application/assets/assettable')));
 const AssetDetails = Loadable(lazy(() => import('views/application/assets/Details')));
 const Controls = Loadable(lazy(() => import('views/application/controls')));
 const ControlImplementations = Loadable(lazy(() => import('views/application/controls/ControlImplementations')));
+const Incidents = Loadable(lazy(() => import('views/application/incidents')));
+const IncidentDetail = Loadable(lazy(() => import('views/application/incidents/incident')));
 const ControlDetails = Loadable(lazy(() => import('views/application/controls/ControlDetails')));
 const Objectives = Loadable(lazy(() => import('views/application/objectives')));
 const Risks = Loadable(lazy(() => import('views/application/risks')));
@@ -588,7 +588,14 @@ const MainRoutes = {
         {
             path: '/squids',
             element: <UnderConstruction />
-
+        },
+        {
+            path: '/incidents',
+            element: <Incidents />
+        },
+        {
+            path: '/incident/:id',
+            element: <IncidentDetail />
         },
         {
             path: '/settings',
@@ -598,7 +605,6 @@ const MainRoutes = {
             path: '/integrations',
             element: <Integrations />
         }
-
     ]
 };
 
