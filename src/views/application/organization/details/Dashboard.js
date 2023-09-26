@@ -32,7 +32,37 @@ const Dashboard = (controlData) => {
     const { metrics } = useSelector((state) => state.organisation);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
-
+    const fakeData = [{ "x" : "3/1/2023", "y" :448791},
+    { "x" : "3/8/2023", "y" :421123},
+    { "x" : "3/15/2023", "y" :400212},
+    { "x" : "3/22/2023", "y" :392232},
+    { "x" : "3/29/2023", "y" :385623},
+    { "x" : "4/5/2023", "y" :320230},
+    { "x" : "4/12/2023", "y" :280312},
+    { "x" : "4/19/2023", "y" :250312},
+    { "x" : "4/26/2023", "y" :260312},
+    { "x" : "5/3/2023", "y" :270312},
+    { "x" : "5/10/2023", "y" :290312},
+    { "x" : "5/17/2023", "y" :320045},
+    { "x" : "5/24/2023", "y" :275646},
+    { "x" : "5/31/2023", "y" :274146},
+    { "x" : "6/7/2023", "y" :272646},
+    { "x" : "6/14/2023", "y" :252646},
+    { "x" : "6/21/2023", "y" :251146},
+    { "x" : "6/28/2023", "y" :236146},
+    { "x" : "7/5/2023", "y" :171146},
+    { "x" : "7/12/2023", "y" :169646},
+    { "x" : "7/19/2023", "y" :168146},
+    { "x" : "7/26/2023", "y" :183146},
+    { "x" : "8/2/2023", "y" :213146},
+    { "x" : "8/9/2023", "y" :228146},
+    { "x" : "8/16/2023", "y" :226646},
+    { "x" : "8/23/2023", "y" :225146},
+    { "x" : "8/30/2023", "y" :198146},
+    { "x" : "9/6/2023", "y" :196646},
+    { "x" : "9/13/2023", "y" :181646},
+    { "x" : "9/20/2023", "y" :166646},
+    { "x" : "9/27/2023", "y" :151646}]
     useEffect(() => {
         
         
@@ -44,16 +74,16 @@ const Dashboard = (controlData) => {
 
 
     useEffect(() => {
-        setControlMetrics(metrics);
-        for(let i = 0; i < metrics.length; i++){
-            let obj = metrics[i];
+        setControlMetrics(fakeData);
+        for(let i = 0; i < fakeData.length; i++){
+            let obj = fakeData[i];
             values.push(obj.y)
             xaxis.push(new Date(Date.parse(obj.x)).toLocaleDateString("en-US"))
     
         }
         
         setSeries([{
-            name: 'Implementation Cost',
+            name: 'Net Risk',
             data: values
         }])
         setOptions({chart: {
@@ -69,6 +99,17 @@ const Dashboard = (controlData) => {
         },
         xaxis: {
             categories: xaxis
+        },
+        yaxis: {
+            labels: {
+                show: true,
+ 
+                formatter: (value) => { return value.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    maximumFractionDigits: 0
+                });  },
+            }
         }})
     }, [metrics]);
     
@@ -113,7 +154,7 @@ const Dashboard = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h2">{selectedOrganisation.controlvalueformated}</Typography>
+                                                        <Typography variant="h2">$300,684.00</Typography>
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h3" color={secondary}>
@@ -129,7 +170,7 @@ const Dashboard = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h2">{selectedOrganisation.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">$339,000.00</Typography>
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h3" color={secondary}>
@@ -145,7 +186,7 @@ const Dashboard = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h2">{selectedOrganisation.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">$6,490.00</Typography>
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h3" color={secondary}>
@@ -161,7 +202,7 @@ const Dashboard = (controlData) => {
                                             <CardContent>
                                                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
                                                     <Grid item>
-                                                        <Typography variant="h2">{selectedOrganisation.implementationcostformated}</Typography>
+                                                        <Typography variant="h2">5123.42%</Typography>
                                                     </Grid>
                                                     <Grid item>
                                                         <Typography variant="h3" color={secondary}>

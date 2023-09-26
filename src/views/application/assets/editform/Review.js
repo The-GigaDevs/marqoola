@@ -3,7 +3,7 @@ import * as React from 'react';
 // material-ui
 import { Grid, List, ListItem, ListItemText, Typography, Divider } from '@mui/material';
 import { useDispatch, useSelector } from 'store';
-
+import useAuth from 'hooks/useAuth';
 import { getOrganisationDetails } from 'store/slices/organisation';
 import { getAssetDetails } from 'store/slices/asset';
 
@@ -15,11 +15,11 @@ export default function Review({basicInformationData, assetDetailsData}) {
 
     const { assetdetails } = useSelector((state) => state.asset);
     const [parentDetailsData, setParentDetailsData] = React.useState({});
-    
+    const { user } = useAuth();
 
     React.useEffect(() => {
         dispatch(getOrganisationDetails(basicInformationData.organisation));
-        dispatch(getAssetDetails(basicInformationData.parent));
+        dispatch(getAssetDetails(basicInformationData.parent, user.accessToken));
     
     }, [dispatch]);
 

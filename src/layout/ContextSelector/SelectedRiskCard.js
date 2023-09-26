@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
-import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography, IconButton } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import { useDispatch, useSelector } from 'store';
+import { IconAlertTriangle } from '@tabler/icons';
+import { IconX } from '@tabler/icons';
+import  useAuth  from 'hooks/useAuth';
+import { setRiskSelector } from 'store/slices/risk-selector';
 
 // assets
 import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
@@ -43,6 +47,8 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 const SelectedRiskCard = () => {
     const theme = useTheme();
     const { selectedRiskData, selectedRisk } = useSelector((state) => state.riskselector);
+    const dispatch = useDispatch();
+    const { user } = useAuth();
 
     return (
         <>
@@ -61,7 +67,7 @@ const SelectedRiskCard = () => {
                                             color: '#fff'
                                         }}
                                     >
-                                        <TableChartOutlinedIcon fontSize="inherit" />
+                                        <IconAlertTriangle fontSize="inherit" />
                                     </Avatar>
                                 </ListItemAvatar>
                                 <ListItemText
@@ -81,6 +87,22 @@ const SelectedRiskCard = () => {
                                         </Typography>
                                     }
                                 />
+                                 <IconButton
+                                disableElevation
+                                disableRipple
+                                size="small"
+                                sx={{
+                                    ml: 1,
+                                    "&.MuiButtonBase-root:hover": {
+                                        bgcolor: "transparent"
+                                    },
+                                    color: 'primary.light', mt: -3, mr: -2, scale: '0.75'
+                                }}
+                                onClick={() => { dispatch(setRiskSelector('0', user.accessToken)) }}
+                            >
+
+                                <IconX />
+                            </IconButton>
                             </ListItem>
                         </List>
                     </Box>

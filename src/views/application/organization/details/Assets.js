@@ -259,7 +259,7 @@ const AssetTable = ({selectedOrganisation}) => {
     const handleCloseDialog = () => {
         setOpen(false);
         setResetForm(true);
-        dispatch(getAssets(user.accessToken));
+        dispatch(getAssets(null, null,user.accessToken));
     };
 
     // Getting the token
@@ -295,7 +295,7 @@ const AssetTable = ({selectedOrganisation}) => {
 
             })
         )
-        dispatch(getAssets(user.accessToken));
+        dispatch(getAssets(null, null, user.accessToken));
         setSelected([])
     };
 
@@ -353,7 +353,7 @@ const AssetTable = ({selectedOrganisation}) => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getAssets("", user.accessToken));
+        dispatch(getAssets("",null, user.accessToken));
     };
 
     const handleClick = (event, name) => {

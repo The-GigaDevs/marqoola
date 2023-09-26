@@ -97,13 +97,14 @@ function Details({ selectedIncident }) {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Box display="flex" alignItems="center" justifyContent="space-between">
-                                        <Typography variant="h4" style={{ marginRight: '16px' }}>
-                                            Responsible :
+                                        <Typography variant="h4" style={{ marginRight: '49px' }}>
+                                            Responsible:
                                         </Typography>
                                         <Grid item xs={8}>
                                             <Select
                                                 id="demo-multiple-chip"
                                                 fullWidth
+                                                style={{ width: '212px' }}
                                                 // value={personName}
                                                 // onChange={handleTagSelectChange}
                                                 renderValue={(selected) => (

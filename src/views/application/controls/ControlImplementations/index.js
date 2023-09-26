@@ -52,6 +52,7 @@ import { setDivisionSelector } from 'store/slices/division-selector';
 import { setAssetSelector } from 'store/slices/asset-selector';
 import { setRiskSelector } from 'store/slices/risk-selector';
 import { setObjectiveSelector } from 'store/slices/objective-selector';
+import IntegrationInformation from '../IntegrationInformation';
 
 
 // table sort
@@ -294,7 +295,7 @@ const ControlTable = () => {
     }, [controlscenarios]);
 
     React.useEffect(() => {
-        setDivisionSelector2(selectedDivision);
+        setDivisionSelector(selectedDivision);
         dispatch(getControlScenarios(selectedDivision, selectedAsset, selectedRisk, selectedObjective,user.accessToken));
     }, [selectedDivision, selectedAsset, selectedRisk, selectedObjective]);
 
@@ -462,9 +463,9 @@ const ControlTable = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} sx={{ textAlign: 'right' }}>
                         
-                        { /*
-                        <CreateForm open={open} handleCloseDialog={handleCloseDialog} resetForm={resetForm} setResetForm={setResetForm} />
-                        */}
+                        
+                        <IntegrationInformation setOpen={setOpen} open={open}/>
+                        
                     </Grid>
                 </Grid>
             </CardContent>
@@ -574,7 +575,7 @@ const ControlTable = () => {
                                             {row.potentialroi ? row.potentialroiformated : '0'} 
                                         </TableCell>
                                         <TableCell align="center">
-                                        <Button variant="contained" color="error" >
+                                        <Button variant="contained" color="error" onClick={(event) => { setOpen(true)  }}>
                                             Fix Now !
                                             </Button>
                                         </TableCell>

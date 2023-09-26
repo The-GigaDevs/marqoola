@@ -74,14 +74,14 @@ function DiscreteSlider(props) {
       <Slider
         sx={{
           "& .MuiSlider-track": {
-            background: "green",
+            background: "yellow",
             borderColor: "white"
           },
           "& .MuiSlider-thumb": {
             [`&:nth-of-type(${1}n)`]: {
-              background: "blue",
+              background: "green",
               "& span": {
-                background: "blue"
+                background: "green"
               }
             },
             [`&:nth-of-type(${2}n)`]: {
@@ -95,7 +95,7 @@ function DiscreteSlider(props) {
             background: "none"
           },
           "& .MuiSlider-rail": {
-            background: `linear-gradient(to right, blue 0% ${perc[0]}%, green ${perc[0]}% ${perc[1]}%, red ${perc[1]}% 100%)`
+            background: `linear-gradient(to right, green 0% ${perc[0]}%, yellow ${perc[0]}% ${perc[1]}%, red ${perc[1]}% 100%)`
           },
           "& .MuiSlider-valueLabel": {},
           ...style

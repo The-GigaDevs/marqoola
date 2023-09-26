@@ -6,7 +6,7 @@ import { useTheme } from '@mui/material/styles';
 import { Avatar, Button, CardActions, CardContent, Divider, Grid, Menu, MenuItem, Typography } from '@mui/material';
 
 // project imports
-import BajajAreaChartCard from './BajajAreaChartCard';
+import KeyControlsChartCard from './KeyControlsChartCard';
 import MainCard from 'ui-component/cards/MainCard';
 import SkeletonPopularCard from 'ui-component/cards/Skeleton/PopularCard';
 import { gridSpacing } from 'store/constant';
@@ -19,7 +19,7 @@ import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDown
 
 // ==============================|| DASHBOARD DEFAULT - POPULAR CARD ||============================== //
 
-const PopularCard = ({ isLoading }) => {
+const KeyControlCard = ({ isLoading }) => {
     const theme = useTheme();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,7 +43,7 @@ const PopularCard = ({ isLoading }) => {
                             <Grid item xs={12}>
                                 <Grid container alignContent="center" justifyContent="space-between">
                                     <Grid item>
-                                        <Typography variant="h4" color="secondary">Key Risks</Typography>
+                                        <Typography variant="h4" color="secondary">Key Controls Cost Reduction</Typography>
                                     </Grid>
                                     <Grid item>
                                         <MoreHorizOutlinedIcon
@@ -80,7 +80,7 @@ const PopularCard = ({ isLoading }) => {
                                 </Grid>
                             </Grid>
                             <Grid item xs={12} sx={{ pt: '16px !important' }}>
-                                <BajajAreaChartCard />
+                                <KeyControlsChartCard />
                             </Grid>
                             <Grid item xs={12}>
                                 <Grid container direction="column">
@@ -88,14 +88,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                Data Breach: Malicious External
+                                                    1.1 Establish and Maintain Enterprise Asset Inventory
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $185,439.00
+                                                            $208,652.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -129,14 +129,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                Insider Threat: Access, Misuse, Internal Disclosure
+                                                1.2 Address Unauthorized Assets
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $225,743.00
+                                                            $245,173.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -160,7 +160,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            -8% Change
+                                            -12% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -170,14 +170,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                Phishing
+                                                1.3 Utilize an Active Discovery Tool
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $249,267.00
+                                                            $380,035.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -201,7 +201,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.success.dark }}>
-                                            5% Change
+                                            14% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -211,14 +211,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                Ransomware
+                                                1.4 Use Dynamic Host Configuration Protocol (DHCP)<br/> Logging to Update Enterprise Asset Inventory
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $364,331.00
+                                                            $354,232.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -242,7 +242,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            -30% Change
+                                            -2% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -252,14 +252,14 @@ const PopularCard = ({ isLoading }) => {
                                         <Grid container alignItems="center" justifyContent="space-between">
                                             <Grid item>
                                                 <Typography variant="subtitle1" color="inherit">
-                                                Spear Phishing/Business Email Compromise (BEC)
+                                                1.5 Use a Passive Asset Discovery Tool
                                                 </Typography>
                                             </Grid>
                                             <Grid item>
                                                 <Grid container alignItems="center" justifyContent="space-between">
                                                     <Grid item>
                                                         <Typography variant="subtitle1" color="inherit">
-                                                            $168,171.00
+                                                            $356,321.00
                                                         </Typography>
                                                     </Grid>
                                                     <Grid item>
@@ -283,7 +283,7 @@ const PopularCard = ({ isLoading }) => {
                                     </Grid>
                                     <Grid item>
                                         <Typography variant="subtitle2" sx={{ color: theme.palette.orange.dark }}>
-                                            -40% Change
+                                            -11% Change
                                         </Typography>
                                     </Grid>
                                 </Grid>
@@ -302,8 +302,8 @@ const PopularCard = ({ isLoading }) => {
     );
 };
 
-PopularCard.propTypes = {
+KeyControlCard.propTypes = {
     isLoading: PropTypes.bool
 };
 
-export default PopularCard;
+export default KeyControlCard;

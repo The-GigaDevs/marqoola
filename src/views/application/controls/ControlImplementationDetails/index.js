@@ -1,22 +1,22 @@
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
 import { Box, Tab, Tabs } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 
 import useAuth from 'hooks/useAuth';
 import { useDispatch, useSelector } from 'store';
-import { setControlScenarioBy } from 'store/slices/control';
 
-// assets
-import DescriptionTwoToneIcon from '@mui/icons-material/DescriptionTwoTone';
-import LocalShippingTwoToneIcon from '@mui/icons-material/LocalShippingTwoTone';
-import ReceiptTwoToneIcon from '@mui/icons-material/ReceiptTwoTone';
+// Marqoola ICONS
+import IncidentsIcon from '@mui/icons-material/ConfirmationNumberOutlined';
+import DetailsIcon from '@mui/icons-material/DescriptionOutlined';
+import AuditLogsIcon from '@mui/icons-material/EventNoteOutlined';
+import DashboardIcon from '@mui/icons-material/Insights';
 
 import DetailsDashboard from './Dashboard';
 import Details from './Details';
@@ -97,10 +97,10 @@ const ControlImplementationDetails = (row) => {
                     mb: 3
                 }}
             >
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Dashboard" {...a11yProps(0)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Details" {...a11yProps(1)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Incidents" {...a11yProps(2)} />
-                <Tab icon={<DescriptionTwoToneIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(3)} />
+                <Tab icon={<DashboardIcon />} component={Link} to="#" label="Dashboard" {...a11yProps(0)} />
+                <Tab icon={<DetailsIcon />} component={Link} to="#" label="Details" {...a11yProps(1)} />
+                <Tab icon={<IncidentsIcon />} component={Link} to="#" label="Incidents" {...a11yProps(2)} />
+                <Tab icon={<AuditLogsIcon />} component={Link} to="#" label="Audit Log" {...a11yProps(3)} />
                 
             </Tabs>
 

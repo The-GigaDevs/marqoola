@@ -249,7 +249,7 @@ const Risks = ({selectedOrganisation}) => {
 
     React.useEffect(() => {
 
-        dispatch(getRisks(selectedOrganisation.id, user.accessToken));
+        dispatch(getRisks(selectedOrganisation.id, null, null, null, user.accessToken));
     }, [dispatch]);
 
     React.useEffect(() => {
@@ -278,7 +278,7 @@ const Risks = ({selectedOrganisation}) => {
 
             })
         )
-        dispatch(getRisks(selectedOrganisation.id,user.accessToken));
+        dispatch(getRisks(selectedOrganisation.id, null, null, null,user.accessToken));
         setSelected([])
     };
 

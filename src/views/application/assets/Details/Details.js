@@ -68,11 +68,22 @@ const Details = (controlData) => {
             },
             xaxis: {
                 categories: xaxis
+            },
+            yaxis: {
+                labels: {
+                    show: true,
+     
+                    formatter: (value) => { return value.toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                        maximumFractionDigits: 0
+                    });  },
+                }
             }})
         }
         dispatch(getAssetTypes(user.accessToken));
         dispatch(getOrganisations(user.accessToken));
-        dispatch(getAssets(user.accessToken));
+        dispatch(getAssets(null, null, user.accessToken));
     }, []);
 
     useEffect(() => {

@@ -17,7 +17,7 @@ import {
     TextField,
     Button, MenuItem, Card, CardHeader, CardContent
 } from '@mui/material';
-
+import useAuth from 'hooks/useAuth';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
@@ -94,11 +94,11 @@ const DetailsDashboard = (controlData) => {
     const { metrics } = useSelector((state) => state.control);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
-
+    const { user } = useAuth();
     useEffect(() => {
         
         dispatch(getOrganisations());
-        dispatch(getAssets());
+        dispatch(getAssets(null, null, user.accessToken));
         dispatch(getCurrencies());
         dispatch(getControlCategories());
         dispatch(getObjectives());
@@ -160,6 +160,17 @@ const DetailsDashboard = (controlData) => {
         },
         xaxis: {
             categories: xaxis
+        },
+        yaxis: {
+            labels: {
+                show: true,
+ 
+                formatter: (value) => { return value.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    maximumFractionDigits: 0
+                });  },
+            }
         }})
     }, [metrics]);
     

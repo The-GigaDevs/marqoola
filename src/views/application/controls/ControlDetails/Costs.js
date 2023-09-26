@@ -20,7 +20,7 @@ import {
 
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-
+import useAuth from 'hooks/useAuth';
 // third party
 import { FixedSizeList } from 'react-window';
 
@@ -94,11 +94,11 @@ const Costs = (controlData) => {
     const { metrics } = useSelector((state) => state.control);
     const [series, setSeries] = useState([]);
     const [options, setOptions] = useState({});
-
+    const { user } = useAuth();
     useEffect(() => {
 
         dispatch(getOrganisations());
-        dispatch(getAssets());
+        dispatch(getAssets(null, null,  user.accessToken));
         dispatch(getCurrencies());
         dispatch(getControlCategories());
         dispatch(getObjectives());
