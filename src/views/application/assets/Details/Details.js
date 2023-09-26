@@ -83,7 +83,7 @@ const Details = (controlData) => {
         }
         dispatch(getAssetTypes(user.accessToken));
         dispatch(getOrganisations(user.accessToken));
-        dispatch(getAssets(user.accessToken));
+        dispatch(getAssets(null, null, user.accessToken));
     }, []);
 
     useEffect(() => {

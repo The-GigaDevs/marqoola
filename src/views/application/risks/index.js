@@ -345,7 +345,7 @@ const RiskTable = () => {
 
     const handleCloseEditDialog = () => {
         setOpenEdit(false);
-        dispatch(getRisks(selectedDivision, selectedAsset, selectedRisk, user.accessToken));
+        dispatch(getRisks(selectedDivision, selectedAsset, selectedRisk, null, user.accessToken));
     };
 
     const handleClick = (event, name) => {
