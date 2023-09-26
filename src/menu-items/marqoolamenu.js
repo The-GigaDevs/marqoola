@@ -120,7 +120,7 @@ const marqoolamenu = {
                     id: 'incidents',
                     title: <FormattedMessage id="Incidents" />,
                     type: 'item',
-                    url: '/underconstruction',
+                    url: '/incidents',
                     
                     breadcrumbs: false,
                 }
