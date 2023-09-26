@@ -1,62 +1,53 @@
+import { useTheme } from '@emotion/react';
 import PropTypes from 'prop-types';
-import * as React from 'react';
-import useAuth from 'hooks/useAuth';
-// material-ui
-import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
+import React from 'react'
+import { gridSpacing } from 'store/constant'
+import SubCard from 'ui-component/cards/SubCard';
+import axios from 'utils/axios';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import { useEffect, useState } from 'react';
 import {
-    Box,
-    CardContent,
-    Checkbox,
+    Divider,
     Grid,
     IconButton,
-    InputAdornment,
+    Stack,
     Table,
     TableBody,
     TableCell,
     TableContainer,
     TableHead,
-    TablePagination,
+    Chip,
     TableRow,
-    TableSortLabel,
-    TextField,
-    Toolbar,
-    Tooltip,
     Typography,
-    Fab,
-    Switch,
-    Button
+    TextField,
+    Button, MenuItem, Card, CardHeader, CardContent, TableSortLabel, Toolbar, Tooltip, TablePagination, Fab
 } from '@mui/material';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import PersonIcon from '@mui/icons-material/Person';
-import { visuallyHidden } from '@mui/utils';
-import { openSnackbar } from 'store/slices/snackbar';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+
+// third party
+import { FixedSizeList } from 'react-window';
+
 // project imports
-import Chip from 'ui-component/extended/Chip';
-import MainCard from 'ui-component/cards/MainCard';
-import SubCard from 'ui-component/cards/SubCard';
+
+import AnimateButton from 'ui-component/extended/AnimateButton';
+import ReactApexChart from 'react-apexcharts';
+
 import { useDispatch, useSelector } from 'store';
-import { getAssets, deleteAsset } from 'store/slices/asset';
+import useConfig from 'hooks/useConfig';
+import { ConfirmationNumberOutlined } from '@mui/icons-material';
+import { Box } from '@mui/system';
+import useAuth from 'hooks/useAuth';
+import { getIncidents } from 'store/slices/incident';
+import { useNavigate } from 'react-router-dom';
+import { visuallyHidden } from '@mui/utils';
+import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
 
-// assets
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterListTwoTone';
-import PrintIcon from '@mui/icons-material/PrintTwoTone';
-import FileCopyIcon from '@mui/icons-material/FileCopyTwoTone';
-import SearchIcon from '@mui/icons-material/Search';
+
 import AddIcon from '@mui/icons-material/AddTwoTone';
-
-//import CreateForm from '../createform'
-// import Details from '../ControlImplementationDetails';
-
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { getIncidents, setIncident } from 'store/slices/incident';
-import { deleteControl, setControlScenarioBy } from 'store/slices/control';
-import { setDivisionSelector } from 'store/slices/division-selector';
-import { setAssetSelector } from 'store/slices/asset-selector';
-import { setRiskSelector } from 'store/slices/risk-selector';
-import { setObjectiveSelector } from 'store/slices/objective-selector';
 
 // table sort
 function descendingComparator(a, b, orderBy) {
@@ -84,54 +75,43 @@ function stableSort(array, comparator) {
 
 // table header options
 const headCells = [
-    { id: 'name', label: '', minWidth: 170 },
+    { id: 'control', label: 'Control Name', },
 
     {
-        id: 'title',
-        label: 'Title',
+        id: 'implementationCost',
+        label: 'Implementation Cost ($)',
         numeric: false,
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'priority',
-        label: 'Priority',
-        numeric: false,
-        align: 'center',
-        format: (value) => value.toLocaleString('en-US')
-    },
-    {
-        id: 'status',
-        label: 'Status',
+        id: 'net',
+        label: 'Net Risk',
         numeric: false,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'startdate',
-        label: 'Start Date',
+        id: 'control',
+        label: 'Control Value',
         numeric: false,
         align: 'center',
         format: (value) => value.toLocaleString('en-US')
     },
     {
-        id: 'closedate',
-        label: 'Close Date',
+        id: 'actualRisl',
+        label: 'Actual Risk Reduction',
+        numeric: false,
+        align: 'center',
+        format: (value) => value.toLocaleString('en-US')
+    },
+    {
+        id: 'currentROI',
+        label: 'Current ROI',
         numeric: false,
         align: 'center',
         format: (value) => typeof value === 'number' && value.toFixed(2)
     },
-    {
-        id: 'responsible',
-        align: 'center',
-        label: 'Responsible',
-        numeric: false
-    },
-    {
-        id: 'impact',
-        align: 'center',
-        label: 'Impact',
-        numeric: false
-    }
+
 ];
 
 // ==============================|| TABLE HEADER ||============================== //
@@ -144,18 +124,7 @@ function EnhancedTableHead({ onSelectAllClick, order, orderBy, numSelected, rowC
     return (
         <TableHead>
             <TableRow>
-                <TableCell padding="checkbox" sx={{ pl: 3 }}>
-                    {/* <Checkbox
-                        color="primary"
-                        indeterminate={numSelected > 0 && numSelected < rowCount}
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        inputProps={{
-                            'aria-label': 'select all desserts'
-                        }}
-                    /> */}
-                    Incident Id
-                </TableCell>
+
                 {numSelected > 0 && (
                     <TableCell padding="none" colSpan={6}>
                         <EnhancedTableToolbar numSelected={selected.length} selection={selected} handleDelete={handleDelete} />
@@ -239,9 +208,9 @@ EnhancedTableToolbar.propTypes = {
     handleDelete: PropTypes.func.isRequired
 };
 
-// ==============================|| ASSET TABLE ||============================== //
 
-const IncidentTable = () => {
+function Controls({ selectedIncident }) {
+
     const theme = useTheme();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -262,7 +231,7 @@ const IncidentTable = () => {
     const { selectedObjective } = useSelector((state) => state.objectiveselector);
     const { user } = useAuth();
     const [orgTableData, setOrgTableData] = React.useState([]);
-    const { incidents, selectedIncident } = useSelector((state) => state.incident);
+    const { incidents } = useSelector((state) => state.incident);
 
     const [open, setOpen] = React.useState(false);
     const [resetForm, setResetForm] = React.useState(false);
@@ -303,39 +272,19 @@ const IncidentTable = () => {
     }, [divisionSelector]);
 
     const handleDivisionClick = (event, division) => {
-        dispatch(setDivisionSelector(division, user.accessToken));
     };
 
     const handleAssetClick = (event, asset) => {
-        dispatch(setAssetSelector(asset, user.accessToken));
     };
 
     const handleRiskClick = (event, risk) => {
-        dispatch(setRiskSelector(risk, user.accessToken));
     };
 
     const handleObjectiveClick = (event, objective) => {
-        dispatch(setObjectiveSelector(objective, user.accessToken));
     };
 
     const handleDelete = async (selected) => {
-        for (var selectedid of selected) {
-            dispatch(deleteControl(selectedid, user.accessToken));
-        }
-        await delay(500);
-        dispatch(
-            openSnackbar({
-                open: true,
-                message: 'Item(s) deleted successfully',
-                variant: 'alert',
-                alert: {
-                    color: 'success'
-                },
-                close: true
-            })
-        );
-        dispatch(getIncidents(selectedDivision, user.accessToken));
-        setSelected([]);
+
     };
 
     const handleSearch = (event) => {
@@ -386,10 +335,6 @@ const IncidentTable = () => {
     };
 
     const handleOpenEditDialog = (event, row) => {
-        navigate('/incident/' + row?.id);
-        setIncident(row);
-        setIdentifier(row);
-        setOpenDetails(true);
     };
 
     const handleCloseEditDialog = () => {
@@ -431,47 +376,33 @@ const IncidentTable = () => {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
     const isExpanded = (name) => expandedRow.indexOf(name) !== -1;
+    const secondary = theme.palette.secondary.main;
 
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - orgTableData.length) : 0;
-
     return (
-        !openDetails && (
-            <MainCard title="Incidents" content={false}>
-                {!checked && (
-                    <>
-                        <CardContent>
-                            <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <SearchIcon fontSize="small" />
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        onChange={handleSearch}
-                                        placeholder="Search Incident"
-                                        value={search}
-                                        size="small"
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6} sx={{ textAlign: 'right' }}>
-                                    <Tooltip title="Create Incident">
-                                        <Fab
-                                            color="primary"
-                                            size="small"
-                                            onClick={handleClickOpenDialog}
-                                            sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}
-                                        >
-                                            <AddIcon fontSize="small" />
-                                        </Fab>
-                                    </Tooltip>
-                                    {}
-                                </Grid>
-                            </Grid>
-                        </CardContent>
+        <Grid container spacing={gridSpacing}>
+            <Grid item xs={12}>
+                <SubCard title={
+                    <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingLeft: '16px' }}>
+                        <Box style={{ display: 'flex', alignItems: 'center', }}>
+                            <ConfirmationNumberOutlined style={{ marginRight: '8px' }} />
+                            <Typography variant="h2" color={secondary}>
+                                {selectedIncident.name || 'Data Over-retention'}
+                            </Typography>
+                        </Box>
+                        <Fab
+                            color="primary"
+                            size="small"
+                            onClick={handleClickOpenDialog}
+                            sx={{ boxShadow: 'none', ml: 1, width: 32, height: 32, minHeight: 32 }}
+                        >
+                            <AddIcon fontSize="small" />
+                        </Fab>
+                    </Box>
+                }
+                >
 
+                    <Grid container spacing={gridSpacing}>
                         <TableContainer>
                             <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
                                 <EnhancedTableHead
@@ -505,102 +436,29 @@ const IncidentTable = () => {
                                                         key={index}
                                                         selected={isItemSelected}
                                                     >
-                                                        <TableCell
-                                                            padding="checkbox"
-                                                            sx={{ pl: 3 }}
-                                                            onClick={(event) => handleClick(event, row.id)}
-                                                        >
-                                                            {index + 1}
-                                                            {/* <Checkbox
-                                                                color="primary"
-                                                                checked={isItemSelected}
-                                                                inputProps={{
-                                                                    'aria-labelledby': labelId
-                                                                }}
-                                                            /> */}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <ConfirmationNumberIcon />
-                                                        </TableCell>
+
                                                         <TableCell component="th" id={labelId} scope="row" sx={{ cursor: 'pointer' }}>
-                                                            <Typography
-                                                                variant="subtitle1"
-                                                                sx={{ color: '#db72ff' }}
-                                                                onClick={(event) => {
-                                                                    handleOpenEditDialog(event, row);
-                                                                }}
-                                                            >
-                                                                {''}
-                                                                {row.name}{' '}
-                                                            </Typography>
-                                                            <div
-                                                                onClick={(event) => {
-                                                                    handleDivisionClick(event, row.orgaid);
-                                                                    handleAssetClick(event, row.assetid);
-                                                                    handleRiskClick(event, row.riskid);
-                                                                    handleObjectiveClick(event, row.objectiveid);
-                                                                }}
-                                                            >
+                                                            <Box style={{ display: 'flex', alignItems: 'center', }}>
+
+                                                                <SportsEsportsOutlinedIcon sx={{marginRight: '1rem'}}/>
                                                                 <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
+                                                                    variant="subtitle1"
+                                                                    sx={{ color: '#db72ff' }}
                                                                     onClick={(event) => {
-                                                                        handleDivisionClick(event, row.orgaid);
+                                                                        handleOpenEditDialog(event, row);
                                                                     }}
                                                                 >
-                                                                    {'Organisation: '}
-                                                                    {row.organame}{' '}
+                                                                    {''}
+                                                                    {row.name}{' '}
                                                                 </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleAssetClick(event, row.assetid);
-                                                                    }}
-                                                                >
-                                                                    {'Asset: '}
-                                                                    {row.assetname}{' '}
-                                                                </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleRiskClick(event, row.riskid);
-                                                                    }}
-                                                                >
-                                                                    {'Risk: '}
-                                                                    {row.riskname}{' '}
-                                                                </Typography>
-                                                                <Typography
-                                                                    variant="subtitle2"
-                                                                    sx={{ color: '#808080' }}
-                                                                    onClick={(event) => {
-                                                                        handleObjectiveClick(event, row.objectiveid);
-                                                                    }}
-                                                                >
-                                                                    {'Objective: '}
-                                                                    {row.objectivename}{' '}
-                                                                </Typography>
-                                                            </div>
+                                                           </Box>
                                                         </TableCell>
-                                                        <TableCell align="center" sx={{ color: 'red' }}>
-                                                            High
-                                                        </TableCell>
-                                                        <TableCell>Open</TableCell>
-                                                        <TableCell>01-01-2023</TableCell>
-                                                        <TableCell>02-01-2023</TableCell>
-                                                        <TableCell>
-                                                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                                <PersonIcon />
-                                                                Anton
-                                                            </Box>
-                                                        </TableCell>
-                                                        <TableCell>{row.potentialroi ? row.potentialroiformated : '0'}</TableCell>
-                                                        {/* <TableCell align="center">
-                                                            <Button variant="contained" color="error">
-                                                                Fix Now !
-                                                            </Button>
-                                                        </TableCell> */}
+                                                        <TableCell align="center" > $ 1,123,123  </TableCell>
+                                                        <TableCell align="center" >$ 1,234</TableCell>
+                                                        <TableCell align="center" >$ 987 </TableCell>
+                                                        <TableCell align="center" >$ 3,456  </TableCell>
+                                                        <TableCell align="center" >  0.31  </TableCell>
+
                                                     </TableRow>
                                                 </>
                                             );
@@ -627,11 +485,13 @@ const IncidentTable = () => {
                             onPageChange={handleChangePage}
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
-                    </>
-                )}
-            </MainCard>
-        )
-    );
-};
+                    </Grid>
+                </SubCard>
 
-export default IncidentTable;
+            </Grid>
+
+        </Grid>
+    )
+}
+
+export default Controls
